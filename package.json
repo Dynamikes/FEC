@@ -14,30 +14,31 @@
     "start": "webpack serve --hot --mode development"
   },
   "dependencies": {
+    "lodash": "^4.17.21",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
-    "react-hot-loader": "^4.13.0",
-    "lodash": "^4.17.21"
+    "react-hot-loader": "^4.13.0"
   },
   "devDependencies": {
-    "webpack": "^5.72.1",
-    "webpack-cli": "^4.9.2",
-    "mocha": "^10.0.0",
-    "babel-loader": "^8.2.5",
     "@babel/core": "^7.17.12",
+    "@babel/plugin-syntax-jsx": "^7.17.12",
     "@babel/preset-env": "^7.17.12",
+    "@babel/preset-react": "^7.17.12",
     "@hot-loader/react-dom": "^17.0.2+4.13.0",
+    "babel-jest": "^28.1.0",
+    "babel-loader": "^8.2.5",
+    "chai": "^4.3.6",
     "css-loader": "^6.7.1",
-    "style-loader": "^3.3.1",
     "eslint": "^8.15.0",
     "eslint-plugin-react": "^7.29.4",
-    "chai": "^4.3.6",
     "jest": "^28.1.0",
-    "babel-jest": "^28.1.0",
-    "@babel/preset-react": "^7.17.12",
-    "webpack-dev-server": "^4.9.0",
-    "prettier": "^2.6.2",
     "lodash-webpack-plugin": "^0.11.6",
-    "url-loader": "^4.1.1"
+    "mocha": "^10.0.0",
+    "prettier": "^2.6.2",
+    "style-loader": "^3.3.1",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.9.0"
   }
 }
