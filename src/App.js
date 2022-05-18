@@ -1,21 +1,24 @@
-
 import React from "react";
 import { hot } from 'react-hot-loader/root';
+import Overview from './Components/Overview/Overview.js';
+import Reviews from './Components/Reviews/Reviews.js';
+import Related_Products from './Components/Related_Products/Related_Products.js';
+import Q_A from './Components/Q_A/Q_A.js';
 
-class App extends React.Component {
-  constructor(props) {
-   super(props)
-  }
-  render() {
-    const { name } = this.props;
+
+const App = (props) => {
+    const name = props.name;
     return (
       <>
         <h1>
           Hello {name}
         </h1>
+        <Overview />
+        <Reviews />
+        <Related_Products />
+        <Q_A />
       </>
     );
   }
-}
 
 export default hot(App);
