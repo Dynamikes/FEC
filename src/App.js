@@ -4,7 +4,7 @@ import { hot } from 'react-hot-loader/root';
 
 class App extends React.Component {
   constructor(props) {
-
+   super(props)
   }
   render() {
     const { name } = this.props;
