@@ -6,6 +6,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "jest" : {"moduleFileExtensions": ["js"]},
   "scripts": {
     "clean": "rm dist/bundle.js",
     "build-dev": "webpack --mode development",
@@ -35,6 +36,7 @@
     "lodash-webpack-plugin": "^0.11.6",
     "mocha": "^10.0.0",
     "prettier": "^2.6.2",
+    "react-test-renderer": "^18.1.0",
     "style-loader": "^3.3.1",
     "url-loader": "^4.1.1",
     "webpack": "^5.72.1",
