@@ -52,6 +52,9 @@ const config = {
         ]
       }
     ]
+    resolve: {
+      extensions: ['.jsx', '.js'],
+    }
   },
   devServer: {
     'static': {

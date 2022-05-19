@@ -3,12 +3,15 @@
     [
       "@babel/preset-env",
       {
-        "modules": false
+        "modules": "auto"
       }
     ],
-    "@babel/preset-react"
+    [
+      "@babel/preset-react",
+      {
+        "runtime": "automatic"
+      }
+    ]
   ],
-  "plugins": [
-    "react-hot-loader/babel"
-  ]
+  "plugins": ["react-hot-loader/babel"]
 }
