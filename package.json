@@ -6,7 +6,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "jest" : {"moduleFileExtensions": ["js"]},
   "scripts": {
     "clean": "rm dist/bundle.js",
     "build-dev": "webpack --mode development",
@@ -34,6 +33,7 @@
     "eslint": "^8.15.0",
     "eslint-plugin-react": "^7.29.4",
     "jest": "^28.1.0",
+    "jest-environment-jsdom": "^28.1.0",
     "lodash-webpack-plugin": "^0.11.6",
     "mocha": "^10.0.0",
     "prettier": "^2.6.2",
