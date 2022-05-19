@@ -1,3 +1,12 @@
+/**
+ * @jest-environment jsdom
+ */
+
+ test('use jsdom in this test file', () => {
+  const element = document.createElement('div');
+  expect(element).not.toBeNull();
+});
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { act } from 'react-dom/test-utils';
