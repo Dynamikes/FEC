@@ -1,6 +1,15 @@
 import React from 'react';
 import { hot } from 'react-hot-loader/root';
 import axios from 'axios';
+import styled from 'styled-components';
+
+const Title = styled.h3`
+  text-align: center;
+  color: violetred;
+`;
+const Wrapper = styled.section`
+  background: papayawhip;
+`;
 
 class ImageView extends React.Component {
   constructor(props) {
@@ -26,9 +35,10 @@ class ImageView extends React.Component {
 
   render() {
     return (
-      <div>
-        <h3>ImageView</h3>
-      </div>
+      <Wrapper>
+        <Title>ImageView</Title>
+        <img src='https://i.imgur.com/sNZ0V4q.jpeg' height='800' width='auto' />
+      </Wrapper>
     );
   }
 }
