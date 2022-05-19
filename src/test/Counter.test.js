@@ -1,13 +1,13 @@
-//import React from 'react';
-const react = require('react');
-// import ReactTestUtils from 'react-dom/test-utils';
-// import { hot } from 'react-hot-loader/root';
-// import ReactDOM from 'react-dom/client';
-const ReactDOM = require('react-dom/client');
-//  import { act } from 'react-dom/test-utils';
-const act = require('react-dom/test-utils').act;
-//  import Counter from '../Counter';
- const Counter = require('../Counter');
+import React from 'react';
+// const react = require('react');
+import ReactTestUtils from 'react-dom/test-utils';
+import { hot } from 'react-hot-loader/root';
+import ReactDOM from 'react-dom/client';
+// const ReactDOM = require('react-dom/client');
+ import { act } from 'react-dom/test-utils';
+// const act = require('react-dom/test-utils').act;
+ import Counter from '../Counter';
+//  const Counter = require('../Counter.js');
 
 let container;
 
