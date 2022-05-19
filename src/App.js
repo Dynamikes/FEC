@@ -4,6 +4,7 @@ import Overview from './Components/Overview/Overview.js';
 import Reviews from './Components/Reviews/Reviews.js';
 import Related_Products from './Components/Related_Products/Related_Products.js';
 import Q_A from './Components/Q_A/Q_A.js';
+import Counter from './Counter.js';
 
 
 const App = (props) => {
