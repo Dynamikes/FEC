@@ -47,15 +47,15 @@ const config = {
       },
     ],
   },
-  resolve: {
-    extensions: ['', '.jsx', '.js'],
-  },
   devServer: {
     static: {
       directory: './dist',
     },
   },
   plugins: [new LodashModuleReplacementPlugin()],
+  resolve: {
+    extensions: ['', '.jsx', '.js'],
+  },
 };
 
 module.exports = config;
