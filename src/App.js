@@ -10,7 +10,7 @@ import Link from './Link.js';
 const App = (props) => {
     const name = props.name;
     return (
-      <>
+      <div>
         <h1>
           Hello {name}
         </h1>
@@ -18,9 +18,7 @@ const App = (props) => {
         <Reviews />
         <Related_Products />
         <Q_A />
-        <Counter />
-        <Link />
-      </>
+      </div>
     );
   }
 
