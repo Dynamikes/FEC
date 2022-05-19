@@ -52,9 +52,6 @@ const config = {
         ]
       }
     ],
-    resolve: {
-      extensions: ['.jsx', '.js'],
-    },
   },
   devServer: {
     'static': {
@@ -63,7 +60,10 @@ const config = {
   },
   plugins: [
     new LodashModuleReplacementPlugin
-  ]
+  ],
+  resolve: {
+    extensions: ['', '.jsx', '.js'],
+  },
 };
 
 module.exports = config;
