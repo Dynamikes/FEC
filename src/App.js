@@ -18,7 +18,6 @@ const App = (props) => {
         <Reviews />
         <Related_Products />
         <Q_A />
-        <Counter />
       </>
     );
   }
