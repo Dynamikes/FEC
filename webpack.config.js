@@ -1,5 +1,5 @@
-const webpack = require('webpack');
 const path = require('path');
+//import path from 'path';
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
 const config = {
@@ -46,9 +46,9 @@ const config = {
         ],
       },
     ],
-    resolve: {
-      extensions: ['.jsx', '.js'],
-    },
+  },
+  resolve: {
+    extensions: ['', '.jsx', '.js'],
   },
   devServer: {
     static: {
