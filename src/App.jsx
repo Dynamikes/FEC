@@ -11,7 +11,7 @@ const Flexbox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 60%;
+  width: 76.66%;
   margin: auto;
 `;
 
