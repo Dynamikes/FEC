@@ -3,27 +3,27 @@ import { hot } from 'react-hot-loader/root';
 import styled from 'styled-components';
 //import axios from 'axios';
 
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: red;
+  width: center;
+  min-height: 200;
+  border: 10px;
+  border-color: grey;
+`;
+
+const StyledParagraph = styled.p`
+  font-size: 0.75em;
+  margin: 4px;
+`;
+
 function ProductInfo() {
   const Title = styled.h3`
     background-color: red;
     margin: 3px;
-  `;
-
-  const Wrapper = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-color: red;
-    width: center;
-    min-height: 200;
-    border: 10px;
-    border-color: grey;
-  `;
-
-  const StyledParagraph = styled.p`
-    font-size: 0.75em;
-    margin: 4px;
   `;
 
   return (

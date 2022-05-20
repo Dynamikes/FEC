@@ -6,41 +6,54 @@ import AddToCart from './AddToCart.jsx';
 import ProductInfo from './ProductInfo.jsx';
 import styled from 'styled-components';
 
-const FlexDisplay = styled.div`
+const StyledSideBar = styled.div`
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  z-index: 1;
 `;
 const StyledProductInfo = styled.div`
   display: flex;
   align-self: flex-end;
   justify-content: center;
 `;
-const ImageStack = styled.div`
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  z-index: 1;
+`;
+const StyledProductName = styled.h2`
   display: flex;
   justify-content: center;
+  background: black;
+  color: gold;
 `;
-// const StyledImage = styled.div`
-//   display: flex;
-//   flex-grow: 3;
-// `;
+const BigWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+const StyledImageView = styled.div`
+  display: flex;
+  width: 100%;
+  z-index: 2;
+`;
 
 function Overview() {
   return (
-    <div>
-      <h2>OVERVIEW</h2>
-      <ImageStack>
-        <ImageView />
-        <FlexDisplay>
+    <BigWrapper>
+      <StyledProductName>Product Name</StyledProductName>
+      <Wrapper>
+        <StyledImageView>
+          <ImageView />
+        </StyledImageView>
+        <StyledSideBar>
           <StyleSelector />
           <AddToCart />
-        </FlexDisplay>
-      </ImageStack>
-
+        </StyledSideBar>
+      </Wrapper>
       <StyledProductInfo>
         <ProductInfo />
       </StyledProductInfo>
-    </div>
+    </BigWrapper>
   );
 }
 

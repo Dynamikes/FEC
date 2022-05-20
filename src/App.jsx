@@ -10,16 +10,22 @@ import styled from 'styled-components';
 const Flexbox = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
-  width: 76.66%;
+  width: 80%;
   margin: auto;
 `;
+const StyledPageTitle = styled.h1`
+  display: flex;
+  justify-content: center;
+  background: black;
+  color: gold;
+`;
+const AppWrapper = styled.div``;
 
 const App = (props) => {
   const name = props.name;
   return (
-    <div>
-      <h1>Hello {name}</h1>
+    <AppWrapper>
+      <StyledPageTitle>Hello {name}</StyledPageTitle>
       <Flexbox>
         <Overview />
       </Flexbox>
@@ -32,7 +38,7 @@ const App = (props) => {
       <Flexbox>
         <Q_A />
       </Flexbox>
-    </div>
+    </AppWrapper>
   );
 };
 App.propTypes = {
