@@ -9,7 +9,6 @@ const Title = styled.h3`
 `;
 const Wrapper = styled.section`
   background: papayawhip;
-  width: 70%;
 `;
 
 class ImageView extends React.Component {
@@ -38,7 +37,7 @@ class ImageView extends React.Component {
     return (
       <Wrapper>
         <Title>ImageView</Title>
-        <img src='https://i.imgur.com/sNZ0V4q.jpeg' height='auto' width='100%' />
+        <img src='https://i.imgur.com/sNZ0V4q.jpeg' height='800' width='auto' />
       </Wrapper>
     );
   }
