@@ -19,13 +19,6 @@ const App = (props) => {
   const name = props.name;
   return (
     <div>
-<<<<<<< HEAD
-      <h1>Hello There {name}</h1>
-      <Overview />
-      <Reviews />
-      <RelatedProducts />
-      <Q_A />
-=======
       <h1>Hello {name}</h1>
       <Flexbox>
         <Overview />
@@ -39,7 +32,6 @@ const App = (props) => {
       <Flexbox>
         <Q_A />
       </Flexbox>
->>>>>>> bbfc50f6171ed9bc2c8ad59814948c0abb2d20e7
     </div>
   );
 };
