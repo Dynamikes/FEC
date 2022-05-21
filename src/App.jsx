@@ -10,7 +10,7 @@ import styled from 'styled-components';
 const Flexbox = styled.div`
   display: flex;
   justify-content: center;
-  width: 80%;
+  max-width: 90%;
   margin: auto;
 `;
 const StyledPageTitle = styled.h1`

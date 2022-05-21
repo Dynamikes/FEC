@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { hot } from 'react-hot-loader/root';
 import ImageView from './ImageView.jsx';
 import StyleSelector from './StyleSelector.jsx';
@@ -7,9 +7,13 @@ import ProductInfo from './ProductInfo.jsx';
 import styled from 'styled-components';
 
 const StyledSideBar = styled.div`
-  display: flex;
   flex-direction: column;
   z-index: 1;
+  display: default;
+`;
+// display: none;
+const HiddenSideBar = styled(StyledSideBar)`
+  display: none;
 `;
 const StyledProductInfo = styled.div`
   display: flex;
@@ -18,8 +22,6 @@ const StyledProductInfo = styled.div`
 `;
 const Wrapper = styled.div`
   display: flex;
-  justify-content: space-between;
-  z-index: 1;
 `;
 const StyledProductName = styled.h2`
   display: flex;
@@ -33,22 +35,42 @@ const BigWrapper = styled.div`
 `;
 const StyledImageView = styled.div`
   display: flex;
-  width: 100%;
   z-index: 2;
+  width: 100%;
 `;
 
 function Overview() {
+  //hook that adds state ttoggle
+
+  //function that toggles state from A to B
+
+  //switch statement that sets styled sidebar if A or hidden sidebar if B
+  let [toggle, setToggle] = useState(!toggle);
+
+  const toggleFunc = () => {
+    setToggle(!toggle);
+  };
+
   return (
     <BigWrapper>
       <StyledProductName>Product Name</StyledProductName>
       <Wrapper>
         <StyledImageView>
-          <ImageView />
+          <ImageView click={toggleFunc} />
         </StyledImageView>
-        <StyledSideBar>
-          <StyleSelector />
-          <AddToCart />
-        </StyledSideBar>
+        {toggle ? (
+          <StyledSideBar>
+            {' '}
+            <StyleSelector />
+            <AddToCart />{' '}
+          </StyledSideBar>
+        ) : (
+          <HiddenSideBar>
+            {' '}
+            <StyleSelector />
+            <AddToCart />{' '}
+          </HiddenSideBar>
+        )}
       </Wrapper>
       <StyledProductInfo>
         <ProductInfo />
