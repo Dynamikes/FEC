@@ -6,11 +6,12 @@ import RelatedProducts from './Components/RelatedProducts/RelatedProducts.jsx';
 import Q_A from './Components/QA/QA.jsx';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+// import { Flexbox, StyledPageTitle, AppWrapper } from './StyledComponents.jsx';
 
 const Flexbox = styled.div`
   display: flex;
   justify-content: center;
-  width: 80%;
+  max-width: 90%;
   margin: auto;
 `;
 const StyledPageTitle = styled.h1`

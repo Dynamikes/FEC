@@ -3,12 +3,18 @@ import { hot } from 'react-hot-loader/root';
 import axios from 'axios';
 import styled from 'styled-components';
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
+// import {
+//   ImageWrapper,
+//   ExpandButton,
+//   DogImage,
+//   Thumbnails,
+//   ThumbnailImage,
+// } from '/home/tannerhebert/hackreactorhub/FEC/FEC/src/StyledComponents.jsx';
 
 const ImageWrapper = styled.section`
   position: relative;
   background: blanchedalmond;
   display: flex;
-  width: 100%;
   align-items: center;
   justify-content: center;
   padding: 5px;
@@ -53,6 +59,7 @@ class ImageView extends React.Component {
     this.setState = {
       imageData: null,
     };
+    this.imageToggle = this.imageToggle.bind(this);
   }
 
   componentDidMount() {
@@ -69,10 +76,13 @@ class ImageView extends React.Component {
       });
   }
 
+  imageToggle() {
+    this.props.click();
+  }
   render() {
     return (
       <ImageWrapper>
-        <ExpandButton> Expand </ExpandButton>
+        <ExpandButton onClick={this.imageToggle}> Expand </ExpandButton>
         <Thumbnails>
           <ThumbnailImage src='https://i.imgur.com/sNZ0V4q.jpeg' />
           <ThumbnailImage src='https://i.imgur.com/sNZ0V4q.jpeg' />
