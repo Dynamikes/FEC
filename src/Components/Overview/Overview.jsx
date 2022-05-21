@@ -5,6 +5,16 @@ import StyleSelector from './StyleSelector.jsx';
 import AddToCart from './AddToCart.jsx';
 import ProductInfo from './ProductInfo.jsx';
 import styled from 'styled-components';
+// import {
+//   StyledSideBar,
+//   HiddenSideBar,
+//   StyledProductInfo,
+//   Wrapper,
+//   StyledProductName,
+//   BigWrapper,
+//   StyledImageView
+// }
+// from '/home/tannerhebert/hackreactorhub/FEC/FEC/src/StyledComponents.jsx'
 
 const StyledSideBar = styled.div`
   flex-direction: column;

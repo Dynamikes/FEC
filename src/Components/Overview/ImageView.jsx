@@ -3,6 +3,13 @@ import { hot } from 'react-hot-loader/root';
 import axios from 'axios';
 import styled from 'styled-components';
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
+// import {
+//   ImageWrapper,
+//   ExpandButton,
+//   DogImage,
+//   Thumbnails,
+//   ThumbnailImage,
+// } from '/home/tannerhebert/hackreactorhub/FEC/FEC/src/StyledComponents.jsx';
 
 const ImageWrapper = styled.section`
   position: relative;

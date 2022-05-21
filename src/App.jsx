@@ -6,6 +6,7 @@ import RelatedProducts from './Components/RelatedProducts/RelatedProducts.jsx';
 import Q_A from './Components/QA/QA.jsx';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+// import { Flexbox, StyledPageTitle, AppWrapper } from './StyledComponents.jsx';
 
 const Flexbox = styled.div`
   display: flex;
