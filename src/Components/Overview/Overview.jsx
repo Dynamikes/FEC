@@ -1,46 +1,55 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { hot } from 'react-hot-loader/root';
 import ImageView from './ImageView.jsx';
 import StyleSelector from './StyleSelector.jsx';
 import AddToCart from './AddToCart.jsx';
+import ProductDescription from './ProductDescription.jsx';
 import ProductInfo from './ProductInfo.jsx';
-import styled from 'styled-components';
-
-const FlexDisplay = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-`;
-const StyledProductInfo = styled.div`
-  display: flex;
-  align-self: flex-end;
-  justify-content: center;
-`;
-const ImageStack = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-// const StyledImage = styled.div`
-//   display: flex;
-//   flex-grow: 3;
-// `;
+import {
+  StyledSideBar,
+  HiddenSideBar,
+  StyledProductInfo,
+  Wrapper,
+  OverviewWrapper,
+  StyledImageView
+}
+from '../StyledComponents.jsx'
 
 function Overview() {
-  return (
-    <div>
-      <h2>OVERVIEW</h2>
-      <ImageStack>
-        <ImageView />
-        <FlexDisplay>
-          <StyleSelector />
-          <AddToCart />
-        </FlexDisplay>
-      </ImageStack>
+  //hook that adds state ttoggle
+  //function that toggles state from A to B
+  let [toggle, setToggle] = useState(!toggle);
 
+  const toggleFunc = () => {
+    setToggle(!toggle);
+  };
+
+  return (
+    <OverviewWrapper>
+      <Wrapper>
+        <StyledImageView>
+          <ImageView click={toggleFunc} />
+        </StyledImageView>
+        {toggle ? (
+          <StyledSideBar>
+            {' '}
+            <ProductInfo />
+            <StyleSelector />
+            <AddToCart />{' '}
+          </StyledSideBar>
+        ) : (
+          <HiddenSideBar>
+            {' '}
+            <ProductInfo />
+            <StyleSelector />
+            <AddToCart />{' '}
+          </HiddenSideBar>
+        )}
+      </Wrapper>
       <StyledProductInfo>
-        <ProductInfo />
+        <ProductDescription />
       </StyledProductInfo>
-    </div>
+    </OverviewWrapper>
   );
 }
 

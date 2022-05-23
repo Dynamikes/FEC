@@ -1,21 +1,28 @@
 import React from 'react';
 import { hot } from 'react-hot-loader/root';
 // import axios from 'axios';
-import styled from 'styled-components';
-const CartDiv = styled.div`
-  display: flex;
-  justify-content: center;
-  background-color: blue;
-  border: 10px;
-  border-color: black;
-`;
-const CartH3 = styled.h3`
-  background-color: blue;
-`;
+// import styled from 'styled-components';
+import { CartDiv, StyledSizeQuantity, StyledSizeSelect, StyledQuantitySelect, AddToCartButton } from '../StyledComponents.jsx';
+
 const AddToCart = () => {
   return (
     <CartDiv>
-      <CartH3>AddToCart</CartH3>
+      <StyledSizeQuantity>
+        <StyledSizeSelect name='SizeSelect' id='SizeSelect'>
+          <option value='empty' disabled selected hidden> Select Size </option>
+          <option value="small"> Small </option>
+          <option value="medium"> Medium </option>
+          <option value="large"> Large </option>
+        </StyledSizeSelect>
+        <StyledQuantitySelect name='Quantity' id='Quantity'>
+          <option value="1"> 1 </option>
+          <option value="2"> 2 </option>
+          <option value="3"> 3 </option>
+        </StyledQuantitySelect>
+       </StyledSizeQuantity>
+       <AddToCartButton>
+         Add to Cart
+       </AddToCartButton>
     </CartDiv>
   );
 };
