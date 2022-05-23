@@ -1,16 +1,16 @@
 import React from 'react';
 import { hot } from 'react-hot-loader/root';
 import axios from 'axios';
-import styled from 'styled-components';
+//import styled from 'styled-components';
+import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
+import {
+  ImageWrapper,
+  ExpandButton,
+  MainImage,
+  Thumbnails,
+  ThumbnailImage,
+} from '../StyledComponents.jsx';
 
-const Title = styled.h3`
-  text-align: center;
-  color: violetred;
-`;
-const Wrapper = styled.section`
-  background: papayawhip;
-  width: 70%;
-`;
 
 class ImageView extends React.Component {
   constructor(props) {
@@ -18,6 +18,7 @@ class ImageView extends React.Component {
     this.setState = {
       imageData: null,
     };
+    this.imageToggle = this.imageToggle.bind(this);
   }
 
   componentDidMount() {
@@ -34,14 +35,26 @@ class ImageView extends React.Component {
       });
   }
 
+  imageToggle() {
+    this.props.click();
+  }
   render() {
     return (
-      <Wrapper>
-        <Title>ImageView</Title>
-        <img src='https://i.imgur.com/sNZ0V4q.jpeg' height='auto' width='100%' />
-      </Wrapper>
+      <ImageWrapper>
+        <ExpandButton onClick={this.imageToggle} > Expand </ExpandButton>
+        <FaArrowAltCircleLeft className='left-arrow' size='2em'/>
+        <MainImage src='https://i.imgur.com/sNZ0V4q.jpeg'></MainImage>
+        <Thumbnails>
+          <ThumbnailImage src='https://i.imgur.com/sNZ0V4q.jpeg' />
+          <ThumbnailImage src='https://i.imgur.com/sNZ0V4q.jpeg' />
+          <ThumbnailImage src='https://i.imgur.com/sNZ0V4q.jpeg' />
+          <ThumbnailImage src='https://i.imgur.com/sNZ0V4q.jpeg' />
+        </Thumbnails>
+        <FaArrowAltCircleRight className='right-arrow' size='2em'/>
+      </ImageWrapper>
     );
   }
 }
+
 
 export default hot(ImageView);

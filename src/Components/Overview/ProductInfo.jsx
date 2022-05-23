@@ -1,61 +1,32 @@
 import React from 'react';
 import { hot } from 'react-hot-loader/root';
-import styled from 'styled-components';
+//import styled from 'styled-components';
 //import axios from 'axios';
+import {
+  ProductInfoWrapper,
+  Title,
+  StyledStars,
+  StyledCategory,
+  StyledPrice,
+  StyledShare } from '../StyledComponents.jsx';
 
 function ProductInfo() {
-  const Title = styled.h3`
-    background-color: red;
-    margin: 3px;
-  `;
-
-  const Wrapper = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-color: red;
-    width: center;
-    min-height: 200;
-    border: 10px;
-    border-color: grey;
-  `;
-
-  const StyledParagraph = styled.p`
-    font-size: 0.75em;
-    margin: 4px;
-  `;
 
   return (
-    <div>
-      <Wrapper>
-        <Title>ProductInfo</Title>
-        <StyledParagraph>
-          What the fuck did you just fucking say about me, you little bitch?
-          I'll have you know I graduated top of my class in the Navy Seals, and
-          I've been involved in numerous secret raids on Al-Quaeda, and I have
-          over 300 confirmed kills. I am trained in gorilla warfare and I'm the
-          top sniper in the entire US armed forces. You are nothing to me but
-          just another target. I will wipe you the fuck out with precision the
-          likes of which has never been seen before on this Earth, mark my
-          fucking words. You think you can get away with saying that shit to me
-          over the Internet? Think again, fucker. As we speak I am contacting my
-          secret network of spies across the USA and your IP is being traced
-          right now so you better prepare for the storm, maggot. The storm that
-          wipes out the pathetic little thing you call your life. You're fucking
-          dead, kid. I can be anywhere, anytime, and I can kill you in over
-          seven hundred ways, and that's just with my bare hands. Not only am I
-          extensively trained in unarmed combat, but I have access to the entire
-          arsenal of the United States Marine Corps and I will use it to its
-          full extent to wipe your miserable ass off the face of the continent,
-          you little shit. If only you could have known what unholy retribution
-          your little "clever" comment was about to bring down upon you, maybe
-          you would have held your fucking tongue. But you couldn't, you didn't,
-          and now you're paying the price, you goddamn idiot. I will shit fury
-          all over you and you will drown in it. You're fucking dead, kiddo.
-        </StyledParagraph>
-      </Wrapper>
-    </div>
+    <ProductInfoWrapper>
+    <StyledStars> ⭐⭐⭐⭐⭐ <a href='#ratings_and_reviews'> <small>Reviews</small> </a></StyledStars>
+      <StyledCategory> Category </StyledCategory>
+      <Title> Product Name </Title>
+      <StyledPrice> $500 </StyledPrice>
+      <StyledShare>
+      <div className="fb-share-button" data-href="https://facebook.com" data-layout="button_count" data-size="small"><a target="_blank" rel='noreferrer' href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Ffacebook.com%2F&amp;src=sdkpreparse" className="fb-xfbml-parse-ignore">Share</a></div>
+      <a rel='noReferrer' href="//www.pinterest.com/pin/create/button/" className="pin-it-button" count-layout="none" target='_blank'><img src="//assets.pinterest.com/images/pidgets/pin_it_button.png" alt="Pin it" /> </a>
+      <a className="twitter-share-button" rel='noReferrer' target='_blank'
+        href="https://twitter.com/intent/tweet">
+        <img src="" alt="Tweet" />
+      </a>
+      </StyledShare>
+      </ProductInfoWrapper>
   );
 }
 
