@@ -50,12 +50,6 @@ class ImageView extends React.Component {
   }
   render() {
     return (
-<<<<<<< HEAD
-      <Wrapper>
-        <Title>ImageView</Title>
-        <img src='https://i.imgur.com/sNZ0V4q.jpeg' height='800' width='auto' />
-      </Wrapper>
-=======
       <ImageWrapper>
         <ExpandButton onClick={this.imageToggle} > Expand </ExpandButton>
         <FaArrowAltCircleLeft className='left-arrow' size='2em'/>
@@ -68,7 +62,6 @@ class ImageView extends React.Component {
         </Thumbnails>
         <FaArrowAltCircleRight className='right-arrow' size='2em'/>
       </ImageWrapper>
->>>>>>> 48443c16449670106b2ff8ffc5cc63cb2dbdcba1
     );
   }
 }

@@ -6,19 +6,6 @@
  * or disable the default devtool with "devtool: false".
  * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
  */
-<<<<<<< HEAD
-/******/ (() => {
-  // webpackBootstrap
-  /******/ var __webpack_modules__ = {
-    /***/ './src/App.jsx':
-      /*!*********************!*\
-  !*** ./src/App.jsx ***!
-  \*********************/
-      /***/ () => {
-        eval(
-          'throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\\nSyntaxError: /Users/michaelzaki/Hack/FEC/src/App.jsx: Unexpected token (22:1)\\n\\n\\u001b[0m \\u001b[90m 20 |\\u001b[39m   \\u001b[36mreturn\\u001b[39m (\\u001b[0m\\n\\u001b[0m \\u001b[90m 21 |\\u001b[39m     \\u001b[33m<\\u001b[39m\\u001b[33mdiv\\u001b[39m\\u001b[33m>\\u001b[39m\\u001b[0m\\n\\u001b[0m\\u001b[31m\\u001b[1m>\\u001b[22m\\u001b[39m\\u001b[90m 22 |\\u001b[39m \\u001b[33m<<\\u001b[39m\\u001b[33m<<\\u001b[39m\\u001b[33m<<\\u001b[39m\\u001b[33m<\\u001b[39m \\u001b[33mHEAD\\u001b[39m\\u001b[0m\\n\\u001b[0m \\u001b[90m    |\\u001b[39m  \\u001b[31m\\u001b[1m^\\u001b[22m\\u001b[39m\\u001b[0m\\n\\u001b[0m \\u001b[90m 23 |\\u001b[39m       \\u001b[33m<\\u001b[39m\\u001b[33mh1\\u001b[39m\\u001b[33m>\\u001b[39m\\u001b[33mHello\\u001b[39m \\u001b[33mThere\\u001b[39m {name}\\u001b[33m<\\u001b[39m\\u001b[33m/\\u001b[39m\\u001b[33mh1\\u001b[39m\\u001b[33m>\\u001b[39m\\u001b[0m\\n\\u001b[0m \\u001b[90m 24 |\\u001b[39m       \\u001b[33m<\\u001b[39m\\u001b[33mOverview\\u001b[39m \\u001b[33m/\\u001b[39m\\u001b[33m>\\u001b[39m\\u001b[0m\\n\\u001b[0m \\u001b[90m 25 |\\u001b[39m       \\u001b[33m<\\u001b[39m\\u001b[33mReviews\\u001b[39m \\u001b[33m/\\u001b[39m\\u001b[33m>\\u001b[39m\\u001b[0m\\n    at instantiate (/Users/michaelzaki/Hack/FEC/node_modules/@babel/parser/lib/index.js:72:32)\\n    at constructor (/Users/michaelzaki/Hack/FEC/node_modules/@babel/parser/lib/index.js:358:12)\\n    at Object.raise (/Users/michaelzaki/Hack/FEC/node_modules/@babel/parser/lib/index.js:3334:19)\\n    at Object.unexpected (/Users/michaelzaki/Hack/FEC/node_modules/@babel/parser/lib/index.js:3372:16)\\n    at Object.jsxParseIdentifier (/Users/michaelzaki/Hack/FEC/node_modules/@babel/parser/lib/index.js:7778:12)\\n    at Object.jsxParseNamespacedName (/Users/michaelzaki/Hack/FEC/node_modules/@babel/parser/lib/index.js:7788:23)\\n    at Object.jsxParseElementName (/Users/michaelzaki/Hack/FEC/node_modules/@babel/parser/lib/index.js:7799:21)\\n    at Object.jsxParseOpeningElementAt (/Users/michaelzaki/Hack/FEC/node_modules/@babel/parser/lib/index.js:7896:22)\\n    at Object.jsxParseElementAt (/Users/michaelzaki/Hack/FEC/node_modules/@babel/parser/lib/index.js:7929:33)\\n    at Object.jsxParseElementAt (/Users/michaelzaki/Hack/FEC/node_modules/@babel/parser/lib/index.js:7945:32)");\n\n//# sourceURL=webpack://fec/./src/App.jsx?'
-        );
-=======
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
@@ -511,7 +498,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_hot_loader_root__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-hot-loader/root */ \"./node_modules/react-hot-loader/root.js\");\n/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ \"./node_modules/react/jsx-runtime.js\");\n/* module decorator */ module = __webpack_require__.hmd(module);\n(function () {\n  var enterModule = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.enterModule : undefined;\n  enterModule && enterModule(module);\n})();\n\nvar __signature__ = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal[\"default\"].signature : function (a) {\n  return a;\n};\n\n\n\n\n\nvar Reviews = function Reviews() {\n  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(\"div\", {\n    children: \"Reviews\"\n  });\n};\n\nvar _default = (0,react_hot_loader_root__WEBPACK_IMPORTED_MODULE_2__.hot)(Reviews);\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_default);\n;\n\n(function () {\n  var reactHotLoader = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.default : undefined;\n\n  if (!reactHotLoader) {\n    return;\n  }\n\n  reactHotLoader.register(Reviews, \"Reviews\", \"/home/tannerhebert/hackreactorhub/FEC/FEC/src/Components/Reviews/Reviews.jsx\");\n  reactHotLoader.register(_default, \"default\", \"/home/tannerhebert/hackreactorhub/FEC/FEC/src/Components/Reviews/Reviews.jsx\");\n})();\n\n;\n\n(function () {\n  var leaveModule = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.leaveModule : undefined;\n  leaveModule && leaveModule(module);\n})();\n\n//# sourceURL=webpack://fec/./src/Components/Reviews/Reviews.jsx?");
->>>>>>> 48443c16449670106b2ff8ffc5cc63cb2dbdcba1
 
         /***/
       },
@@ -526,13 +512,8 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
           '__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _App_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./App.jsx */ "./src/App.jsx");\n/* harmony import */ var _App_jsx__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_App_jsx__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./styles.css */ "./src/styles.css");\n/* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");\n/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");\n/* module decorator */ module = __webpack_require__.hmd(module);\n(function () {\n  var enterModule = typeof reactHotLoaderGlobal !== \'undefined\' ? reactHotLoaderGlobal.enterModule : undefined;\n  enterModule && enterModule(module);\n})();\n\nvar __signature__ = typeof reactHotLoaderGlobal !== \'undefined\' ? reactHotLoaderGlobal["default"].signature : function (a) {\n  return a;\n};\n\n\n\n\n\n\nvar container = document.getElementById(\'app\');\nvar root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_3__.createRoot)(container);\nroot.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)((_App_jsx__WEBPACK_IMPORTED_MODULE_1___default()), {\n  name: "Tanner"\n}));\n;\n\n(function () {\n  var reactHotLoader = typeof reactHotLoaderGlobal !== \'undefined\' ? reactHotLoaderGlobal.default : undefined;\n\n  if (!reactHotLoader) {\n    return;\n  }\n\n  reactHotLoader.register(container, "container", "/Users/michaelzaki/Hack/FEC/src/index.js");\n  reactHotLoader.register(root, "root", "/Users/michaelzaki/Hack/FEC/src/index.js");\n})();\n\n;\n\n(function () {\n  var leaveModule = typeof reactHotLoaderGlobal !== \'undefined\' ? reactHotLoaderGlobal.leaveModule : undefined;\n  leaveModule && leaveModule(module);\n})();\n\n//# sourceURL=webpack://fec/./src/index.js?'
         );
 
-<<<<<<< HEAD
-        /***/
-      },
-=======
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _App_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./App.jsx */ \"./src/App.jsx\");\n/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./styles.css */ \"./src/styles.css\");\n/* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-dom/client */ \"./node_modules/react-dom/client.js\");\n/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ \"./node_modules/react/jsx-runtime.js\");\n/* module decorator */ module = __webpack_require__.hmd(module);\n(function () {\n  var enterModule = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.enterModule : undefined;\n  enterModule && enterModule(module);\n})();\n\nvar __signature__ = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal[\"default\"].signature : function (a) {\n  return a;\n};\n\n\n\n\n\n\nvar container = document.getElementById('app');\nvar root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_3__.createRoot)(container);\nroot.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_App_jsx__WEBPACK_IMPORTED_MODULE_1__[\"default\"], {\n  name: \"Tanner\"\n}));\n;\n\n(function () {\n  var reactHotLoader = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.default : undefined;\n\n  if (!reactHotLoader) {\n    return;\n  }\n\n  reactHotLoader.register(container, \"container\", \"/home/tannerhebert/hackreactorhub/FEC/FEC/src/index.js\");\n  reactHotLoader.register(root, \"root\", \"/home/tannerhebert/hackreactorhub/FEC/FEC/src/index.js\");\n})();\n\n;\n\n(function () {\n  var leaveModule = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.leaveModule : undefined;\n  leaveModule && leaveModule(module);\n})();\n\n//# sourceURL=webpack://fec/./src/index.js?");
->>>>>>> 48443c16449670106b2ff8ffc5cc63cb2dbdcba1
 
     /***/ './node_modules/css-loader/dist/cjs.js!./src/styles.css':
       /*!**************************************************************!*\
@@ -714,10 +695,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var reac
         /***/
       },
 
-<<<<<<< HEAD
-    /***/ './node_modules/react-dom/cjs/react-dom.development.js':
-      /*!*************************************************************!*\
-=======
 /***/ "./node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js":
 /*!**********************************************************************************!*\
   !*** ./node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js ***!
@@ -839,7 +816,6 @@ eval("\n\nif (false) {} else {\n  module.exports = __webpack_require__(/*! ./cjs
 
 /***/ "./node_modules/react-dom/cjs/react-dom.development.js":
 /*!*************************************************************!*\
->>>>>>> 48443c16449670106b2ff8ffc5cc63cb2dbdcba1
   !*** ./node_modules/react-dom/cjs/react-dom.development.js ***!
   \*************************************************************/
       /***/ (__unused_webpack_module, exports, __webpack_require__) => {
@@ -916,10 +892,6 @@ eval("\n\nif (false) {} else {\n  module.exports = __webpack_require__(/*! ./cjs
         /***/
       },
 
-<<<<<<< HEAD
-    /***/ './node_modules/react-hot-loader/patch.js':
-      /*!************************************************!*\
-=======
 /***/ "./node_modules/react-hot-loader/index.js":
 /*!************************************************!*\
   !*** ./node_modules/react-hot-loader/index.js ***!
@@ -933,7 +905,6 @@ eval("\n\nif (false) {} else if (false) {} else if (typeof window === 'undefined
 
 /***/ "./node_modules/react-hot-loader/patch.js":
 /*!************************************************!*\
->>>>>>> 48443c16449670106b2ff8ffc5cc63cb2dbdcba1
   !*** ./node_modules/react-hot-loader/patch.js ***!
   \************************************************/
       /***/ (module, __unused_webpack_exports, __webpack_require__) => {
@@ -945,10 +916,6 @@ eval("\n\nif (false) {} else if (false) {} else if (typeof window === 'undefined
         /***/
       },
 
-<<<<<<< HEAD
-    /***/ './node_modules/react/cjs/react-jsx-runtime.development.js':
-      /*!*****************************************************************!*\
-=======
 /***/ }),
 
 /***/ "./node_modules/react-hot-loader/root.js":
@@ -985,7 +952,6 @@ eval("\n\nif (false) {} else {\n  module.exports = __webpack_require__(/*! ./cjs
 
 /***/ "./node_modules/react/cjs/react-jsx-runtime.development.js":
 /*!*****************************************************************!*\
->>>>>>> 48443c16449670106b2ff8ffc5cc63cb2dbdcba1
   !*** ./node_modules/react/cjs/react-jsx-runtime.development.js ***!
   \*****************************************************************/
       /***/ (__unused_webpack_module, exports, __webpack_require__) => {
@@ -1027,31 +993,6 @@ eval("\n\nif (false) {} else {\n  module.exports = __webpack_require__(/*! ./cjs
       /*!*******************************************!*\
   !*** ./node_modules/react/jsx-runtime.js ***!
   \*******************************************/
-<<<<<<< HEAD
-      /***/ (module, __unused_webpack_exports, __webpack_require__) => {
-        'use strict';
-        eval(
-          '\n\nif (false) {} else {\n  module.exports = __webpack_require__(/*! ./cjs/react-jsx-runtime.development.js */ "./node_modules/react/cjs/react-jsx-runtime.development.js");\n}\n\n\n//# sourceURL=webpack://fec/./node_modules/react/jsx-runtime.js?'
-        );
-
-        /***/
-      },
-
-    /***/ './node_modules/shallowequal/index.js':
-      /*!********************************************!*\
-  !*** ./node_modules/shallowequal/index.js ***!
-  \********************************************/
-      /***/ (module) => {
-        eval(
-          '//\n\nmodule.exports = function shallowEqual(objA, objB, compare, compareContext) {\n  var ret = compare ? compare.call(compareContext, objA, objB) : void 0;\n\n  if (ret !== void 0) {\n    return !!ret;\n  }\n\n  if (objA === objB) {\n    return true;\n  }\n\n  if (typeof objA !== "object" || !objA || typeof objB !== "object" || !objB) {\n    return false;\n  }\n\n  var keysA = Object.keys(objA);\n  var keysB = Object.keys(objB);\n\n  if (keysA.length !== keysB.length) {\n    return false;\n  }\n\n  var bHasOwnProperty = Object.prototype.hasOwnProperty.bind(objB);\n\n  // Test for A\'s keys different from B.\n  for (var idx = 0; idx < keysA.length; idx++) {\n    var key = keysA[idx];\n\n    if (!bHasOwnProperty(key)) {\n      return false;\n    }\n\n    var valueA = objA[key];\n    var valueB = objB[key];\n\n    ret = compare ? compare.call(compareContext, valueA, valueB, key) : void 0;\n\n    if (ret === false || (ret === void 0 && valueA !== valueB)) {\n      return false;\n    }\n  }\n\n  return true;\n};\n\n\n//# sourceURL=webpack://fec/./node_modules/shallowequal/index.js?'
-        );
-
-        /***/
-      },
-
-    /***/ './src/styles.css':
-      /*!************************!*\
-=======
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
@@ -1071,7 +1012,6 @@ eval("//\n\nmodule.exports = function shallowEqual(objA, objB, compare, compareC
 
 /***/ "./src/styles.css":
 /*!************************!*\
->>>>>>> 48443c16449670106b2ff8ffc5cc63cb2dbdcba1
   !*** ./src/styles.css ***!
   \************************/
       /***/ (
@@ -1156,164 +1096,6 @@ eval("//\n\nmodule.exports = function shallowEqual(objA, objB, compare, compareC
       /*!*********************************************************************!*\
   !*** ./node_modules/style-loader/dist/runtime/styleTagTransform.js ***!
   \*********************************************************************/
-<<<<<<< HEAD
-      /***/ (module) => {
-        'use strict';
-        eval(
-          '\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElement) {\n  if (styleElement.styleSheet) {\n    styleElement.styleSheet.cssText = css;\n  } else {\n    while (styleElement.firstChild) {\n      styleElement.removeChild(styleElement.firstChild);\n    }\n\n    styleElement.appendChild(document.createTextNode(css));\n  }\n}\n\nmodule.exports = styleTagTransform;\n\n//# sourceURL=webpack://fec/./node_modules/style-loader/dist/runtime/styleTagTransform.js?'
-        );
-
-        /***/
-      },
-
-    /******/
-  };
-  /************************************************************************/
-  /******/ // The module cache
-  /******/ var __webpack_module_cache__ = {};
-  /******/
-  /******/ // The require function
-  /******/ function __webpack_require__(moduleId) {
-    /******/ // Check if module is in cache
-    /******/ var cachedModule = __webpack_module_cache__[moduleId];
-    /******/ if (cachedModule !== undefined) {
-      /******/ return cachedModule.exports;
-      /******/
-    }
-    /******/ // Create a new module (and put it into the cache)
-    /******/ var module = (__webpack_module_cache__[moduleId] = {
-      /******/ id: moduleId,
-      /******/ loaded: false,
-      /******/ exports: {},
-      /******/
-    });
-    /******/
-    /******/ // Execute the module function
-    /******/ __webpack_modules__[moduleId](
-      module,
-      module.exports,
-      __webpack_require__
-    );
-    /******/
-    /******/ // Flag the module as loaded
-    /******/ module.loaded = true;
-    /******/
-    /******/ // Return the exports of the module
-    /******/ return module.exports;
-    /******/
-  }
-  /******/
-  /************************************************************************/
-  /******/ /* webpack/runtime/compat get default export */
-  /******/ (() => {
-    /******/ // getDefaultExport function for compatibility with non-harmony modules
-    /******/ __webpack_require__.n = (module) => {
-      /******/ var getter =
-        module && module.__esModule
-          ? /******/ () => module['default']
-          : /******/ () => module;
-      /******/ __webpack_require__.d(getter, { a: getter });
-      /******/ return getter;
-      /******/
-    };
-    /******/
-  })();
-  /******/
-  /******/ /* webpack/runtime/define property getters */
-  /******/ (() => {
-    /******/ // define getter functions for harmony exports
-    /******/ __webpack_require__.d = (exports, definition) => {
-      /******/ for (var key in definition) {
-        /******/ if (
-          __webpack_require__.o(definition, key) &&
-          !__webpack_require__.o(exports, key)
-        ) {
-          /******/ Object.defineProperty(exports, key, {
-            enumerable: true,
-            get: definition[key],
-          });
-          /******/
-        }
-        /******/
-      }
-      /******/
-    };
-    /******/
-  })();
-  /******/
-  /******/ /* webpack/runtime/harmony module decorator */
-  /******/ (() => {
-    /******/ __webpack_require__.hmd = (module) => {
-      /******/ module = Object.create(module);
-      /******/ if (!module.children) module.children = [];
-      /******/ Object.defineProperty(module, 'exports', {
-        /******/ enumerable: true,
-        /******/ set: () => {
-          /******/ throw new Error(
-            'ES Modules may not assign module.exports or exports.*, Use ESM export syntax, instead: ' +
-              module.id
-          );
-          /******/
-        },
-        /******/
-      });
-      /******/ return module;
-      /******/
-    };
-    /******/
-  })();
-  /******/
-  /******/ /* webpack/runtime/hasOwnProperty shorthand */
-  /******/ (() => {
-    /******/ __webpack_require__.o = (obj, prop) =>
-      Object.prototype.hasOwnProperty.call(obj, prop);
-    /******/
-  })();
-  /******/
-  /******/ /* webpack/runtime/make namespace object */
-  /******/ (() => {
-    /******/ // define __esModule on exports
-    /******/ __webpack_require__.r = (exports) => {
-      /******/ if (typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-        /******/ Object.defineProperty(exports, Symbol.toStringTag, {
-          value: 'Module',
-        });
-        /******/
-      }
-      /******/ Object.defineProperty(exports, '__esModule', { value: true });
-      /******/
-    };
-    /******/
-  })();
-  /******/
-  /******/ /* webpack/runtime/node module decorator */
-  /******/ (() => {
-    /******/ __webpack_require__.nmd = (module) => {
-      /******/ module.paths = [];
-      /******/ if (!module.children) module.children = [];
-      /******/ return module;
-      /******/
-    };
-    /******/
-  })();
-  /******/
-  /******/ /* webpack/runtime/nonce */
-  /******/ (() => {
-    /******/ __webpack_require__.nc = undefined;
-    /******/
-  })();
-  /******/
-  /************************************************************************/
-  /******/
-  /******/ // startup
-  /******/ // Load entry module and return exports
-  /******/ // This entry module can't be inlined because the eval devtool is used.
-  /******/ __webpack_require__('./node_modules/react-hot-loader/patch.js');
-  /******/ var __webpack_exports__ = __webpack_require__('./src/index.js');
-  /******/
-  /******/
-})();
-=======
 /***/ ((module) => {
 
 "use strict";
@@ -1435,7 +1217,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/ 	
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
@@ -1449,17 +1231,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			loaded: false,
 /******/ 			exports: {}
 /******/ 		};
-/******/ 	
+/******/
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
-/******/ 	
+/******/
 /******/ 		// Flag the module as loaded
 /******/ 		module.loaded = true;
-/******/ 	
+/******/
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/ 	
+/******/
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
@@ -1472,7 +1254,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			return getter;
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -1484,7 +1266,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			}
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/harmony module decorator */
 /******/ 	(() => {
 /******/ 		__webpack_require__.hmd = (module) => {
@@ -1499,12 +1281,12 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			return module;
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
@@ -1515,7 +1297,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/node module decorator */
 /******/ 	(() => {
 /******/ 		__webpack_require__.nmd = (module) => {
@@ -1524,20 +1306,19 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			return module;
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/nonce */
 /******/ 	(() => {
 /******/ 		__webpack_require__.nc = undefined;
 /******/ 	})();
-/******/ 	
+/******/
 /************************************************************************/
-/******/ 	
+/******/
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
 /******/ 	__webpack_require__("./node_modules/react-hot-loader/patch.js");
 /******/ 	var __webpack_exports__ = __webpack_require__("./src/index.js");
-/******/ 	
+/******/
 /******/ })()
 ;
->>>>>>> 48443c16449670106b2ff8ffc5cc63cb2dbdcba1
