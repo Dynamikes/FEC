@@ -11,17 +11,6 @@ import {
   ThumbnailImage,
 } from '../StyledComponents.jsx';
 
-<<<<<<< HEAD
-const Title = styled.h3`
-  text-align: center;
-  color: violetred;
-`;
-const Wrapper = styled.section`
-  background: papayawhip;
-`;
-=======
->>>>>>> 48443c16449670106b2ff8ffc5cc63cb2dbdcba1
-
 class ImageView extends React.Component {
   constructor(props) {
     super(props);
@@ -51,8 +40,8 @@ class ImageView extends React.Component {
   render() {
     return (
       <ImageWrapper>
-        <ExpandButton onClick={this.imageToggle} > Expand </ExpandButton>
-        <FaArrowAltCircleLeft className='left-arrow' size='2em'/>
+        <ExpandButton onClick={this.imageToggle}> Expand </ExpandButton>
+        <FaArrowAltCircleLeft className='left-arrow' size='2em' />
         <MainImage src='https://i.imgur.com/sNZ0V4q.jpeg'></MainImage>
         <Thumbnails>
           <ThumbnailImage src='https://i.imgur.com/sNZ0V4q.jpeg' />
@@ -60,11 +49,10 @@ class ImageView extends React.Component {
           <ThumbnailImage src='https://i.imgur.com/sNZ0V4q.jpeg' />
           <ThumbnailImage src='https://i.imgur.com/sNZ0V4q.jpeg' />
         </Thumbnails>
-        <FaArrowAltCircleRight className='right-arrow' size='2em'/>
+        <FaArrowAltCircleRight className='right-arrow' size='2em' />
       </ImageWrapper>
     );
   }
 }
-
 
 export default hot(ImageView);
