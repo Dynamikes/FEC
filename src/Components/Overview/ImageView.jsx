@@ -1,57 +1,16 @@
 import React from 'react';
 import { hot } from 'react-hot-loader/root';
 import axios from 'axios';
-import styled from 'styled-components';
+//import styled from 'styled-components';
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
-// import {
-//   ImageWrapper,
-//   ExpandButton,
-//   DogImage,
-//   Thumbnails,
-//   ThumbnailImage,
-// } from '/home/tannerhebert/hackreactorhub/FEC/FEC/src/StyledComponents.jsx';
+import {
+  ImageWrapper,
+  ExpandButton,
+  MainImage,
+  Thumbnails,
+  ThumbnailImage,
+} from '../StyledComponents.jsx';
 
-const ImageWrapper = styled.section`
-  position: relative;
-  background: blanchedalmond;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 5px;
-  z-index: 2;
-`;
-const ExpandButton = styled.button`
-  position: absolute;
-  right: 0%;
-  top: 0%;
-  z-index: 2;
-`;
-const DogImage = styled.img`
-  position: relative;
-  height: auto;
-  left: 0%;
-  width: 70%;
-  z-index: 1;
-`;
-const Thumbnails = styled.div`
-  position: absolute;
-  width: 10%;
-  left: 0%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  background: white;
-  z-index: 2;
-`;
-// width: calc(80/thumbnailarray.length)%
-const ThumbnailImage = styled.img`
-  height: auto;
-`;
-
-// width: ${props => (props.dogWidth ? '79% : 100%)}')}
-
-// {onClick(if that thing has props remove // inverse
-//   thatthing.props = dogWidth)}
 
 class ImageView extends React.Component {
   constructor(props) {
@@ -82,22 +41,20 @@ class ImageView extends React.Component {
   render() {
     return (
       <ImageWrapper>
-        <ExpandButton onClick={this.imageToggle}> Expand </ExpandButton>
+        <ExpandButton onClick={this.imageToggle} > Expand </ExpandButton>
+        <FaArrowAltCircleLeft className='left-arrow' size='2em'/>
+        <MainImage src='https://i.imgur.com/sNZ0V4q.jpeg'></MainImage>
         <Thumbnails>
           <ThumbnailImage src='https://i.imgur.com/sNZ0V4q.jpeg' />
           <ThumbnailImage src='https://i.imgur.com/sNZ0V4q.jpeg' />
           <ThumbnailImage src='https://i.imgur.com/sNZ0V4q.jpeg' />
           <ThumbnailImage src='https://i.imgur.com/sNZ0V4q.jpeg' />
         </Thumbnails>
-        <FaArrowAltCircleLeft className='left-arrow' />
-        <DogImage src='https://i.imgur.com/sNZ0V4q.jpeg'></DogImage>
-        <FaArrowAltCircleRight className='right-arrow' />
+        <FaArrowAltCircleRight className='right-arrow' size='2em'/>
       </ImageWrapper>
     );
   }
 }
 
+
 export default hot(ImageView);
-{
-  /* <DogImage src='https://i.imgur.com/sNZ0V4q.jpeg'></DogImage> */
-}
