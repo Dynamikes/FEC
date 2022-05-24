@@ -5,10 +5,16 @@ import Reviews from './Components/Reviews/Reviews.jsx';
 import RelatedProducts from './Components/RelatedProducts/RelatedProducts.jsx';
 import QA from './Components/QA/QA.jsx';
 import PropTypes from 'prop-types';
-import { Flexbox, StyledPageTitle, AppWrapper } from './Components/StyledComponents.jsx';
+import {
+  Flexbox,
+  StyledPageTitle,
+  AppWrapper,
+} from './Components/StyledComponents.jsx';
+import { products } from './data.jsx';
 
 const App = (props) => {
   const name = props.name;
+  console.log(products);
   return (
     <AppWrapper>
       <StyledPageTitle>Hello {name}</StyledPageTitle>
