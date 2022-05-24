@@ -14,7 +14,7 @@ import {
 import {
   API_KEY,
   MAIN_URL,
-} from '/home/tannerhebert/hackreactorhub/FEC/FEC/src/config.js';
+} from '/./src/config.js';
 // import {
 //   MAIN_URL,
 //   API_KEY,
