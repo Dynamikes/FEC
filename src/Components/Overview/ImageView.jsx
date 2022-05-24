@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { hot } from 'react-hot-loader/root';
 import axios from 'axios';
-//import styled from 'styled-components';
+import styled from 'styled-components';
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
 import {
   ImageWrapper,
@@ -9,7 +9,22 @@ import {
   MainImage,
   Thumbnails,
   ThumbnailImage,
+  ImageViewWrapper,
 } from '../StyledComponents.jsx';
+
+const StyledLeftArrow = styled(FaArrowAltCircleLeft)`
+  transform: scale(2);
+  position: absolute;
+  left: 5%;
+  z-index: 3;
+`;
+
+const StyledRightArrow = styled(FaArrowAltCircleRight)`
+  transform: scale(2);
+  position: absolute;
+  right: 5%;
+  z-index: 3;
+`;
 
 function ImageView(props) {
   const imageToggle = () => {
@@ -35,7 +50,7 @@ function ImageView(props) {
       url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/40344/styles',
       method: 'get',
       headers: {
-        Authorization: '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',
+        Authorization: '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',
       },
     })
       .then((response) => {
@@ -60,18 +75,13 @@ function ImageView(props) {
   }, []);
 
   return (
-    <ImageWrapper>
+    <ImageViewWrapper>
       <ExpandButton onClick={imageToggle}> Expand </ExpandButton>
       {current === 0 ? (
         ''
       ) : (
-        <FaArrowAltCircleLeft
-          className='left-arrow'
-          size='10em'
-          onClick={prevImage}
-        />
+        <StyledLeftArrow className='left-arrow' onClick={prevImage} />
       )}
-
       {loaded
         ? CarouselData.map((picture, index) => {
             return (
@@ -95,13 +105,9 @@ function ImageView(props) {
       {current === carLength - 1 ? (
         ''
       ) : (
-        <FaArrowAltCircleRight
-          className='right-arrow'
-          size='10em'
-          onClick={nextImage}
-        />
+        <StyledRightArrow className='right-arrow' onClick={nextImage} />
       )}
-    </ImageWrapper>
+    </ImageViewWrapper>
   );
 }
 
