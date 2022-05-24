@@ -48,6 +48,7 @@ export const Flexbox = styled.div`
   max-width: 90%;
   margin: auto;
 `;
+
 export const StyledPageTitle = styled.h1`
   display: flex;
   justify-content: center;
