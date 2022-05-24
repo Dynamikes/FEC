@@ -195,7 +195,6 @@ export const ReviewListWrapper = styled.div`
 display: flex;
 background-color: green;
 flex-direction: column;
-flex-grow: 1;
 `
 
 export const ReviewTile = styled.div`

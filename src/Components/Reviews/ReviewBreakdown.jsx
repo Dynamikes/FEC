@@ -9,7 +9,7 @@ const ReviewBreakdown = () => {
 
   return (
     <ReviewBreakdownWrapper>
-      --Rating Breakdown--
+      -----------------Review Breakdown-----------------
       <div>
         Star # + average
       </div>

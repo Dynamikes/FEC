@@ -10,8 +10,8 @@ from '../StyledComponents.jsx';
 
 const Reviews = () => {
 
-  const [reviews, setReview] = useState(null);
-  const [error, setError] = useState('');
+  const [reviews, setReview] = useState([]);
+  const [ReviewError, setReviewError] = useState('');
   const [loadedReview, setReviewLoaded] = useState(false);
 
 
@@ -24,14 +24,13 @@ const Reviews = () => {
       },
     })
       .then((response) => {
-        setReview(response.data);
-        console.log('THIS?', response.data);
+        setReview(response.data.results);
       })
       .then(() => {
         setReviewLoaded(true);
       })
       .catch((err) => {
-        setError(err);
+        setReviewError(err);
         console.log('Breaking in Review GET. Err:', err);
       });
   }, []);

@@ -1,42 +1,27 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
 import { hot } from 'react-hot-loader/root';
 import {
   ReviewListWrapper,
-  ReviewTile,
-  ReviewBody,
-  ReviewImageWrapper,
   ReviewButtonWrapper,
 }
 from '../StyledComponents.jsx'
 import ReviewListEntry from './ReviewListEntry'
 
-const ReviewList = () => {
+const ReviewList = ({reviews}) => {
 
   return (
     <ReviewListWrapper>
-      --Review List--
+      {console.log(reviews[0])}
+     --------------------------------Review List-------------------------------
       <div>
-        # Reviews/sortedBy
+        {reviews.length} Reviews /*sortedBy*
       </div>
-      <ReviewTile>
-        <div>
-          Ver / username/ date
-        </div>
-        <div>response from seller</div>
-        <div>star rating</div>
-        <p>Review Summary</p>
-        <ReviewBody>
-          --ReviewBody--
-          <p>Review Body 250 chars showing</p>
-          <p>check mark + Recommend this product?</p>
-          <ReviewImageWrapper>
-            Images Here 5
-            <button>Submit Image</button>
-          </ReviewImageWrapper>
-          <u>Helpful? Yes {'(ADD helpfulness here)'}</u>
-        </ReviewBody>
-      </ReviewTile>
-      <ReviewButtonWrapper><button>More Reviews</button> <button>Add a Review</button></ReviewButtonWrapper>
+      {reviews.slice(0,2).map((review, index) => <ReviewListEntry key={index} review={review}/>)}
+      <ReviewButtonWrapper>
+        <button>More Reviews</button>
+        <button>Add a Review</button>
+      </ReviewButtonWrapper>
     </ReviewListWrapper>
   )
 }
