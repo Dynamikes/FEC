@@ -7,9 +7,24 @@ export const ImageWrapper = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: auto;
+  z-index: 2;
+  height: 100%;
+  max-width: 100%;
+`;
+
+export const ImageViewWrapper = styled.section`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 5px;
   z-index: 2;
-  max-width: 90%;
+  width: 400px;
+  height: 500px;
+  border-color: red;
+  border-width: 10px;
+  border-style: solid;
 `;
 export const ExpandButton = styled.button`
   position: absolute;
@@ -59,8 +74,9 @@ export const StyledSideBar = styled.div`
   justify-content: space-between;
   z-index: 1;
   display: flex;
-  width: 33%;
   padding: 10px;
+  width: 250px;
+  height: 100%;
 `;
 export const HiddenSideBar = styled(StyledSideBar)`
   display: none;
@@ -72,21 +88,21 @@ export const StyledProductInfo = styled.div`
 `;
 export const Wrapper = styled.div`
   display: flex;
+  justify-self: space-around;
 `;
 export const StyledProductName = styled.h2`
   display: flex;
   justify-content: center;
-
   margin: 5px;
 `;
 export const OverviewWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 export const StyledImageView = styled.div`
   display: flex;
   z-index: 2;
-  width: 100%;
 `;
 export const ProductInfoWrapper = styled.div`
   display: flex;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { hot } from 'react-hot-loader/root';
 import axios from 'axios';
-//import styled from 'styled-components';
+import styled from 'styled-components';
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
 import {
   ImageWrapper,
@@ -9,7 +9,22 @@ import {
   MainImage,
   Thumbnails,
   ThumbnailImage,
+  ImageViewWrapper
 } from '../StyledComponents.jsx';
+
+const StyledLeftArrow = styled(FaArrowAltCircleLeft)`
+  transform: scale(2);
+  position: absolute;
+  left: 5%;
+  z-index: 4;
+`;
+
+const StyledRightArrow = styled(FaArrowAltCircleRight)`
+  transform: scale(2);
+  position: absolute;
+  right: 5%;
+  z-index: 4;
+`;
 
 function ImageView(props) {
   const imageToggle = () => {
@@ -60,18 +75,16 @@ function ImageView(props) {
   }, []);
 
   return (
-    <ImageWrapper>
+    <ImageViewWrapper>
       <ExpandButton onClick={imageToggle}> Expand </ExpandButton>
       {current === 0 ? (
         ''
       ) : (
-        <FaArrowAltCircleLeft
+        <StyledLeftArrow
           className='left-arrow'
-          size='10em'
           onClick={prevImage}
         />
       )}
-
       {loaded
         ? CarouselData.map((picture, index) => {
             return (
@@ -95,13 +108,12 @@ function ImageView(props) {
       {current === carLength - 1 ? (
         ''
       ) : (
-        <FaArrowAltCircleRight
+        <StyledRightArrow
           className='right-arrow'
-          size='10em'
           onClick={nextImage}
         />
       )}
-    </ImageWrapper>
+    </ImageViewWrapper>
   );
 }
 
