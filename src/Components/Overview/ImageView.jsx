@@ -16,14 +16,14 @@ const StyledLeftArrow = styled(FaArrowAltCircleLeft)`
   transform: scale(2);
   position: absolute;
   left: 5%;
-  z-index: 4;
+  z-index: 3;
 `;
 
 const StyledRightArrow = styled(FaArrowAltCircleRight)`
   transform: scale(2);
   position: absolute;
   right: 5%;
-  z-index: 4;
+  z-index: 3;
 `;
 
 function ImageView(props) {
