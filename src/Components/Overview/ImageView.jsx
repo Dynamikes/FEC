@@ -9,7 +9,7 @@ import {
   MainImage,
   Thumbnails,
   ThumbnailImage,
-  ImageViewWrapper
+  ImageViewWrapper,
 } from '../StyledComponents.jsx';
 
 const StyledLeftArrow = styled(FaArrowAltCircleLeft)`
@@ -50,7 +50,7 @@ function ImageView(props) {
       url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/40344/styles',
       method: 'get',
       headers: {
-        Authorization: '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',
+        Authorization: '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',
       },
     })
       .then((response) => {
@@ -80,10 +80,7 @@ function ImageView(props) {
       {current === 0 ? (
         ''
       ) : (
-        <StyledLeftArrow
-          className='left-arrow'
-          onClick={prevImage}
-        />
+        <StyledLeftArrow className='left-arrow' onClick={prevImage} />
       )}
       {loaded
         ? CarouselData.map((picture, index) => {
@@ -108,10 +105,7 @@ function ImageView(props) {
       {current === carLength - 1 ? (
         ''
       ) : (
-        <StyledRightArrow
-          className='right-arrow'
-          onClick={nextImage}
-        />
+        <StyledRightArrow className='right-arrow' onClick={nextImage} />
       )}
     </ImageViewWrapper>
   );
