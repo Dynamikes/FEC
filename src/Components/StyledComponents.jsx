@@ -9,6 +9,7 @@ export const ImageWrapper = styled.section`
   justify-content: center;
   padding: 5px;
   z-index: 2;
+  max-width: 90%;
 `;
 export const ExpandButton = styled.button`
   position: absolute;
@@ -24,7 +25,7 @@ export const MainImage = styled.img`
   position: relative;
   height: auto;
   left: 0%;
-  width: 90%;
+  width: 70%;
   z-index: 1;
   padding: 0.5em;
 `;

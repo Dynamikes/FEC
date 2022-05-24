@@ -70,11 +70,10 @@ function ProductInfo() {
 
   useEffect(() => {
     axios({
-      url: MAIN_URL + 'products/',
-
+      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/',
       method: 'get',
       headers: {
-        Authorization: API_KEY,
+        Authorization: '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',
       },
     })
       .then((response) => {
@@ -104,7 +103,10 @@ function ProductInfo() {
         {loaded ? products[0].category : 'CATEGORY'}
       </StyledCategory>
       <Title> {loaded ? products[0].name : 'TITLE'} </Title>
-      <StyledPrice> $500 </StyledPrice>
+      <StyledPrice>
+        {' '}
+        {loaded ? '$' + products[0].default_price : 'PRICE'}{' '}
+      </StyledPrice>
       <StyledShare>
         <div
           className='fb-share-button'
