@@ -8,6 +8,7 @@ import {
   ReviewButtonWrapper,
 }
 from '../StyledComponents.jsx'
+import ReviewListEntry from './ReviewListEntry'
 
 const ReviewList = () => {
 
@@ -32,7 +33,7 @@ const ReviewList = () => {
             Images Here 5
             <button>Submit Image</button>
           </ReviewImageWrapper>
-          <div>was this rating helpful?</div>
+          <u>Helpful? Yes {'(ADD helpfulness here)'}</u>
         </ReviewBody>
       </ReviewTile>
       <ReviewButtonWrapper><button>More Reviews</button> <button>Add a Review</button></ReviewButtonWrapper>
