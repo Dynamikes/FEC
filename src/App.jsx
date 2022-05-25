@@ -24,11 +24,11 @@ const App = (props) => {
       <Flexbox>
         <RelatedProducts />
       </Flexbox>
-      <Flexbox id='ratings_and_reviews'>
-        <Reviews />
-      </Flexbox>
       <Flexbox>
         <QA />
+      </Flexbox>
+      <Flexbox id='ratings_and_reviews'>
+        <Reviews />
       </Flexbox>
     </AppWrapper>
   );

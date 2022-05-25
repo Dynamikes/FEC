@@ -62,6 +62,7 @@ export const Flexbox = styled.div`
   justify-content: center;
   max-width: 90%;
   margin: auto;
+  padding: 10px;
 `;
 export const StyledPageTitle = styled.h1`
   display: flex;
