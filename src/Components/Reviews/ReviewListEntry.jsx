@@ -14,17 +14,22 @@ const ReviewListEntry = ({review}) => {
   return (
     <ReviewTile>
         <div>
-          Ver / username/ date
+        <div>
+          {review.reviewer_name} Verified?*
         </div>
-        <div>response from seller</div>
-        <div>star rating</div>
+        <div>
+          star rating
+        </div>
+         {review.date} --**HUMAN READABLE**--
+        </div>
+        {review.response ? <div>{review.response}</div> : <div></div>}
         <p>{review.summary}</p>
         <ReviewBody>
          -ReviewBody-
           <p>{review.body}</p>
-          <p>check mark + Recommend this product?</p>
+          {review.recommend ? <p>✅ I Recommend This Product!</p> : <p></p>}
           <ReviewImageWrapper>
-            User Images: Images Here 5
+            User Images: Images Here 5 *Thumbnails*
           </ReviewImageWrapper>
           <u>Helpful? Yes {`(${review.helpfulness})`}</u>
         </ReviewBody>
