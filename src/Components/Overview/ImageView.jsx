@@ -97,10 +97,17 @@ function ImageView(props) {
         : ''}
 
       <Thumbnails>
-        <ThumbnailImage src='https://i.imgur.com/sNZ0V4q.jpeg' />
-        <ThumbnailImage src='https://i.imgur.com/sNZ0V4q.jpeg' />
-        <ThumbnailImage src='https://i.imgur.com/sNZ0V4q.jpeg' />
-        <ThumbnailImage src='https://i.imgur.com/sNZ0V4q.jpeg' />
+        {loaded
+          ? CarouselData.map((thumbnail, index) => {
+              return (
+                <ThumbnailImage
+                  key={index}
+                  src={thumbnail}
+                  alt={'style thumbnail'}
+                />
+              );
+            })
+          : ''}
       </Thumbnails>
       {current === carLength - 1 ? (
         ''
@@ -112,3 +119,7 @@ function ImageView(props) {
 }
 
 export default hot(ImageView);
+//  <ThumbnailImage src='https://i.imgur.com/sNZ0V4q.jpeg' />
+//         <ThumbnailImage src='https://i.imgur.com/sNZ0V4q.jpeg' />
+//         <ThumbnailImage src='https://i.imgur.com/sNZ0V4q.jpeg' />
+//         <ThumbnailImage src='https://i.imgur.com/sNZ0V4q.jpeg' />

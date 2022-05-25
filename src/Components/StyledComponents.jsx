@@ -46,8 +46,8 @@ export const MainImage = styled.img`
 `;
 export const Thumbnails = styled.div`
   position: absolute;
-  width: 10%;
-  left: 6%;
+  width: 15%;
+  left: 4%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
