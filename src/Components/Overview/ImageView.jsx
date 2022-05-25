@@ -34,7 +34,10 @@ function ImageView(props) {
   const [loaded, setLoaded] = useState(false);
   const [CarouselData, setCarouselData] = useState(null);
   const [carLength, setCarLength] = useState(0);
+  const [thumbCarouselData, setThumbCarouselData] = useState(null);
+  const [selectedThumb, setSelectedThumb] = useState(0);
   const Carousel = [];
+  const CarThumbs = [];
 
   const nextImage = () => {
     setCurrent(current === carLength - 1 ? 0 : current + 1);
@@ -43,6 +46,11 @@ function ImageView(props) {
   const prevImage = () => {
     setCurrent(current === 0 ? carLength - 1 : current - 1);
     console.log(current);
+  };
+  const thumbClick = () => {
+    setSelectedThumb(selectedThumb + 1);
+    console.log(selectedThumb);
+    console.log(this.i);
   };
 
   useEffect(() => {
@@ -55,13 +63,16 @@ function ImageView(props) {
     })
       .then((response) => {
         console.log('image array:', response.data.results);
-        let allPics = response.data.results[0].photos;
+        let allPics = response.data.results[4].photos;
         console.log('allPics', allPics);
         let tempLength = 0;
         for (let i = 0; i < allPics.length; i++) {
-          Carousel.push(allPics[i].url);
+          Carousel.push([allPics[i].url, i]);
+          CarThumbs.push([allPics[i].thumbnail_url, i]);
           tempLength++;
         }
+        console.log(Carousel);
+        setThumbCarouselData(CarThumbs);
         setCarouselData(Carousel);
         setCarLength(tempLength);
         //console.log('Cardata and carlength:', CarouselData, carLength);
@@ -98,9 +109,10 @@ function ImageView(props) {
 
       <Thumbnails>
         {loaded
-          ? CarouselData.map((thumbnail, index) => {
+          ? thumbCarouselData.map((thumbnail, index) => {
               return (
                 <ThumbnailImage
+                  onClick={thumbClick}
                   key={index}
                   src={thumbnail}
                   alt={'style thumbnail'}
