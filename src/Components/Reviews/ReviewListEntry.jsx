@@ -3,11 +3,13 @@ import {React} from 'react'
 import { hot } from 'react-hot-loader/root';
 import {
   ReviewTile,
-  ReviewBody,
+  ReviewBodyWrapper,
   ReviewImageWrapper,
+  ReviewBody
 
 }
-from '../StyledComponents.jsx'
+from '../StyledComponents.jsx';
+import Moment from 'react-moment';
 
 const ReviewListEntry = ({review}) => {
 
@@ -20,19 +22,18 @@ const ReviewListEntry = ({review}) => {
         <div>
           star rating
         </div>
-         {review.date} --**HUMAN READABLE**--
+         <Moment format='MMMM Do YYYY, h:mm:ss a'>{review.date}</Moment>
         </div>
         {review.response ? <div>{review.response}</div> : <div></div>}
         <p>{review.summary}</p>
-        <ReviewBody>
-         -ReviewBody-
-          <p>{review.body}</p>
-          {review.recommend ? <p>✅ I Recommend This Product!</p> : <p></p>}
+        <ReviewBodyWrapper>
+          <ReviewBody>{review.body}</ReviewBody>
+          {review.recommend ? <p>✓ I recommend this product!</p> : <p></p>}
           <ReviewImageWrapper>
             User Images: Images Here 5 *Thumbnails*
           </ReviewImageWrapper>
           <u>Helpful? Yes {`(${review.helpfulness})`}</u>
-        </ReviewBody>
+        </ReviewBodyWrapper>
       </ReviewTile>
   )
 }

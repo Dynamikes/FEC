@@ -184,46 +184,109 @@ export const StyleThumbnail = styled.img`
 `;
 export const StyleSelectorContainer = styled.div``;
 
+
+//Review Title
+export const ReviewTitle = styled.h3`
+  display: flex;
+  justify-content: center;
+`;
+
 //Reviews.jsx -----------------------------
 export const  TotalReviewWrapper = styled.div`
 display: flex;
 flex-direction: row;
+background-color: rgb(7, 7, 7);
+border-color: green;
+border-width: 3px;
+border-style: solid;
+padding: 5px;
+margin: 5px;
 `;
 
 //ReviewList.jsx ---------------------------
 export const ReviewListWrapper = styled.div`
 display: flex;
-background-color: green;
+border-color: gold;
+border-width: 3px;
+border-style: solid;
 flex-direction: column;
-`
+height: 10px
+overflow: auto;
+padding: 3px;
+margin: 3px;
+`;
 
 export const ReviewTile = styled.div`
 display: flex;
-background-color: orange;
 flex-direction: column;
-`
+border-color: gold;
+border-width: 3px;
+border-style: solid;
+padding: 3px;
+margin: 3px;
+`;
 
-export const ReviewBody = styled.div`
+export const ReviewBodyWrapper = styled.div`
 display: flex;
-background-color: purple;
 flex-direction: column;
+padding: 3px;
+margin: 3px;
 `;
 
 export const ReviewImageWrapper = styled.div`
 display: flex;
-background-color: gray;
 flex-direction: row;
+border-color: gold;
+border-width: 1px;
+border-style: solid;
+padding: 3px;
+margin: 3px;
 `;
 
 export const ReviewButtonWrapper = styled.div`
 display: flex;
 flex-direction: row;
-`
+`;
+
+export const ReviewBody = styled.p`
+border-color: gold;
+border-width: 1px;
+border-style: solid;
+display: flex;
+padding: 3px;
+margin: 3px;
+`;
 
 //ReviewBreakdown.jsx ----------------------
 export const ReviewBreakdownWrapper = styled.div`
 display: flex;
-background-color: red;
 flex-direction: column;
 justify-content: flex-start;
+border-color: gold;
+border-width: 3px;
+border-style: solid;
+padding: 3px;
+margin: 3px;
+`;
+
+export const ReviewAverage = styled.h2`
+border-color: gold;
+border-width: 1px;
+border-style: solid;
+display: flex;
+flex-direction: row;
+padding: 3px;
+margin: 3px;
+`;
+
+//AddReview.jsx
+
+export const AddWrapper = styled.div`
+display: flex;
+flex-direction: column;
+`;
+
+export const AddTitle = styled.h2`
+display: flex;
+flex-direction: column;
 `;

@@ -14,7 +14,7 @@ const updateProducts = async () => {
     url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/',
     method: 'get',
     headers: {
-      Authorization: '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',
+      Authorization: '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',
     },
   })
     .then((response) => {
@@ -36,7 +36,7 @@ const updateStyles = () => {
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${product['id']}/styles`,
       method: 'get',
       headers: {
-        Authorization: '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',
+        Authorization: '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',
       },
     })
       .then((response) => {

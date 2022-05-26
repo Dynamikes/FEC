@@ -9,6 +9,7 @@ import {
   Flexbox,
   StyledPageTitle,
   AppWrapper,
+  ReviewTitle,
 } from './Components/StyledComponents.jsx';
 import { products } from './data.jsx';
 
@@ -24,6 +25,7 @@ const App = (props) => {
       <Flexbox>
         <RelatedProducts />
       </Flexbox>
+      <ReviewTitle>Ratings {'&'} Reviews</ReviewTitle>
       <Flexbox id="ratings_and_reviews">
         <Reviews />
       </Flexbox>

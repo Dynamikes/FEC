@@ -9,36 +9,48 @@ import {
 from '../StyledComponents.jsx';
 
 const Reviews = () => {
-
+  //States for user reviews / Meta data
   const [reviews, setReview] = useState([]);
-  const [ReviewError, setReviewError] = useState('');
-  const [loadedReview, setReviewLoaded] = useState(false);
+  const [reviewsMeta, setReviewMeta] = useState({recommended: {true: null, false: null}});
 
-
+  //Get for reviews user data
   useEffect(() => {
     axios({
       url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?product_id=40344',
       method: 'get',
       headers: {
-        Authorization: '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',
+        Authorization: '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',
       },
     })
       .then((response) => {
         setReview(response.data.results);
       })
-      .then(() => {
-        setReviewLoaded(true);
+      .catch((err) => {
+        console.log('Breaking in Review GET. Err:', err);
+      });
+  }, []);
+
+  //Get for reviews Meta Data
+  useEffect(() => {
+    axios({
+      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/meta/?product_id=40344',
+      method: 'get',
+      headers: {
+        Authorization: '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',
+      },
+    })
+      .then((response) => {
+        setReviewMeta(response.data);
       })
       .catch((err) => {
-        setReviewError(err);
-        console.log('Breaking in Review GET. Err:', err);
+        console.log('Breaking in ReviewMeta GET. Err:', err);
       });
   }, []);
 
   return(
   <TotalReviewWrapper>
-    {console.log('REVIEWS', reviews)}
-    <ReviewBreakdown reviews={reviews}/>
+    {console.log('REVIEWSMeta', reviewsMeta)}
+    <ReviewBreakdown reviewsMeta={reviewsMeta}/>
     <ReviewList reviews={reviews}/>
   </TotalReviewWrapper>
   );
