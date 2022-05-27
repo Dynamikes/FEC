@@ -210,8 +210,8 @@ border-color: gold;
 border-width: 3px;
 border-style: solid;
 flex-direction: column;
-height: 10px
-overflow: auto;
+max-height: 10px
+overflow-y: scroll;
 padding: 3px;
 margin: 3px;
 `;
@@ -257,6 +257,29 @@ padding: 3px;
 margin: 3px;
 `;
 
+export const AddTitle = styled.h2`
+display: flex;
+flex-direction: column;
+padding: 5px
+`;
+
+export const StarRatingList = styled.div`
+display: flex;
+flex-direction: column;
+border-color: gold;
+border-width: 1px;
+border-style: solid;
+margin: 5px;
+padding 3px;
+justify-content: center;
+font-size: 12px;
+`;
+
+export const StarRow = styled.div`
+display: flex;
+flex-direction: row;
+`;
+
 //ReviewBreakdown.jsx ----------------------
 export const ReviewBreakdownWrapper = styled.div`
 display: flex;
@@ -282,11 +305,30 @@ margin: 3px;
 //AddReview.jsx
 
 export const AddWrapper = styled.div`
-display: flex;
-flex-direction: column;
+background-color: rgba(7,7,7);
+border-color: gold;
+border-width: 1px;
+border-style: solid;
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+padding: 50px;
+zIndex: 1000;
 `;
 
-export const AddTitle = styled.h2`
+
+export const AddOverlay = styled.div`
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: rgba(0,0,0,.7);
+zIndex: 1000;
+`;
+
+export const AddSummaryWrapper = styled.div`
 display: flex;
-flex-direction: column;
+flex-direction: row;
 `;

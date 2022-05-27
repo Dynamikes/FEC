@@ -1,21 +1,25 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
 import { hot } from 'react-hot-loader/root';
 import {
   AddWrapper,
-  AddTitle
+  AddOverlay
 }
 from '../StyledComponents.jsx'
+import ReactDom from 'react-dom'
 
-const AddReview = () => {
-
-  return (
-   <AddWrapper>
-     <AddTitle>Write Your Review</AddTitle>
-     <h3>About the *Add Product Name*</h3>
-     <div>Overall rating -Stars-*</div>
-     <div>Radio Button- helpful review yes no</div>
-     
-  </AddWrapper>
+const AddReview = ({children, open, onClose}) => {
+  if (!open) {return null}
+  return ReactDom.createPortal(
+    <>
+  <AddOverlay onClick={onClose}>
+    <AddWrapper onClick={e => e.stopPropagation()}>
+      <button onClick={onClose}>x</button>
+      {children}
+    </AddWrapper>
+  </AddOverlay>
+  </>,
+  document.getElementById("portal")
   )
 }
 
