@@ -11,6 +11,7 @@ import {
   ThumbnailImage,
   ImageViewWrapper,
 } from '../StyledComponents.jsx';
+import config from '../../config.js'
 
 const StyledLeftArrow = styled(FaArrowAltCircleLeft)`
   transform: scale(2);
@@ -50,7 +51,7 @@ function ImageView(props) {
       url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/40344/styles',
       method: 'get',
       headers: {
-        Authorization: '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',
+        Authorization: config.API_KEY,
       },
     })
       .then((response) => {

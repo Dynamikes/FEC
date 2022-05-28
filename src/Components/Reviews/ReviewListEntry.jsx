@@ -12,6 +12,7 @@ from '../StyledComponents.jsx';
 import Moment from 'react-moment';
 import axios from 'axios'
 import StarRatings from 'react-star-ratings';
+import config from '../../config.js'
 
 const ReviewListEntry = ({review, getReviews}) => {
 
@@ -22,7 +23,7 @@ const ReviewListEntry = ({review, getReviews}) => {
         url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/${id}/helpful`,
         method: 'put',
         headers: {
-          Authorization: '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',
+          Authorization: config.API_KEY,
         },
       })
       getReviews();
