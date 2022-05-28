@@ -193,142 +193,142 @@ export const ReviewTitle = styled.h3`
 
 //Reviews.jsx -----------------------------
 export const  TotalReviewWrapper = styled.div`
-display: flex;
-flex-direction: row;
-background-color: rgb(7, 7, 7);
-border-color: green;
-border-width: 3px;
-border-style: solid;
-padding: 5px;
-margin: 5px;
+  display: flex;
+  flex-direction: row;
+  background-color: rgb(7, 7, 7);
+  border-color: green;
+  border-width: 3px;
+  border-style: solid;
+  padding: 5px;
+  margin: 5px;
+  position: relative;
 `;
 
 //ReviewList.jsx ---------------------------
 export const ReviewListWrapper = styled.div`
-display: flex;
-border-color: gold;
-border-width: 3px;
-border-style: solid;
-flex-direction: column;
-max-height: 10px
-overflow-y: scroll;
-padding: 3px;
-margin: 3px;
+  display: flex;
+  border-color: gold;
+  border-width: 3px;
+  border-style: solid;
+  flex-direction: column;
+  overflow-y: scroll;
+  padding: 3px;
+  margin: 3px;
 `;
 
 export const ReviewTile = styled.div`
-display: flex;
-flex-direction: column;
-border-color: gold;
-border-width: 3px;
-border-style: solid;
-padding: 3px;
-margin: 3px;
+  display: flex;
+  flex-direction: column;
+  border-color: gold;
+  border-width: 3px;
+  border-style: solid;
+  padding: 3px;
+  margin: 3px;
 `;
 
 export const ReviewBodyWrapper = styled.div`
-display: flex;
-flex-direction: column;
-padding: 3px;
-margin: 3px;
+  display: flex;
+  flex-direction: column;
+  padding: 3px;
+  margin: 3px;
 `;
 
 export const ReviewImageWrapper = styled.div`
-display: flex;
-flex-direction: row;
-border-color: gold;
-border-width: 1px;
-border-style: solid;
-padding: 3px;
-margin: 3px;
+  display: flex;
+  flex-direction: row;
+  border-color: gold;
+  border-width: 1px;
+  border-style: solid;
+  padding: 3px;
+  margin: 3px;
 `;
 
 export const ReviewButtonWrapper = styled.div`
-display: flex;
-flex-direction: row;
+  display: flex;
+  flex-direction: row;
 `;
 
 export const ReviewBody = styled.p`
-border-color: gold;
-border-width: 1px;
-border-style: solid;
-display: flex;
-padding: 3px;
-margin: 3px;
+  border-color: gold;
+  border-width: 1px;
+  border-style: solid;
+  display: flex;
+  padding: 3px;
+  margin: 3px;
 `;
 
 export const AddTitle = styled.h2`
-display: flex;
-flex-direction: column;
-padding: 5px
+  display: flex;
+  flex-direction: column;
+  padding: 5px
 `;
 
 export const StarRatingList = styled.div`
-display: flex;
-flex-direction: column;
-border-color: gold;
-border-width: 1px;
-border-style: solid;
-margin: 5px;
-padding 3px;
-justify-content: center;
-font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  border-color: gold;
+  border-width: 1px;
+  border-style: solid;
+  margin: 5px;
+  padding 3px;
+  justify-content: center;
+  font-size: 12px;
 `;
 
 export const StarRow = styled.div`
-display: flex;
-flex-direction: row;
+  display: flex;
+  flex-direction: row;
 `;
 
 //ReviewBreakdown.jsx ----------------------
 export const ReviewBreakdownWrapper = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: flex-start;
-border-color: gold;
-border-width: 3px;
-border-style: solid;
-padding: 3px;
-margin: 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border-color: gold;
+  border-width: 3px;
+  border-style: solid;
+  padding: 3px;
+  margin: 3px;
 `;
 
 export const ReviewAverage = styled.h2`
-border-color: gold;
-border-width: 1px;
-border-style: solid;
-display: flex;
-flex-direction: row;
-padding: 3px;
-margin: 3px;
+  border-color: gold;
+  border-width: 1px;
+  border-style: solid;
+  display: flex;
+  flex-direction: row;
+  padding: 3px;
+  margin: 3px;
 `;
 
 //AddReview.jsx
 
 export const AddWrapper = styled.div`
-background-color: rgba(7,7,7);
-border-color: gold;
-border-width: 1px;
-border-style: solid;
-position: fixed;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-padding: 50px;
-zIndex: 1000;
+  background-color: rgba(7,7,7);
+  border-color: gold;
+  border-width: 1px;
+  border-style: solid;
+  position: fixed;
+  top: 8%;
+  right: 100%
+  transform: translate(-50%, -50%);
+  padding: 50px;
+  z-index: 5;
 `;
 
 
 export const AddOverlay = styled.div`
-position: fixed;
-top: 0;
-left: 0;
-right: 0;
-bottom: 0;
-background-color: rgba(0,0,0,.7);
-zIndex: 1000;
+  position: fixed;
+  background-color: rgba(0,0,0, .7);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 5
 `;
 
 export const AddSummaryWrapper = styled.div`
-display: flex;
-flex-direction: row;
+  display: flex;
+  flex-direction: row;
 `;

@@ -1,7 +1,7 @@
 const path = require('path');
 //import path from 'path';
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
-
+const Dotenv = require('dotenv-webpack')
 const config = {
   entry: ['react-hot-loader/patch', './src/index.js'],
   output: {
@@ -52,7 +52,7 @@ const config = {
       directory: './dist',
     },
   },
-  plugins: [new LodashModuleReplacementPlugin()],
+  plugins: [new LodashModuleReplacementPlugin(), new Dotenv()],
   resolve: {
     extensions: ['', '.jsx', '.js'],
   },

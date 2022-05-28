@@ -1,13 +1,18 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { hot } from 'react-hot-loader/root';
- const Rating = ({value, getStar, getStars}) => {
+import StarRatings from 'react-star-ratings';
+
+ const Rating = ({value}) => {
 
   return (
     <div>
-      {getStars(value).map((value, index) => (
-        <img width={25} src={getStar(value)} key={index}/>
-      ))}
+      <StarRatings
+        rating={Number(value)}
+        starRatedColor="gold"
+        starDimension={'25px'}
+        starSpacing={'2px'}
+      />
     </div>
   )
 }

@@ -6,21 +6,19 @@ import {
   AddOverlay
 }
 from '../StyledComponents.jsx'
-import ReactDom from 'react-dom'
 
 const AddReview = ({children, open, onClose}) => {
   if (!open) {return null}
-  return ReactDom.createPortal(
+  else {return (
     <>
-  <AddOverlay onClick={onClose}>
-    <AddWrapper onClick={e => e.stopPropagation()}>
-      <button onClick={onClose}>x</button>
-      {children}
-    </AddWrapper>
-  </AddOverlay>
-  </>,
-  document.getElementById("portal")
-  )
+      <AddOverlay onClick={onClose}>
+        <AddWrapper onClick={e => e.stopPropagation()}>
+          <button onClick={onClose}>x</button>
+          {children}
+        </AddWrapper>
+      </AddOverlay>
+    </>
+  )}
 }
 
 export default hot(AddReview)
