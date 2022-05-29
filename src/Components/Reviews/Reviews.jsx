@@ -40,7 +40,7 @@ const Reviews = () => {
       url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/meta/?product_id=40344',
       method: 'get',
       headers: {
-        Authorization: MAIN_API_KEY,
+       Authorization: MAIN_API_KEY,
       },
     })
     .then((response) => {

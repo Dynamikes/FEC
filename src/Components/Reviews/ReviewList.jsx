@@ -8,7 +8,8 @@ import {
   StarRatingList,
   StarRow,
   AddSummaryWrapper,
-  ReviewMap
+  ReviewMap,
+  RadioAdd
 }
 from '../StyledComponents.jsx'
 import ReviewListEntry from './ReviewListEntry'
@@ -42,8 +43,8 @@ const ReviewList = ({reviews, getReviews}) => {
     }
 
   }
-  const submitAdd = () => {
-
+  const submitAdd = (e) => {
+    e.preventDefault()
     setAdd(false);
     alert('Review has been submitted')
     console.log(addUsername, addSummary, addBody, addEmail, addRecommend, addStar)
@@ -105,8 +106,12 @@ const ReviewList = ({reviews, getReviews}) => {
               </StarRatingList> : null}
             </StarRow>
             <div required>Do you recommend this product?</div>
-            <button onClick={() => setRecommend(true)}>{addRecommend ? '✓' : ''}Yes</button>
-            <button onClick={() => setRecommend(false)}>{addRecommend === false ? '✓' : ''}No</button>
+            <RadioAdd>
+              <div>Yes:</div>
+              <input onClick={() => setRecommend(true)} required type="radio" name="addAnswer" />
+              <div>No:</div>
+              <input onClick={() => setRecommend(false)} required type="radio" name="addAnswer" />
+            </RadioAdd>
             <div required>Characteristics</div>
             <div>Summary</div>
             <AddSummaryWrapper>
@@ -150,7 +155,7 @@ const ReviewList = ({reviews, getReviews}) => {
               rows='1'
             />
             <div>For authentification reasons, you will not be emailed</div>
-            <input type='submit' onSubmit={()=>{console.log('yes')}} value='Submit Review'/>
+            <input type='submit' onSubmit={()=>{submitAdd()}} value='Submit Review'/>
           </form>
         </AddReview>
       </ReviewButtonWrapper>

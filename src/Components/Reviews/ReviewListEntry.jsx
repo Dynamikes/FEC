@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import {useEffect, React } from 'react';
+import {useState, React } from 'react';
 import { hot } from 'react-hot-loader/root';
 import {
   ReviewTile,
@@ -16,7 +16,8 @@ import {MAIN_API_KEY} from '../../config.js'
 
 const ReviewListEntry = ({review, getReviews}) => {
 
-  //not working
+  const [clickedYes, setClickedYes] = useState(false);
+
   const incrementHelpful = (id) => {
       axios({
         url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/${id}/helpful`,
@@ -26,13 +27,13 @@ const ReviewListEntry = ({review, getReviews}) => {
         },
       })
       .then (() => {
+        setClickedYes(true)
         getReviews();
       })
   };
 
   return (
     <ReviewTile>
-      {console.log(review)}
       <div>
         <div>
           {review.reviewer_name} Verified?*
@@ -57,7 +58,7 @@ const ReviewListEntry = ({review, getReviews}) => {
           User Images: Images Here 5 *Thumbnails*
         </ReviewImageWrapper>
         <u>Helpful?
-          <u onClick={()=>{incrementHelpful(review['review_id'])}}>
+          <u onClick={!clickedYes ? ()=>{incrementHelpful(review['review_id'])} : null}>
             Yes
           </u>
           {`(${review.helpfulness})`}

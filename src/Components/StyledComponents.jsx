@@ -287,6 +287,11 @@ export const StarRow = styled.div`
   flex-direction: row;
 `;
 
+export const RadioAdd = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
 //ReviewBreakdown.jsx ----------------------
 export const ReviewBreakdownWrapper = styled.div`
   display: flex;
