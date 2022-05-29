@@ -419,6 +419,10 @@ export const SliderInputLength = styled.input`
 }
 `;
 
+export const RecommendWrap = styled.div`
+  margin: 5px
+`
+
 
 
 //AddReview.jsx

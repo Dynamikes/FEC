@@ -7,7 +7,7 @@ import {
   TotalReviewWrapper
 }
 from '../StyledComponents.jsx';
-import config from '../../config.js'
+import {MAIN_API_KEY} from '../../config.js'
 
 const Reviews = () => {
   //States for user reviews / Meta data
@@ -24,7 +24,7 @@ const Reviews = () => {
       url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?product_id=40344&&count=100',
       method: 'get',
       headers: {
-        Authorization: config.API_KEY,
+        Authorization: MAIN_API_KEY,
       },
     })
     .then((response) => {
@@ -40,7 +40,7 @@ const Reviews = () => {
       url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/meta/?product_id=40344',
       method: 'get',
       headers: {
-        Authorization: config.API_KEY,
+        Authorization: MAIN_API_KEY,
       },
     })
     .then((response) => {

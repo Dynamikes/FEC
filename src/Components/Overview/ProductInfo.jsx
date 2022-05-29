@@ -11,7 +11,7 @@ import {
   StyledPrice,
   StyledShare,
 } from '../StyledComponents.jsx';
-import config from '../../config.js'
+import {MAIN_API_KEY} from '../../config.js'
 
 function ProductInfo() {
   const [products, setProduct] = useState(null);
@@ -23,7 +23,7 @@ function ProductInfo() {
       url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/',
       method: 'get',
       headers: {
-        Authorization: config.API_KEY,
+        Authorization: MAIN_API_KEY,
       },
     })
       .then((response) => {

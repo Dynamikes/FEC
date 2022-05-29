@@ -9,7 +9,8 @@ import {
   SliderInputFit,
   SliderInputQuality,
   SliderInputLength,
-  StarBarWrap
+  StarBarWrap,
+  RecommendWrap
 }
 from '../StyledComponents.jsx'
 import RatingStars from './RatingStars.jsx'
@@ -137,9 +138,9 @@ const ReviewBreakdown = ({reviewsMeta, chars}) => {
             />
           <div>{five}</div>
       </ProgressBarWrap>
-      <div>
+      <RecommendWrap>
         {(Math.ceil(recommended / (recommended + notRecommended) * 100))}% of reviews recommend this product.
-      </div>
+      </RecommendWrap>
       <div>
         {
         fit ?

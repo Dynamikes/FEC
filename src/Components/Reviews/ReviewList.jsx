@@ -150,7 +150,7 @@ const ReviewList = ({reviews, getReviews}) => {
               rows='1'
             />
             <div>For authentification reasons, you will not be emailed</div>
-            <input type='submit' value='Submit Review'/>
+            <input type='submit' onSubmit={()=>{console.log('yes')}} value='Submit Review'/>
           </form>
         </AddReview>
       </ReviewButtonWrapper>
