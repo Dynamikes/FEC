@@ -68,7 +68,8 @@ export const StyledPageTitle = styled.h1`
   display: flex;
   justify-content: center;
 `;
-export const AppWrapper = styled.div``;
+export const AppWrapper = styled.div`
+`;
 
 export const StyledSideBar = styled.div`
   flex-direction: column;
@@ -84,8 +85,9 @@ export const HiddenSideBar = styled(StyledSideBar)`
 `;
 export const StyledProductInfo = styled.div`
   display: flex;
-  align-self: flex-end;
+  align-self: center;
   justify-content: center;
+  max-width: 100%;
 `;
 export const Wrapper = styled.div`
   display: flex;
@@ -100,6 +102,7 @@ export const OverviewWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 `;
 export const StyledImageView = styled.div`
   display: flex;
@@ -107,14 +110,12 @@ export const StyledImageView = styled.div`
 `;
 export const ProductInfoWrapper = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  width: center;
 `;
 export const StyledParagraph = styled.p`
-  font-size: 0.75em;
+  font-size: 1em;
   margin: 4px;
+  max-width: 600px;
 `;
 export const Title = styled.h2`
   align-self: center;
@@ -183,3 +184,28 @@ export const StyleThumbnail = styled.img`
   padding: 5px;
 `;
 export const StyleSelectorContainer = styled.div``;
+
+
+export const AddWrapper = styled.div`
+background-color: rgba(7,7,7);
+border-color: gold;
+border-width: 1px;
+border-style: solid;
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+padding: 50px;
+zIndex: 1000;`
+;
+
+
+export const AddOverlay = styled.div`
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: rgba(0,0,0, .7);
+zIndex: 1000;`
+;

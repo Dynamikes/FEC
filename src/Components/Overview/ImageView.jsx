@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import { hot } from 'react-hot-loader/root';
 import axios from 'axios';
@@ -47,10 +48,10 @@ function ImageView(props) {
 
   useEffect(() => {
     axios({
-      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/40344/styles',
+      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/40352/styles',
       method: 'get',
       headers: {
-        Authorization: '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',
+        Authorization: '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',
       },
     })
       .then((response) => {
