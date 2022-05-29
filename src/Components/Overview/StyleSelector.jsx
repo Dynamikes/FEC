@@ -6,11 +6,11 @@ import axios from 'axios';
 import { SelectorWrapper, Title, StyleThumbnail, StyleSelectorContainer } from '../StyledComponents.jsx';
 import {styleIDContext} from './Overview'
 import {API_KEY} from '../../config.js'
-function StyleSelector() {
+function StyleSelector(props) {
 const [styleThumbs, setStyleThumbs] = useState(null)
 const [loaded, setLoaded] = useState(false)
 const styleID = useContext(styleIDContext)
-const tempStyleThumbs = [];
+var tempStyleThumbs = [];
 useEffect(() => {
   axios({
     url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/40344/styles',
@@ -20,14 +20,18 @@ useEffect(() => {
     },
   })
   .then((response) => {
-    console.log(response.data)
-    console.log(styleID)
     if (styleID === null) {
       for (let i = 0; i < response.data.results.length; i++) {
         tempStyleThumbs.push([response.data.results[i].photos[0].thumbnail_url, response.data.results[i].style_id])
       }
-      console.log(tempStyleThumbs)
       
+    } else {
+      tempStyleThumbs = [];
+      for (let i = 0; i < response.data.results.length; i++) {
+        if (response.data.results[i].style_id !== styleID) {
+          tempStyleThumbs.push([response.data.results[i].photos[0].thumbnail_url, response.data.results[i].style_id])
+        } 
+      }
     }
     setStyleThumbs(tempStyleThumbs)
   })
@@ -44,7 +48,7 @@ useEffect(() => {
       <Title>StyleSelector</Title>
       <StyleSelectorContainer>
         {loaded ? styleThumbs.map((thumb) => {
-          return <StyleThumbnail key={thumb[1]} src={thumb[0]} />
+          return <StyleThumbnail key={thumb[1]} src={thumb[0]} onClick={() => {props.click(thumb[1])}}/>
         }) : ''}
         
         

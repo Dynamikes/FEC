@@ -26,6 +26,9 @@ function Overview() {
   const toggleFunc = () => {
     setToggle(!toggle);
   };
+  const changeStyleID = (id) => {
+    setStyleID(id)
+  }
 
   return (
     <styleIDContext.Provider value={styleID}>
@@ -39,7 +42,7 @@ function Overview() {
           <StyledSideBar>
             {' '}
             <ProductInfo />
-            <StyleSelector />
+            <StyleSelector click={changeStyleID} />
             <AddToCart />{' '}
           </StyledSideBar>
         ) : (

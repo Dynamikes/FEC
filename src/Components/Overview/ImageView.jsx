@@ -38,10 +38,10 @@ function ImageView(props) {
   const [thumbCarouselData, setThumbCarouselData] = useState(null)
   const [carLength, setCarLength] = useState(0);
   const [styleLoaded, setStyleLoaded] = useState(false)
-  const Carousel = [];
+  var Carousel = [];
   const thumbCarousel = [];
   const styleID = useContext(styleIDContext);
-  // console.log(styleID, 'This is styleID')
+  
   // console.log(API_KEY)
   const nextImage = () => {
     setCurrent(current === carLength - 1 ? 0 : current + 1);
@@ -61,6 +61,7 @@ function ImageView(props) {
       },
     })
       .then((response) => {
+        console.log(styleID, 'This is styleID')
         let allPics = response.data.results[0].photos;
         // console.log(response.data)
         // console.log(allPics)
@@ -74,10 +75,23 @@ function ImageView(props) {
             thumbCarousel.push(response.data.results[0].photos[x].thumbnail_url);
           }
           // console.log('This is thumb carousel', thumbCarousel)
+        } else {
+          for (let i = 0; i < response.data.results.length; i++) {
+            if (response.data.results[i].style_id === styleID) {
+              Carousel = [];
+              for (let y = 0; y < response.data.results[i].photos.length; y++) {
+                Carousel.push(response.data.results[i].photos[y].url)
+              }
+              console.log('This is carousel:', Carousel)
+            }
+          }
+          
         }
+
         setCarouselData(Carousel);
         setCarLength(tempLength);
         setThumbCarouselData(thumbCarousel)
+        
         // console.log(thumbCarousel)
       })
       .then(() => {
