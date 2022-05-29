@@ -11,11 +11,9 @@ import {
   AppWrapper,
   ReviewTitle,
 } from './Components/StyledComponents.jsx';
-import { products } from './data.jsx';
 
 const App = (props) => {
   const name = props.name;
-  console.log(products);
   return (
     <AppWrapper>
       <StyledPageTitle>Hello {name}</StyledPageTitle>

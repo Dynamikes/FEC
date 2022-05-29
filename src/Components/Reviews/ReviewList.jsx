@@ -7,7 +7,8 @@ import {
   AddTitle,
   StarRatingList,
   StarRow,
-  AddSummaryWrapper
+  AddSummaryWrapper,
+  ReviewMap
 }
 from '../StyledComponents.jsx'
 import ReviewListEntry from './ReviewListEntry'
@@ -23,10 +24,12 @@ const ReviewList = ({reviews, getReviews}) => {
   const [addUsername, setUser] = useState(null)
   const [addSummary, setSummary] = useState(null)
   const [addBody, setBody] = useState(null)
-  const [addImages, setImages] = useState([])
   const [addEmail, setEmail] = useState(null)
   const [addRecommend, setRecommend] = useState(null)
   const [addStar, setStar] = useState(0)
+  const [factors, setFactors] = useState(null)
+  const [addImages, setImages] = useState([])
+
   //Characteristics
   //Helpful
 
@@ -48,19 +51,19 @@ const ReviewList = ({reviews, getReviews}) => {
 
   return (
     <ReviewListWrapper>
-      <div>
-        {reviews.length} Reviews /*sortedBy*
-      </div>
-
-
-      {reviews.slice(0,reviewCount).map((review, index) =>
-       <ReviewListEntry
-          getReviews={getReviews}
-          key={index}
-          review={review}
-          reviews={reviews}
-        />
-      )}
+      <ReviewMap>
+        <div>
+          {reviews.length} Reviews /*sortedBy*
+        </div>
+        {reviews.slice(0,reviewCount).map((review, index) =>
+        <ReviewListEntry
+            getReviews={getReviews}
+            key={index}
+            review={review}
+            reviews={reviews}
+          />
+        )}
+      </ReviewMap>
       <ReviewButtonWrapper>
         {reviewCount < reviews.length && reviews.length > 2 ?
           <button onClick={() => { setReviewCount(reviewCount + 2)}}>More Reviews</button> :
@@ -68,79 +71,87 @@ const ReviewList = ({reviews, getReviews}) => {
         }
         <button onClick={()=>{setAdd(true)}}>Add a Review</button>
         <AddReview open={addIsOpen} onClose={() => setAdd(false)}>
-          <AddTitle>Write Your Review</AddTitle>
-          <h3>About the *Add Product Name*</h3>
-          <StarRow>
-            <div>
-              <StarRatings
-                rating={addStar}
-                starRatedColor="gold"
-                starDimension={'25px'}
-                starSpacing={'2px'}
-                changeRating={(e)=>{setStar(e)}}
+          <form>
+            <AddTitle>Write Your Review</AddTitle>
+            <h3>About the *Add Product Name*</h3>
+            <StarRow>
+              <div>
+                <StarRatings
+                  rating={addStar}
+                  starRatedColor="gold"
+                  starDimension={'25px'}
+                  starSpacing={'2px'}
+                  changeRating={(e)=>{setStar(e)}}
+                  required
+                />
+            </div>
+              {addStar > 0 ?
+              <StarRatingList>
+                <div>
+                  1 star - Poor
+                </div>
+                <div>
+                  2 stars - Fair
+                </div>
+                <div>
+                  3 stars - Average
+                </div>
+                <div>
+                  4 stars - Good
+                </div>
+                <div>
+                  5 stars - Great
+                </div>
+              </StarRatingList> : null}
+            </StarRow>
+            <div required>Do you recommend this product?</div>
+            <button onClick={() => setRecommend(true)}>{addRecommend ? '✓' : ''}Yes</button>
+            <button onClick={() => setRecommend(false)}>{addRecommend === false ? '✓' : ''}No</button>
+            <div required>Characteristics</div>
+            <div>Summary</div>
+            <AddSummaryWrapper>
+              <textarea
+                required
+                onChange={(e) => setSummary(e.target.value)}
+                cols='80'
+                rows='1'
+                placeholder='Example: Best purchase ever!'
               />
-           </div>
-            {addStar > 0 ?
-            <StarRatingList>
-              <div>
-                1 star - Poor
-              </div>
-              <div>
-                2 stars - Fair
-              </div>
-              <div>
-                3 stars - Average
-              </div>
-              <div>
-                4 stars - Good
-              </div>
-              <div>
-                5 stars - Great
-              </div>
-            </StarRatingList> : null}
-          </StarRow>
-          <div>Do you recommend this product?</div>
-          <button onClick={() => setRecommend(true)}>{addRecommend ? '✓' : ''}Yes</button>
-          <button onClick={() => setRecommend(false)}>{addRecommend === false ? '✓' : ''}No</button>
-          <div>Characteristics</div>
-          <div>Summary</div>
-          <AddSummaryWrapper>
+            </AddSummaryWrapper>
+            <div>Body</div>
             <textarea
-              onChange={(e) => setSummary(e.target.value)}
+              required
+              onChange={(e) => setBody(e.target.value)}
               cols='80'
-              rows='1'
-              placeholder='Example: Best purchase ever!'
+              rows='2'
+              onKeyUp={(e) => countChars(e)}
+              id="add-body"
+              placeholder='Why did you like the product or not?'
             />
-          </AddSummaryWrapper>
-          <div>Body</div>
-          <textarea
-            onChange={(e) => setBody(e.target.value)}
-            cols='80'
-            rows='2'
-            onKeyUp={(e) => countChars(e)}
-            id="add-body"
-            placeholder='Why did you like the product or not?'
-          />
-          <div id="count-body"></div>
-          <div>Images Added</div>
-          <button>Upload Photos</button>
-          <div>Your Username</div>
-          <textarea
-            onChange={(e) => setUser(e.target.value)}
-            placeholder='Example: jackson11!'
-            cols='20'
-            rows='1'
-          />
-          <div>For privacy reasons, do not use your full name or email</div>
-          <div>Your Email</div>
-          <textarea
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder='Example: jackson11@email.com'
-            cols='30'
-            rows='1'
-          />
-          <div>For authentification reasons, you will not be emailed</div>
-          <button onClick={submitAdd}>Submit Review</button>
+            <div id="count-body"></div>
+            <div>Images Added</div>
+            <button>Upload Photos</button>
+            <div>Your Username</div>
+            <textarea
+              required
+              onChange={(e) => setUser(e.target.value)}
+              placeholder='Example: jackson11!'
+              cols='20'
+              rows='1'
+            />
+            <div>For privacy reasons, do not use your full name or email</div>
+            <div>Your Email</div>
+            <textarea
+              required
+              type='email'
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder='Example: jackson11@email.com'
+              cols='30'
+              rows='1'
+            />
+            <div>For authentification reasons, you will not be emailed</div>
+            <input type='submit' value='Submit Review'/>
+          </form>
         </AddReview>
       </ReviewButtonWrapper>
     </ReviewListWrapper>

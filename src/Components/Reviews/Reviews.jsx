@@ -15,6 +15,7 @@ const Reviews = () => {
   const [reviewsMeta, setReviewMeta] = useState(
     {recommended: {true: null, false: null}, ratings: {'1': '1', '2': '2', '3': '3', '4': '4', '5': '5'}});
   const [chars, setChars] = useState({Size: 1, Width: 1, Comfort: 1, Quality: 1, Length:1, Fit: 1})
+  const [loadedChars, setLoadedChars] = useState(false);
 
 
   //helper functions
@@ -46,6 +47,9 @@ const Reviews = () => {
       setChars(response.data.characteristics)
       setReviewMeta(response.data);
     })
+    .then(() => {
+      setLoadedChars(true);
+    })
     .catch((err) => {
       console.log('Breaking in ReviewMeta GET. Err:', err);
     });
@@ -60,12 +64,14 @@ const Reviews = () => {
   useEffect(() => {
     getMeta();
   }, []);
+  let chara
+  if(loadedChars){chara = chars}
 
   return(
     <TotalReviewWrapper>
       <ReviewBreakdown
         reviewsMeta={reviewsMeta}
-        chars={chars}
+        chars={chara}
       />
       <ReviewList
         reviews={reviews}

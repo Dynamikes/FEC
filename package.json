@@ -14,6 +14,7 @@
     "start": "webpack serve --hot --mode development"
   },
   "dependencies": {
+    "@ramonak/react-progress-bar": "^4.4.0",
     "axios": "^0.27.2",
     "dotenv-webpack": "^7.1.0",
     "lodash": "^4.17.21",

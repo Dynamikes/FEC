@@ -10,7 +10,7 @@ import StarRatings from 'react-star-ratings';
       <StarRatings
         rating={Number(value)}
         starRatedColor="gold"
-        starDimension={'25px'}
+        starDimension='25px'
         starSpacing={'2px'}
       />
     </div>

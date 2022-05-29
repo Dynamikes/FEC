@@ -18,7 +18,6 @@ const ReviewListEntry = ({review, getReviews}) => {
 
   //not working
   const incrementHelpful = (id) => {
-    useEffect(() => {
       axios({
         url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/${id}/helpful`,
         method: 'put',
@@ -26,13 +25,14 @@ const ReviewListEntry = ({review, getReviews}) => {
           Authorization: config.API_KEY,
         },
       })
-      getReviews();
-    }, []);
-
-  }
+      .then (() => {
+        getReviews();
+      })
+  };
 
   return (
     <ReviewTile>
+      {console.log(review)}
       <div>
         <div>
           {review.reviewer_name} Verified?*
@@ -57,7 +57,7 @@ const ReviewListEntry = ({review, getReviews}) => {
           User Images: Images Here 5 *Thumbnails*
         </ReviewImageWrapper>
         <u>Helpful?
-          <u onClick={()=>{incrementHelpful(review.review_id)}}>
+          <u onClick={()=>{incrementHelpful(review['review_id'])}}>
             Yes
           </u>
           {`(${review.helpfulness})`}

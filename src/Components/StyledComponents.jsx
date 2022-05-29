@@ -211,9 +211,15 @@ export const ReviewListWrapper = styled.div`
   border-width: 3px;
   border-style: solid;
   flex-direction: column;
-  overflow-y: scroll;
   padding: 3px;
   margin: 3px;
+`;
+
+export const ReviewMap = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  height:590px;
 `;
 
 export const ReviewTile = styled.div`
@@ -224,6 +230,7 @@ export const ReviewTile = styled.div`
   border-style: solid;
   padding: 3px;
   margin: 3px;
+  width:600PX;
 `;
 
 export const ReviewBodyWrapper = styled.div`
@@ -301,6 +308,118 @@ export const ReviewAverage = styled.h2`
   padding: 3px;
   margin: 3px;
 `;
+
+export const ProgressBarWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%
+`;
+
+export const StarBarWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%
+`;
+
+export const InnerBar = styled.div`
+  display: flex;
+  flex-basis: 60%;
+`
+
+export const SliderWrapper = styled.div`
+  margin: 3px
+  width: 75%
+
+`;
+
+export const SliderInputFit = styled.input`
+  -webkit-appearance: none;
+  height: 6px;
+  width: 75%;
+  background-color: grey;
+  border-radius: 1px;
+  outline: none;
+  box-shadow: 0px 1px 10px 1px gold;
+  background: radial-gradient(circle at center, white 0, grey 100%);
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    background: white;
+    width: 7px;
+    height: 25px;
+    border-radius: 8px;
+    border: 1px solid #777;
+  };
+  &:after {
+    content: "Too large";
+    color: white
+  }
+  &:before {
+    content: "Too small";
+    color: white
+  }
+}
+`;
+
+export const SliderInputQuality = styled.input`
+  -webkit-appearance: none;
+  height: 6px;
+  width: 75%;
+  background-color: grey;
+  border-radius: 1px;
+  outline: none;
+  box-shadow: 0px 1px 10px 1px gold;
+  background: radial-gradient(circle at center, white 0, grey 100%);
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    background: white;
+    width: 7px;
+    height: 25px;
+    border-radius: 8px;
+    border: 1px solid #777;
+  };
+  &:after {
+    content: "Great";
+    color: white
+  }
+  &:before {
+    content: "Poor";
+    color: white
+  }
+}
+`;
+
+export const SliderInputLength = styled.input`
+  -webkit-appearance: none;
+  height: 6px;
+  width: 75%;
+  background-color: grey;
+  border-radius: 1px;
+  outline: none;
+  box-shadow: 0px 1px 10px 1px gold;
+  background: radial-gradient(circle at center, white 0, grey 100%);
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    background: white;
+    width: 7px;
+    height: 25px;
+    border-radius: 8px;
+    border: 1px solid #777;
+  };
+  &:after {
+    content: "Too long";
+    color: white
+  }
+  &:before {
+    content: "Too short";
+    color: white
+  }
+}
+`;
+
+
 
 //AddReview.jsx
 
