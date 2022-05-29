@@ -9,14 +9,11 @@ import {
   Flexbox,
   StyledPageTitle,
   AppWrapper,
+  ReviewTitle,
 } from './Components/StyledComponents.jsx';
-// import { products } from './data.jsx';
-import {MAIN_API_KEY} from './config.js';
 
 const App = (props) => {
   const name = props.name;
-  // console.log(products);
-  console.log(MAIN_API_KEY);
   return (
     <AppWrapper>
       <StyledPageTitle>Hello {name}</StyledPageTitle>
@@ -26,11 +23,12 @@ const App = (props) => {
       <Flexbox>
         <RelatedProducts />
       </Flexbox>
+      <ReviewTitle>Ratings {'&'} Reviews</ReviewTitle>
+      <Flexbox id="ratings_and_reviews">
+        <Reviews />
+      </Flexbox>
       <Flexbox>
         <QA />
-      </Flexbox>
-      <Flexbox id='ratings_and_reviews'>
-        <Reviews />
       </Flexbox>
     </AppWrapper>
   );
