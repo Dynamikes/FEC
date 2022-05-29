@@ -373,23 +373,23 @@ function QA() {
 
   const searchQuestions = (e) => {
     e.preventDefault();
-    let searchStr = e.target.search.value;
-    let searchedQuestions = [];
-    for (let i = 0; i < questions.length; i++) {
-      if (questions[i]['question_body'].indexOf(searchStr) !== -1) {
-        searchedQuestions.push(questions[i])
-      }
-    }
-    setQuestions(searchedQuestions);
+    // let searchStr = e.target.search.value.toLowerCase();
+    // let searchedQuestions = [];
+    // for (let i = 0; i < questions.length; i++) {
+    //   if (questions[i]['question_body'].toLowerCase().indexOf(searchStr) !== -1) {
+    //     searchedQuestions.push(questions[i])
+    //   }
+    // }
+    // setQuestions(searchedQuestions);
     e.target.search.value = '';
   }
 
   const whileSearching = (e) => {
-    let searchStr = e.target.value;
+    let searchStr = e.target.value.toLowerCase();
     if (searchStr.length >= 3) {
       let searchedQuestions = [];
       for (let i = 0; i < questions.length; i++) {
-        if (questions[i]['question_body'].indexOf(searchStr) !== -1) {
+        if (questions[i]['question_body'].toLowerCase().indexOf(searchStr) !== -1) {
           searchedQuestions.push(questions[i])
         }
       }
