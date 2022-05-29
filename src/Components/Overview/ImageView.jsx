@@ -51,13 +51,12 @@ function ImageView(props) {
       url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/40352/styles',
       method: 'get',
       headers: {
-        Authorization: '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',
+        Authorization: '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',
       },
     })
       .then((response) => {
-        console.log('image array:', response.data.results);
+        // console.log('image array:', response.data.results);
         let allPics = response.data.results[0].photos;
-        console.log('allPics', allPics);
         let tempLength = 0;
         for (let i = 0; i < allPics.length; i++) {
           Carousel.push(allPics[i].url);

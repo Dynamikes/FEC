@@ -209,3 +209,75 @@ bottom: 0;
 background-color: rgba(0,0,0, .7);
 zIndex: 1000;`
 ;
+
+export const BigQAWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 80vh;
+`;
+export const QAWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-height: 80vh;
+  overflow-y: scroll;
+`;
+export const QAEntryWrapper = styled.div`
+border-width: 2 px;
+border-color: orange;
+border-style: solid;
+padding: 5px;
+margin: 10px 1px;
+`;
+export const AnswerListWrapper = styled.div`
+max-height: 50vh;
+overflow-y: scroll;
+`;
+export const AnswerWrapper = styled.li`
+  margin: 10px 20px;
+`;
+export const QASearchBar = styled.input`
+  width: 74vh;
+  height: 30px;
+  padding: 2px;
+  border: none;
+`;
+export const QASearchButton = styled.input`
+  background: white;
+  width: 5vh;
+  padding: 9.5px 1px;
+  border: none;
+`;
+export const StyledQuestion = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+export const StyledQuestionExtensions = styled.div`
+  display: flex;
+`;
+export const QAButtons = styled.button`
+  padding: 10px;
+  margin: 10px;
+`;
+export const AnswerPhotos = styled.div`
+  display: flex;
+`;
+export const AnswerPhoto = styled.img`
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  margin: 5px;
+`;
+export const UpdateButtons = styled.button`
+background: none!important;
+  border: none;
+  font-family: arial, sans-serif;
+  color: gold;
+  text-decoration: underline;
+  padding: 0px 3px;
+  cursor: pointer;
+`
+export const AddForms = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+`;
