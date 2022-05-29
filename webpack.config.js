@@ -51,7 +51,7 @@ const config = {
       directory: './dist',
     },
   },
-  plugins: [new LodashModuleReplacementPlugin(), new Dotenv()],
+  plugins: [new LodashModuleReplacementPlugin()],
   resolve: {
     extensions: ['', '.jsx', '.js'],
   },
