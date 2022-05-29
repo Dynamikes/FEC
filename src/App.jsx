@@ -11,10 +11,12 @@ import {
   AppWrapper,
 } from './Components/StyledComponents.jsx';
 // import { products } from './data.jsx';
+import {MAIN_API_KEY} from './config.js';
 
 const App = (props) => {
   const name = props.name;
   // console.log(products);
+  console.log(MAIN_API_KEY);
   return (
     <AppWrapper>
       <StyledPageTitle>Hello {name}</StyledPageTitle>

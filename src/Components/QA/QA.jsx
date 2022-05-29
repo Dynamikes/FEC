@@ -4,7 +4,7 @@ import { hot } from 'react-hot-loader/root';
 import styled from 'styled-components';
 import axios from 'axios';
 import { Title, AddOverlay, AddWrapper, BigQAWrapper, QAWrapper, QASearchBar, QASearchButton, StyledQuestionExtensions, QAButtons, AddForms } from '../StyledComponents.jsx';
-
+import { MAIN_API_KEY } from '../../config.js'
 import QAEntry from './QAEntry.jsx'
 
 const SearchWrapper = styled.div`
@@ -27,7 +27,7 @@ function QA() {
       url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=' + product_id,
       method: 'get',
       headers: {
-        Authorization: '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',
+        Authorization: MAIN_API_KEY,
       },
     })
     .then ((data) => {
@@ -57,7 +57,7 @@ function QA() {
       url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions',
       method: 'post',
       headers: {
-        Authorization: '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',
+        Authorization: MAIN_API_KEY,
       },
       data: questionContent
     })

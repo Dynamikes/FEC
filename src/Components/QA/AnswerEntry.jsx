@@ -4,7 +4,7 @@ import { hot } from 'react-hot-loader/root';
 // import styled from 'styled-components';
 import axios from 'axios';
 import { AnswerWrapper, AnswerPhotos, AnswerPhoto, UpdateButtons, } from '../StyledComponents.jsx';
-
+import { MAIN_API_KEY } from '../../config.js'
 
 function AnswerEntry(props) {
   let date = new Date(Date.parse(props.answer.date)).toLocaleDateString('en-us', {month: 'long', day: 'numeric', year: 'numeric'})
@@ -15,7 +15,7 @@ function AnswerEntry(props) {
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/answers/${props.answer['id']}/report`,
       method: 'put',
       headers: {
-        Authorization: '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',
+        Authorization: MAIN_API_KEY,
       },
     })
     .then(()=>{
@@ -28,7 +28,7 @@ function AnswerEntry(props) {
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/answers/${props.answer['id']}/helpful`,
       method: 'put',
       headers: {
-        Authorization: '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',
+        Authorization: MAIN_API_KEY,
       },
     })
     .then(()=>{

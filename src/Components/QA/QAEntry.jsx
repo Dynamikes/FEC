@@ -4,7 +4,7 @@ import { hot } from 'react-hot-loader/root';
 // import styled from 'styled-components';
 import axios from 'axios';
 import { Title, AddOverlay, AddWrapper, QAEntryWrapper, AnswerListWrapper, StyledQuestion, AnswerPhotos, AnswerPhoto, UpdateButtons, AddForms } from '../StyledComponents.jsx';
-
+import { MAIN_API_KEY, IMG_API_KEY } from '../../config.js'
 import AnswerEntry from './AnswerEntry.jsx'
 
 function QAEntry(props) {
@@ -26,7 +26,7 @@ function QAEntry(props) {
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions/${props.question['question_id']}/helpful`,
       method: 'put',
       headers: {
-        Authorization: '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',
+        Authorization: MAIN_API_KEY,
       },
     })
     .then(() => {
@@ -65,7 +65,7 @@ function QAEntry(props) {
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions/${props.question['question_id']}/answers`,
       method: 'post',
       headers: {
-        Authorization: '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',
+        Authorization: MAIN_API_KEY,
       },
       data: answerContent
     })
@@ -99,7 +99,7 @@ function QAEntry(props) {
       let body = new FormData();
       body.append('image', file64);
       await axios({
-        url: `https://api.imgbb.com/1/upload?expiration=600&key=71af321260bd6877bf0b3aeb96421ef0`, //api key change
+        url: `https://api.imgbb.com/1/upload?expiration=600&key=${IMG_API_KEY}`, //api key change
         method: 'post',
         data: body
       })
