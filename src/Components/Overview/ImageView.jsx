@@ -81,6 +81,7 @@ function ImageView(props) {
               Carousel = [];
               for (let y = 0; y < response.data.results[i].photos.length; y++) {
                 Carousel.push(response.data.results[i].photos[y].url)
+                thumbCarousel.push(response.data.results[i].photos[y].thumbnail_url)
               }
               console.log('This is carousel:', Carousel)
             }
