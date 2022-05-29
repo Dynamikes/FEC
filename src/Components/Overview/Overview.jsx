@@ -14,17 +14,22 @@ import {
   StyledImageView
 }
 from '../StyledComponents.jsx'
-
+export const styleIDContext = React.createContext();
+export const prodIDContext = React.createContext();
 function Overview() {
   //hook that adds state ttoggle
   //function that toggles state from A to B
   let [toggle, setToggle] = useState(!toggle);
+  const [styleID, setStyleID] = useState(null)
+  const [prodID, setProdID] = useState(40344)
 
   const toggleFunc = () => {
     setToggle(!toggle);
   };
 
   return (
+    <styleIDContext.Provider value={styleID}>
+      <prodIDContext.Provider value={prodID} >
     <OverviewWrapper>
       <Wrapper>
         <StyledImageView>
@@ -50,6 +55,8 @@ function Overview() {
         <ProductDescription />
       </StyledProductInfo>
     </OverviewWrapper>
+    </prodIDContext.Provider>
+    </styleIDContext.Provider>
   );
 }
 

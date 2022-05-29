@@ -73,7 +73,7 @@ function ProductInfo() {
       url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/',
       method: 'get',
       headers: {
-        Authorization: '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',
+        Authorization: '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',
       },
     })
       .then((response) => {

@@ -177,8 +177,8 @@ export const AddToCartButton = styled.button`
 
 export const StyleThumbnail = styled.img`
   border-radius: 50%;
-  width: 25%;
-  height: auto;
+  width: 60px;
+  height: 60px;
   padding: 5px;
 `;
 export const StyleSelectorContainer = styled.div``;

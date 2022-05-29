@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext} from 'react';
 import { hot } from 'react-hot-loader/root';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -11,6 +11,8 @@ import {
   ThumbnailImage,
   ImageViewWrapper,
 } from '../StyledComponents.jsx';
+import {styleIDContext} from './Overview'
+import {API_KEY} from '../../config.js'
 
 const StyledLeftArrow = styled(FaArrowAltCircleLeft)`
   transform: scale(2);
@@ -33,16 +35,21 @@ function ImageView(props) {
   const [current, setCurrent] = useState(0);
   const [loaded, setLoaded] = useState(false);
   const [CarouselData, setCarouselData] = useState(null);
+  const [thumbCarouselData, setThumbCarouselData] = useState(null)
   const [carLength, setCarLength] = useState(0);
+  const [styleLoaded, setStyleLoaded] = useState(false)
   const Carousel = [];
-
+  const thumbCarousel = [];
+  const styleID = useContext(styleIDContext);
+  // console.log(styleID, 'This is styleID')
+  // console.log(API_KEY)
   const nextImage = () => {
     setCurrent(current === carLength - 1 ? 0 : current + 1);
-    console.log(current);
+    // console.log(current);
   };
   const prevImage = () => {
     setCurrent(current === 0 ? carLength - 1 : current - 1);
-    console.log(current);
+    // console.log(current);
   };
 
   useEffect(() => {
@@ -50,29 +57,37 @@ function ImageView(props) {
       url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/40344/styles',
       method: 'get',
       headers: {
-        Authorization: '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',
+        Authorization: API_KEY,
       },
     })
       .then((response) => {
-        console.log('image array:', response.data.results);
         let allPics = response.data.results[0].photos;
-        console.log('allPics', allPics);
+        // console.log(response.data)
+        // console.log(allPics)
         let tempLength = 0;
         for (let i = 0; i < allPics.length; i++) {
           Carousel.push(allPics[i].url);
           tempLength++;
         }
+        if (styleID === null) {
+          for (let x = 0; x < response.data.results[0].photos.length; x++) {
+            thumbCarousel.push(response.data.results[0].photos[x].thumbnail_url);
+          }
+          // console.log('This is thumb carousel', thumbCarousel)
+        }
         setCarouselData(Carousel);
         setCarLength(tempLength);
-        //console.log('Cardata and carlength:', CarouselData, carLength);
+        setThumbCarouselData(thumbCarousel)
+        // console.log(thumbCarousel)
       })
       .then(() => {
         setLoaded(true);
+        setStyleLoaded(true)
       })
       .catch((err) => {
         console.log('Breaking in getOurData. Err:', err);
       });
-  }, []);
+  }, [styleID]);
 
   return (
     <ImageViewWrapper>
@@ -97,10 +112,15 @@ function ImageView(props) {
         : ''}
 
       <Thumbnails>
-        <ThumbnailImage src='https://i.imgur.com/sNZ0V4q.jpeg' />
-        <ThumbnailImage src='https://i.imgur.com/sNZ0V4q.jpeg' />
-        <ThumbnailImage src='https://i.imgur.com/sNZ0V4q.jpeg' />
-        <ThumbnailImage src='https://i.imgur.com/sNZ0V4q.jpeg' />
+        {styleLoaded ?
+        thumbCarouselData.map((thumb, index) => {
+          return (
+            
+              <ThumbnailImage key={index} src={thumb} />
+            
+          )
+        }) : ''}
+        
       </Thumbnails>
       {current === carLength - 1 ? (
         ''
