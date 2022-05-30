@@ -14,14 +14,16 @@ import {
   ReviewsSearch,
   SearchBarWrapper,
   StyledSearchIcon,
-  QAButtons
+  QAButtons,
+  AnswerPhoto,
+  AnswerPhotos
 }
 from '../StyledComponents.jsx';
 import ReviewListEntry from './ReviewListEntry';
 import AddReview from './AddReview.jsx';
 import StarRatings from 'react-star-ratings';
 import axios from 'axios';
-import {MAIN_API_KEY} from '../../config.js'
+import {MAIN_API_KEY, IMG_API_KEY} from '../../config.js'
 import {prodIDContext} from '../../App.jsx'
 
 const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prodID}) => {
@@ -31,25 +33,26 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
   const [reviewCount, setReviewCount] = useState(2);
   const [addIsOpen, setAdd ] = useState(false)
 
-  const [addUsername, setUser] = useState('')
-  const [addSummary, setSummary] = useState('')
-  const [addBody, setBody] = useState('')
-  const [addEmail, setEmail] = useState('')
-  const [addRecommend, setRecommend] = useState(null)
-  const [addStar, setStar] = useState(0)
-  const [addFit, setAddFit] = useState('none selected')
-  const [fitValue, setFitValue] = useState(0)
-  const [addValue, setAddValue] = useState('none selected')
-  const [valueValue, setValueValue] = useState(0)
-  const [addComfort, setAddComfort] = useState('none selected')
-  const [comfortValue, setComfortValue] = useState(0)
-  const [addQuality, setAddQuality] = useState('none selected')
-  const [qualityValue, setQualityValue] = useState(0)
-  const [addLength, setAddLength] = useState('none selected')
-  const [lengthValue, setLengthValue] = useState(0)
-  const [addSize, setAddSize] = useState('none selected')
-  const [sizeValue, setSizeValue] = useState(0)
-  const [addImages, setImages] = useState([])
+  const [addUsername, setUser] = useState('');
+  const [addSummary, setSummary] = useState('');
+  const [addBody, setBody] = useState('');
+  const [addEmail, setEmail] = useState('');
+  const [addRecommend, setRecommend] = useState(null);
+  const [addStar, setStar] = useState(0);
+  const [addFit, setAddFit] = useState('none selected');
+  const [fitValue, setFitValue] = useState(0);
+  const [addValue, setAddValue] = useState('none selected');
+  const [valueValue, setValueValue] = useState(0);
+  const [addComfort, setAddComfort] = useState('none selected');
+  const [comfortValue, setComfortValue] = useState(0);
+  const [addQuality, setAddQuality] = useState('none selected');
+  const [qualityValue, setQualityValue] = useState(0);
+  const [addLength, setAddLength] = useState('none selected');
+  const [lengthValue, setLengthValue] = useState(0);
+  const [addSize, setAddSize] = useState('none selected');
+  const [sizeValue, setSizeValue] = useState(0);
+  const [addImages, setImages] = useState([]);
+  const [addPhotoUrls, setAddPhotoUrls] = useState([]);
 
 
   //Characteristics
@@ -88,6 +91,45 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
     }
 
   }
+
+  const getBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        let encoded = reader.result.toString().replace(/^data:(.*,)?/, '');
+        if ((encoded.length % 4) > 0) {
+          encoded += '='.repeat(4 - (encoded.length % 4));
+        }
+        resolve(encoded);
+      };
+      reader.onerror = error => reject(error);
+    });
+  }
+
+  const handlePhotos = async (e) => {
+    e.preventDefault();
+    try {
+      const file64 = await getBase64(e.target.files[0]);
+      let body = new FormData();
+      body.append('image', file64);
+      await axios({
+        url: `https://api.imgbb.com/1/upload?expiration=600&key=${IMG_API_KEY}`, //api key change
+        method: 'post',
+        data: body
+      })
+      .then((results) => {
+        if (typeof results['data']['data']['url'] === 'string') {
+          setAddPhotoUrls([...addPhotoUrls, results['data']['data']['url']])
+        }
+      })
+    } catch(err) {
+      console.log(err)
+      return;
+    }
+    setImages([...addImages, e.target.files['0']]);
+  }
+
   const submitAdd = (e) => {
     e.preventDefault();
     let addReviewContent = {
@@ -98,7 +140,7 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
       "recommend": addRecommend,
       "name": addUsername,
       "email": addEmail,
-      "Photos": [],
+      "Photos": addPhotoUrls,
       "characteristics": {}
     };
     axios({
@@ -370,7 +412,12 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
             />
             <div id="count-body"></div>
             <div>Images Added</div>
-            <button>Upload Photos</button>
+            <input type='file' disabled={addImages.length <= 4 ? false : true } accept='image/*' onChange={handlePhotos}/>
+            <AnswerPhotos>
+              {addImages.length===0 ? null : addImages.map((photo, index) => (
+                <AnswerPhoto key ={index} src={URL.createObjectURL(photo)}/>
+              )) }
+            </AnswerPhotos>
             <div>Your Username</div>
             <textarea
               required
