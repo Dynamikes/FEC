@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState, React } from 'react';
+import { useContext, useState, React } from 'react';
 import { hot } from 'react-hot-loader/root';
 import {
   ReviewListWrapper,
@@ -9,33 +9,73 @@ import {
   StarRow,
   AddSummaryWrapper,
   ReviewMap,
+  RadioAdd,
+  CharAdd,
   ReviewsSearch,
   SearchBarWrapper,
   StyledSearchIcon,
   QAButtons
 }
-from '../StyledComponents.jsx'
-import ReviewListEntry from './ReviewListEntry'
-import AddReview from './AddReview.jsx'
+from '../StyledComponents.jsx';
+import ReviewListEntry from './ReviewListEntry';
+import AddReview from './AddReview.jsx';
 import StarRatings from 'react-star-ratings';
+import axios from 'axios';
+import {MAIN_API_KEY} from '../../config.js'
+import {prodIDContext} from '../../App.jsx'
 
-const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews}) => {
+const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara}) => {
 
+  const prodID2 = useContext(prodIDContext)
   //State for various items
   const [reviewCount, setReviewCount] = useState(2);
   const [addIsOpen, setAdd ] = useState(false)
 
-  const [addUsername, setUser] = useState(null)
-  const [addSummary, setSummary] = useState(null)
-  const [addBody, setBody] = useState(null)
-  const [addEmail, setEmail] = useState(null)
+  const [addUsername, setUser] = useState('')
+  const [addSummary, setSummary] = useState('')
+  const [addBody, setBody] = useState('')
+  const [addEmail, setEmail] = useState('')
   const [addRecommend, setRecommend] = useState(null)
   const [addStar, setStar] = useState(0)
-  const [factors, setFactors] = useState(null)
   const [addImages, setImages] = useState([])
+  const [addFit, setAddFit] = useState('none selected')
+  const [fitValue, setFitValue] = useState(0)
+  const [addValue, setAddValue] = useState('none selected')
+  const [valueValue, setValueValue] = useState(0)
+  const [addComfort, setAddComfort] = useState('none selected')
+  const [comfortValue, setComfortValue] = useState(0)
+  const [addQuality, setAddQuality] = useState('none selected')
+  const [qualityValue, setQualityValue] = useState(0)
+  const [addLength, setAddLength] = useState('none selected')
+  const [lengthValue, setLengthValue] = useState(0)
+  const [addSize, setAddSize] = useState('none selected')
+  const [sizeValue, setSizeValue] = useState(0)
+
 
   //Characteristics
   //Helpful
+  let fitAdd
+  let valueAdd
+  let comfortAdd
+  let lengthAdd
+  let qualityAdd
+  let sizeAdd
+  let charas = chara;
+
+  for(var key in charas) {
+    if(key === 'Fit') {fitAdd = charas['Fit'].value
+  }else if (key === 'Comfort') {
+    comfortAdd = charas['Comfort'].value
+  }else if (key === 'Length') {
+    lengthAdd = charas['Length'].value
+  }else if (key === 'Quality') {
+    qualityAdd = charas['Quality'].value
+  }else if (key === 'Size') {
+    sizeAdd = charas['Size'].value
+  }else if (key === 'Value') {
+    valueAdd = charas['Value'].value
+  }}
+
 
   //Fuctions for Add Review
   const countChars = (obj) => {
@@ -46,11 +86,34 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews}) => {
     }
 
   }
-  const submitAdd = () => {
-
-    setAdd(false);
-    alert('Review has been submitted')
-    console.log(addUsername, addSummary, addBody, addEmail, addRecommend, addStar)
+  const submitAdd = (e) => {
+    e.preventDefault();
+    let addReviewContent = {
+      "rating": addStar,
+      "summary": addSummary,
+      "body": addBody,
+      "recommend": addRecommend,
+      "name": addUsername,
+      "email": addEmail,
+      "Photos": [],
+      "characteristics": {}
+    };
+    axios({
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?product_id=${prodID2}`,
+      method: 'post',
+      headers: {
+        Authorization: MAIN_API_KEY,
+      },
+      data: addReviewContent
+    })
+    .then(()=> {
+      alert('Review successfully submitted!');
+      setAdd(false);
+    })
+    .catch((err) => {
+      console.log(err)
+      alert('Incorrect submission! Please ensure all fields are appropriately filled')
+    })
   }
 
   const searched = (e) => {
@@ -107,7 +170,7 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews}) => {
         }
         <QAButtons onClick={()=>{setAdd(true)}}>Add a Review</QAButtons>
         <AddReview open={addIsOpen} onClose={() => setAdd(false)}>
-          <form>
+          <form onSubmit={submitAdd}>
             <AddTitle>Write Your Review</AddTitle>
             <h3>About the *Add Product Name*</h3>
             <StarRow>
@@ -141,13 +204,149 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews}) => {
               </StarRatingList> : null}
             </StarRow>
             <div required>Do you recommend this product?</div>
-            <button onClick={() => setRecommend(true)}>{addRecommend ? '✓' : ''}Yes</button>
-            <button onClick={() => setRecommend(false)}>{addRecommend === false ? '✓' : ''}No</button>
-            <div required>Characteristics</div>
+            <RadioAdd>
+              <div>Yes:</div>
+              <input onClick={() => setRecommend(true)} required type="radio" name="addAnswer" />
+              <div>No:</div>
+              <input onClick={() => setRecommend(false)} required type="radio" name="addAnswer" />
+            </RadioAdd>
+            <CharAdd>
+              {fitAdd ?
+              <div>
+                <u>Fit: {addFit}</u>
+                <div>
+                  <input
+                    onClick={() => {setAddFit('Runs tight'), setFitValue(1)}} required type="radio" name="addFit"
+                  />
+                  <input
+                    onClick={() => {setAddFit('Runs slightly tight'), setFitValue(2)}} required type="radio" name="addFit"
+                  />
+                  <input
+                  onClick={() => {setAddFit('Perfect'), setFitValue(3)}} required type="radio" name="addFit"
+                  />
+                  <input
+                  onClick={() => {setAddFit('Runs slightly long'), setFitValue(4)}} required type="radio" name="addFit"
+                  />
+                  <input
+                    onClick={() => {setAddFit('Runs long'), setFitValue(5)}} required type="radio" name="addFit"
+                  />
+                </div>
+              </div>
+              : null}
+              {valueAdd ?
+              <div>
+                <u>Value: {addValue}</u>
+                <div>
+                  <input
+                    onClick={() => {setAddValue('Too narrow'), setValueValue(1)}} required type="radio" name="addValue"
+                  />
+                  <input
+                    onClick={() => {setAddValue('Slightly narrow'), setValueValue(2)}} required type="radio" name="addValue"
+                  />
+                  <input
+                  onClick={() => {setAddValue('Perfect'), setValueValue(3)}} required type="radio" name="addValue"
+                  />
+                  <input
+                  onClick={() => {setAddValue('Slightly wide'), setValueValue(4)}} required type="radio" name="addValue"
+                  />
+                  <input
+                    onClick={() => {setAddValue('Too wide'), setValueValue(5)}} required type="radio" name="addValue"
+                  />
+                </div>
+              </div> : null}
+                {comfortAdd ?
+             <div>
+                <u>Comfort: {addComfort}</u>
+                <div>
+                  <input
+                    onClick={() => {setAddComfort('Uncomfortable'), setComfortValue(1)}} required type="radio" name="addComfort"
+                  />
+                  <input
+                    onClick={() => {setAddComfort('Slightly uncomfortable'), setComfortValue(2)}} required type="radio" name="addComfort"
+                  />
+                  <input
+                  onClick={() => {setAddComfort('Ok'), setComfortValue(3)}} required type="radio" name="addComfort"
+                  />
+                  <input
+                  onClick={() => {setAddComfort('Comfortable'), setComfortValue(4)}} required type="radio" name="addComfort"
+                  />
+                  <input
+                    onClick={() => {setAddComfort('Perfect'), setComfortValue(5)}} required type="radio" name="addComfort"
+                  />
+               </div>
+            </div>
+              : null}
+              {qualityAdd ?
+              <div>
+                <u>Quality: {addQuality}</u>
+                <div>
+                  <input
+                    onClick={() => {setAddQuality('Uncomfortable'), setQualityValue(1)}} required type="radio" name="addQuality"
+                  />
+                  <input
+                    onClick={() => {setAddQuality('Slightly uncomfortable'), setQualityValue(2)}} required type="radio" name="addQuality"
+                  />
+                  <input
+                  onClick={() => {setAddQuality('Ok'), setQualityValue(3)}} required type="radio" name="addQuality"
+                  />
+                  <input
+                  onClick={() => {setAddQuality('Comfortable'), setQualityValue(4)}} required type="radio" name="addQuality"
+                  />
+                  <input
+                    onClick={() => {setAddQuality('Perfect'), setQualityValue(5)}} required type="radio" name="addQuality"
+                  />
+                </div>
+              </div>
+              : null}
+              {lengthAdd ?
+              <div>
+              <u>Length: {addLength}</u>
+                <div>
+                  <input
+                    onClick={() => {setAddLength('Runs short'), setLengthValue(1)}} required type="radio" name="addLength"
+                  />
+                  <input
+                    onClick={() => {setAddLength('Runs slightly short'), setLengthValue(2)}} required type="radio" name="addLength"
+                  />
+                  <input
+                  onClick={() => {setAddLength('Perfect'), setLengthValue(3)}} required type="radio" name="addLength"
+                  />
+                  <input
+                  onClick={() => {setAddLength('Runs slightly long'), setLengthValue(4)}} required type="radio" name="addLength"
+                  />
+                  <input
+                    onClick={() => {setAddLength('Runs long'), setLengthValue(5)}} required type="radio" name="addLength"
+                  />
+                </div>
+              </div> : null}
+            {sizeAdd ?
+              <div>
+                <u>Size: {addSize}</u>
+                <div>
+                  <input
+                    onClick={() => {setAddSize('Runs tight'), setSizeValue(1)}} required type="radio" name="addSize"
+                  />
+                  <input
+                    onClick={() => {setAddSize('Runs slightly tight'), setSizeValue(2)}} required type="radio" name="addSize"
+                  />
+                  <input
+                  onClick={() => {setAddSize('Perfect'), setSizeValue(3)}} required type="radio" name="addSize"
+                  />
+                  <input
+                  onClick={() => {setAddSize('Runs slightly long'), setSizeValue(4)}} required type="radio" name="addSize"
+                  />
+                  <input
+                    onClick={() => {setAddSize('Runs long'), setSizeValue(5)}} required type="radio" name="addSize"
+                  />
+                </div>
+              </div> : null}
+            </CharAdd>
             <div>Summary</div>
             <AddSummaryWrapper>
               <textarea
                 required
+
+                maxLength='60'
                 onChange={(e) => setSummary(e.target.value)}
                 cols='80'
                 rows='1'
@@ -163,6 +362,8 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews}) => {
               onKeyUp={(e) => countChars(e)}
               id="add-body"
               placeholder='Why did you like the product or not?'
+              maxLength='1000'
+              minLength='50'
             />
             <div id="count-body"></div>
             <div>Images Added</div>
@@ -174,19 +375,21 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews}) => {
               placeholder='Example: jackson11!'
               cols='20'
               rows='1'
+              maxLength='60'
             />
-            <div>For privacy reasons, do not use your full name or email</div>
+            <div><small>For privacy reasons, do not use your full name or email</small></div>
             <div>Your Email</div>
-            <textarea
+            <input
               required
+              maxLength='60'
               type='email'
               onChange={(e) => setEmail(e.target.value)}
               placeholder='Example: jackson11@email.com'
               cols='30'
               rows='1'
             />
-            <div>For authentification reasons, you will not be emailed</div>
-            <input type='submit' onSubmit={()=>{console.log('yes')}} value='Submit Review'/>
+            <div><small>For authentification reasons, you will not be emailed</small></div>
+            <input type='submit' value='Submit Review'/>
           </form>
         </AddReview>
       </ReviewButtonWrapper>

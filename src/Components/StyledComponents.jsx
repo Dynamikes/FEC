@@ -381,6 +381,16 @@ export const StarRow = styled.div`
   flex-direction: row;
 `;
 
+export const RadioAdd = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+export const CharAdd = styled.div`
+display: flex;
+flex-direction: column;
+`;
+
 //ReviewBreakdown.jsx ----------------------
 export const ReviewBreakdownWrapper = styled.div`
   display: flex;
@@ -521,13 +531,27 @@ export const AddWrapper = styled.div`
   border-width: 1px;
   border-style: solid;
   position: fixed;
-  top: 8%;
+  top: 3%;
   right: 100%
   transform: translate(-50%, -50%);
   padding: 50px;
   z-index: 5;
 `;
 
+export const AddReviewWrapper = styled.div`
+  background-color: rgba(7,7,7);
+  border-color: rgb(20 , 20, 20);
+  border-width: 1px;
+  border-style: solid;
+  position: fixed;
+  overflow: auto;
+  height: 80vh;
+  top: 3%;
+  right: 100%
+  transform: translate(-50%, -50%);
+  padding: 50px;
+  z-index: 5;
+`;
 
 export const AddOverlay = styled.div`
   display: flex;
