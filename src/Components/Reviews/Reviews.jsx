@@ -73,10 +73,13 @@ const Reviews = () => {
         reviewsMeta={reviewsMeta}
         chars={chara}
       />
-      <ReviewList
-        reviews={reviews}
-        getReviews={getReviews}
-      />
+      <div>
+        <QASearchBar type='text' />
+        <ReviewList
+          reviews={reviews}
+          getReviews={getReviews}
+        />
+      </div>
     </TotalReviewWrapper>
   );
 };
