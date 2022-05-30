@@ -10,14 +10,15 @@ import {
   AddSummaryWrapper,
   ReviewMap,
   RadioAdd,
-  CharAdd
+  CharAdd,
+  inputWrapper
 }
 from '../StyledComponents.jsx'
 import ReviewListEntry from './ReviewListEntry'
 import AddReview from './AddReview.jsx'
 import StarRatings from 'react-star-ratings';
 
-const ReviewList = ({reviews, getReviews}) => {
+const ReviewList = ({reviews, getReviews, chara}) => {
 
   //State for various items
   const [reviewCount, setReviewCount] = useState(2);
@@ -46,6 +47,28 @@ const ReviewList = ({reviews, getReviews}) => {
 
   //Characteristics
   //Helpful
+  let fit
+  let value
+  let comfort
+  let length
+  let quality
+  let size
+  let chars = chara;
+
+  for(var key in chars) {
+    if(key === 'Fit') {fit = chars['Fit'].value
+  }else if (key === 'Comfort') {
+    comfort = chars['Comfort'].value
+  }else if (key === 'Length') {
+    length = chars['Length'].value
+  }else if (key === 'Quality') {
+    quality = chars['Quality'].value
+  }else if (key === 'Size') {
+    size = chars['Size'].value
+  }else if (key === 'Value') {
+    value = chars['Value'].value
+  }}
+
 
   //Fuctions for Add Review
   const countChars = (obj) => {
@@ -129,8 +152,9 @@ const ReviewList = ({reviews, getReviews}) => {
               <input onClick={() => setRecommend(false)} required type="radio" name="addAnswer" />
             </RadioAdd>
             <CharAdd>
-              <u>Fit: {addFit}</u>
-              <div required>
+              
+               <u>Fit: {addFit}</u>
+              <div>
                 <input
                   onClick={() => {setAddFit('Runs tight'), setFitValue(1)}} required type="radio" name="addFit"
                 />
@@ -148,7 +172,7 @@ const ReviewList = ({reviews, getReviews}) => {
                 />
               </div>
               <u>Width: {addWidth}</u>
-              <div required>
+              <div>
                 <input
                   onClick={() => {setAddWidth('Too narrow'), setWidthValue(1)}} required type="radio" name="addWidth"
                 />
@@ -166,7 +190,7 @@ const ReviewList = ({reviews, getReviews}) => {
                 />
               </div>
               <u>Comfort: {addComfort}</u>
-              <div required>
+              <div>
                 <input
                   onClick={() => {setAddComfort('Uncomfortable'), setComfortValue(1)}} required type="radio" name="addComfort"
                 />
@@ -184,7 +208,7 @@ const ReviewList = ({reviews, getReviews}) => {
                 />
               </div>
               <u>Quality: {addQuality}</u>
-              <div required>
+              <div>
                 <input
                   onClick={() => {setAddQuality('Uncomfortable'), setQualityValue(1)}} required type="radio" name="addQuality"
                 />
@@ -202,7 +226,7 @@ const ReviewList = ({reviews, getReviews}) => {
                 />
               </div>
               <u>Length: {addLength}</u>
-              <div required>
+              <div>
                 <input
                   onClick={() => {setAddLength('Runs short'), setLengthValue(1)}} required type="radio" name="addLength"
                 />
@@ -220,7 +244,7 @@ const ReviewList = ({reviews, getReviews}) => {
                 />
               </div>
               <u>Size: {addSize}</u>
-              <div required>
+              <div>
                 <input
                   onClick={() => {setAddSize('Runs tight'), setSizeValue(1)}} required type="radio" name="addSize"
                 />

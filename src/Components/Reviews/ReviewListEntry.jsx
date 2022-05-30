@@ -1,12 +1,13 @@
 /* eslint-disable react/prop-types */
-import {useState, React } from 'react';
+import {useEffect, React, useState } from 'react';
 import { hot } from 'react-hot-loader/root';
 import {
   ReviewTile,
   ReviewBodyWrapper,
   ReviewImageWrapper,
-  ReviewBody
-
+  ReviewBody,
+  UpdateButtons,
+  StyledQuestion
 }
 from '../StyledComponents.jsx';
 import Moment from 'react-moment';
@@ -15,6 +16,7 @@ import StarRatings from 'react-star-ratings';
 import {MAIN_API_KEY} from '../../config.js'
 
 const ReviewListEntry = ({review, getReviews}) => {
+  const [clickedYes, setClickedYes] = useState(false);
 
 
   const incrementHelpful = (id) => {
@@ -27,6 +29,9 @@ const ReviewListEntry = ({review, getReviews}) => {
       })
       .then (() => {
         getReviews();
+      })
+      .then(()=>{
+        setClickedYes(true)
       })
   };
 

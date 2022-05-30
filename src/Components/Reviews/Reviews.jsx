@@ -83,6 +83,7 @@ const Reviews = () => {
         <ReviewList
           reviews={reviews}
           getReviews={getReviews}
+          chars={chara}
         />
     </TotalReviewWrapper>
   );
