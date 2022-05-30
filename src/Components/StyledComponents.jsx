@@ -567,7 +567,8 @@ export const AddOverlay = styled.div`
   bottom: 0;
   z-index: 5
 `;
-
+export const ImageOverlay = styled(AddOverlay)`
+background-color: grey;`
 export const AddSummaryWrapper = styled.div`
   display: flex;
   flex-direction: row;
