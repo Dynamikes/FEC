@@ -12,6 +12,7 @@ import {
   StyledShare,
 } from '../StyledComponents.jsx';
 import {MAIN_API_KEY} from '../../config.js'
+import StarRatings from 'react-star-ratings';
 
 function ProductInfo() {
   const [products, setProduct] = useState(null);
@@ -41,7 +42,12 @@ function ProductInfo() {
     <ProductInfoWrapper>
       <StyledStars>
         {' '}
-        ⭐⭐⭐⭐⭐{' '}
+        <StarRatings
+        rating={1} //Need to pull rating for product in from Ratings to replace 1...
+        starRatedColor="gold"
+        starDimension='25px'
+        starSpacing={'2px'}
+      />{' '}
         <a href='#ratings_and_reviews'>
           {' '}
           <small>Reviews</small>{' '}
