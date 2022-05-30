@@ -51,6 +51,7 @@ const ReviewList = ({reviews, getReviews}) => {
 
   return (
     <ReviewListWrapper>
+      <input type='text' />
       <ReviewMap>
         <div>
           {reviews.length} Reviews /*sortedBy*

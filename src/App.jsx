@@ -13,7 +13,7 @@ import {
 } from './Components/StyledComponents.jsx';
 export const prodIDContext = React.createContext();
 const App = (props) => {
-  const [prodID, setProdID] = useState(40344)
+  const [prodID, setProdID] = useState(40350)
 
   const name = props.name;
   return (

@@ -74,10 +74,10 @@ const Reviews = () => {
         reviewsMeta={reviewsMeta}
         chars={chara}
       />
-      <ReviewList
-        reviews={reviews}
-        getReviews={getReviews}
-      />
+        <ReviewList
+          reviews={reviews}
+          getReviews={getReviews}
+        />
     </TotalReviewWrapper>
   );
 };
