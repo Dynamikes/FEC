@@ -43,7 +43,7 @@ function ImageView(props) {
   const thumbCarousel = [];
   const styleID = useContext(styleIDContext);
   const prodID = useContext(prodIDContext);
-  
+
   // console.log(API_KEY)
   const nextImage = () => {
     setCurrent(current === carLength - 1 ? 0 : current + 1);
@@ -87,13 +87,13 @@ function ImageView(props) {
             }
           }
           setCurrent(0);
-          
+
         }
 
         setCarouselData(Carousel);
         setCarLength(tempLength);
         setThumbCarouselData(thumbCarousel)
-        
+
         // console.log(thumbCarousel)
       })
       .then(() => {
@@ -107,7 +107,6 @@ function ImageView(props) {
 
   return (
     <ImageViewWrapper>
-      <ExpandButton onClick={imageToggle}> Expand </ExpandButton>
       {current === 0 ? (
         ''
       ) : (
