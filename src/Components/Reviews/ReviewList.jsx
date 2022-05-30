@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState, React } from 'react';
+import { useContext, useState, React } from 'react';
 import { hot } from 'react-hot-loader/root';
 import {
   ReviewListWrapper,
@@ -13,60 +13,64 @@ import {
   CharAdd,
   inputWrapper
 }
-from '../StyledComponents.jsx'
-import ReviewListEntry from './ReviewListEntry'
-import AddReview from './AddReview.jsx'
+from '../StyledComponents.jsx';
+import ReviewListEntry from './ReviewListEntry';
+import AddReview from './AddReview.jsx';
 import StarRatings from 'react-star-ratings';
+import axios from 'axios';
+import {MAIN_API_KEY} from '../../config.js'
+import {prodIDContext} from '../../App.jsx'
 
 const ReviewList = ({reviews, getReviews, chara}) => {
 
+  const prodID2 = useContext(prodIDContext)
   //State for various items
   const [reviewCount, setReviewCount] = useState(2);
   const [addIsOpen, setAdd ] = useState(false)
 
-  const [addUsername, setUser] = useState(null)
-  const [addSummary, setSummary] = useState(null)
-  const [addBody, setBody] = useState(null)
-  const [addEmail, setEmail] = useState(null)
+  const [addUsername, setUser] = useState('')
+  const [addSummary, setSummary] = useState('')
+  const [addBody, setBody] = useState('')
+  const [addEmail, setEmail] = useState('')
   const [addRecommend, setRecommend] = useState(null)
   const [addStar, setStar] = useState(0)
   const [addImages, setImages] = useState([])
   const [addFit, setAddFit] = useState('none selected')
   const [fitValue, setFitValue] = useState(0)
-  const [addWidth, setAddWidth] = useState('none selected')
-  const [WidthValue, setWidthValue] = useState(0)
+  const [addValue, setAddValue] = useState('none selected')
+  const [valueValue, setValueValue] = useState(0)
   const [addComfort, setAddComfort] = useState('none selected')
-  const [ComfortValue, setComfortValue] = useState(0)
+  const [comfortValue, setComfortValue] = useState(0)
   const [addQuality, setAddQuality] = useState('none selected')
-  const [QualityValue, setQualityValue] = useState(0)
+  const [qualityValue, setQualityValue] = useState(0)
   const [addLength, setAddLength] = useState('none selected')
-  const [LengthValue, setLengthValue] = useState(0)
+  const [lengthValue, setLengthValue] = useState(0)
   const [addSize, setAddSize] = useState('none selected')
-  const [SizeValue, setSizeValue] = useState(0)
+  const [sizeValue, setSizeValue] = useState(0)
 
 
   //Characteristics
   //Helpful
-  let fit
-  let value
-  let comfort
-  let length
-  let quality
-  let size
-  let chars = chara;
+  let fitAdd
+  let valueAdd
+  let comfortAdd
+  let lengthAdd
+  let qualityAdd
+  let sizeAdd
+  let charas = chara;
 
-  for(var key in chars) {
-    if(key === 'Fit') {fit = chars['Fit'].value
+  for(var key in charas) {
+    if(key === 'Fit') {fitAdd = charas['Fit'].value
   }else if (key === 'Comfort') {
-    comfort = chars['Comfort'].value
+    comfortAdd = charas['Comfort'].value
   }else if (key === 'Length') {
-    length = chars['Length'].value
+    lengthAdd = charas['Length'].value
   }else if (key === 'Quality') {
-    quality = chars['Quality'].value
+    qualityAdd = charas['Quality'].value
   }else if (key === 'Size') {
-    size = chars['Size'].value
+    sizeAdd = charas['Size'].value
   }else if (key === 'Value') {
-    value = chars['Value'].value
+    valueAdd = charas['Value'].value
   }}
 
 
@@ -80,18 +84,40 @@ const ReviewList = ({reviews, getReviews, chara}) => {
 
   }
   const submitAdd = (e) => {
-    e.preventDefault()
-    setAdd(false);
-    alert('Review has been submitted')
-    console.log(addUsername, addSummary, addBody, addEmail, addRecommend, addStar)
+    e.preventDefault();
+    let addReviewContent = {
+      "rating": addStar,
+      "summary": addSummary,
+      "body": addBody,
+      "recommend": addRecommend,
+      "name": addUsername,
+      "email": addEmail,
+      "Photos": [],
+      "characteristics": {}
+    };
+    axios({
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?product_id=${prodID2}`,
+      method: 'post',
+      headers: {
+        Authorization: MAIN_API_KEY,
+      },
+      data: addReviewContent
+    })
+    .then(()=> {
+      alert('Review successfully submitted!');
+      setAdd(false);
+    })
+    .catch((err) => {
+      console.log(err)
+      alert('Incorrect submission! Please ensure all fields are appropriately filled')
+    })
   }
 
   return (
     <ReviewListWrapper>
+
       <input type='text' />
       <ReviewMap>
-        {console.log('CAHNGE', addFit)}
-       { console.log('VALUES', fitValue)}
         <div>
           {reviews.length} Reviews /*sortedBy*
         </div>
@@ -111,7 +137,7 @@ const ReviewList = ({reviews, getReviews, chara}) => {
         }
         <button onClick={()=>{setAdd(true)}}>Add a Review</button>
         <AddReview open={addIsOpen} onClose={() => setAdd(false)}>
-          <form>
+          <form onSubmit={submitAdd}>
             <AddTitle>Write Your Review</AddTitle>
             <h3>About the *Add Product Name*</h3>
             <StarRow>
@@ -152,115 +178,135 @@ const ReviewList = ({reviews, getReviews, chara}) => {
               <input onClick={() => setRecommend(false)} required type="radio" name="addAnswer" />
             </RadioAdd>
             <CharAdd>
-              
-               <u>Fit: {addFit}</u>
+              {fitAdd ?
               <div>
-                <input
-                  onClick={() => {setAddFit('Runs tight'), setFitValue(1)}} required type="radio" name="addFit"
-                />
-                <input
-                  onClick={() => {setAddFit('Runs slightly tight'), setFitValue(2)}} required type="radio" name="addFit"
-                />
-                <input
-                 onClick={() => {setAddFit('Perfect'), setFitValue(3)}} required type="radio" name="addFit"
-                />
-                <input
-                 onClick={() => {setAddFit('Runs slightly long'), setFitValue(4)}} required type="radio" name="addFit"
-                />
-                <input
-                  onClick={() => {setAddFit('Runs long'), setFitValue(5)}} required type="radio" name="addFit"
-                />
+                <u>Fit: {addFit}</u>
+                <div>
+                  <input
+                    onClick={() => {setAddFit('Runs tight'), setFitValue(1)}} required type="radio" name="addFit"
+                  />
+                  <input
+                    onClick={() => {setAddFit('Runs slightly tight'), setFitValue(2)}} required type="radio" name="addFit"
+                  />
+                  <input
+                  onClick={() => {setAddFit('Perfect'), setFitValue(3)}} required type="radio" name="addFit"
+                  />
+                  <input
+                  onClick={() => {setAddFit('Runs slightly long'), setFitValue(4)}} required type="radio" name="addFit"
+                  />
+                  <input
+                    onClick={() => {setAddFit('Runs long'), setFitValue(5)}} required type="radio" name="addFit"
+                  />
+                </div>
               </div>
-              <u>Width: {addWidth}</u>
+              : null}
+              {valueAdd ?
               <div>
-                <input
-                  onClick={() => {setAddWidth('Too narrow'), setWidthValue(1)}} required type="radio" name="addWidth"
-                />
-                <input
-                  onClick={() => {setAddWidth('Slightly narrow'), setWidthValue(2)}} required type="radio" name="addWidth"
-                />
-                <input
-                 onClick={() => {setAddWidth('Perfect'), setWidthValue(3)}} required type="radio" name="addWidth"
-                />
-                <input
-                 onClick={() => {setAddWidth('Slightly wide'), setWidthValue(4)}} required type="radio" name="addWidth"
-                />
-                <input
-                  onClick={() => {setAddWidth('Too wide'), setWidthValue(5)}} required type="radio" name="addWidth"
-                />
-              </div>
-              <u>Comfort: {addComfort}</u>
+                <u>Value: {addValue}</u>
+                <div>
+                  <input
+                    onClick={() => {setAddValue('Too narrow'), setValueValue(1)}} required type="radio" name="addValue"
+                  />
+                  <input
+                    onClick={() => {setAddValue('Slightly narrow'), setValueValue(2)}} required type="radio" name="addValue"
+                  />
+                  <input
+                  onClick={() => {setAddValue('Perfect'), setValueValue(3)}} required type="radio" name="addValue"
+                  />
+                  <input
+                  onClick={() => {setAddValue('Slightly wide'), setValueValue(4)}} required type="radio" name="addValue"
+                  />
+                  <input
+                    onClick={() => {setAddValue('Too wide'), setValueValue(5)}} required type="radio" name="addValue"
+                  />
+                </div>
+              </div> : null}
+                {comfortAdd ?
+             <div>
+                <u>Comfort: {addComfort}</u>
+                <div>
+                  <input
+                    onClick={() => {setAddComfort('Uncomfortable'), setComfortValue(1)}} required type="radio" name="addComfort"
+                  />
+                  <input
+                    onClick={() => {setAddComfort('Slightly uncomfortable'), setComfortValue(2)}} required type="radio" name="addComfort"
+                  />
+                  <input
+                  onClick={() => {setAddComfort('Ok'), setComfortValue(3)}} required type="radio" name="addComfort"
+                  />
+                  <input
+                  onClick={() => {setAddComfort('Comfortable'), setComfortValue(4)}} required type="radio" name="addComfort"
+                  />
+                  <input
+                    onClick={() => {setAddComfort('Perfect'), setComfortValue(5)}} required type="radio" name="addComfort"
+                  />
+               </div>
+            </div>
+              : null}
+              {qualityAdd ?
               <div>
-                <input
-                  onClick={() => {setAddComfort('Uncomfortable'), setComfortValue(1)}} required type="radio" name="addComfort"
-                />
-                <input
-                  onClick={() => {setAddComfort('Slightly uncomfortable'), setComfortValue(2)}} required type="radio" name="addComfort"
-                />
-                <input
-                 onClick={() => {setAddComfort('Ok'), setComfortValue(3)}} required type="radio" name="addComfort"
-                />
-                <input
-                 onClick={() => {setAddComfort('Comfortable'), setComfortValue(4)}} required type="radio" name="addComfort"
-                />
-                <input
-                  onClick={() => {setAddComfort('Perfect'), setComfortValue(5)}} required type="radio" name="addComfort"
-                />
+                <u>Quality: {addQuality}</u>
+                <div>
+                  <input
+                    onClick={() => {setAddQuality('Uncomfortable'), setQualityValue(1)}} required type="radio" name="addQuality"
+                  />
+                  <input
+                    onClick={() => {setAddQuality('Slightly uncomfortable'), setQualityValue(2)}} required type="radio" name="addQuality"
+                  />
+                  <input
+                  onClick={() => {setAddQuality('Ok'), setQualityValue(3)}} required type="radio" name="addQuality"
+                  />
+                  <input
+                  onClick={() => {setAddQuality('Comfortable'), setQualityValue(4)}} required type="radio" name="addQuality"
+                  />
+                  <input
+                    onClick={() => {setAddQuality('Perfect'), setQualityValue(5)}} required type="radio" name="addQuality"
+                  />
+                </div>
               </div>
-              <u>Quality: {addQuality}</u>
+              : null}
+              {lengthAdd ?
               <div>
-                <input
-                  onClick={() => {setAddQuality('Uncomfortable'), setQualityValue(1)}} required type="radio" name="addQuality"
-                />
-                <input
-                  onClick={() => {setAddQuality('Slightly uncomfortable'), setQualityValue(2)}} required type="radio" name="addQuality"
-                />
-                <input
-                 onClick={() => {setAddQuality('Ok'), setQualityValue(3)}} required type="radio" name="addQuality"
-                />
-                <input
-                 onClick={() => {setAddQuality('Comfortable'), setQualityValue(4)}} required type="radio" name="addQuality"
-                />
-                <input
-                  onClick={() => {setAddQuality('Perfect'), setQualityValue(5)}} required type="radio" name="addQuality"
-                />
-              </div>
               <u>Length: {addLength}</u>
+                <div>
+                  <input
+                    onClick={() => {setAddLength('Runs short'), setLengthValue(1)}} required type="radio" name="addLength"
+                  />
+                  <input
+                    onClick={() => {setAddLength('Runs slightly short'), setLengthValue(2)}} required type="radio" name="addLength"
+                  />
+                  <input
+                  onClick={() => {setAddLength('Perfect'), setLengthValue(3)}} required type="radio" name="addLength"
+                  />
+                  <input
+                  onClick={() => {setAddLength('Runs slightly long'), setLengthValue(4)}} required type="radio" name="addLength"
+                  />
+                  <input
+                    onClick={() => {setAddLength('Runs long'), setLengthValue(5)}} required type="radio" name="addLength"
+                  />
+                </div>
+              </div> : null}
+            {sizeAdd ?
               <div>
-                <input
-                  onClick={() => {setAddLength('Runs short'), setLengthValue(1)}} required type="radio" name="addLength"
-                />
-                <input
-                  onClick={() => {setAddLength('Runs slightly short'), setLengthValue(2)}} required type="radio" name="addLength"
-                />
-                <input
-                 onClick={() => {setAddLength('Perfect'), setLengthValue(3)}} required type="radio" name="addLength"
-                />
-                <input
-                 onClick={() => {setAddLength('Runs slightly long'), setLengthValue(4)}} required type="radio" name="addLength"
-                />
-                <input
-                  onClick={() => {setAddLength('Runs long'), setLengthValue(5)}} required type="radio" name="addLength"
-                />
-              </div>
-              <u>Size: {addSize}</u>
-              <div>
-                <input
-                  onClick={() => {setAddSize('Runs tight'), setSizeValue(1)}} required type="radio" name="addSize"
-                />
-                <input
-                  onClick={() => {setAddSize('Runs slightly tight'), setSizeValue(2)}} required type="radio" name="addSize"
-                />
-                <input
-                 onClick={() => {setAddSize('Perfect'), setSizeValue(3)}} required type="radio" name="addSize"
-                />
-                <input
-                 onClick={() => {setAddSize('Runs slightly long'), setSizeValue(4)}} required type="radio" name="addSize"
-                />
-                <input
-                  onClick={() => {setAddSize('Runs long'), setSizeValue(5)}} required type="radio" name="addSize"
-                />
-              </div>
+                <u>Size: {addSize}</u>
+                <div>
+                  <input
+                    onClick={() => {setAddSize('Runs tight'), setSizeValue(1)}} required type="radio" name="addSize"
+                  />
+                  <input
+                    onClick={() => {setAddSize('Runs slightly tight'), setSizeValue(2)}} required type="radio" name="addSize"
+                  />
+                  <input
+                  onClick={() => {setAddSize('Perfect'), setSizeValue(3)}} required type="radio" name="addSize"
+                  />
+                  <input
+                  onClick={() => {setAddSize('Runs slightly long'), setSizeValue(4)}} required type="radio" name="addSize"
+                  />
+                  <input
+                    onClick={() => {setAddSize('Runs long'), setSizeValue(5)}} required type="radio" name="addSize"
+                  />
+                </div>
+              </div> : null}
             </CharAdd>
             <div>Summary</div>
             <AddSummaryWrapper>
@@ -310,7 +356,7 @@ const ReviewList = ({reviews, getReviews, chara}) => {
               rows='1'
             />
             <div><small>For authentification reasons, you will not be emailed</small></div>
-            <input type='submit' onSubmit={()=>{submitAdd()}} value='Submit Review'/>
+            <input type='submit' value='Submit Review'/>
           </form>
         </AddReview>
       </ReviewButtonWrapper>
