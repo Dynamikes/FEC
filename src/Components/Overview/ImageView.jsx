@@ -48,11 +48,13 @@ function ImageView(props) {
     props.click();
   };
   const [current, setCurrent] = useState(0);
+  const [vertCurrent, setVertCurrent] = useState([0, 7]);
   const [loaded, setLoaded] = useState(false);
   const [CarouselData, setCarouselData] = useState(null);
   const [thumbCarouselData, setThumbCarouselData] = useState(null)
   const [carLength, setCarLength] = useState(0);
   const [styleLoaded, setStyleLoaded] = useState(false)
+
   var Carousel = [];
   const thumbCarousel = [];
   const styleID = useContext(styleIDContext);
@@ -70,6 +72,15 @@ function ImageView(props) {
  const changeCurrent = (num) => {
    setCurrent(num)
  } 
+ const changeVertCurrent = (x) => {
+   if (vertCurrent[1] < CarouselData.length && x === 'down') {
+    setVertCurrent([vertCurrent[0] + 1, vertCurrent[1] + 1])
+    console.log(vertCurrent)
+   } else if (vertCurrent[0] > 0 && x === 'up') {
+     setVertCurrent([vertCurrent[0] - 1, vertCurrent[1] - 1])
+     console.log(vertCurrent)
+   }
+ }
   useEffect(() => {
     axios({
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${prodID}/styles`,
@@ -105,12 +116,9 @@ function ImageView(props) {
           
           
         }
-
         setCarouselData(Carousel);
         setCarLength(tempLength);
         setThumbCarouselData(thumbCarousel)
-        
-        // console.log(thumbCarousel)
       })
       .then(() => {
         setLoaded(true);
@@ -124,10 +132,10 @@ function ImageView(props) {
   return (
     <ImageViewWrapper>
       <ExpandButton onClick={imageToggle}> Expand </ExpandButton>
-      {current === 0 ? (
+      {vertCurrent[0] === 0 ? (
         ''
       ) : (
-        <StyledUpArrow className='left-arrow'  />
+        <StyledUpArrow className='left-arrow'  onClick={() => changeVertCurrent('up')} />
       )}
       {current === 0 ? (
         ''
@@ -150,9 +158,9 @@ function ImageView(props) {
         : ''}
 <Thumbnails>
         {loaded
-          ? thumbCarouselData.slice(0, 7).map((thumbnail, index) => {
+          ? CarouselData.slice(vertCurrent[0], vertCurrent[1]).map((thumbnail, index) => {
               
-            if (index === current) {
+            if (thumbnail === CarouselData[current]) {
               return (
                 <HighlightedStyleThumbnail
                   key={index}
@@ -178,10 +186,10 @@ function ImageView(props) {
         <StyledRightArrow className='right-arrow' onClick={nextImage} />
       )}
     
-      {current === carLength - 1 ? (
+      {vertCurrent[0] === carLength - 1 ? (
         ''
       ) : (
-        <StyledDownArrow className='right-arrow'  />
+        <StyledDownArrow className='right-arrow'  onClick={() => changeVertCurrent('down')} />
       )}
     </ImageViewWrapper>
   );
