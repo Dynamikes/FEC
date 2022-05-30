@@ -24,9 +24,6 @@ export const ImageViewWrapper = styled.section`
   z-index: 2;
   width: 400px;
   height: 500px;
-  border-color: red;
-  border-width: 10px;
-  border-style: solid;
 `;
 export const ExpandButton = styled.button`
   position: absolute;
@@ -191,31 +188,6 @@ export const StyleThumbnail = styled.img`
   padding: 5px;
 `;
 export const StyleSelectorContainer = styled.div``;
-
-
-// export const AddWrapper = styled.div`
-// background-color: rgba(7,7,7);
-// border-color: rgb(20 , 20, 20);
-// border-width: 1px;
-// border-style: solid;
-// position: fixed;
-// top: 50%;
-// left: 50%;
-// transform: translate(-50%, -50%);
-// padding: 50px;
-// zIndex: 1000;`
-// ;
-
-
-// export const AddOverlay = styled.div`
-// position: fixed;
-// top: 0;
-// left: 0;
-// right: 0;
-// bottom: 0;
-// background-color: rgba(0,0,0, .7);
-// zIndex: 1000;`
-// ;
 
 export const BigQAWrapper = styled.div`
 display: flex;
