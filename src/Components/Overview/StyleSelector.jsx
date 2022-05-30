@@ -5,18 +5,20 @@ import axios from 'axios';
 // import axios from 'axios';
 import { SelectorWrapper, Title, StyleThumbnail, StyleSelectorContainer } from '../StyledComponents.jsx';
 import {styleIDContext} from './Overview'
-import {API_KEY} from '../../config.js'
+import {prodIDContext} from '../../App.jsx'
+import {MAIN_API_KEY} from '../../config.js'
 function StyleSelector(props) {
 const [styleThumbs, setStyleThumbs] = useState(null)
 const [loaded, setLoaded] = useState(false)
 const styleID = useContext(styleIDContext)
+const prodID = useContext(prodIDContext)
 var tempStyleThumbs = [];
 useEffect(() => {
   axios({
-    url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/40344/styles',
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${prodID}/styles`,
     method: 'get',
     headers: {
-      Authorization: API_KEY,
+      Authorization: MAIN_API_KEY,
     },
   })
   .then((response) => {

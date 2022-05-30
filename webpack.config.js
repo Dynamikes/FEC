@@ -2,7 +2,6 @@ const path = require('path');
 const Dotenv = require('dotenv-webpack');
 //import path from 'path';
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
-
 const config = {
   entry: ['react-hot-loader/patch', './src/index.js'],
   output: {

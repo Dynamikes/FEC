@@ -11,8 +11,9 @@ import {
   ThumbnailImage,
   ImageViewWrapper,
 } from '../StyledComponents.jsx';
+import {MAIN_API_KEY} from '../../config.js'
 import {styleIDContext} from './Overview'
-import {API_KEY} from '../../config.js'
+import {prodIDContext} from '../../App.jsx'
 
 const StyledLeftArrow = styled(FaArrowAltCircleLeft)`
   transform: scale(2);
@@ -41,6 +42,7 @@ function ImageView(props) {
   var Carousel = [];
   const thumbCarousel = [];
   const styleID = useContext(styleIDContext);
+  const prodID = useContext(prodIDContext);
   
   // console.log(API_KEY)
   const nextImage = () => {
@@ -54,17 +56,15 @@ function ImageView(props) {
 
   useEffect(() => {
     axios({
-      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/40344/styles',
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${prodID}/styles`,
       method: 'get',
       headers: {
-        Authorization: API_KEY,
+        Authorization: MAIN_API_KEY,
       },
     })
       .then((response) => {
-        console.log(styleID, 'This is styleID')
+        console.log('image array:', response.data.results);
         let allPics = response.data.results[0].photos;
-        // console.log(response.data)
-        // console.log(allPics)
         let tempLength = 0;
         for (let i = 0; i < allPics.length; i++) {
           Carousel.push(allPics[i].url);
@@ -74,7 +74,7 @@ function ImageView(props) {
           for (let x = 0; x < response.data.results[0].photos.length; x++) {
             thumbCarousel.push(response.data.results[0].photos[x].thumbnail_url);
           }
-          // console.log('This is thumb carousel', thumbCarousel)
+          console.log('This is thumb carousel', thumbCarousel)
         } else {
           for (let i = 0; i < response.data.results.length; i++) {
             if (response.data.results[i].style_id === styleID) {

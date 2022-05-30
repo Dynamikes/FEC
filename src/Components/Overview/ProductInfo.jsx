@@ -11,58 +11,8 @@ import {
   StyledPrice,
   StyledShare,
 } from '../StyledComponents.jsx';
-// import {
-//   API_KEY,
-//   MAIN_URL,
-// } from '/home/tannerhebert/hackreactorhub/FEC/FEC/src/config.js';
-// import {
-//   MAIN_URL,
-//   API_KEY,
-// } from '/home/tannerhebert/hackreactorhub/FEC/FEC/src/config.js';
-// const getOurData = () => {
-//   const [products, setProduct] = useState(null);
-//   const [error, setError] = useState('');
-//   const [loaded, setLoaded] = useState(false);
+import {MAIN_API_KEY} from '../../config.js'
 
-//   useEffect(() => {
-//     axios({
-//       url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/',
-//       method: 'get',
-//       headers: {
-//         Authorization: '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',
-//       },
-//     })
-//       .then((response) => {
-//         setProduct(response.data);
-//         console.log(response.data);
-//       })
-//       .then(() => {
-//         setLoaded(true);
-//       })
-//       .catch((err) => {
-//         setError(err);
-//         console.log('Breaking in getOurData. Err:', err);
-//       });
-//   }, []);
-//   return { products, error, loaded };
-// };
-
-// const getOurData = () => {
-//   axios({
-//     url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/',
-//     method: 'get',
-//     // baseURL: window.MAIN_URL,
-//     headers: {
-//       Authorization: window.API_KEY,
-//     },
-//   })
-//     .then((response) => {
-//       console.log(response.data);
-//     })
-//     .catch((err) => {
-//       console.log('Breaking in basic axios request. Err:', err);
-//     });
-// };
 function ProductInfo() {
   const [products, setProduct] = useState(null);
   const [error, setError] = useState('');
@@ -73,12 +23,11 @@ function ProductInfo() {
       url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/',
       method: 'get',
       headers: {
-        Authorization: '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',
+        Authorization: MAIN_API_KEY,
       },
     })
       .then((response) => {
         setProduct(response.data);
-        console.log(response.data);
       })
       .then(() => {
         setLoaded(true);
