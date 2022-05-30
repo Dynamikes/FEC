@@ -86,6 +86,7 @@ function ImageView(props) {
               console.log('This is carousel:', Carousel)
             }
           }
+          setCurrent(0);
           
         }
 
