@@ -3,13 +3,11 @@ import React, { useState, useEffect } from 'react';
 import { hot } from 'react-hot-loader/root';
 import styled from 'styled-components';
 import axios from 'axios';
-import { Title, AddOverlay, AddWrapper, BigQAWrapper, QAWrapper, QASearchBar, QASearchButton, StyledQuestionExtensions, QAButtons, AddForms } from '../StyledComponents.jsx';
+import { SearchWrapper, Title, AddOverlay, AddWrapper, BigQAWrapper, QAWrapper, QASearchBar, QASearchButton, StyledQuestionExtensions, QAButtons, AddForms } from '../StyledComponents.jsx';
 import { MAIN_API_KEY } from '../../config.js'
 import QAEntry from './QAEntry.jsx'
 
-const SearchWrapper = styled.div`
-  display: flex;
-`;
+
 
 function QA() {
   const [questions, setQuestions] = useState([]);
@@ -93,7 +91,7 @@ function QA() {
   }
 
   return (
-    <BigQAWrapper display='flex'>
+    <BigQAWrapper>
     <Title> Questions and Answers </Title>
     <SearchWrapper>
       <form onSubmit={searchQuestions}>
@@ -102,58 +100,58 @@ function QA() {
       </form>
     </SearchWrapper>
     <QAWrapper>
-    { loaded ? questions.length === 0 ? <h3> No questions have been asked about this product yet! </h3> :
-      questions.slice(0, questionsCount).map((question) => (
-      <QAEntry key={question['question_id']} question={question} getQuestions={getQuestions}/>
-      )) :
-    ''}
-    <StyledQuestionExtensions>
-      {questionsCount < questions.length && questions.length > 2 ?
-        <QAButtons size='large' onClick={()=> {setCount(questionsCount + 2)}}> More Answered Questions</QAButtons> :
-        null
-      }
-      <QAButtons size ='large' onClick={()=>{openAddQuestion(true)}}> Add a Question + </QAButtons>
-    </StyledQuestionExtensions>
-    <AddQuestion open={addQuestion} onClose={()=>{openAddQuestion(false)}} submitQuestion={submitQuestion}>
-      <AddForms onSubmit={submitQuestion}>
-        <Title> Ask your Question About the (Product)</Title>
-        <label>
-          Ask your question!<small>*</small>
-        </label>
-        <textarea
-          cols='40'
-          rows='4'
-          placeholder='Ask a Question'
-          required
-          maxLength='1000'
-          onChange={(e)=>{setQuestionBody(e.target.value)}}
-        />
-        <label>
-          What is your nickname<small>*</small>:
-          </label>
-          <input
-            type='text'
-            maxLength='60'
-            placeholder='"Example: jackson11!"'
-            required
-            onChange={(e)=>{setUsername(e.target.value)}}
-          />
-          <small> For privacy reasons, do not use your full name or email address </small>
+      { loaded ? questions.length === 0 ? <h3> No questions have been asked about this product yet! </h3> :
+        questions.slice(0, questionsCount).map((question) => (
+        <QAEntry key={question['question_id']} question={question} getQuestions={getQuestions}/>
+        )) :
+      ''}
+      <StyledQuestionExtensions>
+        {questionsCount < questions.length && questions.length > 2 ?
+          <QAButtons size='large' onClick={()=> {setCount(questionsCount + 2)}}> More Answered Questions</QAButtons> :
+          null
+        }
+        <QAButtons size ='large' onClick={()=>{openAddQuestion(true)}}> Add a Question + </QAButtons>
+      </StyledQuestionExtensions>
+      <AddQuestion open={addQuestion} onClose={()=>{openAddQuestion(false)}} submitQuestion={submitQuestion}>
+        <AddForms onSubmit={submitQuestion}>
+          <Title> Ask your Question About the (Product)</Title>
           <label>
-          What is your email <small>*</small>:
+            Ask your question!<small>*</small>
           </label>
-          <input
-            type='email'
-            placeholder='Why did you like the product or not?'
+          <textarea
+            cols='40'
+            rows='4'
+            placeholder='Ask a Question'
             required
-            maxLength='60'
-            onChange={(e)=>{setEmail(e.target.value)}}
+            maxLength='1000'
+            onChange={(e)=>{setQuestionBody(e.target.value)}}
           />
-          <small> For authentication reasons only; you will not be emailed. </small>
-        <input type='submit' value='Submit Question!'/>
-      </AddForms>
-    </AddQuestion>
-  </QAWrapper>
+          <label>
+            What is your nickname<small>*</small>:
+            </label>
+            <input
+              type='text'
+              maxLength='60'
+              placeholder='"Example: jackson11!"'
+              required
+              onChange={(e)=>{setUsername(e.target.value)}}
+            />
+            <small> For privacy reasons, do not use your full name or email address </small>
+            <label>
+            What is your email <small>*</small>:
+            </label>
+            <input
+              type='email'
+              placeholder='Why did you like the product or not?'
+              required
+              maxLength='60'
+              onChange={(e)=>{setEmail(e.target.value)}}
+            />
+            <small> For authentication reasons only; you will not be emailed. </small>
+          <input type='submit' value='Submit Question!'/>
+        </AddForms>
+      </AddQuestion>
+    </QAWrapper>
   </BigQAWrapper>);
 }
   const AddQuestion=(props) =>{

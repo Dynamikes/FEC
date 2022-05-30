@@ -8,7 +8,7 @@ import {
   StarRatingList,
   StarRow,
   AddSummaryWrapper,
-  ReviewMap
+  ReviewMap,
 }
 from '../StyledComponents.jsx'
 import ReviewListEntry from './ReviewListEntry'

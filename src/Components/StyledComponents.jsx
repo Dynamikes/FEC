@@ -214,7 +214,7 @@ export const StyleSelectorContainer = styled.div``;
 export const BigQAWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 80vh;
+  width: 80vw;
 `;
 export const QAWrapper = styled.div`
   display: flex;
@@ -237,14 +237,14 @@ export const AnswerWrapper = styled.li`
   margin: 10px 20px;
 `;
 export const QASearchBar = styled.input`
-  width: 74vh;
   height: 30px;
+  width: 74vw;
   padding: 2px;
   border: none;
 `;
 export const QASearchButton = styled.input`
   background: white;
-  width: 5vh;
+  width: 5vw;
   padding: 9.5px 1px;
   border: none;
 `;
@@ -300,6 +300,7 @@ export const  TotalReviewWrapper = styled.div`
   padding: 5px;
   margin: 5px;
   position: relative;
+  width: 80vw;
 `;
 
 //ReviewList.jsx ---------------------------
@@ -328,7 +329,6 @@ export const ReviewTile = styled.div`
   border-style: solid;
   padding: 3px;
   margin: 3px;
-  width:600PX;
 `;
 
 export const ReviewBodyWrapper = styled.div`
@@ -395,6 +395,8 @@ export const ReviewBreakdownWrapper = styled.div`
   border-style: solid;
   padding: 3px;
   margin: 3px;
+  width: 300px;
+  min-width: 300px;
 `;
 
 export const ReviewAverage = styled.h2`
@@ -416,7 +418,8 @@ export const ProgressBarWrap = styled.div`
 export const StarBarWrap = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%
+  margin: 5px;
+  padding: 5px;
 `;
 
 export const InnerBar = styled.div`
@@ -552,4 +555,8 @@ export const AddOverlay = styled.div`
 export const AddSummaryWrapper = styled.div`
   display: flex;
   flex-direction: row;
+`;
+
+export const SearchWrapper = styled.div`
+  display: flex;
 `;
