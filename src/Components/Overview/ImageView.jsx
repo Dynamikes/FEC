@@ -26,7 +26,9 @@ const StyledLeftArrow = styled(FaArrowAltCircleLeft)`
   z-index: 3;
 `;
 const ZoomedLeftArrow = styled(StyledLeftArrow)`
-z-index: 7;`
+z-index: 7;
+top: 50%;
+`
 
 const StyledRightArrow = styled(FaArrowAltCircleRight)`
   transform: scale(2);
@@ -35,7 +37,9 @@ const StyledRightArrow = styled(FaArrowAltCircleRight)`
   z-index: 3;
 `;
 const ZoomedRightArrow = styled(StyledRightArrow)`
-z-index: 7;`
+z-index: 7;
+top: 50%;
+`
 const StyledUpArrow = styled(FaArrowAltCircleUp)`
 transform: scale(1);
 position: absolute;
@@ -68,6 +72,10 @@ function ImageView(props) {
   const prodID = useContext(prodIDContext);
   const [clicked, setClicked] = useState('default')
   
+  useEffect(()=> {
+    console.log('This is current:', current)
+    console.log('This is vert Current:', vertCurrent)
+  }, [current, vertCurrent])
   // console.log(API_KEY)
   const nextImage = () => {
     setCurrent(current === carLength - 1 ? 0 : current + 1);
@@ -98,7 +106,7 @@ function ImageView(props) {
       },
     })
       .then((response) => {
-        console.log('image array:', response.data.results);
+        //console.log('image array:', response.data.results);
         let allPics = response.data.results[0].photos;
         let tempLength = 0;
         for (let i = 0; i < allPics.length; i++) {
