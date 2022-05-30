@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { hot } from 'react-hot-loader/root';
 import Overview from './Components/Overview/Overview.jsx';
 import Reviews from './Components/Reviews/Reviews.jsx';
@@ -11,10 +11,13 @@ import {
   AppWrapper,
   ReviewTitle,
 } from './Components/StyledComponents.jsx';
-
+export const prodIDContext = React.createContext();
 const App = (props) => {
+  const [prodID, setProdID] = useState(40344)
+
   const name = props.name;
   return (
+    <prodIDContext.Provider value={prodID} >
     <AppWrapper>
       <StyledPageTitle>Hello {name}</StyledPageTitle>
       <Flexbox>
@@ -31,6 +34,7 @@ const App = (props) => {
         <QA />
       </Flexbox>
     </AppWrapper>
+    </prodIDContext.Provider>
   );
 };
 App.propTypes = {

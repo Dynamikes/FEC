@@ -1,4 +1,5 @@
 const path = require('path');
+const Dotenv = require('dotenv-webpack');
 //import path from 'path';
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 const config = {
@@ -51,7 +52,7 @@ const config = {
       directory: './dist',
     },
   },
-  plugins: [new LodashModuleReplacementPlugin()],
+  plugins: [new LodashModuleReplacementPlugin(), new Dotenv()],
   resolve: {
     extensions: ['', '.jsx', '.js'],
   },

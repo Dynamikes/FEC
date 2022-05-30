@@ -12,7 +12,7 @@ import {
 }
 from '../StyledComponents.jsx'
 import ReviewListEntry from './ReviewListEntry'
-import AddReview from './Addreview.jsx'
+import AddReview from './AddReview.jsx'
 import StarRatings from 'react-star-ratings';
 
 const ReviewList = ({reviews, getReviews}) => {

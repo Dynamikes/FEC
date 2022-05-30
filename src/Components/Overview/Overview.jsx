@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import { hot } from 'react-hot-loader/root';
 import ImageView from './ImageView.jsx';
 import StyleSelector from './StyleSelector.jsx';
@@ -14,17 +14,23 @@ import {
   StyledImageView
 }
 from '../StyledComponents.jsx'
-
+export const styleIDContext = React.createContext();
 function Overview() {
   //hook that adds state ttoggle
   //function that toggles state from A to B
   let [toggle, setToggle] = useState(!toggle);
+  const [styleID, setStyleID] = useState(null)
 
   const toggleFunc = () => {
     setToggle(!toggle);
   };
+  const changeStyleID = (id) => {
+    setStyleID(id)
+    console.log(id)
+  }
 
   return (
+    <styleIDContext.Provider value={styleID}>
     <OverviewWrapper>
       <Wrapper>
         <StyledImageView>
@@ -34,7 +40,7 @@ function Overview() {
           <StyledSideBar>
             {' '}
             <ProductInfo />
-            <StyleSelector />
+            <StyleSelector click={changeStyleID} />
             <AddToCart />{' '}
           </StyledSideBar>
         ) : (
@@ -50,6 +56,7 @@ function Overview() {
         <ProductDescription />
       </StyledProductInfo>
     </OverviewWrapper>
+    </styleIDContext.Provider>
   );
 }
 

@@ -46,8 +46,8 @@ export const MainImage = styled.img`
 `;
 export const Thumbnails = styled.div`
   position: absolute;
-  width: 10%;
-  left: 6%;
+  width: 15%;
+  left: 4%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -180,8 +180,8 @@ export const AddToCartButton = styled.button`
 
 export const StyleThumbnail = styled.img`
   border-radius: 50%;
-  width: 25%;
-  height: auto;
+  width: 60px;
+  height: 60px;
   padding: 5px;
 `;
 export const StyleSelectorContainer = styled.div``;

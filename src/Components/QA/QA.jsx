@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect , useContext} from 'react';
 import { hot } from 'react-hot-loader/root';
 import styled from 'styled-components';
 import axios from 'axios';
 import { SearchWrapper, Title, AddOverlay, AddWrapper, BigQAWrapper, QAWrapper, QASearchBar, QASearchButton, StyledQuestionExtensions, QAButtons, AddForms } from '../StyledComponents.jsx';
 import { MAIN_API_KEY } from '../../config.js'
 import QAEntry from './QAEntry.jsx'
+import {prodIDContext} from '../../App.jsx';
 
 
 
@@ -19,7 +20,8 @@ function QA() {
   const [questionBody, setQuestionBody] = useState('');
   const [email, setEmail] = useState('');
 
-  let product_id = 40360;
+  let product_id = useContext(prodIDContext);
+  console.log(product_id)
   const getQuestions= () => {
     axios({
       url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=' + product_id,
