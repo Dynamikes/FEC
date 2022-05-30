@@ -13,6 +13,7 @@ export const ImageWrapper = styled.section`
   z-index: 2;
   height: 100%;
   max-width: 100%;
+  user-select: none;
 `;
 
 export const ImageViewWrapper = styled.section`
@@ -24,6 +25,7 @@ export const ImageViewWrapper = styled.section`
   z-index: 2;
   width: 400px;
   height: 500px;
+  user-select: none;
 `;
 export const ExpandButton = styled.button`
   position: absolute;
@@ -52,6 +54,7 @@ export const Thumbnails = styled.div`
   justify-content: space-around;
   background: white;
   z-index: 2;
+  user-select: none;
 `;
 export const ThumbnailImage = styled.img`
   height: auto;
@@ -187,6 +190,13 @@ export const StyleThumbnail = styled.img`
   height: 60px;
   padding: 5px;
 `;
+export const HighlightedStyleThumbnail = styled(ThumbnailImage)`
+border: 2px solid #dadada;
+border-radius: 7px;
+outline: none;
+border-color: #9ecaed;
+box-shadow: 0 0 10px #9ecaed;
+`
 export const StyleSelectorContainer = styled.div``;
 
 export const BigQAWrapper = styled.div`
@@ -557,7 +567,8 @@ export const AddOverlay = styled.div`
   bottom: 0;
   z-index: 5
 `;
-
+export const ImageOverlay = styled(AddOverlay)`
+background-color: grey;`
 export const AddSummaryWrapper = styled.div`
   display: flex;
   flex-direction: row;

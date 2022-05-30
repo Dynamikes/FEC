@@ -47,7 +47,7 @@ useEffect(() => {
 
   return (
     <SelectorWrapper>
-      <Title>StyleSelector</Title>
+      <Title>Styles</Title>
       <StyleSelectorContainer>
         {loaded ? styleThumbs.map((thumb) => {
           return <StyleThumbnail key={thumb[1]} src={thumb[0]} onClick={() => {props.click(thumb[1])}}/>
