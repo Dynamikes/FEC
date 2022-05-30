@@ -35,9 +35,6 @@ const Reviews = () => {
       setReview(response.data.results);
       setReviewsHolder(response.data.results);
     })
-    .then(() => {
-      setLoadedRev(true);
-    })
     .catch((err) => {
       console.log('Breaking in Review GET. Err:', err);
     });

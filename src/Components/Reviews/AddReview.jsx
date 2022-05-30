@@ -2,7 +2,7 @@
 import React from 'react'
 import { hot } from 'react-hot-loader/root';
 import {
-  AddWrapper,
+  AddReviewWrapper,
   AddOverlay
 }
 from '../StyledComponents.jsx'
@@ -12,10 +12,10 @@ const AddReview = ({children, open, onClose}) => {
   else {return (
     <>
       <AddOverlay onClick={onClose}>
-        <AddWrapper onClick={e => e.stopPropagation()}>
+        <AddReviewWrapper onClick={e => e.stopPropagation()}>
           <button onClick={onClose}>x</button>
           {children}
-        </AddWrapper>
+        </AddReviewWrapper>
       </AddOverlay>
     </>
   )}

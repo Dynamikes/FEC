@@ -11,9 +11,10 @@ import {
   ReviewMap,
   RadioAdd,
   CharAdd,
-  inputWrapper,
   ReviewsSearch,
-  SearchBarWrapper
+  SearchBarWrapper,
+  StyledSearchIcon,
+  QAButtons
 }
 from '../StyledComponents.jsx';
 import ReviewListEntry from './ReviewListEntry';
@@ -23,7 +24,7 @@ import axios from 'axios';
 import {MAIN_API_KEY} from '../../config.js'
 import {prodIDContext} from '../../App.jsx'
 
-const ReviewList = ({reviews, getReviews, chara, reviewsHolder, setReviews}) => {
+const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara}) => {
 
   const prodID2 = useContext(prodIDContext)
   //State for various items
@@ -142,6 +143,7 @@ const ReviewList = ({reviews, getReviews, chara, reviewsHolder, setReviews}) => 
   return (
     <ReviewListWrapper>
       <SearchBarWrapper onSubmit={(e)=>{searched(e)}}>
+      <StyledSearchIcon />
         <ReviewsSearch type='text' name='search'
           placeholder='Filter reviews here!'
           onChange={(e)=>{whileSearching(e)}}
@@ -163,10 +165,10 @@ const ReviewList = ({reviews, getReviews, chara, reviewsHolder, setReviews}) => 
       </ReviewMap>
       <ReviewButtonWrapper>
         {reviewCount < reviews.length && reviews.length > 2 ?
-          <button onClick={() => { setReviewCount(reviewCount + 2)}}>More Reviews</button> :
+          <QAButtons onClick={() => { setReviewCount(reviewCount + 2)}}>More Reviews</QAButtons> :
           null
         }
-        <button onClick={()=>{setAdd(true)}}>Add a Review</button>
+        <QAButtons onClick={()=>{setAdd(true)}}>Add a Review</QAButtons>
         <AddReview open={addIsOpen} onClose={() => setAdd(false)}>
           <form onSubmit={submitAdd}>
             <AddTitle>Write Your Review</AddTitle>
