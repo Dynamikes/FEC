@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext} from 'react';
 import { hot } from 'react-hot-loader/root';
 import axios from 'axios';
 import styled from 'styled-components';
-import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
+import { FaArrowAltCircleRight, FaArrowAltCircleLeft, FaArrowAltCircleUp, FaArrowAltCircleDown } from 'react-icons/fa';
 import {
   ImageWrapper,
   ExpandButton,
@@ -10,6 +10,7 @@ import {
   Thumbnails,
   ThumbnailImage,
   ImageViewWrapper,
+  HighlightedStyleThumbnail,
 } from '../StyledComponents.jsx';
 import {MAIN_API_KEY} from '../../config.js'
 import {styleIDContext} from './Overview'
@@ -28,7 +29,20 @@ const StyledRightArrow = styled(FaArrowAltCircleRight)`
   right: 5%;
   z-index: 3;
 `;
-
+const StyledUpArrow = styled(FaArrowAltCircleUp)`
+transform: scale(1);
+position: absolute;
+left: 10%;
+top: 5%;
+z-index: 3;
+`
+const StyledDownArrow = styled(FaArrowAltCircleDown)`
+transform: scale(1);
+position: absolute;
+left: 10%;
+bottom: 5%;
+z-index: 3;
+`
 function ImageView(props) {
   const imageToggle = () => {
     props.click();
@@ -53,7 +67,9 @@ function ImageView(props) {
     setCurrent(current === 0 ? carLength - 1 : current - 1);
     // console.log(current);
   };
-
+ const changeCurrent = (num) => {
+   setCurrent(num)
+ } 
   useEffect(() => {
     axios({
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${prodID}/styles`,
@@ -86,7 +102,7 @@ function ImageView(props) {
               console.log('This is carousel:', Carousel)
             }
           }
-          setCurrent(0);
+          
           
         }
 
@@ -111,32 +127,48 @@ function ImageView(props) {
       {current === 0 ? (
         ''
       ) : (
+        <StyledUpArrow className='left-arrow'  />
+      )}
+      {current === 0 ? (
+        ''
+      ) : (
         <StyledLeftArrow className='left-arrow' onClick={prevImage} />
       )}
       {loaded
         ? CarouselData.map((picture, index) => {
+          
             return (
               <ImageWrapper
                 className={index === current ? 'slide active' : 'slide'}
                 key={index}>
                 {index === current && (
-                  <MainImage key={index} src={picture} alt='style image' />
+                  <MainImage key={index} src={picture} alt='style image'  />
                 )}
               </ImageWrapper>
-            );
+            )
           })
         : ''}
-
-      <Thumbnails>
+<Thumbnails>
         {loaded
-          ? CarouselData.map((thumbnail, index) => {
+          ? thumbCarouselData.slice(0, 7).map((thumbnail, index) => {
+              
+            if (index === current) {
               return (
-                <ThumbnailImage
+                <HighlightedStyleThumbnail
                   key={index}
                   src={thumbnail}
                   alt={'style thumbnail'}
+                  
                 />
-              );
+              )
+            } else {
+              return (<ThumbnailImage
+                  key={index}
+                  src={thumbnail}
+                  alt={'style thumbnail'}
+                  onClick={() => changeCurrent(index)}
+                />)
+            }
             })
           : ''}
       </Thumbnails>
@@ -145,12 +177,13 @@ function ImageView(props) {
       ) : (
         <StyledRightArrow className='right-arrow' onClick={nextImage} />
       )}
+    
+      {current === carLength - 1 ? (
+        ''
+      ) : (
+        <StyledDownArrow className='right-arrow'  />
+      )}
     </ImageViewWrapper>
   );
 }
-
 export default hot(ImageView);
-//  <ThumbnailImage src='https://i.imgur.com/sNZ0V4q.jpeg' />
-//         <ThumbnailImage src='https://i.imgur.com/sNZ0V4q.jpeg' />
-//         <ThumbnailImage src='https://i.imgur.com/sNZ0V4q.jpeg' />
-//         <ThumbnailImage src='https://i.imgur.com/sNZ0V4q.jpeg' />
