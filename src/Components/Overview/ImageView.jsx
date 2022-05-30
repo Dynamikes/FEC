@@ -73,9 +73,13 @@ function ImageView(props) {
   const [clicked, setClicked] = useState('default')
   
   useEffect(()=> {
-    console.log('This is current:', current)
-    console.log('This is vert Current:', vertCurrent)
-  }, [current, vertCurrent])
+    if (current === vertCurrent[1]) {
+      setVertCurrent([vertCurrent[0] + 1, vertCurrent[1] + 1])
+    }
+     else if (current === vertCurrent[0] && current !== 0) {
+      setVertCurrent([vertCurrent[0] - 1, vertCurrent[1] - 1])
+    }
+  }, [current])
   // console.log(API_KEY)
   const nextImage = () => {
     setCurrent(current === carLength - 1 ? 0 : current + 1);
