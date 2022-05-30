@@ -65,41 +65,11 @@ const ReviewBreakdown = ({reviewsMeta, chars}) => {
         <RatingStars value={(Number(Math.round(average * 4) / 4).toFixed(2))}/>
       </ReviewAverage>
       <ProgressBarWrap>
-        <StarBarWrap>
-        <div><StarRatings rating={1} starRatedColor='gold' starDimension='15px' starSpacing='2px'/> <small>({one}) Reviews! </small></div>
+      <StarBarWrap>
+        <div> <StarRatings rating={5} starRatedColor='gold' starDimension='15px' starSpacing='2px'/> <small>({five}) Reviews! </small></div>
             <ProgressBar
               width='65%'
-              completed={`${one}`}
-              maxCompleted={`${total}`}
-              customLabel="-"
-              labelColor='green'
-              baseBgColor='grey'
-              borderRadius='0'
-              height='7px'
-              bgColor='green'
-              margin='5px'
-            />
-        </StarBarWrap>
-        <StarBarWrap>
-        <div> <StarRatings rating={2} starRatedColor='gold' starDimension='15px' starSpacing='2px'/> <small>({two}) Reviews! </small></div>
-            <ProgressBar
-              width='65%'
-              completed={`${two}`}
-              maxCompleted={`${total}`}
-              customLabel="-"
-              labelColor='green'
-              baseBgColor='grey'
-              borderRadius='0'
-              height='7px'
-              bgColor='green'
-              margin='5px'
-            />
-        </StarBarWrap>
-        <StarBarWrap>
-        <div> <StarRatings rating={3} starRatedColor='gold' starDimension='15px' starSpacing='2px'/> <small>({three}) Reviews! </small></div>
-            <ProgressBar
-              width='65%'
-              completed={`${three}`}
+              completed={`${five}`}
               maxCompleted={`${total}`}
               customLabel="-"
               labelColor='green'
@@ -126,10 +96,40 @@ const ReviewBreakdown = ({reviewsMeta, chars}) => {
             />
         </StarBarWrap>
         <StarBarWrap>
-        <div> <StarRatings rating={5} starRatedColor='gold' starDimension='15px' starSpacing='2px'/> <small>({five}) Reviews! </small></div>
+        <div> <StarRatings rating={3} starRatedColor='gold' starDimension='15px' starSpacing='2px'/> <small>({three}) Reviews! </small></div>
             <ProgressBar
               width='65%'
-              completed={`${five}`}
+              completed={`${three}`}
+              maxCompleted={`${total}`}
+              customLabel="-"
+              labelColor='green'
+              baseBgColor='grey'
+              borderRadius='0'
+              height='7px'
+              bgColor='green'
+              margin='5px'
+            />
+        </StarBarWrap>
+        <StarBarWrap>
+        <div> <StarRatings rating={2} starRatedColor='gold' starDimension='15px' starSpacing='2px'/> <small>({two}) Reviews! </small></div>
+            <ProgressBar
+              width='65%'
+              completed={`${two}`}
+              maxCompleted={`${total}`}
+              customLabel="-"
+              labelColor='green'
+              baseBgColor='grey'
+              borderRadius='0'
+              height='7px'
+              bgColor='green'
+              margin='5px'
+            />
+        </StarBarWrap>
+        <StarBarWrap>
+          <div><StarRatings rating={1} starRatedColor='gold' starDimension='15px' starSpacing='2px'/> <small>({one}) Reviews! </small></div>
+            <ProgressBar
+              width='65%'
+              completed={`${one}`}
               maxCompleted={`${total}`}
               customLabel="-"
               labelColor='green'
@@ -149,69 +149,45 @@ const ReviewBreakdown = ({reviewsMeta, chars}) => {
       <div>
         {
         fit ?
-        <div>
-          <u>Fit</u>
-           <div>
-           <SliderWrapper>
+        <SliderWrapper>
+          <div> Fit </div>
             <SliderInputFit type='range' min='1' max='5' value='fit'/>
-          </SliderWrapper>
-           </div>
-        </div>: null
+        </SliderWrapper>: null
         }
         {
         value ?
-        <div>
-          <u>Value</u>
-          <div>
-          <SliderWrapper>
+        <SliderWrapper>
+            <div> Value </div>
             <SliderInputQuality type='range' min='1' max='5' value='value'/>
-          </SliderWrapper>
-          </div>
-        </div>: null
+          </SliderWrapper>: null
         }
         {
         comfort ?
-        <div>
-          <u>Comfort</u>
-          <div>
-          <SliderWrapper>
+        <SliderWrapper>
+          <div> Comfort </div>
             <SliderInputQuality type='range' min='1' max='5' value='comfort'/>
-          </SliderWrapper>
-          </div>
-        </div>: null
+        </SliderWrapper> : null
         }
         {
         length ?
-        <div>
-          <u>Length</u>
-           <div>
-           <SliderWrapper>
+        <SliderWrapper>
+             <div> Length </div>
             <SliderInputLength type='range' min='1' max='5' value='length'/>
-          </SliderWrapper>
-          </div>
-       </div>: null
+          </SliderWrapper>: null
        }
         {
         quality ?
-        <div>
-          <u>Quality</u>
-          <div>
-          <SliderWrapper>
+        <SliderWrapper>
+            <div> Quality </div>
             <SliderInputQuality type='range' min='1' max='5' value='quality'/>
-          </SliderWrapper>
-          </div>
-        </div>: null
-          }
+        </SliderWrapper>: null
+        }
         {
         size ?
-        <div>
-          <u>Size</u>
-          <div>
-          <SliderWrapper>
+        <SliderWrapper>
+            <div> Size </div>
             <SliderInputFit type='range' min='1' max='5' value='size'/>
-          </SliderWrapper>
-          </div>
-        </div>: null
+        </SliderWrapper>: null
         }
       </div>
     </ReviewBreakdownWrapper>

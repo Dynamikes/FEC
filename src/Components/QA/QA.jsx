@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect , useContext} from 'react';
 import { hot } from 'react-hot-loader/root';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import axios from 'axios';
-import { SearchWrapper, Title, AddOverlay, AddWrapper, BigQAWrapper, QAWrapper, QASearchBar, QASearchButton, StyledQuestionExtensions, QAButtons, AddForms } from '../StyledComponents.jsx';
+import { SearchBarWrapper, SearchWrapper, Title, AddOverlay, AddWrapper, BigQAWrapper, QAWrapper, QASearchBar, QASearchButton, StyledQuestionExtensions, QAButtons, AddForms } from '../StyledComponents.jsx';
 import { MAIN_API_KEY } from '../../config.js'
 import QAEntry from './QAEntry.jsx'
 import {prodIDContext} from '../../App.jsx';
@@ -78,7 +78,6 @@ function QA() {
 
   const whileSearching = (e) => {
     let searchStr = e.target.value.toLowerCase();
-    console.log('typing: ', e.target.value)
     if (searchStr.length > 2) {
       let searchedQuestions = [];
       for (let i = 0; i < questionsHolder.length; i++) {
@@ -95,12 +94,10 @@ function QA() {
   return (
     <BigQAWrapper>
     <Title> Questions and Answers </Title>
-    <SearchWrapper>
-      <form onSubmit={searchQuestions}>
+      <SearchBarWrapper onSubmit={searchQuestions}>
         <QASearchBar name='search' type='text' placeholder='Search for a question here!' onChange={(e)=>{whileSearching(e)}}/>
         <QASearchButton type='submit' value='X' onClick={()=> {setQuestions(questionsHolder)}}/>
-      </form>
-    </SearchWrapper>
+      </SearchBarWrapper>
     <QAWrapper>
       { loaded ? questions.length === 0 ? <h3> No questions have been asked about this product yet! </h3> :
         questions.slice(0, questionsCount).map((question) => (

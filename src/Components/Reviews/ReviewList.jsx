@@ -11,7 +11,9 @@ import {
   ReviewMap,
   RadioAdd,
   CharAdd,
-  inputWrapper
+  inputWrapper,
+  ReviewsSearch,
+  SearchBarWrapper
 }
 from '../StyledComponents.jsx';
 import ReviewListEntry from './ReviewListEntry';
@@ -21,7 +23,7 @@ import axios from 'axios';
 import {MAIN_API_KEY} from '../../config.js'
 import {prodIDContext} from '../../App.jsx'
 
-const ReviewList = ({reviews, getReviews, chara}) => {
+const ReviewList = ({reviews, getReviews, chara, reviewsHolder, setReviews}) => {
 
   const prodID2 = useContext(prodIDContext)
   //State for various items
@@ -113,10 +115,39 @@ const ReviewList = ({reviews, getReviews, chara}) => {
     })
   }
 
+  const searched = (e) => {
+    e.preventDefault();
+    e.target.search.value='';
+  }
+
+  const whileSearching = (e) => {
+    let searchStr = e.target.value.toLowerCase();
+    if (searchStr.length > 2) {
+      let searchedReviews = [];
+      for (let i = 0; i < reviewsHolder.length; i++) {
+        if (
+          reviewsHolder[i]['body'].toLowerCase().includes(searchStr) ||
+          reviewsHolder[i]['reviewer_name'].toLowerCase().includes(searchStr) ||
+          reviewsHolder[i]['summary'].toLowerCase().includes(searchStr)
+        ) {
+          searchedReviews.push(reviewsHolder[i])
+        }
+      }
+      setReviews(searchedReviews);
+    } else {
+      setReviews(reviewsHolder);
+    }
+  }
+
   return (
     <ReviewListWrapper>
-
-      <input type='text' />
+      <SearchBarWrapper onSubmit={(e)=>{searched(e)}}>
+        <ReviewsSearch type='text' name='search'
+          placeholder='Filter reviews here!'
+          onChange={(e)=>{whileSearching(e)}}
+        />
+        <input type='submit' value='x'onClick={()=> {setReviews(reviewsHolder)}} />
+      </SearchBarWrapper>
       <ReviewMap>
         <div>
           {reviews.length} Reviews /*sortedBy*
