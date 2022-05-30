@@ -11,6 +11,9 @@ import {
   ThumbnailImage,
   ImageViewWrapper,
   HighlightedStyleThumbnail,
+  AddOverlay,
+  ImagePopUp,
+  AddWrapper
 } from '../StyledComponents.jsx';
 import {MAIN_API_KEY} from '../../config.js'
 import {styleIDContext} from './Overview'
@@ -22,6 +25,8 @@ const StyledLeftArrow = styled(FaArrowAltCircleLeft)`
   left: 5%;
   z-index: 3;
 `;
+const ZoomedLeftArrow = styled(StyledLeftArrow)`
+z-index: 7;`
 
 const StyledRightArrow = styled(FaArrowAltCircleRight)`
   transform: scale(2);
@@ -29,6 +34,8 @@ const StyledRightArrow = styled(FaArrowAltCircleRight)`
   right: 5%;
   z-index: 3;
 `;
+const ZoomedRightArrow = styled(StyledRightArrow)`
+z-index: 7;`
 const StyledUpArrow = styled(FaArrowAltCircleUp)`
 transform: scale(1);
 position: absolute;
@@ -54,11 +61,12 @@ function ImageView(props) {
   const [thumbCarouselData, setThumbCarouselData] = useState(null)
   const [carLength, setCarLength] = useState(0);
   const [styleLoaded, setStyleLoaded] = useState(false)
-
+  const [currentPicture, setCurrentPicture] = useState('');
   var Carousel = [];
   const thumbCarousel = [];
   const styleID = useContext(styleIDContext);
   const prodID = useContext(prodIDContext);
+  const [clicked, setClicked] = useState('default')
   
   // console.log(API_KEY)
   const nextImage = () => {
@@ -142,6 +150,27 @@ function ImageView(props) {
       ) : (
         <StyledLeftArrow className='left-arrow' onClick={prevImage} />
       )}
+      
+      {clicked === 'expanded' ? 
+      <AddOverlay onClick={() => setCurrentPicture('')}>
+          <AddWrapper>
+            {current === 0 ? (
+          ''
+        ) : (
+          <ZoomedLeftArrow className='left-arrow' onClick={prevImage} />
+        )}
+            <ImagePopUp src={currentPicture} />
+            {current === carLength - 1 ? (
+        ''
+      ) : (
+        <ZoomedRightArrow className='right-arrow' onClick={nextImage} />
+      )}
+          </AddWrapper>
+        </AddOverlay> 
+        :
+        null
+        
+      }
       {loaded
         ? CarouselData.map((picture, index) => {
           
@@ -150,7 +179,7 @@ function ImageView(props) {
                 className={index === current ? 'slide active' : 'slide'}
                 key={index}>
                 {index === current && (
-                  <MainImage key={index} src={picture} alt='style image'  />
+                  <MainImage key={index} src={picture} alt='style image' onClick={() => {setCurrentPicture(picture), setClicked('expanded')}} />
                 )}
               </ImageWrapper>
             )
