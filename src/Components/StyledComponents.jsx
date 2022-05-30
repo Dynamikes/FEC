@@ -32,7 +32,7 @@ export const ExpandButton = styled.button`
   top: 1em;
   z-index: 2;
   background: black;
-  color: gold;
+  color: orange;
   border-radius: 20%;
   padding: 5px;
 `;
@@ -160,7 +160,7 @@ export const StyledSizeSelect = styled.select`
   border-width: 3px;
   text-align-last: center;
   background: black;
-  color: gold;
+  color: orange;
 `;
 export const StyledQuantitySelect = styled.select`
   flex-grow: 2;
@@ -168,13 +168,13 @@ export const StyledQuantitySelect = styled.select`
   border-width: 3px;
   text-align-last: right;
   background: black;
-  color: gold;
+  color: orange;
 `;
 export const AddToCartButton = styled.button`
   padding: 10px;
   border-width: 5px;
   background: black;
-  color: gold;
+  color: orange;
   font-size: 1.1em;
 `;
 
@@ -189,7 +189,7 @@ export const StyleSelectorContainer = styled.div``;
 
 // export const AddWrapper = styled.div`
 // background-color: rgba(7,7,7);
-// border-color: gold;
+// border-color: rgb(20 , 20, 20);
 // border-width: 1px;
 // border-style: solid;
 // position: fixed;
@@ -212,21 +212,28 @@ export const StyleSelectorContainer = styled.div``;
 // ;
 
 export const BigQAWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 80vw;
+display: flex;
+flex-direction: column;
+padding: 5px;
+margin: 5px;
+width: 70vw;
+border-color: rgb(20 , 20, 20);
+border-width: 2px;
+border-style: solid;
 `;
 export const QAWrapper = styled.div`
   display: flex;
   flex-direction: column;
   max-height: 80vh;
   overflow-y: scroll;
+  margin: 10px;
+  padding: 10px;
 `;
 export const QAEntryWrapper = styled.div`
-border-width: 2 px;
-border-color: orange;
+border-width: 1 px;
+border-color: grey;
 border-style: solid;
-padding: 5px;
+padding: 10px;
 margin: 10px 1px;
 `;
 export const AnswerListWrapper = styled.div`
@@ -236,17 +243,21 @@ overflow-y: scroll;
 export const AnswerWrapper = styled.li`
   margin: 10px 20px;
 `;
-export const QASearchBar = styled.input`
+export const SearchBarWrapper = styled.form`
   height: 30px;
-  width: 74vw;
-  padding: 2px;
-  border: none;
+  width: 95%;
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+  padding: 5px;
+  align-self: center;
+`;
+export const QASearchBar = styled.input`
+  padding: 5px;
+  width: 100%;
 `;
 export const QASearchButton = styled.input`
-  background: white;
-  width: 5vw;
-  padding: 9.5px 1px;
-  border: none;
+
 `;
 export const StyledQuestion = styled.div`
   display: flex;
@@ -272,7 +283,7 @@ export const UpdateButtons = styled.button`
 background: none!important;
   border: none;
   font-family: arial, sans-serif;
-  color: gold;
+  color: orange;
   text-decoration: underline;
   padding: 0px 3px;
   cursor: pointer;
@@ -292,26 +303,28 @@ export const ReviewTitle = styled.h3`
 //Reviews.jsx -----------------------------
 export const  TotalReviewWrapper = styled.div`
   display: flex;
-  flex-direction: row;
-  background-color: rgb(7, 7, 7);
-  border-color: green;
-  border-width: 3px;
-  border-style: solid;
+  flex-direction: column;
   padding: 5px;
   margin: 5px;
-  position: relative;
-  width: 80vw;
+  width: 70vw;
+  border-color: rgb(20 , 20, 20);
+  border-width: 2px;
+  border-style: solid;
+`;
+
+export const InnerReviewWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
 
 //ReviewList.jsx ---------------------------
 export const ReviewListWrapper = styled.div`
   display: flex;
-  border-color: gold;
-  border-width: 3px;
-  border-style: solid;
+
   flex-direction: column;
-  padding: 3px;
-  margin: 3px;
+  padding: 10px;
+  margin: 10px;
+  flex-grow: 1;
 `;
 
 export const ReviewMap = styled.div`
@@ -324,11 +337,11 @@ export const ReviewMap = styled.div`
 export const ReviewTile = styled.div`
   display: flex;
   flex-direction: column;
-  border-color: gold;
-  border-width: 3px;
+  border-width: 1 px;
+  border-color: grey;
   border-style: solid;
-  padding: 3px;
-  margin: 3px;
+  padding: 10px;
+  margin: 10px 1px;
 `;
 
 export const ReviewBodyWrapper = styled.div`
@@ -341,7 +354,7 @@ export const ReviewBodyWrapper = styled.div`
 export const ReviewImageWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  border-color: gold;
+  border-color: rgb(20 , 20, 20);
   border-width: 1px;
   border-style: solid;
   padding: 3px;
@@ -354,7 +367,7 @@ export const ReviewButtonWrapper = styled.div`
 `;
 
 export const ReviewBody = styled.p`
-  border-color: gold;
+  border-color: rgb(20 , 20, 20);
   border-width: 1px;
   border-style: solid;
   display: flex;
@@ -371,7 +384,7 @@ export const AddTitle = styled.h2`
 export const StarRatingList = styled.div`
   display: flex;
   flex-direction: column;
-  border-color: gold;
+  border-color: rgb(20 , 20, 20);
   border-width: 1px;
   border-style: solid;
   margin: 5px;
@@ -390,23 +403,17 @@ export const ReviewBreakdownWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  border-color: gold;
-  border-width: 3px;
-  border-style: solid;
-  padding: 3px;
-  margin: 3px;
+  padding: 10px;
+  margin: 10px;
   width: 300px;
   min-width: 300px;
 `;
 
 export const ReviewAverage = styled.h2`
-  border-color: gold;
-  border-width: 1px;
-  border-style: solid;
   display: flex;
   flex-direction: row;
-  padding: 3px;
-  margin: 3px;
+  padding: 10px;
+  margin: 10px;
 `;
 
 export const ProgressBarWrap = styled.div`
@@ -428,9 +435,8 @@ export const InnerBar = styled.div`
 `
 
 export const SliderWrapper = styled.div`
-  margin: 3px
-  width: 75%
-
+  margin: 10px;
+  padding: 5px;
 `;
 
 export const SliderInputFit = styled.input`
@@ -440,7 +446,7 @@ export const SliderInputFit = styled.input`
   background-color: grey;
   border-radius: 1px;
   outline: none;
-  box-shadow: 0px 1px 10px 1px gold;
+  box-shadow: 0px 1px 10px 1px orange;
   background: radial-gradient(circle at center, white 0, grey 100%);
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -469,7 +475,7 @@ export const SliderInputQuality = styled.input`
   background-color: grey;
   border-radius: 1px;
   outline: none;
-  box-shadow: 0px 1px 10px 1px gold;
+  box-shadow: 0px 1px 10px 1px orange;
   background: radial-gradient(circle at center, white 0, grey 100%);
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -498,7 +504,7 @@ export const SliderInputLength = styled.input`
   background-color: grey;
   border-radius: 1px;
   outline: none;
-  box-shadow: 0px 1px 10px 1px gold;
+  box-shadow: 0px 1px 10px 1px orange;
   background: radial-gradient(circle at center, white 0, grey 100%);
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -522,15 +528,13 @@ export const SliderInputLength = styled.input`
 
 export const RecommendWrap = styled.div`
   margin: 5px
-`
-
-
+`;
 
 //AddReview.jsx
 
 export const AddWrapper = styled.div`
   background-color: rgba(7,7,7);
-  border-color: gold;
+  border-color: rgb(20 , 20, 20);
   border-width: 1px;
   border-style: solid;
   position: fixed;
@@ -543,6 +547,8 @@ export const AddWrapper = styled.div`
 
 
 export const AddOverlay = styled.div`
+  display: flex;
+  justify-content: center;
   position: fixed;
   background-color: rgba(0,0,0, .7);
   top: 0;
@@ -559,4 +565,21 @@ export const AddSummaryWrapper = styled.div`
 
 export const SearchWrapper = styled.div`
   display: flex;
+  width: 65vw;
+  padding: 10px;
+  margin: 10px;
+`;
+
+export const ReviewsSearch = styled.input`
+  padding: 5px;
+  flex: 1;
+`;
+export const ReviewsSearchButton = styled.input`
+  margin: 5px;
+  height: 25px;
+  width: 25px;
+`;
+export const ImagePopUp = styled.img`
+  max-height: 80vh;
+  max-width: 80vw;
 `;

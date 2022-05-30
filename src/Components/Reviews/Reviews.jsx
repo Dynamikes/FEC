@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useState, useEffect, React, useContext} from 'react';
 import ReviewList from './ReviewList.jsx';
 import {
-  TotalReviewWrapper, QASearchBar, QASearchButton
+  TotalReviewWrapper, Title, InnerReviewWrapper
 }
 from '../StyledComponents.jsx';
 import {MAIN_API_KEY} from '../../config.js'
@@ -13,6 +13,7 @@ import {prodIDContext} from '../../App.jsx'
 const Reviews = () => {
   //States for user reviews / Meta data
   const [reviews, setReview] = useState([]);
+  const [reviewsHolder, setReviewsHolder] = useState([]);
   const [reviewsMeta, setReviewMeta] = useState(
     {recommended: {true: null, false: null}, ratings: {'1': '1', '2': '2', '3': '3', '4': '4', '5': '5'}});
   const [chars, setChars] = useState({Size: 1, Width: 1, Comfort: 1, Quality: 1, Length:1, Fit: 1})
@@ -30,6 +31,7 @@ const Reviews = () => {
     })
     .then((response) => {
       setReview(response.data.results);
+      setReviewsHolder(response.data.results);
     })
     .catch((err) => {
       console.log('Breaking in Review GET. Err:', err);
@@ -70,14 +72,19 @@ const Reviews = () => {
 
   return(
     <TotalReviewWrapper>
-      <ReviewBreakdown
-        reviewsMeta={reviewsMeta}
-        chars={chara}
-      />
+      <Title> Ratings and Reviews </Title>
+      <InnerReviewWrapper>
+        <ReviewBreakdown
+          reviewsMeta={reviewsMeta}
+          chars={chara}
+        />
         <ReviewList
           reviews={reviews}
+          reviewsHolder={reviewsHolder}
           getReviews={getReviews}
+          setReviews={setReview}
         />
+      </InnerReviewWrapper>
     </TotalReviewWrapper>
   );
 };

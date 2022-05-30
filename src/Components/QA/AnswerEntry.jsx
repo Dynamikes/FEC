@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { hot } from 'react-hot-loader/root';
 // import styled from 'styled-components';
 import axios from 'axios';
-import { AnswerWrapper, AnswerPhotos, AnswerPhoto, UpdateButtons, } from '../StyledComponents.jsx';
+import { ImagePopUp, AddWrapper, AddOverlay, AnswerWrapper, AnswerPhotos, AnswerPhoto, UpdateButtons, } from '../StyledComponents.jsx';
 import { MAIN_API_KEY } from '../../config.js'
 
 function AnswerEntry(props) {
@@ -38,16 +38,27 @@ function AnswerEntry(props) {
       disableHelpful(true);
     })
   }
+  const [currentPicture, setCurrentPicture] = useState('');
+
   return props.answer['reported'] ? null : (
     <AnswerWrapper>
       <span> {props.answer['body']}</span>
       <AnswerPhotos>
-        {props.answer['photos'].length === 0 ? null :
-          props.answer['photos'].map((photo, index) => (
-            <AnswerPhoto key={index} src={photo}/>
-          ))
-        }
+          {props.answer['photos'].length === 0 ? null :
+            props.answer['photos'].map((photo, index) =>( <AnswerPhoto
+                onClick={() => {setCurrentPicture(photo)}}
+                key={index}
+                src={photo}
+              />))
+          }
       </AnswerPhotos>
+      {currentPicture === '' ? null :
+        <AddOverlay onClick={() => setCurrentPicture('')}>
+          <AddWrapper>
+            <ImagePopUp src={currentPicture} />
+          </AddWrapper>
+        </AddOverlay>
+      }
       <div>
         <small> by
           {props.answer['username'] === 'seller' ? <span><b> Seller </b></span> : <span> {props.answer['answerer_name']} </span>}
