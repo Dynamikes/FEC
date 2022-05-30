@@ -26,7 +26,6 @@ const App = (props) => {
       <Flexbox>
         <RelatedProducts />
       </Flexbox>
-      <ReviewTitle>Ratings {'&'} Reviews</ReviewTitle>
       <Flexbox id="ratings_and_reviews">
         <Reviews />
       </Flexbox>

@@ -7,7 +7,12 @@ import {
   ReviewImageWrapper,
   ReviewBody,
   UpdateButtons,
-  StyledQuestion
+  StyledQuestion,
+  AnswerPhotos,
+  AnswerPhoto,
+  ImagePopUp,
+  AddOverlay,
+  AddWrapper
 }
 from '../StyledComponents.jsx';
 import Moment from 'react-moment';
@@ -34,6 +39,7 @@ const ReviewListEntry = ({review, getReviews}) => {
         setClickedYes(true)
       })
   };
+  const [popUpPicture, setPopUpPicture] = useState('');
 
   return (
     <ReviewTile>
@@ -63,9 +69,20 @@ const ReviewListEntry = ({review, getReviews}) => {
       <ReviewBodyWrapper>
         <ReviewBody>{review.body}</ReviewBody>
         {review.recommend ? <p>✓ I recommend this product!</p> : null}
-        <ReviewImageWrapper>
-          User Images: Images Here 5 *Thumbnails*
-        </ReviewImageWrapper>
+        <AnswerPhotos>
+        {review['photos'].length === 0 ? null :
+          review['photos'].map((photo, index) => (
+            <AnswerPhoto key={index} src={photo.url} onClick={()=>{setPopUpPicture(photo.url)}}/>
+          ))
+        }
+      </AnswerPhotos>
+      {popUpPicture === '' ? null :
+        <AddOverlay onClick={() => setPopUpPicture('')}>
+          <AddWrapper>
+            <ImagePopUp src={popUpPicture} />
+          </AddWrapper>
+        </AddOverlay>
+      }
       </ReviewBodyWrapper>
     </ReviewTile>
   )
