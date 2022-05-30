@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useState, useEffect, React } from 'react';
 import ReviewList from './ReviewList.jsx';
 import {
-  TotalReviewWrapper
+  TotalReviewWrapper, QASearchBar, QASearchButton
 }
 from '../StyledComponents.jsx';
 import {MAIN_API_KEY} from '../../config.js'

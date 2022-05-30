@@ -12,7 +12,8 @@ import {
   StarBarWrap,
   RecommendWrap
 }
-from '../StyledComponents.jsx'
+from '../StyledComponents.jsx';
+import StarRatings from 'react-star-ratings';
 import RatingStars from './RatingStars.jsx'
 import ProgressBar from "@ramonak/react-progress-bar";
 
@@ -66,7 +67,7 @@ const ReviewBreakdown = ({reviewsMeta, chars}) => {
       </ReviewAverage>
       <ProgressBarWrap>
         <StarBarWrap>
-          <div>1 Star</div>
+        <div><StarRatings rating={1} starRatedColor='gold' starDimension='15px' starSpacing='2px'/> <small>({one}) Reviews! </small></div>
             <ProgressBar
               width='65%'
               completed={`${one}`}
@@ -79,9 +80,9 @@ const ReviewBreakdown = ({reviewsMeta, chars}) => {
               bgColor='green'
               margin='5px'
             />
-          <div>{one}</div>
         </StarBarWrap>
-          <div>2 Stars</div>
+        <StarBarWrap>
+        <div> <StarRatings rating={2} starRatedColor='gold' starDimension='15px' starSpacing='2px'/> <small>({two}) Reviews! </small></div>
             <ProgressBar
               width='65%'
               completed={`${two}`}
@@ -94,8 +95,9 @@ const ReviewBreakdown = ({reviewsMeta, chars}) => {
               bgColor='green'
               margin='5px'
             />
-          <div>{two}</div>
-          <div>3 Stars</div>
+        </StarBarWrap>
+        <StarBarWrap>
+        <div> <StarRatings rating={3} starRatedColor='gold' starDimension='15px' starSpacing='2px'/> <small>({three}) Reviews! </small></div>
             <ProgressBar
               width='65%'
               completed={`${three}`}
@@ -108,8 +110,9 @@ const ReviewBreakdown = ({reviewsMeta, chars}) => {
               bgColor='green'
               margin='5px'
             />
-          <div>{three}</div>
-          <div>4 Stars</div>
+        </StarBarWrap>
+        <StarBarWrap>
+          <div> <StarRatings rating={4} starRatedColor='gold' starDimension='15px' starSpacing='2px'/> <small>({four}) Reviews! </small></div>
             <ProgressBar
               width='65%'
               completed={`${four}`}
@@ -122,8 +125,9 @@ const ReviewBreakdown = ({reviewsMeta, chars}) => {
               bgColor='green'
               margin='5px'
             />
-          <div>{four}</div>
-          <div>5 Stars</div>
+        </StarBarWrap>
+        <StarBarWrap>
+        <div> <StarRatings rating={5} starRatedColor='gold' starDimension='15px' starSpacing='2px'/> <small>({five}) Reviews! </small></div>
             <ProgressBar
               width='65%'
               completed={`${five}`}
@@ -136,7 +140,7 @@ const ReviewBreakdown = ({reviewsMeta, chars}) => {
               bgColor='green'
               margin='5px'
             />
-          <div>{five}</div>
+        </StarBarWrap>
       </ProgressBarWrap>
       <RecommendWrap>
         {(Math.ceil(recommended / (recommended + notRecommended) * 100))}% of reviews recommend this product.

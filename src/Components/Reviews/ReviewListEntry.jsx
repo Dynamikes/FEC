@@ -1,12 +1,13 @@
 /* eslint-disable react/prop-types */
-import {useEffect, React } from 'react';
+import {useEffect, React, useState } from 'react';
 import { hot } from 'react-hot-loader/root';
 import {
   ReviewTile,
   ReviewBodyWrapper,
   ReviewImageWrapper,
-  ReviewBody
-
+  ReviewBody,
+  UpdateButtons,
+  StyledQuestion
 }
 from '../StyledComponents.jsx';
 import Moment from 'react-moment';
@@ -15,6 +16,7 @@ import StarRatings from 'react-star-ratings';
 import {MAIN_API_KEY} from '../../config.js'
 
 const ReviewListEntry = ({review, getReviews}) => {
+  const [clickedYes, setClickedYes] = useState(false);
 
   //not working
   const incrementHelpful = (id) => {
@@ -28,15 +30,23 @@ const ReviewListEntry = ({review, getReviews}) => {
       .then (() => {
         getReviews();
       })
+      .then(()=>{
+        setClickedYes(true)
+      })
   };
 
   return (
     <ReviewTile>
-      {console.log(review)}
       <div>
-        <div>
-          {review.reviewer_name} Verified?*
-        </div>
+        <StyledQuestion>
+          <h3>
+            {review.reviewer_name} Verified?*
+          </h3>
+          <div>
+            <small> Helpful? <UpdateButtons disabled={clickedYes} onClick={()=>{incrementHelpful(review['review_id'])}}> Yes ({review.helpfulness}) </UpdateButtons>
+            </small>
+          </div>
+        </StyledQuestion>
         <div>
           <StarRatings
             rating={review.rating}
@@ -46,7 +56,7 @@ const ReviewListEntry = ({review, getReviews}) => {
             starSpacing={'2'}
           />
         </div>
-        <Moment format='MMMM Do YYYY, h:mm:ss a'>{review.date}</Moment>
+        <Moment format='MMMM Do YYYY'>{review.date}</Moment>
       </div>
       {review.response ? <div>{review.response}</div> : <div></div>}
       <p>{review.summary}</p>
@@ -56,12 +66,6 @@ const ReviewListEntry = ({review, getReviews}) => {
         <ReviewImageWrapper>
           User Images: Images Here 5 *Thumbnails*
         </ReviewImageWrapper>
-        <u>Helpful?
-          <u onClick={()=>{incrementHelpful(review['review_id'])}}>
-            Yes
-          </u>
-          {`(${review.helpfulness})`}
-        </u>
       </ReviewBodyWrapper>
     </ReviewTile>
   )
