@@ -10,7 +10,9 @@ import {
   AddSummaryWrapper,
   ReviewMap,
   ReviewsSearch,
-  SearchBarWrapper
+  SearchBarWrapper,
+  StyledSearchIcon,
+  QAButtons
 }
 from '../StyledComponents.jsx'
 import ReviewListEntry from './ReviewListEntry'
@@ -78,6 +80,7 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews}) => {
   return (
     <ReviewListWrapper>
       <SearchBarWrapper onSubmit={(e)=>{searched(e)}}>
+      <StyledSearchIcon />
         <ReviewsSearch type='text' name='search'
           placeholder='Filter reviews here!'
           onChange={(e)=>{whileSearching(e)}}
@@ -99,10 +102,10 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews}) => {
       </ReviewMap>
       <ReviewButtonWrapper>
         {reviewCount < reviews.length && reviews.length > 2 ?
-          <button onClick={() => { setReviewCount(reviewCount + 2)}}>More Reviews</button> :
+          <QAButtons onClick={() => { setReviewCount(reviewCount + 2)}}>More Reviews</QAButtons> :
           null
         }
-        <button onClick={()=>{setAdd(true)}}>Add a Review</button>
+        <QAButtons onClick={()=>{setAdd(true)}}>Add a Review</QAButtons>
         <AddReview open={addIsOpen} onClose={() => setAdd(false)}>
           <form>
             <AddTitle>Write Your Review</AddTitle>
