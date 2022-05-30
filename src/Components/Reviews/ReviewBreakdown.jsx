@@ -146,42 +146,42 @@ const ReviewBreakdown = ({reviewsMeta, chars}) => {
         fit ?
         <SliderWrapper>
           <div> Fit </div>
-            <SliderInputFit type='range' min='1' max='5' value='fit'/>
+            <SliderInputFit readOnly type='range' min='1' max='5' defaultValue={fit}/>
         </SliderWrapper>: null
         }
         {
         value ?
         <SliderWrapper>
             <div> Value </div>
-            <SliderInputQuality type='range' min='1' max='5' value='value'/>
+            <SliderInputQuality readOnly type='range' min='1' max='5' defaultValue={value}/>
           </SliderWrapper>: null
         }
         {
         comfort ?
         <SliderWrapper>
           <div> Comfort </div>
-            <SliderInputQuality type='range' min='1' max='5' value='comfort'/>
+            <SliderInputQuality readOnly type='range' min='1' max='5' defaultValue={comfort}/>
         </SliderWrapper> : null
         }
         {
         length ?
         <SliderWrapper>
              <div> Length </div>
-            <SliderInputLength type='range' min='1' max='5' value='length'/>
+            <SliderInputLength readOnly type='range' min='1' max='5' defaultValue={length}/>
           </SliderWrapper>: null
        }
         {
         quality ?
         <SliderWrapper>
             <div> Quality </div>
-            <SliderInputQuality type='range' min='1' max='5' value='quality'/>
+            <SliderInputQuality readOnly type='range' min='1' max='5' defaultValue={quality}/>
         </SliderWrapper>: null
         }
         {
         size ?
         <SliderWrapper>
             <div> Size </div>
-            <SliderInputFit type='range' min='1' max='5' value='size'/>
+            <SliderInputFit readOnly type='range' min='1' max='5' defaultValue={size}/>
         </SliderWrapper>: null
         }
       </div>

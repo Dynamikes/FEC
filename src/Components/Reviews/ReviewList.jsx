@@ -24,9 +24,9 @@ import axios from 'axios';
 import {MAIN_API_KEY} from '../../config.js'
 import {prodIDContext} from '../../App.jsx'
 
-const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara}) => {
+const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prodID}) => {
 
-  const prodID2 = useContext(prodIDContext)
+  // const prodID2 = useContext(prodIDContext)
   //State for various items
   const [reviewCount, setReviewCount] = useState(2);
   const [addIsOpen, setAdd ] = useState(false)
@@ -37,7 +37,6 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara}) => 
   const [addEmail, setEmail] = useState('')
   const [addRecommend, setRecommend] = useState(null)
   const [addStar, setStar] = useState(0)
-  const [addImages, setImages] = useState([])
   const [addFit, setAddFit] = useState('none selected')
   const [fitValue, setFitValue] = useState(0)
   const [addValue, setAddValue] = useState('none selected')
@@ -50,6 +49,7 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara}) => 
   const [lengthValue, setLengthValue] = useState(0)
   const [addSize, setAddSize] = useState('none selected')
   const [sizeValue, setSizeValue] = useState(0)
+  const [addImages, setImages] = useState([])
 
 
   //Characteristics
@@ -61,6 +61,8 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara}) => 
   let qualityAdd
   let sizeAdd
   let charas = chara;
+
+  let productId = useContext(prodIDContext);
 
   for(var key in charas) {
     if(key === 'Fit') {fitAdd = charas['Fit'].value
@@ -89,6 +91,7 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara}) => 
   const submitAdd = (e) => {
     e.preventDefault();
     let addReviewContent = {
+      "product_id": productId,
       "rating": addStar,
       "summary": addSummary,
       "body": addBody,
@@ -99,7 +102,7 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara}) => 
       "characteristics": {}
     };
     axios({
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?product_id=${prodID2}`,
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?product_id=${prodID}`,
       method: 'post',
       headers: {
         Authorization: MAIN_API_KEY,

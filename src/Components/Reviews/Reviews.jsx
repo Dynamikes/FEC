@@ -87,6 +87,7 @@ const Reviews = () => {
           getReviews={getReviews}
           chara={chara}
           setReviews={setReview}
+          prodId={prodID}
         />
       </InnerReviewWrapper>
     </TotalReviewWrapper>
