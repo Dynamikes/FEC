@@ -71,7 +71,7 @@ function ImageView(props) {
   const styleID = useContext(styleIDContext);
   const prodID = useContext(prodIDContext);
   const [clicked, setClicked] = useState('default')
-  
+
   useEffect(()=> {
     if (current === vertCurrent[1]) {
       setVertCurrent([vertCurrent[0] + 1, vertCurrent[1] + 1])
@@ -91,7 +91,7 @@ function ImageView(props) {
   };
  const changeCurrent = (num) => {
    setCurrent(num)
- } 
+ }
  const changeVertCurrent = (x) => {
    if (vertCurrent[1] < CarouselData.length && x === 'down') {
     setVertCurrent([vertCurrent[0] + 1, vertCurrent[1] + 1])
@@ -133,8 +133,8 @@ function ImageView(props) {
               console.log('This is carousel:', Carousel)
             }
           }
-          
-          
+
+
         }
         setCarouselData(Carousel);
         setCarLength(tempLength);
@@ -162,8 +162,8 @@ function ImageView(props) {
       ) : (
         <StyledLeftArrow className='left-arrow' onClick={prevImage} />
       )}
-      
-      {clicked === 'expanded' ? 
+
+      {clicked === 'expanded' ?
       <AddOverlay onClick={() => setCurrentPicture('')}>
           <AddWrapper>
             {current === 0 ? (
@@ -178,14 +178,14 @@ function ImageView(props) {
         <ZoomedRightArrow className='right-arrow' onClick={nextImage} />
       )}
           </AddWrapper>
-        </AddOverlay> 
+        </AddOverlay>
         :
         null
-        
+
       }
       {loaded
         ? CarouselData.map((picture, index) => {
-          
+
             return (
               <ImageWrapper
                 className={index === current ? 'slide active' : 'slide'}
@@ -200,14 +200,14 @@ function ImageView(props) {
 <Thumbnails>
         {loaded
           ? CarouselData.slice(vertCurrent[0], vertCurrent[1]).map((thumbnail, index) => {
-              
+
             if (thumbnail === CarouselData[current]) {
               return (
                 <HighlightedStyleThumbnail
                   key={index}
                   src={thumbnail}
                   alt={'style thumbnail'}
-                  
+
                 />
               )
             } else {
@@ -226,7 +226,7 @@ function ImageView(props) {
       ) : (
         <StyledRightArrow className='right-arrow' onClick={nextImage} />
       )}
-    
+
       {vertCurrent[0] === carLength - 1 ? (
         ''
       ) : (

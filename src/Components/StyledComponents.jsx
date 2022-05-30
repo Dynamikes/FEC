@@ -13,6 +13,7 @@ export const ImageWrapper = styled.section`
   z-index: 2;
   height: 100%;
   max-width: 100%;
+  user-select: none;
 `;
 
 export const ImageViewWrapper = styled.section`
@@ -24,6 +25,7 @@ export const ImageViewWrapper = styled.section`
   z-index: 2;
   width: 400px;
   height: 500px;
+  user-select: none;
 `;
 export const ExpandButton = styled.button`
   position: absolute;
@@ -52,6 +54,7 @@ export const Thumbnails = styled.div`
   justify-content: space-around;
   background: white;
   z-index: 2;
+  user-select: none;
 `;
 export const ThumbnailImage = styled.img`
   height: auto;
