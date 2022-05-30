@@ -1,13 +1,14 @@
 import { hot } from 'react-hot-loader/root';
 import ReviewBreakdown from './ReviewBreakdown.jsx';
 import axios from 'axios';
-import { useState, useEffect, React } from 'react';
+import { useState, useEffect, React, useContext} from 'react';
 import ReviewList from './ReviewList.jsx';
 import {
-  TotalReviewWrapper
+  TotalReviewWrapper, QASearchBar, QASearchButton
 }
 from '../StyledComponents.jsx';
 import {MAIN_API_KEY} from '../../config.js'
+import {prodIDContext} from '../../App.jsx'
 
 const Reviews = () => {
   //States for user reviews / Meta data
@@ -16,12 +17,14 @@ const Reviews = () => {
     {recommended: {true: null, false: null}, ratings: {'1': '1', '2': '2', '3': '3', '4': '4', '5': '5'}});
   const [chars, setChars] = useState({Size: 1, Width: 1, Comfort: 1, Quality: 1, Length:1, Fit: 1})
   const [loadedChars, setLoadedChars] = useState(false);
+  const [loadedRev, setLoadedRev] = useState(false);
 
+  const prodID = useContext(prodIDContext)
 
   //helper functions
   const getReviews = () => {
     axios({
-      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?product_id=40344&&count=100',
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?product_id=${prodID}&&count=100`,
       method: 'get',
       headers: {
         Authorization: MAIN_API_KEY,
@@ -30,6 +33,9 @@ const Reviews = () => {
     .then((response) => {
       setReview(response.data.results);
     })
+    .then(() => {
+      setLoadedRev(true);
+    })
     .catch((err) => {
       console.log('Breaking in Review GET. Err:', err);
     });
@@ -37,7 +43,7 @@ const Reviews = () => {
 
   const getMeta = () => {
     axios({
-      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/meta/?product_id=40344',
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/meta/?product_id=${prodID}`,
       method: 'get',
       headers: {
        Authorization: MAIN_API_KEY,
@@ -66,6 +72,7 @@ const Reviews = () => {
   }, []);
   let chara
   if(loadedChars){chara = chars}
+  if(loadedRev){console.log(reviews)}
 
   return(
     <TotalReviewWrapper>
@@ -73,10 +80,10 @@ const Reviews = () => {
         reviewsMeta={reviewsMeta}
         chars={chara}
       />
-      <ReviewList
-        reviews={reviews}
-        getReviews={getReviews}
-      />
+        <ReviewList
+          reviews={reviews}
+          getReviews={getReviews}
+        />
     </TotalReviewWrapper>
   );
 };

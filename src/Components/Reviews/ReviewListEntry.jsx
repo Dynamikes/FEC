@@ -16,7 +16,6 @@ import {MAIN_API_KEY} from '../../config.js'
 
 const ReviewListEntry = ({review, getReviews}) => {
 
-  const [clickedYes, setClickedYes] = useState(false);
 
   const incrementHelpful = (id) => {
       axios({
@@ -27,7 +26,6 @@ const ReviewListEntry = ({review, getReviews}) => {
         },
       })
       .then (() => {
-        setClickedYes(true)
         getReviews();
       })
   };
@@ -35,9 +33,15 @@ const ReviewListEntry = ({review, getReviews}) => {
   return (
     <ReviewTile>
       <div>
-        <div>
-          {review.reviewer_name} Verified?*
-        </div>
+        <StyledQuestion>
+          <h3>
+            {review.reviewer_name} Verified?*
+          </h3>
+          <div>
+            <small> Helpful? <UpdateButtons disabled={clickedYes} onClick={()=>{incrementHelpful(review['review_id'])}}> Yes ({review.helpfulness}) </UpdateButtons>
+            </small>
+          </div>
+        </StyledQuestion>
         <div>
           <StarRatings
             rating={review.rating}
@@ -47,7 +51,7 @@ const ReviewListEntry = ({review, getReviews}) => {
             starSpacing={'2'}
           />
         </div>
-        <Moment format='MMMM Do YYYY, h:mm:ss a'>{review.date}</Moment>
+        <Moment format='MMMM Do YYYY'>{review.date}</Moment>
       </div>
       {review.response ? <div>{review.response}</div> : <div></div>}
       <p>{review.summary}</p>
@@ -55,14 +59,8 @@ const ReviewListEntry = ({review, getReviews}) => {
         <ReviewBody>{review.body}</ReviewBody>
         {review.recommend ? <p>✓ I recommend this product!</p> : null}
         <ReviewImageWrapper>
-          User Images: Images Here 5 *Thumbnails*
+          User Images: Images Here 5 Thumbnails
         </ReviewImageWrapper>
-        <u>Helpful?
-          <u onClick={!clickedYes ? ()=>{incrementHelpful(review['review_id'])} : null}>
-            Yes
-          </u>
-          {`(${review.helpfulness})`}
-        </u>
       </ReviewBodyWrapper>
     </ReviewTile>
   )

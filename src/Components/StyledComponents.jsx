@@ -46,8 +46,8 @@ export const MainImage = styled.img`
 `;
 export const Thumbnails = styled.div`
   position: absolute;
-  width: 10%;
-  left: 6%;
+  width: 15%;
+  left: 4%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -180,8 +180,8 @@ export const AddToCartButton = styled.button`
 
 export const StyleThumbnail = styled.img`
   border-radius: 50%;
-  width: 25%;
-  height: auto;
+  width: 60px;
+  height: 60px;
   padding: 5px;
 `;
 export const StyleSelectorContainer = styled.div``;
@@ -197,7 +197,7 @@ export const StyleSelectorContainer = styled.div``;
 // left: 50%;
 // transform: translate(-50%, -50%);
 // padding: 50px;
-// zIndex: 1000;`
+// z-index: 1000;`
 // ;
 
 
@@ -208,13 +208,13 @@ export const StyleSelectorContainer = styled.div``;
 // right: 0;
 // bottom: 0;
 // background-color: rgba(0,0,0, .7);
-// zIndex: 1000;`
+// z-index: 1000;`
 // ;
 
 export const BigQAWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 80vh;
+  width: 80vw;
 `;
 export const QAWrapper = styled.div`
   display: flex;
@@ -237,14 +237,14 @@ export const AnswerWrapper = styled.li`
   margin: 10px 20px;
 `;
 export const QASearchBar = styled.input`
-  width: 74vh;
   height: 30px;
+  width: 74vw;
   padding: 2px;
   border: none;
 `;
 export const QASearchButton = styled.input`
   background: white;
-  width: 5vh;
+  width: 5vw;
   padding: 9.5px 1px;
   border: none;
 `;
@@ -293,13 +293,14 @@ export const ReviewTitle = styled.h3`
 export const  TotalReviewWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  background-color: rgb(7, 7, 7);
+
   border-color: green;
   border-width: 3px;
   border-style: solid;
   padding: 5px;
   margin: 5px;
   position: relative;
+  width: 80vw;
 `;
 
 //ReviewList.jsx ---------------------------
@@ -328,7 +329,6 @@ export const ReviewTile = styled.div`
   border-style: solid;
   padding: 3px;
   margin: 3px;
-  width:600PX;
 `;
 
 export const ReviewBodyWrapper = styled.div`
@@ -390,6 +390,11 @@ export const RadioAdd = styled.div`
   flex-direction: row;
 `;
 
+export const CharAdd = styled.div`
+display: flex;
+flex-direction: column;
+`;
+
 //ReviewBreakdown.jsx ----------------------
 export const ReviewBreakdownWrapper = styled.div`
   display: flex;
@@ -400,6 +405,8 @@ export const ReviewBreakdownWrapper = styled.div`
   border-style: solid;
   padding: 3px;
   margin: 3px;
+  width: 300px;
+  min-width: 300px;
 `;
 
 export const ReviewAverage = styled.h2`
@@ -421,7 +428,8 @@ export const ProgressBarWrap = styled.div`
 export const StarBarWrap = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%
+  margin: 5px;
+  padding: 5px;
 `;
 
 export const InnerBar = styled.div`
@@ -531,16 +539,18 @@ export const RecommendWrap = styled.div`
 //AddReview.jsx
 
 export const AddWrapper = styled.div`
-  background-color: rgba(7,7,7);
-  border-color: gold;
-  border-width: 1px;
-  border-style: solid;
-  position: fixed;
-  top: 8%;
-  right: 100%
-  transform: translate(-50%, -50%);
-  padding: 50px;
-  z-index: 5;
+ background-color: rgba(7,7,7);
+ border-color: gold;
+ border-width: 1px;
+ border-style: solid;
+ position: fixed;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%);
+ padding: 50px;
+ z-index: 1000;
+ height:80vh;
+ overflow: auto
 `;
 
 
@@ -557,4 +567,8 @@ export const AddOverlay = styled.div`
 export const AddSummaryWrapper = styled.div`
   display: flex;
   flex-direction: row;
+`;
+
+export const SearchWrapper = styled.div`
+  display: flex;
 `;

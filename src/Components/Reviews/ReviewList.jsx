@@ -9,11 +9,12 @@ import {
   StarRow,
   AddSummaryWrapper,
   ReviewMap,
-  RadioAdd
+  RadioAdd,
+  CharAdd
 }
 from '../StyledComponents.jsx'
 import ReviewListEntry from './ReviewListEntry'
-import AddReview from './Addreview.jsx'
+import AddReview from './AddReview.jsx'
 import StarRatings from 'react-star-ratings';
 
 const ReviewList = ({reviews, getReviews}) => {
@@ -28,8 +29,20 @@ const ReviewList = ({reviews, getReviews}) => {
   const [addEmail, setEmail] = useState(null)
   const [addRecommend, setRecommend] = useState(null)
   const [addStar, setStar] = useState(0)
-  const [factors, setFactors] = useState(null)
   const [addImages, setImages] = useState([])
+  const [addFit, setAddFit] = useState('none selected')
+  const [fitValue, setFitValue] = useState(0)
+  const [addWidth, setAddWidth] = useState('none selected')
+  const [WidthValue, setWidthValue] = useState(0)
+  const [addComfort, setAddComfort] = useState('none selected')
+  const [ComfortValue, setComfortValue] = useState(0)
+  const [addQuality, setAddQuality] = useState('none selected')
+  const [QualityValue, setQualityValue] = useState(0)
+  const [addLength, setAddLength] = useState('none selected')
+  const [LengthValue, setLengthValue] = useState(0)
+  const [addSize, setAddSize] = useState('none selected')
+  const [SizeValue, setSizeValue] = useState(0)
+
 
   //Characteristics
   //Helpful
@@ -52,7 +65,10 @@ const ReviewList = ({reviews, getReviews}) => {
 
   return (
     <ReviewListWrapper>
+      <input type='text' />
       <ReviewMap>
+        {console.log('CAHNGE', addFit)}
+       { console.log('VALUES', fitValue)}
         <div>
           {reviews.length} Reviews /*sortedBy*
         </div>
@@ -112,11 +128,122 @@ const ReviewList = ({reviews, getReviews}) => {
               <div>No:</div>
               <input onClick={() => setRecommend(false)} required type="radio" name="addAnswer" />
             </RadioAdd>
-            <div required>Characteristics</div>
+            <CharAdd>
+              <u>Fit: {addFit}</u>
+              <div required>
+                <input
+                  onClick={() => {setAddFit('Runs tight'), setFitValue(1)}} required type="radio" name="addFit"
+                />
+                <input
+                  onClick={() => {setAddFit('Runs slightly tight'), setFitValue(2)}} required type="radio" name="addFit"
+                />
+                <input
+                 onClick={() => {setAddFit('Perfect'), setFitValue(3)}} required type="radio" name="addFit"
+                />
+                <input
+                 onClick={() => {setAddFit('Runs slightly long'), setFitValue(4)}} required type="radio" name="addFit"
+                />
+                <input
+                  onClick={() => {setAddFit('Runs long'), setFitValue(5)}} required type="radio" name="addFit"
+                />
+              </div>
+              <u>Width: {addWidth}</u>
+              <div required>
+                <input
+                  onClick={() => {setAddWidth('Too narrow'), setWidthValue(1)}} required type="radio" name="addWidth"
+                />
+                <input
+                  onClick={() => {setAddWidth('Slightly narrow'), setWidthValue(2)}} required type="radio" name="addWidth"
+                />
+                <input
+                 onClick={() => {setAddWidth('Perfect'), setWidthValue(3)}} required type="radio" name="addWidth"
+                />
+                <input
+                 onClick={() => {setAddWidth('Slightly wide'), setWidthValue(4)}} required type="radio" name="addWidth"
+                />
+                <input
+                  onClick={() => {setAddWidth('Too wide'), setWidthValue(5)}} required type="radio" name="addWidth"
+                />
+              </div>
+              <u>Comfort: {addComfort}</u>
+              <div required>
+                <input
+                  onClick={() => {setAddComfort('Uncomfortable'), setComfortValue(1)}} required type="radio" name="addComfort"
+                />
+                <input
+                  onClick={() => {setAddComfort('Slightly uncomfortable'), setComfortValue(2)}} required type="radio" name="addComfort"
+                />
+                <input
+                 onClick={() => {setAddComfort('Ok'), setComfortValue(3)}} required type="radio" name="addComfort"
+                />
+                <input
+                 onClick={() => {setAddComfort('Comfortable'), setComfortValue(4)}} required type="radio" name="addComfort"
+                />
+                <input
+                  onClick={() => {setAddComfort('Perfect'), setComfortValue(5)}} required type="radio" name="addComfort"
+                />
+              </div>
+              <u>Quality: {addQuality}</u>
+              <div required>
+                <input
+                  onClick={() => {setAddQuality('Uncomfortable'), setQualityValue(1)}} required type="radio" name="addQuality"
+                />
+                <input
+                  onClick={() => {setAddQuality('Slightly uncomfortable'), setQualityValue(2)}} required type="radio" name="addQuality"
+                />
+                <input
+                 onClick={() => {setAddQuality('Ok'), setQualityValue(3)}} required type="radio" name="addQuality"
+                />
+                <input
+                 onClick={() => {setAddQuality('Comfortable'), setQualityValue(4)}} required type="radio" name="addQuality"
+                />
+                <input
+                  onClick={() => {setAddQuality('Perfect'), setQualityValue(5)}} required type="radio" name="addQuality"
+                />
+              </div>
+              <u>Length: {addLength}</u>
+              <div required>
+                <input
+                  onClick={() => {setAddLength('Runs short'), setLengthValue(1)}} required type="radio" name="addLength"
+                />
+                <input
+                  onClick={() => {setAddLength('Runs slightly short'), setLengthValue(2)}} required type="radio" name="addLength"
+                />
+                <input
+                 onClick={() => {setAddLength('Perfect'), setLengthValue(3)}} required type="radio" name="addLength"
+                />
+                <input
+                 onClick={() => {setAddLength('Runs slightly long'), setLengthValue(4)}} required type="radio" name="addLength"
+                />
+                <input
+                  onClick={() => {setAddLength('Runs long'), setLengthValue(5)}} required type="radio" name="addLength"
+                />
+              </div>
+              <u>Size: {addSize}</u>
+              <div required>
+                <input
+                  onClick={() => {setAddSize('Runs tight'), setSizeValue(1)}} required type="radio" name="addSize"
+                />
+                <input
+                  onClick={() => {setAddSize('Runs slightly tight'), setSizeValue(2)}} required type="radio" name="addSize"
+                />
+                <input
+                 onClick={() => {setAddSize('Perfect'), setSizeValue(3)}} required type="radio" name="addSize"
+                />
+                <input
+                 onClick={() => {setAddSize('Runs slightly long'), setSizeValue(4)}} required type="radio" name="addSize"
+                />
+                <input
+                  onClick={() => {setAddSize('Runs long'), setSizeValue(5)}} required type="radio" name="addSize"
+                />
+              </div>
+            </CharAdd>
             <div>Summary</div>
             <AddSummaryWrapper>
               <textarea
                 required
+
+                maxLength='60'
                 onChange={(e) => setSummary(e.target.value)}
                 cols='80'
                 rows='1'
@@ -132,6 +259,8 @@ const ReviewList = ({reviews, getReviews}) => {
               onKeyUp={(e) => countChars(e)}
               id="add-body"
               placeholder='Why did you like the product or not?'
+              maxLength='1000'
+              minLength='50'
             />
             <div id="count-body"></div>
             <div>Images Added</div>
@@ -143,18 +272,20 @@ const ReviewList = ({reviews, getReviews}) => {
               placeholder='Example: jackson11!'
               cols='20'
               rows='1'
+              maxLength='60'
             />
-            <div>For privacy reasons, do not use your full name or email</div>
+            <div><small>For privacy reasons, do not use your full name or email</small></div>
             <div>Your Email</div>
-            <textarea
+            <input
               required
+              maxLength='60'
               type='email'
               onChange={(e) => setEmail(e.target.value)}
               placeholder='Example: jackson11@email.com'
               cols='30'
               rows='1'
             />
-            <div>For authentification reasons, you will not be emailed</div>
+            <div><small>For authentification reasons, you will not be emailed</small></div>
             <input type='submit' onSubmit={()=>{submitAdd()}} value='Submit Review'/>
           </form>
         </AddReview>
