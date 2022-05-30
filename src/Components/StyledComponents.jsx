@@ -187,6 +187,13 @@ export const StyleThumbnail = styled.img`
   height: 60px;
   padding: 5px;
 `;
+export const HighlightedStyleThumbnail = styled(ThumbnailImage)`
+border: 2px solid #dadada;
+border-radius: 7px;
+outline: none;
+border-color: #9ecaed;
+box-shadow: 0 0 10px #9ecaed;
+`
 export const StyleSelectorContainer = styled.div``;
 
 export const BigQAWrapper = styled.div`
