@@ -26,6 +26,10 @@ const StyledLeftArrow = styled(FaArrowAltCircleLeft)`
   left: 5%;
   z-index: 3;
 `;
+const DeadLeftArrow = styled(StyledLeftArrow)`
+  opacity: 0;
+  user-select: none;
+`;
 const ZoomedLeftArrow = styled(StyledLeftArrow)`
 z-index: 7;
 top: 50%;
@@ -37,24 +41,34 @@ const StyledRightArrow = styled(FaArrowAltCircleRight)`
   right: 5%;
   z-index: 3;
 `;
+const DeadRightArrow = styled(StyledRightArrow)`
+  opacity: 0;
+  user-select: none;
+`;
 const ZoomedRightArrow = styled(StyledRightArrow)`
 z-index: 7;
 top: 50%;
 `
 const StyledUpArrow = styled(FaArrowAltCircleUp)`
 transform: scale(1);
-position: absolute;
 left: 10%;
 top: 5%;
 z-index: 3;
 `
+const DeadUpArrow = styled(StyledUpArrow)`
+  opacity: 0;
+  user-select: none;
+`;
 const StyledDownArrow = styled(FaArrowAltCircleDown)`
 transform: scale(1);
-position: absolute;
 left: 10%;
 bottom: 5%;
 z-index: 3;
 `
+const DeadDownArrow = styled(StyledDownArrow)`
+  opacity: 0;
+  user-select: none;
+`;
 function ImageView(props) {
   const imageToggle = () => {
     props.click();
@@ -72,7 +86,7 @@ function ImageView(props) {
   const styleID = useContext(styleIDContext);
   const prodID = useContext(prodIDContext);
   const [clicked, setClicked] = useState(false)
-  
+
   useEffect(()=> {
     if (current === vertCurrent[1]) {
       setVertCurrent([vertCurrent[0] + 1, vertCurrent[1] + 1])
@@ -153,22 +167,22 @@ function ImageView(props) {
   return (
     <ImageViewWrapper>
       {clicked &&
-      <ImageOverlay> 
+      <ImageOverlay>
         {vertCurrent[0] === 0 ? (
         ''
       ) : (
         <StyledUpArrow className='left-arrow'  onClick={() => changeVertCurrent('up')} />
       )}
       {current === 0 ? (
-        ''
+        <DeadLeftArrow />
       ) : (
         <StyledLeftArrow className='left-arrow' onClick={prevImage} />
       )}
-      
-      
+
+
       {loaded
         ? CarouselData.map((picture, index) => {
-          
+
             return (
               <ImageWrapper
                 className={index === current ? 'slide active' : 'slide'}
@@ -183,14 +197,14 @@ function ImageView(props) {
 <Thumbnails>
         {loaded
           ? CarouselData.slice(vertCurrent[0], vertCurrent[1]).map((thumbnail, index) => {
-              
+
             if (thumbnail === CarouselData[current]) {
               return (
                 <HighlightedStyleThumbnail
                   key={index}
                   src={thumbnail}
                   alt={'style thumbnail'}
-                  
+
                 />
               )
             } else {
@@ -205,44 +219,24 @@ function ImageView(props) {
           : ''}
       </Thumbnails>
       {current === carLength - 1 ? (
-        ''
+        <DeadRightArrow/>
       ) : (
         <StyledRightArrow className='right-arrow' onClick={nextImage} />
       )}
-    
       {vertCurrent[1] === carLength - 1 ? (
-        ''
+        <DeadDownArrow/>
       ) : (
         <StyledDownArrow className='right-arrow'  onClick={() => changeVertCurrent('down')} />
       )}
       </ImageOverlay> }
+
+
+      <Thumbnails>
       {vertCurrent[0] === 0 ? (
-        ''
+        <DeadUpArrow/>
       ) : (
         <StyledUpArrow className='left-arrow'  onClick={() => changeVertCurrent('up')} />
       )}
-      {current === 0 ? (
-        ''
-      ) : (
-        <StyledLeftArrow className='left-arrow' onClick={prevImage} />
-      )}
-      
-      
-      {loaded
-        ? CarouselData.map((picture, index) => {
-
-            return (
-              <ImageWrapper
-                className={index === current ? 'slide active' : 'slide'}
-                key={index}>
-                {index === current && (
-                  <MainImage key={index} src={picture} alt='style image' onClick={() => {setCurrentPicture(picture), setClicked(true)}} />
-                )}
-              </ImageWrapper>
-            )
-          })
-        : ''}
-<Thumbnails>
         {loaded
           ? CarouselData.slice(vertCurrent[0], vertCurrent[1]).map((thumbnail, index) => {
 
@@ -265,23 +259,43 @@ function ImageView(props) {
             }
             })
           : ''}
-      </Thumbnails>
-      {current === carLength - 1 ? (
-        ''
-      ) : (
-        <StyledRightArrow className='right-arrow' onClick={nextImage} />
-      )}
-    
-      {vertCurrent[1] === carLength - 1 ? (
-        ''
+          {vertCurrent[1] === carLength - 1 ? (
+        <DeadDownArrow/>
       ) : (
         <StyledDownArrow className='right-arrow'  onClick={() => changeVertCurrent('down')} />
+      )}
+      </Thumbnails>
+      {current === 0 ? (
+        <DeadLeftArrow />
+      ) : (
+        <StyledLeftArrow className='left-arrow' onClick={prevImage} />
+      )}
+
+
+      {loaded
+        ? CarouselData.map((picture, index) => {
+
+            return (
+              <ImageWrapper
+                className={index === current ? 'slide active' : 'slide'}
+                key={index}>
+                {index === current && (
+                  <MainImage key={index} src={picture} alt='style image' onClick={() => {setCurrentPicture(picture), setClicked(true)}} />
+                )}
+              </ImageWrapper>
+            )
+          })
+        : ''}
+      {current === carLength - 1 ? (
+        <DeadRightArrow/>
+      ) : (
+        <StyledRightArrow className='right-arrow' onClick={nextImage} />
       )}
     </ImageViewWrapper>
   );
 }
 export default hot(ImageView);
-{/* {clicked === 'expanded' ? 
+{/* {clicked === 'expanded' ?
       <AddOverlay onClick={() => setCurrentPicture('')}>
           <AddWrapper>
             {current === 0 ? (
@@ -296,8 +310,8 @@ export default hot(ImageView);
         <ZoomedRightArrow className='right-arrow' onClick={nextImage} />
       )}
           </AddWrapper>
-        </AddOverlay> 
+        </AddOverlay>
         :
         null
-        
+
       } */}

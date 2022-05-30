@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { hot } from 'react-hot-loader/root';
 import axios from 'axios';
 //import styled from 'styled-components';
@@ -12,11 +12,14 @@ import {
   StyledShare,
 } from '../StyledComponents.jsx';
 import {MAIN_API_KEY} from '../../config.js'
+import {prodIDContext} from '../../App.jsx';
 
 function ProductInfo() {
   const [products, setProduct] = useState(null);
   const [error, setError] = useState('');
   const [loaded, setLoaded] = useState(false);
+
+  let product_id = useContext(prodIDContext);
 
   useEffect(() => {
     axios({
@@ -27,9 +30,11 @@ function ProductInfo() {
       },
     })
       .then((response) => {
+        console.log('responsedata,', response)
         setProduct(response.data);
       })
       .then(() => {
+        console.log('productInfo', products)
         setLoaded(true);
       })
       .catch((err) => {

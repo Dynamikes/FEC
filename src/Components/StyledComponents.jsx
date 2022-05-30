@@ -19,12 +19,11 @@ export const ImageWrapper = styled.section`
 export const ImageViewWrapper = styled.section`
   position: relative;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: row;
   padding: 5px;
   z-index: 2;
-  width: 400px;
-  height: 500px;
+  width: 80%;
+  height: 80%;
   user-select: none;
 `;
 export const ExpandButton = styled.button`
@@ -46,18 +45,19 @@ export const MainImage = styled.img`
   padding: 0.5em;
 `;
 export const Thumbnails = styled.div`
-  position: absolute;
-  width: 15%;
+  width: 10%;
   left: 4%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  background: white;
-  z-index: 2;
+  align-items: center;
+  z-index: 3;
   user-select: none;
 `;
 export const ThumbnailImage = styled.img`
-  height: auto;
+  height: 50px;
+  width: 50px;
+  margin: 2px;
 `;
 export const Flexbox = styled.div`
   display: flex;
@@ -197,7 +197,11 @@ outline: none;
 border-color: #9ecaed;
 box-shadow: 0 0 10px #9ecaed;
 `
-export const StyleSelectorContainer = styled.div``;
+export const StyleSelectorContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+`;
 
 export const BigQAWrapper = styled.div`
 display: flex;
