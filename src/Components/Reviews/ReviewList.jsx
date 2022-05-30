@@ -10,7 +10,8 @@ import {
   AddSummaryWrapper,
   ReviewMap,
   ReviewsSearch,
-  SearchBarWrapper
+  SearchBarWrapper,
+  StyledSearchIcon
 }
 from '../StyledComponents.jsx'
 import ReviewListEntry from './ReviewListEntry'
@@ -78,6 +79,7 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews}) => {
   return (
     <ReviewListWrapper>
       <SearchBarWrapper onSubmit={(e)=>{searched(e)}}>
+      <StyledSearchIcon />
         <ReviewsSearch type='text' name='search'
           placeholder='Filter reviews here!'
           onChange={(e)=>{whileSearching(e)}}

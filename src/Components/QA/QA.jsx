@@ -3,7 +3,7 @@ import React, { useState, useEffect , useContext} from 'react';
 import { hot } from 'react-hot-loader/root';
 // import styled from 'styled-components';
 import axios from 'axios';
-import { SearchBarWrapper, SearchWrapper, Title, AddOverlay, AddWrapper, BigQAWrapper, QAWrapper, QASearchBar, QASearchButton, StyledQuestionExtensions, QAButtons, AddForms } from '../StyledComponents.jsx';
+import { StyledCancelButton, StyledSearchIcon, SearchBarWrapper, Title, AddOverlay, AddWrapper, BigQAWrapper, QAWrapper, QASearchBar, QASearchButton, StyledQuestionExtensions, QAButtons, AddForms } from '../StyledComponents.jsx';
 import { MAIN_API_KEY } from '../../config.js'
 import QAEntry from './QAEntry.jsx'
 import {prodIDContext} from '../../App.jsx';
@@ -95,8 +95,9 @@ function QA() {
     <BigQAWrapper>
     <Title> Questions and Answers </Title>
       <SearchBarWrapper onSubmit={searchQuestions}>
+        <StyledSearchIcon />
         <QASearchBar name='search' type='text' placeholder='Search for a question here!' onChange={(e)=>{whileSearching(e)}}/>
-        <QASearchButton type='submit' value='X' onClick={()=> {setQuestions(questionsHolder)}}/>
+        <QASearchButton type='submit' value={'X'} onClick={()=> {setQuestions(questionsHolder)}}/>
       </SearchBarWrapper>
     <QAWrapper>
       { loaded ? questions.length === 0 ? <h3> No questions have been asked about this product yet! </h3> :

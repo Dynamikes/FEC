@@ -1,6 +1,8 @@
 //import React from 'react';
 import styled from 'styled-components';
 // import { hot } from 'react-hot-loader/root';
+import { FaSearch } from 'react-icons/fa'
+import { AiFillCloseCircle } from 'react-icons/ai'
 
 export const ImageWrapper = styled.section`
   position: relative;
@@ -63,6 +65,8 @@ export const Flexbox = styled.div`
   max-width: 90%;
   margin: auto;
   padding: 10px;
+  min-width: 600px;
+  overflow-x: scroll;
 `;
 
 export const StyledPageTitle = styled.h1`
@@ -70,6 +74,8 @@ export const StyledPageTitle = styled.h1`
   justify-content: center;
 `;
 export const AppWrapper = styled.div`
+  min-width: 600px;
+  overflow-x: scroll;
 `;
 
 export const StyledSideBar = styled.div`
@@ -216,7 +222,7 @@ display: flex;
 flex-direction: column;
 padding: 5px;
 margin: 5px;
-width: 70vw;
+width: 75vw;
 border-color: rgb(20 , 20, 20);
 border-width: 2px;
 border-style: solid;
@@ -234,7 +240,7 @@ border-width: 1 px;
 border-color: grey;
 border-style: solid;
 padding: 10px;
-margin: 10px 1px;
+margin: 10px 5px;
 `;
 export const AnswerListWrapper = styled.div`
 max-height: 50vh;
@@ -247,8 +253,8 @@ export const SearchBarWrapper = styled.form`
   height: 30px;
   width: 95%;
   display: flex;
-  justify-content: center;
-  margin: 10px;
+  justify-content: flex-start;
+  margin: 10px 0px;
   padding: 5px;
   align-self: center;
 `;
@@ -306,7 +312,7 @@ export const  TotalReviewWrapper = styled.div`
   flex-direction: column;
   padding: 5px;
   margin: 5px;
-  width: 70vw;
+  width: 75vw;
   border-color: rgb(20 , 20, 20);
   border-width: 2px;
   border-style: solid;
@@ -320,7 +326,7 @@ export const InnerReviewWrapper = styled.div`
 //ReviewList.jsx ---------------------------
 export const ReviewListWrapper = styled.div`
   display: flex;
-
+  min-width: 200px;
   flex-direction: column;
   padding: 10px;
   margin: 10px;
@@ -349,6 +355,13 @@ export const ReviewBodyWrapper = styled.div`
   flex-direction: column;
   padding: 3px;
   margin: 3px;
+  min-width: 300px;
+`;
+
+export const ReviewBody = styled.div`
+  padding: 3px;
+  margin: 3px;
+  flex-wrap: wrap;
 `;
 
 export const ReviewImageWrapper = styled.div`
@@ -364,15 +377,6 @@ export const ReviewImageWrapper = styled.div`
 export const ReviewButtonWrapper = styled.div`
   display: flex;
   flex-direction: row;
-`;
-
-export const ReviewBody = styled.p`
-  border-color: rgb(20 , 20, 20);
-  border-width: 1px;
-  border-style: solid;
-  display: flex;
-  padding: 3px;
-  margin: 3px;
 `;
 
 export const AddTitle = styled.h2`
@@ -405,8 +409,8 @@ export const ReviewBreakdownWrapper = styled.div`
   justify-content: flex-start;
   padding: 10px;
   margin: 10px;
-  width: 300px;
-  min-width: 300px;
+  width: 250px;
+  min-width: 250px;
 `;
 
 export const ReviewAverage = styled.h2`
@@ -568,6 +572,7 @@ export const SearchWrapper = styled.div`
   width: 65vw;
   padding: 10px;
   margin: 10px;
+  margin-left: 1px;
 `;
 
 export const ReviewsSearch = styled.input`
@@ -578,6 +583,15 @@ export const ReviewsSearchButton = styled.input`
   margin: 5px;
   height: 25px;
   width: 25px;
+`;
+export const StyledSearchIcon = styled(FaSearch)`
+  padding: 5px;
+  margin: 5px;
+  margin-left: 1px;
+`;
+export const StyledCancelButton = styled(AiFillCloseCircle)`
+  padding: 5px;
+  margin: 5px;
 `;
 export const ImagePopUp = styled.img`
   max-height: 80vh;

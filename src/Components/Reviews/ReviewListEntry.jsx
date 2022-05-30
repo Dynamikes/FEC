@@ -22,7 +22,7 @@ import {MAIN_API_KEY} from '../../config.js'
 
 const ReviewListEntry = ({review, getReviews}) => {
   const [clickedYes, setClickedYes] = useState(false);
-
+  console.log(review)
   //not working
   const incrementHelpful = (id) => {
       axios({
@@ -45,24 +45,22 @@ const ReviewListEntry = ({review, getReviews}) => {
     <ReviewTile>
       <div>
         <StyledQuestion>
-          <h3>
-            {review.reviewer_name} Verified?*
-          </h3>
+          <div>
+          <StarRatings
+            rating={review.rating}
+            starRatedColor="gold"
+            numberOfStars={5}
+            starDimension={'15px'}
+            starSpacing={'2'}
+          />
+        </div>
           <div>
             <small> Helpful? <UpdateButtons disabled={clickedYes} onClick={()=>{incrementHelpful(review['review_id'])}}> Yes ({review.helpfulness}) </UpdateButtons>
             </small>
           </div>
         </StyledQuestion>
-        <div>
-          <StarRatings
-            rating={review.rating}
-            starRatedColor="gold"
-            numberOfStars={5}
-            starDimension={25}
-            starSpacing={'2'}
-          />
-        </div>
-        <Moment format='MMMM Do YYYY'>{review.date}</Moment>
+          <div><big>{review.reviewer_name} ✓ </big></div>
+        <small> on <Moment format='MMMM Do YYYY'>{review.date}</Moment></small>
       </div>
       {review.response ? <div>{review.response}</div> : <div></div>}
       <p>{review.summary}</p>
