@@ -9,13 +9,15 @@ import {
   StarRow,
   AddSummaryWrapper,
   ReviewMap,
+  ReviewsSearch,
+  SearchBarWrapper
 }
 from '../StyledComponents.jsx'
 import ReviewListEntry from './ReviewListEntry'
 import AddReview from './AddReview.jsx'
 import StarRatings from 'react-star-ratings';
 
-const ReviewList = ({reviews, getReviews}) => {
+const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews}) => {
 
   //State for various items
   const [reviewCount, setReviewCount] = useState(2);
@@ -49,9 +51,39 @@ const ReviewList = ({reviews, getReviews}) => {
     console.log(addUsername, addSummary, addBody, addEmail, addRecommend, addStar)
   }
 
+  const searched = (e) => {
+    e.preventDefault();
+    e.target.search.value='';
+  }
+
+  const whileSearching = (e) => {
+    let searchStr = e.target.value.toLowerCase();
+    if (searchStr.length > 2) {
+      let searchedReviews = [];
+      for (let i = 0; i < reviewsHolder.length; i++) {
+        if (
+          reviewsHolder[i]['body'].toLowerCase().includes(searchStr) ||
+          reviewsHolder[i]['reviewer_name'].toLowerCase().includes(searchStr) ||
+          reviewsHolder[i]['summary'].toLowerCase().includes(searchStr)
+        ) {
+          searchedReviews.push(reviewsHolder[i])
+        }
+      }
+      setReviews(searchedReviews);
+    } else {
+      setReviews(reviewsHolder);
+    }
+  }
+
   return (
     <ReviewListWrapper>
-      <input type='text' />
+      <SearchBarWrapper onSubmit={(e)=>{searched(e)}}>
+        <ReviewsSearch type='text' name='search'
+          placeholder='Filter reviews here!'
+          onChange={(e)=>{whileSearching(e)}}
+        />
+        <input type='submit' value='x'onClick={()=> {setReviews(reviewsHolder)}} />
+      </SearchBarWrapper>
       <ReviewMap>
         <div>
           {reviews.length} Reviews /*sortedBy*

@@ -13,7 +13,7 @@ import {
 } from './Components/StyledComponents.jsx';
 export const prodIDContext = React.createContext();
 const App = (props) => {
-  const [prodID, setProdID] = useState(40350)
+  const [prodID, setProdID] = useState(40344)
 
   const name = props.name;
   return (
@@ -26,7 +26,6 @@ const App = (props) => {
       <Flexbox>
         <RelatedProducts />
       </Flexbox>
-      <ReviewTitle>Ratings {'&'} Reviews</ReviewTitle>
       <Flexbox id="ratings_and_reviews">
         <Reviews />
       </Flexbox>
