@@ -33,12 +33,7 @@ const ReviewBreakdown = ({reviewsMeta, chars}) => {
   let five = Number(reviewsMeta.ratings[5])
   let total = one + two + three + four + five
 
-  let fit
-  let value
-  let comfort
-  let length
-  let quality
-  let size
+  let fit, value, comfort, length, quality, size;
 
   for(var key in chars) {
     if(key === 'Fit') {fit = chars['Fit'].value
@@ -60,7 +55,6 @@ const ReviewBreakdown = ({reviewsMeta, chars}) => {
 
   return (
     <ReviewBreakdownWrapper>
-      {console.log(fit, value, size, comfort, length, quality)}
       <ReviewAverage>
         {average}
         <RatingStars value={(Number(Math.round(average * 4) / 4).toFixed(2))}/>
