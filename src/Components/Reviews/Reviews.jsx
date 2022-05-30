@@ -18,6 +18,8 @@ const Reviews = () => {
     {recommended: {true: null, false: null}, ratings: {'1': '1', '2': '2', '3': '3', '4': '4', '5': '5'}});
   const [chars, setChars] = useState({Size: 1, Width: 1, Comfort: 1, Quality: 1, Length:1, Fit: 1})
   const [loadedChars, setLoadedChars] = useState(false);
+  const [loadedRev, setLoadedRev] = useState(false);
+
   const prodID = useContext(prodIDContext)
 
   //helper functions
@@ -43,7 +45,7 @@ const Reviews = () => {
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/meta/?product_id=${prodID}`,
       method: 'get',
       headers: {
-        Authorization: MAIN_API_KEY,
+       Authorization: MAIN_API_KEY,
       },
     })
     .then((response) => {
@@ -69,6 +71,7 @@ const Reviews = () => {
   }, []);
   let chara
   if(loadedChars){chara = chars}
+  if(loadedRev){console.log(reviews)}
 
   return(
     <TotalReviewWrapper>
@@ -82,6 +85,7 @@ const Reviews = () => {
           reviews={reviews}
           reviewsHolder={reviewsHolder}
           getReviews={getReviews}
+          chara={chara}
           setReviews={setReview}
         />
       </InnerReviewWrapper>
