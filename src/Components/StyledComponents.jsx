@@ -13,6 +13,7 @@ export const ImageWrapper = styled.section`
   z-index: 2;
   height: 100%;
   max-width: 100%;
+  user-select: none;
 `;
 
 export const ImageViewWrapper = styled.section`
@@ -24,6 +25,7 @@ export const ImageViewWrapper = styled.section`
   z-index: 2;
   width: 400px;
   height: 500px;
+  user-select: none;
 `;
 export const ExpandButton = styled.button`
   position: absolute;
@@ -52,6 +54,7 @@ export const Thumbnails = styled.div`
   justify-content: space-around;
   background: white;
   z-index: 2;
+  user-select: none;
 `;
 export const ThumbnailImage = styled.img`
   height: auto;
@@ -381,6 +384,16 @@ export const StarRow = styled.div`
   flex-direction: row;
 `;
 
+export const RadioAdd = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+export const CharAdd = styled.div`
+display: flex;
+flex-direction: column;
+`;
+
 //ReviewBreakdown.jsx ----------------------
 export const ReviewBreakdownWrapper = styled.div`
   display: flex;
@@ -521,13 +534,27 @@ export const AddWrapper = styled.div`
   border-width: 1px;
   border-style: solid;
   position: fixed;
-  top: 8%;
+  top: 3%;
   right: 100%
   transform: translate(-50%, -50%);
   padding: 50px;
   z-index: 5;
 `;
 
+export const AddReviewWrapper = styled.div`
+  background-color: rgba(7,7,7);
+  border-color: rgb(20 , 20, 20);
+  border-width: 1px;
+  border-style: solid;
+  position: fixed;
+  overflow: auto;
+  height: 80vh;
+  top: 3%;
+  right: 100%
+  transform: translate(-50%, -50%);
+  padding: 50px;
+  z-index: 5;
+`;
 
 export const AddOverlay = styled.div`
   display: flex;

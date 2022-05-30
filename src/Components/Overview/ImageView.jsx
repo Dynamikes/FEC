@@ -92,7 +92,7 @@ function ImageView(props) {
   };
  const changeCurrent = (num) => {
    setCurrent(num)
- } 
+ }
  const changeVertCurrent = (x) => {
    if (vertCurrent[1] < CarouselData.length && x === 'down') {
     setVertCurrent([vertCurrent[0] + 1, vertCurrent[1] + 1])
@@ -134,8 +134,8 @@ function ImageView(props) {
               console.log('This is carousel:', Carousel)
             }
           }
-          
-          
+
+
         }
         setCarouselData(Carousel);
         setCarLength(tempLength);
@@ -230,7 +230,7 @@ function ImageView(props) {
       
       {loaded
         ? CarouselData.map((picture, index) => {
-          
+
             return (
               <ImageWrapper
                 className={index === current ? 'slide active' : 'slide'}
@@ -245,14 +245,14 @@ function ImageView(props) {
 <Thumbnails>
         {loaded
           ? CarouselData.slice(vertCurrent[0], vertCurrent[1]).map((thumbnail, index) => {
-              
+
             if (thumbnail === CarouselData[current]) {
               return (
                 <HighlightedStyleThumbnail
                   key={index}
                   src={thumbnail}
                   alt={'style thumbnail'}
-                  
+
                 />
               )
             } else {
