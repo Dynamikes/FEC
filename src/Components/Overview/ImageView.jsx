@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft, FaArrowAltCircleUp, FaArrowAltCircleDown, FaRegCircle } from 'react-icons/fa';
 import {
   ImageWrapper,
-  ExpandButton,
   MainImage,
   Thumbnails,
   ThumbnailImage,
@@ -15,23 +14,40 @@ import {
   ImagePopUp,
   AddWrapper,
   ImageOverlay,
-  circleRow
+  circleRow, ExpandButton
 } from '../StyledComponents.jsx';
 import {MAIN_API_KEY} from '../../config.js'
 import {styleIDContext} from './Overview'
 import {prodIDContext} from '../../App.jsx'
 
+const CarouselWrapper = styled.div`
+  display: flex;
+  overflow: hidden;
+`;
+const MainImageWrapper = styled.div`
+  height: 300px;
+  width: 300px;
+  overflow: hidden;
+  margin: 1rem;
+`;
+
 const StyledLeftArrow = styled(FaArrowAltCircleLeft)`
   transform: scale(2);
-  position: absolute;
-  left: 5%;
   z-index: 3;
+  margin: 10px;
+`;
+const DeadLeftArrow = styled(StyledLeftArrow)`
+  opacity: 0;
+  user-select: none;
 `;
 const StyledRightArrow = styled(FaArrowAltCircleRight)`
   transform: scale(2);
-  position: absolute;
-  right: 5%;
   z-index: 3;
+  margin: 10px;
+`;
+const DeadRightArrow = styled(StyledRightArrow)`
+  opacity: 0;
+  user-select: none;
 `;
 const ExpandedRightArrow = styled(StyledRightArrow)`
 top: 50%;
@@ -41,18 +57,26 @@ top: 50%;
 `
 const StyledUpArrow = styled(FaArrowAltCircleUp)`
 transform: scale(1);
-position: absolute;
 left: 10%;
 top: 5%;
 z-index: 3;
+margin: 10px;
 `
+const DeadUpArrow = styled(StyledUpArrow)`
+  opacity: 0;
+  user-select: none;
+`;
 const StyledDownArrow = styled(FaArrowAltCircleDown)`
 transform: scale(1);
-position: absolute;
 left: 10%;
 bottom: 5%;
 z-index: 3;
+margin: 10px;
 `
+const DeadDownArrow = styled(StyledDownArrow)`
+  opacity: 0;
+  user-select: none;
+`;
 const ThumbCircle = styled(FaRegCircle)`
 
 `
@@ -162,23 +186,23 @@ function ImageView(props) {
   }, [styleID]);
 
   return (
-    <ImageViewWrapper>
+    <ImageViewWrapper className='ImageViewWrapper'>
       {clicked &&
-      <ImageOverlay> 
-        
-        <div className="modalWrapper"> 
+      <ImageOverlay>
+
+        <div className="modalWrapper">
 
        <ExpandButton onClick={toggleDefault}> Back </ExpandButton>
       {current === 0 ? (
-        ''
+        <DeadLeftArrow />
       ) : (
         <ExpandedLeftArrow className='left-arrow' onClick={prevImage} />
       )}
-      
-      
+
+
       {loaded
         ? CarouselData.map((picture, index) => {
-          
+
             return (
               <ImageWrapper
                 className={index === current ? 'slide active' : 'slide'}
@@ -190,18 +214,18 @@ function ImageView(props) {
             )
           })
         : ''}
-      
+
       {current === carLength - 1 ? (
         ''
       ) : (
         <ExpandedRightArrow className='right-arrow' onClick={nextImage} />
       )}
-    
+
     </div>
     <circleRow>
         {loaded
           ? CarouselData.slice(vertCurrent[0], vertCurrent[1]).map((thumbnail, index) => {
-              
+
             if (thumbnail === CarouselData[current]) {
               return (
                 <HighlightCircle key={index}
@@ -215,33 +239,14 @@ function ImageView(props) {
           : ''}
       </ circleRow>
       </ImageOverlay> }
+
+        {/* DEFAULT VIEW HERE */}
+      <Thumbnails>
       {vertCurrent[0] === 0 ? (
-        ''
+        <DeadUpArrow/>
       ) : (
         <StyledUpArrow className='left-arrow'  onClick={() => changeVertCurrent('up')} />
       )}
-      {current === 0 ? (
-        ''
-      ) : (
-        <StyledLeftArrow className='left-arrow' onClick={prevImage} />
-      )}
-      
-      
-      {loaded
-        ? CarouselData.map((picture, index) => {
-
-            return (
-              <ImageWrapper
-                className={index === current ? 'slide active' : 'slide'}
-                key={index}>
-                {index === current && (
-                  <MainImage key={index} src={picture} alt='style image' onClick={() => {setCurrentPicture(picture), setClicked(true)}} />
-                )}
-              </ImageWrapper>
-            )
-          })
-        : ''}
-<Thumbnails>
         {loaded
           ? CarouselData.slice(vertCurrent[0], vertCurrent[1]).map((thumbnail, index) => {
 
@@ -264,23 +269,46 @@ function ImageView(props) {
             }
             })
           : ''}
-      </Thumbnails>
-      {current === carLength - 1 ? (
-        ''
-      ) : (
-        <StyledRightArrow className='right-arrow' onClick={nextImage} />
-      )}
-    
-      {vertCurrent[1] === carLength - 1 ? (
-        ''
+          {vertCurrent[1] === carLength - 1 ? (
+        <DeadDownArrow/>
       ) : (
         <StyledDownArrow className='right-arrow'  onClick={() => changeVertCurrent('down')} />
+      )}
+      </Thumbnails>
+      {/* ARROWS START HERE */}
+      {current === 0 ? (
+        <DeadLeftArrow />
+      ) : (
+        <StyledLeftArrow className='left-arrow' onClick={prevImage} />
+      )}
+      <CarouselWrapper className='CarouselWrapper'>
+      {loaded
+        ?
+        CarouselData.map((picture, index) => {
+            return (
+              <ImageWrapper
+                className={index === current ? 'slide active' : 'slide'}
+                key={index}>
+                {index === current && (
+                  <MainImageWrapper>
+                    <MainImage key={index} src={picture} alt='style image' onClick={() => {setCurrentPicture(picture), setClicked(true)}} />
+                  </MainImageWrapper>
+                )}
+              </ImageWrapper>
+            )
+          })
+        : null}
+        </CarouselWrapper>
+      {current === carLength - 1 ? (
+        <DeadRightArrow/>
+      ) : (
+        <StyledRightArrow className='right-arrow' onClick={nextImage} />
       )}
     </ImageViewWrapper>
   );
 }
 export default hot(ImageView);
-{/* {clicked === 'expanded' ? 
+{/* {clicked === 'expanded' ?
       <AddOverlay onClick={() => setCurrentPicture('')}>
           <AddWrapper>
             {current === 0 ? (
@@ -295,8 +323,8 @@ export default hot(ImageView);
         <ZoomedRightArrow className='right-arrow' onClick={nextImage} />
       )}
           </AddWrapper>
-        </AddOverlay> 
+        </AddOverlay>
         :
         null
-        
+
       } */}

@@ -26,13 +26,13 @@ useEffect(() => {
       for (let i = 0; i < response.data.results.length; i++) {
         tempStyleThumbs.push([response.data.results[i].photos[0].thumbnail_url, response.data.results[i].style_id])
       }
-      
+
     } else {
       tempStyleThumbs = [];
       for (let i = 0; i < response.data.results.length; i++) {
         if (response.data.results[i].style_id !== styleID) {
           tempStyleThumbs.push([response.data.results[i].photos[0].thumbnail_url, response.data.results[i].style_id])
-        } 
+        }
       }
     }
     setStyleThumbs(tempStyleThumbs)
@@ -52,8 +52,8 @@ useEffect(() => {
         {loaded ? styleThumbs.map((thumb) => {
           return <StyleThumbnail key={thumb[1]} src={thumb[0]} onClick={() => {props.click(thumb[1])}}/>
         }) : ''}
-        
-        
+
+
       </StyleSelectorContainer>
     </SelectorWrapper>
   );

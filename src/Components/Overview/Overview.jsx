@@ -34,7 +34,7 @@ function Overview() {
     <styleIDContext.Provider value={styleID}>
     <OverviewWrapper>
       <Wrapper>
-        <StyledImageView>
+        <StyledImageView className='StyledImageView'>
           <ImageView click={toggleFunc} />
         </StyledImageView>
         {toggle ? (
