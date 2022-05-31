@@ -16,7 +16,7 @@ import {
 }
 from '../StyledComponents.jsx'
 export const styleIDContext = React.createContext();
-function Overview() {
+function Overview({appStyleID}) {
   //hook that adds state ttoggle
   //function that toggles state from A to B
   let [toggle, setToggle] = useState(!toggle);
@@ -27,6 +27,7 @@ function Overview() {
   };
   const changeStyleID = (id) => {
     setStyleID(id)
+    appStyleID(id)
     console.log(id)
   }
 
