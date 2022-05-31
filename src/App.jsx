@@ -11,11 +11,26 @@ import {
   AppWrapper,
 } from './Components/StyledComponents.jsx';
 export const prodIDContext = React.createContext();
+export const starsContext = React.createContext();
+export const productForAdd = React.createContext();
+
 const App = (props) => {
- const[prodID, setProdId] = useState(40351)
+  const [prodID, setProdID] = useState(40351)
+  const [stars, setStars] = useState(null);
+  const [productAdd, setProduct] = useState(null)
+  const changeStars = (count) => {
+    setStars(count);
+  }
+
+  const changeProductAdd = (product) => {
+    setProduct(product);
+  }
+
   const name = props.name;
   return (
     <prodIDContext.Provider value={prodID} >
+    <starsContext.Provider value={stars} >
+    <productForAdd.Provider value={productAdd}>
     <AppWrapper>
       <StyledPageTitle>Hello {name}</StyledPageTitle>
       <Flexbox>
@@ -25,12 +40,14 @@ const App = (props) => {
         <RelatedProducts />
       </Flexbox>
       <Flexbox id="ratings_and_reviews">
-        <Reviews />
+        <Reviews changeStars={changeStars}/>
       </Flexbox>
       <Flexbox>
         <QA />
       </Flexbox>
     </AppWrapper>
+    </productForAdd.Provider>
+    </starsContext.Provider>
     </prodIDContext.Provider>
   );
 };

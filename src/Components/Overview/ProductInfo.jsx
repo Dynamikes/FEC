@@ -14,6 +14,7 @@ import {
 import {MAIN_API_KEY} from '../../config.js'
 import {prodIDContext} from '../../App.jsx';
 import StarRatings from 'react-star-ratings';
+import {starsContext} from '../../App.jsx';
 
 function ProductInfo() {
   const [products, setProduct] = useState(null);
@@ -21,6 +22,7 @@ function ProductInfo() {
   const [loaded, setLoaded] = useState(false);
 
   let product_id = useContext(prodIDContext);
+  const stars = useContext(starsContext)
 
   useEffect(() => {
     axios({
@@ -48,7 +50,7 @@ function ProductInfo() {
       <StyledStars>
         {' '}
         <StarRatings
-        rating={1} //Need to pull rating for product in from Ratings to replace 1...
+        rating={Number(stars)} //Need to pull rating for product in from Ratings to replace 1...
         starRatedColor="gold"
         starDimension='25px'
         starSpacing={'2px'}

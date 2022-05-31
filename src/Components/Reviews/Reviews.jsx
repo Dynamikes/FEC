@@ -10,7 +10,7 @@ from '../StyledComponents.jsx';
 import {MAIN_API_KEY} from '../../config.js'
 import {prodIDContext} from '../../App.jsx'
 
-const Reviews = () => {
+const Reviews = ({changeStars}) => {
   //States for user reviews / Meta data
   const [reviews, setReview] = useState([]);
   const [reviewsHolder, setReviewsHolder] = useState([]);
@@ -81,6 +81,7 @@ const Reviews = () => {
         <ReviewBreakdown
           reviewsMeta={reviewsMeta}
           chars={chara}
+          changeStars={changeStars}
         />
         <ReviewList
           reviews={reviews}

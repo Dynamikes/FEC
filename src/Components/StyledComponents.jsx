@@ -25,6 +25,7 @@ export const ImageViewWrapper = styled.section`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
   padding: 5px;
   z-index: 2;
   flex: 1 1 100%;
@@ -294,13 +295,11 @@ export const  TotalReviewWrapper = styled.div`
   border-color: rgb(20 , 20, 20);
   border-width: 2px;
   border-style: solid;
-  flex-wrap: wrap;
 `;
 
 export const InnerReviewWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
 `;
 
 //ReviewList.jsx ---------------------------
@@ -404,8 +403,7 @@ export const ReviewBreakdownWrapper = styled.div`
   justify-content: flex-start;
   padding: 10px;
   margin: 10px;
-  width: 250px;
-  min-width: 250px;
+  min-width: 190px;
 `;
 
 export const ReviewAverage = styled.h2`
