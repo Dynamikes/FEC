@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { FaSearch } from 'react-icons/fa'
 import { AiFillCloseCircle } from 'react-icons/ai'
 
-export const ImageWrapper = styled.section`
+export const ImageWrapper = styled.div`
   position: relative;
   display: flex;
   align-items: center;
@@ -15,11 +15,18 @@ export const ImageWrapper = styled.section`
   max-width: 100%;
   user-select: none;
 `;
+export const MainImage = styled.img`
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  object-position: 50% 50%;
+`;
 
 export const ImageViewWrapper = styled.section`
   position: relative;
   display: flex;
   flex-direction: row;
+  align-items: center;
   padding: 5px;
   z-index: 2;
   width: 80%;
@@ -35,14 +42,6 @@ export const ExpandButton = styled.button`
   color: orange;
   border-radius: 20%;
   padding: 5px;
-`;
-export const MainImage = styled.img`
-  position: relative;
-  height: auto;
-  left: 0%;
-  width: 70%;
-  z-index: 1;
-  padding: 0.5em;
 `;
 export const Thumbnails = styled.div`
   width: 10%;
@@ -98,7 +97,6 @@ export const StyledProductInfo = styled.div`
 `;
 export const Wrapper = styled.div`
   display: flex;
-  justify-self: space-around;
 `;
 export const StyledProductName = styled.h2`
   display: flex;
@@ -108,8 +106,6 @@ export const StyledProductName = styled.h2`
 export const OverviewWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
 `;
 export const StyledImageView = styled.div`
   display: flex;

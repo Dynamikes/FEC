@@ -20,6 +20,18 @@ import {MAIN_API_KEY} from '../../config.js'
 import {styleIDContext} from './Overview'
 import {prodIDContext} from '../../App.jsx'
 
+const CarouselWrapper = styled.div`
+  border: 3px red solid;
+  display: flex;
+  overflow: hidden;
+`;
+const MainImageWrapper = styled.div`
+  height: 500px;
+  width: 500px;
+  overflow: hidden;
+  margin: 2rem;
+`;
+
 const StyledLeftArrow = styled(FaArrowAltCircleLeft)`
   transform: scale(2);
   position: absolute;
@@ -230,7 +242,7 @@ function ImageView(props) {
       )}
       </ImageOverlay> }
 
-
+        {/* DEFAULT VIEW HERE */}
       <Thumbnails>
       {vertCurrent[0] === 0 ? (
         <DeadUpArrow/>
@@ -265,27 +277,30 @@ function ImageView(props) {
         <StyledDownArrow className='right-arrow'  onClick={() => changeVertCurrent('down')} />
       )}
       </Thumbnails>
+      {/* ARROWS START HERE */}
       {current === 0 ? (
         <DeadLeftArrow />
       ) : (
         <StyledLeftArrow className='left-arrow' onClick={prevImage} />
       )}
-
-
+      <CarouselWrapper>
       {loaded
-        ? CarouselData.map((picture, index) => {
-
+        ?
+        CarouselData.map((picture, index) => {
             return (
               <ImageWrapper
                 className={index === current ? 'slide active' : 'slide'}
                 key={index}>
                 {index === current && (
-                  <MainImage key={index} src={picture} alt='style image' onClick={() => {setCurrentPicture(picture), setClicked(true)}} />
+                  <MainImageWrapper>
+                    <MainImage key={index} src={picture} alt='style image' onClick={() => {setCurrentPicture(picture), setClicked(true)}} />
+                  </MainImageWrapper>
                 )}
               </ImageWrapper>
             )
           })
-        : ''}
+        : null}
+        </CarouselWrapper>
       {current === carLength - 1 ? (
         <DeadRightArrow/>
       ) : (
