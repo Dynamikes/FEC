@@ -15,7 +15,7 @@ import {MAIN_API_KEY} from '../../config.js'
 import {prodIDContext} from '../../App.jsx';
 import StarRatings from 'react-star-ratings';
 import {starsContext} from '../../App.jsx';
-import {styleIDContext} from './Overview.jsx'
+import {styleIDContext} from './Overview'
 
 function ProductInfo() {
   const [products, setProduct] = useState(null);
@@ -27,6 +27,7 @@ function ProductInfo() {
   let prodID = useContext(prodIDContext);
   const stars = useContext(starsContext)
   const styleID = useContext(styleIDContext);
+  console.log(styleID)
 
 
   useEffect(() => {
@@ -58,17 +59,21 @@ function ProductInfo() {
       },
     })
     .then((response) => {
-      console.log(response.data.results)
-      for (let i = 0; i < response.data.results.length; i++) {
-        if (response.data.result[i].style_id === styleID) {
-          setCurrentStyle(response.data.result[i])
+      console.log('responsedataresults', response.data.results)
+      if (styleID !== null) {
+        for (let i = 0; i < response.data.results.length; i++) {
+        if (response.data.results[i].style_id === styleID) {
+          setCurrentStyle(response.data.results[i])
         }
+      }} else {
+        setCurrentStyle(response.data.results[0])
       }
     })
     .then(() => {
       setStyleLoaded(true)
+      console.log('this is currentstyle', currentStyle)
     })
-  }, []);
+  }, [styleID]);
   return (
     <ProductInfoWrapper>
       <StyledStars>
@@ -87,10 +92,10 @@ function ProductInfo() {
         {' '}
         {loaded ? products.category : 'CATEGORY'}
       </StyledCategory>
-      <Title> {loaded ? currentStyle.name : 'TITLE'} </Title>
+      <Title> {styleLoaded ? currentStyle.name : 'TITLE'} </Title>
       <StyledPrice>
         {' '}
-        {loaded ? '$' + currentStyle.original_price : 'PRICE'}{' '}
+        {styleLoaded ? '$' + currentStyle.original_price : 'PRICE'}{' '}
       </StyledPrice>
     </ProductInfoWrapper>
     
