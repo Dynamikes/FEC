@@ -16,19 +16,20 @@ import {prodIDContext} from '../../App.jsx';
 import StarRatings from 'react-star-ratings';
 import {starsContext} from '../../App.jsx';
 import {styleIDContext} from './Overview'
+import {productForAdd} from '../../App.jsx';
 
-function ProductInfo() {
+function ProductInfo({productAdd}) {
   const [products, setProduct] = useState(null);
   const [error, setError] = useState('');
   const [loaded, setLoaded] = useState(false);
-  const [currentStyle, setCurrentStyle] = useState(null)
-  const [styleLoaded, setStyleLoaded] = useState(false)
-
+  const [currentStyle, setCurrentStyle] = useState(null);
+  const [styleLoaded, setStyleLoaded] = useState(false);
   let prodID = useContext(prodIDContext);
-  const stars = useContext(starsContext)
+  const stars = useContext(starsContext);
   const styleID = useContext(styleIDContext);
-  console.log(styleID)
-
+  const prodName = useContext(productForAdd);
+  console.log('prodname', prodName)
+  var tempProd = '';
 
   useEffect(() => {
     axios({
@@ -40,9 +41,17 @@ function ProductInfo() {
     })
       .then((response) => {
         setProduct(response.data);
+        console.log('just product pull', response.data)
+        tempProd = response.data.name
       })
       .then(() => {
         setLoaded(true);
+        console.log('this is products', tempProd)
+        productAdd(tempProd)
+        
+      })
+      .then(() => {
+        console.log('post productadd prodname' , prodName)
       })
       .catch((err) => {
         setError(err);
@@ -93,7 +102,7 @@ function ProductInfo() {
         {' '}
         {loaded ? products.category : 'CATEGORY'}
       </StyledCategory>
-      <Title> {styleLoaded ? currentStyle.name : 'TITLE'} </Title>
+      <Title> {styleLoaded ? products.name : 'TITLE'} </Title>
       <StyledPrice>
         {' '}
         {styleLoaded ? '$' + currentStyle.original_price : 'PRICE'}{' '}

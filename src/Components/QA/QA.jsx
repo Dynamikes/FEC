@@ -7,7 +7,7 @@ import { StyledCancelButton, StyledSearchIcon, SearchBarWrapper, Title, AddOverl
 import { MAIN_API_KEY } from '../../config.js'
 import QAEntry from './QAEntry.jsx'
 import {prodIDContext} from '../../App.jsx';
-
+import {productForAdd} from '../../App.jsx'
 
 
 function QA() {
@@ -19,7 +19,7 @@ function QA() {
   const [username, setUsername] = useState('');
   const [questionBody, setQuestionBody] = useState('');
   const [email, setEmail] = useState('');
-
+  const prodName = useContext(productForAdd)
   let product_id = useContext(prodIDContext);
   console.log(product_id)
   const getQuestions= () => {
@@ -114,9 +114,9 @@ function QA() {
       </StyledQuestionExtensions>
       <AddQuestion open={addQuestion} onClose={()=>{openAddQuestion(false)}} submitQuestion={submitQuestion}>
         <AddForms onSubmit={submitQuestion}>
-          <Title> Ask your Question About the (Product)</Title>
+          <Title> Ask your Question About the {prodName}</Title>
           <label>
-            Ask your question!<small>*</small>
+            Ask your question! <small>*</small>
           </label>
           <textarea
             cols='40'
