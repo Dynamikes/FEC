@@ -105,8 +105,12 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
     newReviews.sort((a, b) => {
       return (a.date < b.date) ? 1 : -1
     })
+    setReviews(newReviews)
+  };
 
-  }
+  const helpfulSorter = () => {
+    let HelpfulSort = reviews.slice()
+  };
 
   const getBase64 = (file) => {
     return new Promise((resolve, reject) => {
@@ -213,11 +217,11 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
       </SearchBarWrapper>
       <ReviewMap>
         <div>
-          {reviews.length} Reviews
+          {reviews.length} Reviews, Sort on
           <select value={option} onChange={changeOption}>
-            <option value='Relevance'></option>
-            <option value='Helpful'></option>
-            <option value='Newest'></option>
+            <option value='Newest'>Newest</option>
+            <option value='Relevance'>Relevance</option>
+            <option value='Helpful'>Helpful</option>
           </select>
         </div>
         {reviews.slice(0,reviewCount).map((review, index) =>
