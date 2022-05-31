@@ -17,21 +17,22 @@ export const productForAdd = React.createContext();
 const App = (props) => {
   const [prodID, setProdID] = useState(40351)
   const [stars, setStars] = useState(null);
-  const [product, setProduct] = useState(null);
+  const [productName, setProductName] = useState(null);
   
   const changeStars = (count) => {
     setStars(count);
   }
 
   const productAdd = (prod) => {
-    setProduct(prod);
+    setProductName(prod);
+    console.log('Is productadd being invoked', )
   }
 
   const name = props.name;
   return (
     <prodIDContext.Provider value={prodID} >
     <starsContext.Provider value={stars} >
-    <productForAdd.Provider value={product}>
+    <productForAdd.Provider value={productName}>
     <AppWrapper>
       <StyledPageTitle>Hello {name}</StyledPageTitle>
       <Flexbox>
