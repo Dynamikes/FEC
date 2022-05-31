@@ -69,9 +69,10 @@ const Reviews = () => {
   useEffect(() => {
     getMeta();
   }, []);
+
+
   let chara
   if(loadedChars){chara = chars}
-  if(loadedRev){console.log(reviews)}
 
   return(
     <TotalReviewWrapper>
