@@ -25,8 +25,8 @@ const CarouselWrapper = styled.div`
   overflow: hidden;
 `;
 const MainImageWrapper = styled.div`
-  height: 450px;
-  width: 450px;
+  height: 500px;
+  width: 500px;
   overflow: hidden;
   margin: 1rem;
 `;
@@ -210,7 +210,7 @@ function ImageView(props) {
         <ExpandedLeftArrow className='left-arrow' onClick={prevImage} />
       )}
 
-<ImageOverlayContainer>
+    <ImageOverlayContainer>
       {loaded
         ? CarouselData.map((picture, index) => {
 
@@ -225,7 +225,7 @@ function ImageView(props) {
             )
           })
         : ''}
-</ImageOverlayContainer>
+    </ImageOverlayContainer>
       {current === carLength - 1 ? (
         ''
       ) : (
