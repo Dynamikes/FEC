@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext} from 'react';
+import React, { useState, useEffect, useContext, useRef} from 'react';
 import { hot } from 'react-hot-loader/root';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -97,6 +97,22 @@ border-radius: 7px;
 outline: none;
 border-color: #9ecaed;
 box-shadow: 0 0 10px #9ecaed;
+` 
+const Target = styled(MainImage)`
+position: absolute;
+left: ${(props) => props.offset.left}px;
+top: ${(props) => props.offset.top}px;
+opacity: ${(props) => props.opacity};
+`
+
+
+const Container = styled.div`
+position: relative;
+overflow: hidden;
+display: block;
+padding: 50px;
+border: 1px solid #00adb7;
+border-radius: 15px;
 `
 function ImageView(props) {
   const imageToggle = () => {
@@ -204,60 +220,44 @@ function ImageView(props) {
       });
   }, [styleID]);
 //>>>>>>>>>>>>>ZOOM HANDLING>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-// const [opacity, setOpacity] = useState(0);
-// const [offset, setOffset] = useState({ left: 0, top: 0})
+const [opacity, setOpacity] = useState(0);
+const [offset, setOffset] = useState({ left: 0, top: 0})
 
-// const sourceRef = useRef(null);
-// const targetRef = useRef(null);
-// const containerRef = useRef(null);
+const sourceRef = useRef(null);
+const targetRef = useRef(null);
+const containerRef = useRef(null);
 
 
-// const handleMouseEnter = () => {
-//     setOpacity(1);
+const handleMouseEnter = () => {
+    setOpacity(2);
+    console.log('Mouse entered')
 
-//   }
+  }
 
-//   const handleMouseLeave = () => {
-//     setOpacity(0);
+  const handleMouseLeave = () => {
+    setOpacity(0);
+    console.log('Mouse left')
+  }
+
+  const handleMouseMove = () => {
+    const targetRect = targetRef.current.getBoundingClientRect();
+    const sourceRect = sourceRef.current.getBoundingClientRect();
+    const containerRect = containerRef.current.getBoundingClientRect();
+
+    const xRatio = (targetRect.width - containerRect.width) / sourceRect.width;
+    const yRatio = (targetRect.height - containerRect.height) / sourceRect.height;
+
+    const left = Math.max(Math.min(event.pageX - sourceRect.left, sourceRect.width), 0);
+    const top = Math.max(Math.min(event.pageY - sourceRect.top, sourceRect.height), 0);
+    setOffset({
+      left: left * -xRatio,
+      top: top * -yRatio
+    })
     
-//   }
-
-//   const handleMouseMove = () => {
-//     const targetRect = targetRef.current.getBoundingClientRect();
-//     const sourceRect = sourceRef.current.getBoundingClientRect();
-//     const containerRect = containerRef.current.getBoundingClientRect();
-
-//     const xRatio = (targetRect.width) / sourceRect.width;
-//     const yRatio = (targetRect.height) / sourceRect.height;
-
-//     const left = Math.max(Math.min(e.pageX - sourceRect.left, sourceRect.width), 0);
-//     const top = Math.max(Math.mid(e.pageY - sourceRect.top, sourceRect.height), 0);
-//     setOffset({
-//       left: left * -xRatio,
-//       top: top * -yRatio
-//     })
-    
-//   }
+  }
 // //>>>>>>>>>>>>>>>>>>>>>>>>>>>Example Styled Images>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-//   const Target = styled(Image)`
-//   postition: absolute;
-//   left: ${(props) => props.offset.left}px;
-//   top: ${(props) => props.offset.top}px;
-//   opacity: ${(props) => props.opacity};
-//   `
 
-//   const Image = styled.img.attrs((props) => ({
-//     src: props.source
-//   }))`
-//   `
-//   const Container = styled.div`
-//   position: relative;
-//   overflow: hidden;
-//   display: block;
-//   padding: 50px;
-//   border: 1px solid #00adb7;
-//   border-radius: 15px;
-//   `
+
 //   //>>>>>>>>>>>>>>>>>> EXAMPLE CONTAINERS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 //   <div className="BiggestContainer">
@@ -293,6 +293,12 @@ function ImageView(props) {
       )}
 
 <ImageOverlayContainer className="ImageOverlayContainer" >
+      <Container 
+      ref={containerRef}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onMouseMove={handleMouseMove}
+      >
       {loaded
         ? CarouselData.map((picture, index) => {
 
@@ -302,13 +308,28 @@ function ImageView(props) {
                 key={index}>
                 {index === current && (
 
-                  //THIS IS GOING TO HAVE TO RENDER CONDITIONALLY BASED ON MOUSE ENTER MOUSE LEAVE AFAIK
-                  <MainImage key={index} src={picture} alt='style image' onClick={() => {setCurrentPicture(picture), setClicked(true)}} />
+                  
+                  <MainImage 
+                  key={index} 
+                  src={picture} 
+                  alt='style image' 
+                  onClick={() => {setCurrentPicture(picture), setClicked(true)}}
+                  ref={sourceRef}
+                  
+                  />
                 )}
+              <Target 
+                ref={targetRef}
+                alt="target"
+                opacity={opacity}
+                offset={offset}
+                src={picture} />
               </ImageWrapper>
+              
             )
           })
         : ''}
+      </Container>
 </ImageOverlayContainer>
       {current === carLength - 1 ? (
         ''
