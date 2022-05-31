@@ -199,7 +199,7 @@ function ImageView(props) {
         <ExpandedLeftArrow className='left-arrow' onClick={prevImage} />
       )}
 
-
+      <CarouselWrapper>
       {loaded
         ? CarouselData.map((picture, index) => {
 
@@ -214,7 +214,7 @@ function ImageView(props) {
             )
           })
         : ''}
-
+      </CarouselWrapper>
       {current === carLength - 1 ? (
         ''
       ) : (

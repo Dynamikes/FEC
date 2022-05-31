@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useContext, } from 'react';
 import { hot } from 'react-hot-loader/root';
 // import axios from 'axios';
 // import styled from 'styled-components';
@@ -9,8 +9,9 @@ import {
   StyledQuantitySelect,
   AddToCartButton,
 } from '../StyledComponents.jsx';
-
+import {styleIDContext} from './Overview'
 const AddToCart = () => {
+  const styleID = useContext(styleIDContext)
   return (
     <CartDiv>
       <StyledSizeQuantity>

@@ -11,12 +11,17 @@ import {
   AppWrapper,
 } from './Components/StyledComponents.jsx';
 export const prodIDContext = React.createContext();
+export const starsContext = React.createContext();
 const App = (props) => {
   const [prodID, setProdID] = useState(40351)
-
+  const [stars, setStars] = useState(null);
+  const changeStars = (count) => {
+    setStars(count);
+  }
   const name = props.name;
   return (
     <prodIDContext.Provider value={prodID} >
+    <starsContext.Provider value={stars} >
     <AppWrapper>
       <StyledPageTitle>Hello {name}</StyledPageTitle>
       <Flexbox>
@@ -32,6 +37,7 @@ const App = (props) => {
         <QA />
       </Flexbox>
     </AppWrapper>
+    </starsContext.Provider>
     </prodIDContext.Provider>
   );
 };
