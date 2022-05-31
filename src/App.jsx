@@ -17,7 +17,8 @@ export const productForAdd = React.createContext();
 const App = (props) => {
   const [prodID, setProdID] = useState(40351)
   const [stars, setStars] = useState(null);
-  const [productAdd, setProduct] = useState(null)
+  const [productAdd, setProduct] = useState(null);
+  const [AppStyle, setAppStyle] = useState(null);
   const changeStars = (count) => {
     setStars(count);
   }
@@ -25,7 +26,9 @@ const App = (props) => {
   const changeProductAdd = (product) => {
     setProduct(product);
   }
-
+  const appStyleID = (id) => {
+    setAppStyle(id);
+  }
   const name = props.name;
   return (
     <prodIDContext.Provider value={prodID} >
@@ -34,7 +37,7 @@ const App = (props) => {
     <AppWrapper>
       <StyledPageTitle>Hello {name}</StyledPageTitle>
       <Flexbox>
-        <Overview />
+        <Overview appStyleID={appStyleID} />
       </Flexbox>
       <Flexbox>
         <RelatedProducts />
