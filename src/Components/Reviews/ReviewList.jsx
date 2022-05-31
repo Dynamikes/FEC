@@ -105,7 +105,7 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
     newReviews.sort((a, b) => {
       return (a.date < b.date) ? 1 : -1
     })
-    
+
   }
 
   const getBase64 = (file) => {
@@ -215,9 +215,9 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
         <div>
           {reviews.length} Reviews
           <select value={option} onChange={changeOption}>
-            <option></option>
-            <option></option>
-            <option></option>
+            <option value='Relevance'></option>
+            <option value='Helpful'></option>
+            <option value='Newest'></option>
           </select>
         </div>
         {reviews.slice(0,reviewCount).map((review, index) =>
