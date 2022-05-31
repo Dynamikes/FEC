@@ -79,7 +79,8 @@ function ProductInfo() {
       <StyledStars>
         {' '}
         <StarRatings
-        rating={Number(stars)} 
+        rating={Number(stars)}
+        starRatedColor="gold"
         starDimension='25px'
         starSpacing={'2px'}
       />{' '}
@@ -98,7 +99,7 @@ function ProductInfo() {
         {styleLoaded ? '$' + currentStyle.original_price : 'PRICE'}{' '}
       </StyledPrice>
     </ProductInfoWrapper>
-    
+
   );
 }
 
