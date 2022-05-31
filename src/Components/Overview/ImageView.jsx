@@ -25,12 +25,18 @@ const CarouselWrapper = styled.div`
   overflow: hidden;
 `;
 const MainImageWrapper = styled.div`
-  height: 300px;
-  width: 300px;
+  height: 450px;
+  width: 450px;
   overflow: hidden;
   margin: 1rem;
 `;
-
+const ImageOverlayContainer=styled.div`
+  max-height: 1000px;
+  max-width: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
 const StyledLeftArrow = styled(FaArrowAltCircleLeft)`
   transform: scale(2);
   z-index: 3;
@@ -51,8 +57,12 @@ const DeadRightArrow = styled(StyledRightArrow)`
 `;
 const ExpandedRightArrow = styled(StyledRightArrow)`
 top: 50%;
+position: absolute;
+right: 5%;
 `
 const ExpandedLeftArrow = styled(StyledLeftArrow)`
+position: absolute;
+left: 5%;
 top: 50%;
 `
 const StyledUpArrow = styled(FaArrowAltCircleUp)`
@@ -193,13 +203,14 @@ function ImageView(props) {
         <div className="modalWrapper">
 
        <ExpandButton onClick={toggleDefault}> Back </ExpandButton>
+
       {current === 0 ? (
         <DeadLeftArrow />
       ) : (
         <ExpandedLeftArrow className='left-arrow' onClick={prevImage} />
       )}
 
-
+<ImageOverlayContainer>
       {loaded
         ? CarouselData.map((picture, index) => {
 
@@ -214,7 +225,7 @@ function ImageView(props) {
             )
           })
         : ''}
-
+</ImageOverlayContainer>
       {current === carLength - 1 ? (
         ''
       ) : (
