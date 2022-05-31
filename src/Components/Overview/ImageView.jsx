@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext} from 'react';
 import { hot } from 'react-hot-loader/root';
 import axios from 'axios';
 import styled from 'styled-components';
-import { FaArrowAltCircleRight, FaArrowAltCircleLeft, FaArrowAltCircleUp, FaArrowAltCircleDown } from 'react-icons/fa';
+import { FaArrowAltCircleRight, FaArrowAltCircleLeft, FaArrowAltCircleUp, FaArrowAltCircleDown, FaRegCircle } from 'react-icons/fa';
 import {
   ImageWrapper,
   MainImage,
@@ -13,7 +13,8 @@ import {
   AddOverlay,
   ImagePopUp,
   AddWrapper,
-  ImageOverlay
+  ImageOverlay,
+  circleRow, ExpandButton
 } from '../StyledComponents.jsx';
 import {MAIN_API_KEY} from '../../config.js'
 import {styleIDContext} from './Overview'
@@ -39,11 +40,6 @@ const DeadLeftArrow = styled(StyledLeftArrow)`
   opacity: 0;
   user-select: none;
 `;
-const ZoomedLeftArrow = styled(StyledLeftArrow)`
-z-index: 7;
-top: 50%;
-`
-
 const StyledRightArrow = styled(FaArrowAltCircleRight)`
   transform: scale(2);
   z-index: 3;
@@ -53,8 +49,10 @@ const DeadRightArrow = styled(StyledRightArrow)`
   opacity: 0;
   user-select: none;
 `;
-const ZoomedRightArrow = styled(StyledRightArrow)`
-z-index: 7;
+const ExpandedRightArrow = styled(StyledRightArrow)`
+top: 50%;
+`
+const ExpandedLeftArrow = styled(StyledLeftArrow)`
 top: 50%;
 `
 const StyledUpArrow = styled(FaArrowAltCircleUp)`
@@ -79,6 +77,16 @@ const DeadDownArrow = styled(StyledDownArrow)`
   opacity: 0;
   user-select: none;
 `;
+const ThumbCircle = styled(FaRegCircle)`
+
+`
+const HighlightCircle = styled(FaRegCircle)`
+border: 2px solid #dadada;
+border-radius: 7px;
+outline: none;
+border-color: #9ecaed;
+box-shadow: 0 0 10px #9ecaed;
+`
 function ImageView(props) {
   const imageToggle = () => {
     props.click();
@@ -125,6 +133,9 @@ function ImageView(props) {
      setVertCurrent([vertCurrent[0] - 1, vertCurrent[1] - 1])
      console.log(vertCurrent)
    }
+ }
+ const toggleDefault = () => {
+   setClicked(!clicked)
  }
   useEffect(() => {
     axios({
@@ -178,15 +189,14 @@ function ImageView(props) {
     <ImageViewWrapper className='ImageViewWrapper'>
       {clicked &&
       <ImageOverlay>
-        {vertCurrent[0] === 0 ? (
-        ''
-      ) : (
-        <StyledUpArrow className='left-arrow'  onClick={() => changeVertCurrent('up')} />
-      )}
+
+        <div className="modalWrapper">
+
+       <ExpandButton onClick={toggleDefault}> Back </ExpandButton>
       {current === 0 ? (
         <DeadLeftArrow />
       ) : (
-        <StyledLeftArrow className='left-arrow' onClick={prevImage} />
+        <ExpandedLeftArrow className='left-arrow' onClick={prevImage} />
       )}
 
 
@@ -204,40 +214,30 @@ function ImageView(props) {
             )
           })
         : ''}
-<Thumbnails>
+
+      {current === carLength - 1 ? (
+        ''
+      ) : (
+        <ExpandedRightArrow className='right-arrow' onClick={nextImage} />
+      )}
+
+    </div>
+    <circleRow>
         {loaded
           ? CarouselData.slice(vertCurrent[0], vertCurrent[1]).map((thumbnail, index) => {
 
             if (thumbnail === CarouselData[current]) {
               return (
-                <HighlightedStyleThumbnail
-                  key={index}
-                  src={thumbnail}
-                  alt={'style thumbnail'}
-
+                <HighlightCircle key={index}
                 />
               )
             } else {
-              return (<ThumbnailImage
-                  key={index}
-                  src={thumbnail}
-                  alt={'style thumbnail'}
-                  onClick={() => changeCurrent(index)}
+              return (<ThumbCircle key={index}
                 />)
             }
             })
           : ''}
-      </Thumbnails>
-      {current === carLength - 1 ? (
-        <DeadRightArrow/>
-      ) : (
-        <StyledRightArrow className='right-arrow' onClick={nextImage} />
-      )}
-      {vertCurrent[1] === carLength - 1 ? (
-        <DeadDownArrow/>
-      ) : (
-        <StyledDownArrow className='right-arrow'  onClick={() => changeVertCurrent('down')} />
-      )}
+      </ circleRow>
       </ImageOverlay> }
 
         {/* DEFAULT VIEW HERE */}

@@ -25,3 +25,7 @@ body {
   background: grey;
   border-radius: 5px;
 }
+
+.modalWrapper {
+  display: flex;
+}

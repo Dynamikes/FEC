@@ -567,7 +567,11 @@ export const AddOverlay = styled.div`
   z-index: 5
 `;
 export const ImageOverlay = styled(AddOverlay)`
-background-color: grey;`
+background-color: grey;
+display: flex;
+flex-direction: column;
+align-items: center;
+`
 export const AddSummaryWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -603,3 +607,8 @@ export const ImagePopUp = styled.img`
   max-height: 80vh;
   max-width: 80vw;
 `;
+export const circleRow = styled.div`
+display: flex;
+justify-content: center;
+
+`
