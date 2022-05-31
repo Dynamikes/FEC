@@ -12,7 +12,7 @@ import {
 } from './Components/StyledComponents.jsx';
 export const prodIDContext = React.createContext();
 const App = (props) => {
-  const prodID = 
+ const[prodID, setProdId] = useState(40351)
   const name = props.name;
   return (
     <prodIDContext.Provider value={prodID} >

@@ -53,6 +53,7 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
   const [sizeValue, setSizeValue] = useState(0);
   const [addImages, setImages] = useState([]);
   const [addPhotoUrls, setAddPhotoUrls] = useState([]);
+  const [option, setOption] = useState('Sort on')
 
 
   //Characteristics
@@ -89,7 +90,22 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
     }else {
       document.getElementById('count-body').innerHTML = 'Minimum reached'
     }
+  };
 
+  const changeOption = (e) => {
+    if (event.target.value === 'Helpful') {
+      helpfulSorter()
+    } else if (event.target.value === 'Newest') {
+      newestSorter()
+    }
+  };
+
+  const newestSorter = () => {
+    let newReviews = reviews.slice()
+    newReviews.sort((a, b) => {
+      return (a.date < b.date) ? 1 : -1
+    })
+    
   }
 
   const getBase64 = (file) => {
@@ -114,7 +130,7 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
       let body = new FormData();
       body.append('image', file64);
       await axios({
-        url: `https://api.imgbb.com/1/upload?expiration=600&key=${IMG_API_KEY}`, //api key change
+        url: `https://api.imgbb.com/1/upload?expiration=600&key=${IMG_API_KEY}`,
         method: 'post',
         data: body
       })
@@ -197,7 +213,12 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
       </SearchBarWrapper>
       <ReviewMap>
         <div>
-          {reviews.length} Reviews /*sortedBy*
+          {reviews.length} Reviews
+          <select value={option} onChange={changeOption}>
+            <option></option>
+            <option></option>
+            <option></option>
+          </select>
         </div>
         {reviews.slice(0,reviewCount).map((review, index) =>
         <ReviewListEntry
