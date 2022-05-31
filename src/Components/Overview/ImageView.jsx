@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext} from 'react';
+import React, { useState, useEffect, useContext, useRef} from 'react';
 import { hot } from 'react-hot-loader/root';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -14,11 +14,12 @@ import {
   ImagePopUp,
   AddWrapper,
   ImageOverlay,
-  circleRow, ExpandButton
+  CircleRow, ExpandButton
 } from '../StyledComponents.jsx';
 import {MAIN_API_KEY} from '../../config.js'
 import {styleIDContext} from './Overview'
 import {prodIDContext} from '../../App.jsx'
+import { relativeTimeThreshold } from 'moment';
 
 const CarouselWrapper = styled.div`
   display: flex;
@@ -96,6 +97,23 @@ border-radius: 7px;
 outline: none;
 border-color: #9ecaed;
 box-shadow: 0 0 10px #9ecaed;
+` 
+const Target = styled(MainImage)`
+position: absolute;
+left: ${(props) => props.offset.left}px;
+top: ${(props) => props.offset.top}px;
+opacity: ${(props) => props.opacity};
+transform: scale(2.5);
+`
+
+
+const Container = styled.div`
+position: relative;
+overflow: hidden;
+display: block;
+padding: 50px;
+border: 1px solid #00adb7;
+border-radius: 15px;
 `
 function ImageView(props) {
   const imageToggle = () => {
@@ -109,8 +127,7 @@ function ImageView(props) {
   const [carLength, setCarLength] = useState(0);
   const [styleLoaded, setStyleLoaded] = useState(false)
   const [currentPicture, setCurrentPicture] = useState('');
-  const [opacity, setOpacity] = useState(0);
-  const [offset, setOffset] = useState({ left: 0, top: 0})
+ 
   var Carousel = [];
   const thumbCarousel = [];
   const styleID = useContext(styleIDContext);
@@ -203,22 +220,67 @@ function ImageView(props) {
         console.log('Breaking in getOurData. Err:', err);
       });
   }, [styleID]);
+//>>>>>>>>>>>>>ZOOM HANDLING>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+const [opacity, setOpacity] = useState(0);
+const [offset, setOffset] = useState({ left: 0, top: 0})
 
-  const handleMouseEnter = () => {
+const sourceRef = useRef(null);
+const targetRef = useRef(null);
+const containerRef = useRef(null);
+
+
+const handleMouseEnter = () => {
     setOpacity(1);
+    console.log('Mouse entered')
 
   }
 
   const handleMouseLeave = () => {
     setOpacity(0);
+    console.log('Mouse left')
     
   }
 
   const handleMouseMove = () => {
+    const targetRect = targetRef.current.getBoundingClientRect();
+    const sourceRect = sourceRef.current.getBoundingClientRect();
+    const containerRect = containerRef.current.getBoundingClientRect();
+    console.log('source rect', sourceRect);
+    console.log('target rect', targetRect)
+    console.log('event', event)
+    const xRatio = (targetRect.width - containerRect.width) / sourceRect.width ;
+    const yRatio = (targetRect.height - containerRect.height) / sourceRect.height ;
 
+    const left = Math.max(Math.min(event.pageX - sourceRect.left, sourceRect.width), 0);
+    const top = Math.max(Math.min(event.pageY - sourceRect.top, sourceRect.height), 0);
+    setOffset({
+      left: left * -xRatio,
+      top: top * -yRatio
+    })
     
   }
+// //>>>>>>>>>>>>>>>>>>>>>>>>>>>Example Styled Images>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+
+//   //>>>>>>>>>>>>>>>>>> EXAMPLE CONTAINERS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+//   <div className="BiggestContainer">
+//       <Container 
+//         ref={containerRef}
+//         onMouseEnter={handleMouseEnter}
+//         onMouseLeave={handleMouseLeave}
+//         onMouseMove={handleMouseMove}
+//         >
+//           <BaseImage ref={sourceRef} alt="source" source="Exampleimage.png" />
+//           <TargetImage 
+//             ref={targetRef}
+//             alt="target"
+//             opacity={opacity}
+//             offset={offset}
+//             source="BiggerExamplePicture" />
+//         </Container>
+//   </div>
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   return (
     <ImageViewWrapper className='ImageViewWrapper'>
       {clicked &&
@@ -234,23 +296,45 @@ function ImageView(props) {
         <ExpandedLeftArrow className='left-arrow' onClick={prevImage} />
       )}
 
-<ImageOverlayContainer className="ImageOverlayContainer" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onMouseMove={handleMouseMove}>
+<ImageOverlayContainer className="ImageOverlayContainer" >
+      <Container 
+      ref={containerRef}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onMouseMove={handleMouseMove}
+      >
       {loaded
         ? CarouselData.map((picture, index) => {
 
             return (
+              
               <ImageWrapper
                 className={index === current ? 'slide active' : 'slide'}
                 key={index}>
                 {index === current && (
 
-                  //THIS IS GOING TO HAVE TO RENDER CONDITIONALLY BASED ON MOUSE ENTER MOUSE LEAVE AFAIK
-                  <MainImage key={index} src={picture} alt='style image' onClick={() => {setCurrentPicture(picture), setClicked(true)}} />
+                  
+                  <MainImage 
+                  key={index} 
+                  src={picture} 
+                  alt='style image' 
+                  onClick={() => {setCurrentPicture(picture), setClicked(true)}}
+                  ref={sourceRef}
+                  
+                  />
                 )}
+              <Target 
+                ref={targetRef}
+                alt="target"
+                opacity={opacity}
+                offset={offset}
+                src={picture} />
               </ImageWrapper>
+              
             )
           })
         : ''}
+      </Container>
 </ImageOverlayContainer>
       {current === carLength - 1 ? (
         ''
@@ -259,7 +343,7 @@ function ImageView(props) {
       )}
 
     </div>
-    <circleRow>
+    <CircleRow>
         {loaded
           ? CarouselData.slice(vertCurrent[0], vertCurrent[1]).map((thumbnail, index) => {
 
@@ -274,7 +358,7 @@ function ImageView(props) {
             }
             })
           : ''}
-      </ circleRow>
+      </ CircleRow>
       </ImageOverlay> }
 
         {/* DEFAULT VIEW HERE */}
