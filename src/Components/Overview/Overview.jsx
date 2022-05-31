@@ -16,7 +16,7 @@ import {
 }
 from '../StyledComponents.jsx'
 export const styleIDContext = React.createContext();
-function Overview({appStyleID}) {
+function Overview({productAdd}) {
   //hook that adds state ttoggle
   //function that toggles state from A to B
   let [toggle, setToggle] = useState(!toggle);
@@ -27,7 +27,6 @@ function Overview({appStyleID}) {
   };
   const changeStyleID = (id) => {
     setStyleID(id)
-    appStyleID(id)
     console.log(id)
   }
 
@@ -36,7 +35,7 @@ function Overview({appStyleID}) {
     <OverviewWrapper>
       <Wrapper>
         <StyledImageView className='StyledImageView'>
-          <ImageView click={toggleFunc} />
+          <ImageView click={toggleFunc} productAdd={productAdd} />
         </StyledImageView>
         {toggle ? (
           <StyledSideBar>
