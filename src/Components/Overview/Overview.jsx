@@ -37,10 +37,9 @@ function Overview({productAdd}) {
         <StyledImageView className='StyledImageView'>
           <ImageView click={toggleFunc} productAdd={productAdd} />
         </StyledImageView>
-        {toggle ? (
           <StyledSideBar>
             {' '}
-            <ProductInfo />
+            <ProductInfo productAdd={productAdd}/>
             <StyleSelector click={changeStyleID} />
             <AddToCart />{' '}
             <StyledShare>
@@ -77,17 +76,9 @@ function Overview({productAdd}) {
         </a>
       </StyledShare>
           </StyledSideBar>
-        ) : (
-          <HiddenSideBar>
-            {' '}
-            <ProductInfo />
-            <StyleSelector />
-            <AddToCart />{' '}
-
-          </HiddenSideBar>
-        )}
+        
       </Wrapper>
-      <StyledProductInfo>
+      <StyledProductInfo productAdd={productAdd}>
         <ProductDescription />
       </StyledProductInfo>
     </OverviewWrapper>

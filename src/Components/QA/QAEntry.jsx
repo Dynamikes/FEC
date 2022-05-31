@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useState, useContext} from 'react';
 import { hot } from 'react-hot-loader/root';
 // import styled from 'styled-components';
 import axios from 'axios';
 import { Title, AddOverlay, AddWrapper, QAEntryWrapper, AnswerListWrapper, StyledQuestion, AnswerPhotos, AnswerPhoto, UpdateButtons, AddForms } from '../StyledComponents.jsx';
 import { MAIN_API_KEY, IMG_API_KEY } from '../../config.js'
 import AnswerEntry from './AnswerEntry.jsx'
-
+import {productForAdd} from '../../App.jsx'
 function QAEntry(props) {
   let answerArray = [];
   let sellerArray = [];
@@ -19,6 +19,7 @@ function QAEntry(props) {
   const [photoUrls, setPhotoUrls] = useState([]);
   const [buttonStatus, disableButton] = useState(false);
   const [photosArray, setUploadPhotos] = useState([]);
+  const prodName = useContext(productForAdd);
 
 
   const qHelpfulUpdate = () => {
