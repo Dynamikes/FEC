@@ -156,7 +156,7 @@ function ImageView(props) {
       },
     })
       .then((response) => {
-        //console.log('image array:', response.data.results);
+        console.log('image array:', response.data);
         let allPics = response.data.results[0].photos;
         let tempLength = 0;
         for (let i = 0; i < allPics.length; i++) {
@@ -167,7 +167,7 @@ function ImageView(props) {
           for (let x = 0; x < response.data.results[0].photos.length; x++) {
             thumbCarousel.push(response.data.results[0].photos[x].thumbnail_url);
           }
-          console.log('This is thumb carousel', thumbCarousel)
+          //console.log('This is thumb carousel', thumbCarousel)
         } else {
           for (let i = 0; i < response.data.results.length; i++) {
             if (response.data.results[i].style_id === styleID) {

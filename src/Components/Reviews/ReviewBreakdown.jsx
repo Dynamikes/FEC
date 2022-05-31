@@ -18,7 +18,7 @@ import RatingStars from './RatingStars.jsx'
 import ProgressBar from "@ramonak/react-progress-bar";
 
 
-const ReviewBreakdown = ({reviewsMeta, chars}) => {
+const ReviewBreakdown = ({reviewsMeta, chars, changeStars}) => {
   //Variables to hold values
   //Recommended
   // eslint-disable-next-line react/prop-types
@@ -52,7 +52,7 @@ const ReviewBreakdown = ({reviewsMeta, chars}) => {
 
   const average = parseFloat(((one * 1) +( two * 2) + (three * 3) + (four * 4) + (five * 5)) / (total)).toFixed(1)
 
-
+   changeStars(average)
   return (
     <ReviewBreakdownWrapper>
       <ReviewAverage>

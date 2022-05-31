@@ -313,6 +313,10 @@ export const ReviewListWrapper = styled.div`
   flex-wrap: wrap;
 `;
 
+export const CheckSpan = styled.span`
+  color:green;
+`;
+
 export const ReviewMap = styled.div`
   display: flex;
   flex-direction: column;
