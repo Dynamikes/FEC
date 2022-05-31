@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext} from 'react';
 import { hot } from 'react-hot-loader/root';
 import axios from 'axios';
 import styled from 'styled-components';
-import { FaArrowAltCircleRight, FaArrowAltCircleLeft, FaArrowAltCircleUp, FaArrowAltCircleDown } from 'react-icons/fa';
+import { FaArrowAltCircleRight, FaArrowAltCircleLeft, FaArrowAltCircleUp, FaArrowAltCircleDown, FaRegCircle } from 'react-icons/fa';
 import {
   ImageWrapper,
   ExpandButton,
@@ -14,7 +14,8 @@ import {
   AddOverlay,
   ImagePopUp,
   AddWrapper,
-  ImageOverlay
+  ImageOverlay,
+  circleRow
 } from '../StyledComponents.jsx';
 import {MAIN_API_KEY} from '../../config.js'
 import {styleIDContext} from './Overview'
@@ -26,19 +27,16 @@ const StyledLeftArrow = styled(FaArrowAltCircleLeft)`
   left: 5%;
   z-index: 3;
 `;
-const ZoomedLeftArrow = styled(StyledLeftArrow)`
-z-index: 7;
-top: 50%;
-`
-
 const StyledRightArrow = styled(FaArrowAltCircleRight)`
   transform: scale(2);
   position: absolute;
   right: 5%;
   z-index: 3;
 `;
-const ZoomedRightArrow = styled(StyledRightArrow)`
-z-index: 7;
+const ExpandedRightArrow = styled(StyledRightArrow)`
+top: 50%;
+`
+const ExpandedLeftArrow = styled(StyledLeftArrow)`
 top: 50%;
 `
 const StyledUpArrow = styled(FaArrowAltCircleUp)`
@@ -54,6 +52,16 @@ position: absolute;
 left: 10%;
 bottom: 5%;
 z-index: 3;
+`
+const ThumbCircle = styled(FaRegCircle)`
+
+`
+const HighlightCircle = styled(FaRegCircle)`
+border: 2px solid #dadada;
+border-radius: 7px;
+outline: none;
+border-color: #9ecaed;
+box-shadow: 0 0 10px #9ecaed;
 `
 function ImageView(props) {
   const imageToggle = () => {
@@ -72,7 +80,7 @@ function ImageView(props) {
   const styleID = useContext(styleIDContext);
   const prodID = useContext(prodIDContext);
   const [clicked, setClicked] = useState(false)
-  
+
   useEffect(()=> {
     if (current === vertCurrent[1]) {
       setVertCurrent([vertCurrent[0] + 1, vertCurrent[1] + 1])
@@ -101,6 +109,9 @@ function ImageView(props) {
      setVertCurrent([vertCurrent[0] - 1, vertCurrent[1] - 1])
      console.log(vertCurrent)
    }
+ }
+ const toggleDefault = () => {
+   setClicked(!clicked)
  }
   useEffect(() => {
     axios({
@@ -154,15 +165,14 @@ function ImageView(props) {
     <ImageViewWrapper>
       {clicked &&
       <ImageOverlay> 
-        {vertCurrent[0] === 0 ? (
-        ''
-      ) : (
-        <StyledUpArrow className='left-arrow'  onClick={() => changeVertCurrent('up')} />
-      )}
+        
+        <div className="modalWrapper"> 
+
+       <ExpandButton onClick={toggleDefault}> Back </ExpandButton>
       {current === 0 ? (
         ''
       ) : (
-        <StyledLeftArrow className='left-arrow' onClick={prevImage} />
+        <ExpandedLeftArrow className='left-arrow' onClick={prevImage} />
       )}
       
       
@@ -180,41 +190,30 @@ function ImageView(props) {
             )
           })
         : ''}
-<Thumbnails>
+      
+      {current === carLength - 1 ? (
+        ''
+      ) : (
+        <ExpandedRightArrow className='right-arrow' onClick={nextImage} />
+      )}
+    
+    </div>
+    <circleRow>
         {loaded
           ? CarouselData.slice(vertCurrent[0], vertCurrent[1]).map((thumbnail, index) => {
               
             if (thumbnail === CarouselData[current]) {
               return (
-                <HighlightedStyleThumbnail
-                  key={index}
-                  src={thumbnail}
-                  alt={'style thumbnail'}
-                  
+                <HighlightCircle key={index}
                 />
               )
             } else {
-              return (<ThumbnailImage
-                  key={index}
-                  src={thumbnail}
-                  alt={'style thumbnail'}
-                  onClick={() => changeCurrent(index)}
+              return (<ThumbCircle key={index}
                 />)
             }
             })
           : ''}
-      </Thumbnails>
-      {current === carLength - 1 ? (
-        ''
-      ) : (
-        <StyledRightArrow className='right-arrow' onClick={nextImage} />
-      )}
-    
-      {vertCurrent[1] === carLength - 1 ? (
-        ''
-      ) : (
-        <StyledDownArrow className='right-arrow'  onClick={() => changeVertCurrent('down')} />
-      )}
+      </ circleRow>
       </ImageOverlay> }
       {vertCurrent[0] === 0 ? (
         ''
