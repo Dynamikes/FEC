@@ -114,6 +114,7 @@ function ImageView(props) {
   const styleID = useContext(styleIDContext);
   const prodID = useContext(prodIDContext);
   const [clicked, setClicked] = useState(false)
+  var name = '';
 
   useEffect(()=> {
     if (current === vertCurrent[1]) {
@@ -167,6 +168,7 @@ function ImageView(props) {
           for (let x = 0; x < response.data.results[0].photos.length; x++) {
             thumbCarousel.push(response.data.results[0].photos[x].thumbnail_url);
           }
+          name = response.data.results[0].name;
           //console.log('This is thumb carousel', thumbCarousel)
         } else {
           for (let i = 0; i < response.data.results.length; i++) {
@@ -175,8 +177,10 @@ function ImageView(props) {
               for (let y = 0; y < response.data.results[i].photos.length; y++) {
                 Carousel.push(response.data.results[i].photos[y].url)
                 thumbCarousel.push(response.data.results[i].photos[y].thumbnail_url)
+                name = response.data.results[i].name;
               }
               console.log('This is carousel:', Carousel)
+              
             }
           }
 
@@ -185,6 +189,9 @@ function ImageView(props) {
         setCarouselData(Carousel);
         setCarLength(tempLength);
         setThumbCarouselData(thumbCarousel)
+      })
+      .then(() => {
+        props.productAdd(name)
       })
       .then(() => {
         setLoaded(true);
