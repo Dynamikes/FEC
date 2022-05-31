@@ -103,6 +103,7 @@ position: absolute;
 left: ${(props) => props.offset.left}px;
 top: ${(props) => props.offset.top}px;
 opacity: ${(props) => props.opacity};
+transform: scale(2.5);
 `
 
 
@@ -229,7 +230,7 @@ const containerRef = useRef(null);
 
 
 const handleMouseEnter = () => {
-    setOpacity(2);
+    setOpacity(1);
     console.log('Mouse entered')
 
   }
@@ -237,15 +238,18 @@ const handleMouseEnter = () => {
   const handleMouseLeave = () => {
     setOpacity(0);
     console.log('Mouse left')
+    
   }
 
   const handleMouseMove = () => {
     const targetRect = targetRef.current.getBoundingClientRect();
     const sourceRect = sourceRef.current.getBoundingClientRect();
     const containerRect = containerRef.current.getBoundingClientRect();
-
-    const xRatio = (targetRect.width - containerRect.width) / sourceRect.width;
-    const yRatio = (targetRect.height - containerRect.height) / sourceRect.height;
+    console.log('source rect', sourceRect);
+    console.log('target rect', targetRect)
+    console.log('event', event)
+    const xRatio = (targetRect.width - containerRect.width) / sourceRect.width ;
+    const yRatio = (targetRect.height - containerRect.height) / sourceRect.height ;
 
     const left = Math.max(Math.min(event.pageX - sourceRect.left, sourceRect.width), 0);
     const top = Math.max(Math.min(event.pageY - sourceRect.top, sourceRect.height), 0);
@@ -303,6 +307,7 @@ const handleMouseEnter = () => {
         ? CarouselData.map((picture, index) => {
 
             return (
+              
               <ImageWrapper
                 className={index === current ? 'slide active' : 'slide'}
                 key={index}>
