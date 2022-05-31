@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react'
+import {React, useState} from 'react'
 import { hot } from 'react-hot-loader/root';
 import {
   ReviewBreakdownWrapper,
@@ -19,10 +19,10 @@ import RatingStars from './RatingStars.jsx'
 import ProgressBar from "@ramonak/react-progress-bar";
 
 
-const ReviewBreakdown = ({reviewsMeta, chars, changeStars, reviews, setReviews}) => {
+const ReviewBreakdown = ({reviewsMeta, chars, changeStars, reviews, setReviews, reviewsHolder}) => {
+
   //Variables to hold values
   //Recommended
-  // eslint-disable-next-line react/prop-types
   const recommended = Number(reviewsMeta.recommended.true);
   const notRecommended = Number(reviewsMeta.recommended.false);
   //Rating stars
@@ -56,23 +56,43 @@ const ReviewBreakdown = ({reviewsMeta, chars, changeStars, reviews, setReviews})
    changeStars(average)
 
    const handleStarClick = (val) => {
-     let starReviews = reviews.slice()
-
-
-     //FIX TOMORROW REEEEEE
      if (val === 5) {
-      setReviews(starReviews.filter(review => review.rating === 5))
+      handleFive();
      } else if (val === 4) {
-      setReviews(starReviews.filter(review => review.rating === 4))
+      handleFour();
      } else if (val === 3) {
-      setReviews(starReviews.filter(review => review.rating === 3))
+      handleThree();
      } else if (val === 2) {
-      setReviews(starReviews.filter(review => review.rating === 2))
+      handleTwo();
      } else {
-      setReviews(starReviews.filter(review => review.rating === 1))
+      handleOne();
      }
     };
 
+    const handleFive = () => {
+      let starFive = reviewsHolder.slice()
+      setReviews(starFive.filter(review => review.rating === 5))
+    };
+
+    const handleFour = () => {
+      let starFour = reviewsHolder.slice()
+      setReviews(starFour.filter(review => review.rating === 4))
+    };
+
+    const handleThree = () => {
+      let starThree = reviewsHolder.slice()
+      setReviews(starThree.filter(review => review.rating === 3))
+    };
+
+    const handleTwo = () => {
+      let starTwo = reviewsHolder.slice()
+      setReviews(starTwo.filter(review => review.rating === 2))
+    };
+
+    const handleOne = () => {
+      let starOne = reviewsHolder.slice()
+      setReviews(starOne.filter(review => review.rating === 1))
+    };
 
   return (
     <ReviewBreakdownWrapper>
@@ -82,7 +102,7 @@ const ReviewBreakdown = ({reviewsMeta, chars, changeStars, reviews, setReviews})
       </ReviewAverage>
       <ProgressBarWrap>
       <StarBarWrap>
-        <div> <StarRatings rating={5} starRatedColor='gold' starDimension='15px' starSpacing='2px'/> <RatingHover onClick={() => handleStarClick(5)}>({five}) Reviews! </RatingHover></div>
+        <div> <StarRatings rating={5} starRatedColor='gold' starDimension='15px' starSpacing='2px'/> <RatingHover onClick={() => {handleStarClick(5)}}>({five}) Reviews! </RatingHover></div>
             <ProgressBar
               width='65%'
               completed={`${five}`}

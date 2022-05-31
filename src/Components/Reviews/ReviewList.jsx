@@ -248,7 +248,7 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
         <AddReview open={addIsOpen} onClose={() => setAdd(false)}>
           <form onSubmit={submitAdd}>
             <AddTitle>Write Your Review</AddTitle>
-            <h3>About the **NEED PRODUCT NAME**</h3>
+            <h3>About the {product}</h3>
             <StarRow>
               <div>
                 <StarRatings
