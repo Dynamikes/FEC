@@ -65,7 +65,7 @@ const ReviewListEntry = ({review, getReviews}) => {
       <p><b>{review.summary}</b></p>
       <ReviewBodyWrapper>
         <ReviewBody>{review.body}</ReviewBody>
-        {review.recommend ? <p>✓ I recommend this product!</p> : null}
+        {review.recommend ? <p><CheckSpan>✓</CheckSpan> I recommend this product!</p> : null}
         <AnswerPhotos>
         {review['photos'].length === 0 ? null :
           review['photos'].map((photo, index) => (

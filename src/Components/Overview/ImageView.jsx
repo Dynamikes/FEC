@@ -180,7 +180,7 @@ function ImageView(props) {
                 name = response.data.results[i].name;
               }
               console.log('This is carousel:', Carousel)
-              
+
             }
           }
 
