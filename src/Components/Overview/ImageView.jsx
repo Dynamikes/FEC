@@ -109,6 +109,8 @@ function ImageView(props) {
   const [carLength, setCarLength] = useState(0);
   const [styleLoaded, setStyleLoaded] = useState(false)
   const [currentPicture, setCurrentPicture] = useState('');
+  const [opacity, setOpacity] = useState(0);
+  const [offset, setOffset] = useState({ left: 0, top: 0})
   var Carousel = [];
   const thumbCarousel = [];
   const styleID = useContext(styleIDContext);
@@ -191,7 +193,7 @@ function ImageView(props) {
         setThumbCarouselData(thumbCarousel)
       })
       .then(() => {
-        props.productAdd(name)
+
       })
       .then(() => {
         setLoaded(true);
@@ -201,6 +203,21 @@ function ImageView(props) {
         console.log('Breaking in getOurData. Err:', err);
       });
   }, [styleID]);
+
+  const handleMouseEnter = () => {
+    setOpacity(1);
+
+  }
+
+  const handleMouseLeave = () => {
+    setOpacity(0);
+    
+  }
+
+  const handleMouseMove = () => {
+
+    
+  }
 
   return (
     <ImageViewWrapper className='ImageViewWrapper'>
@@ -217,7 +234,7 @@ function ImageView(props) {
         <ExpandedLeftArrow className='left-arrow' onClick={prevImage} />
       )}
 
-<ImageOverlayContainer>
+<ImageOverlayContainer className="ImageOverlayContainer" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onMouseMove={handleMouseMove}>
       {loaded
         ? CarouselData.map((picture, index) => {
 
@@ -226,6 +243,8 @@ function ImageView(props) {
                 className={index === current ? 'slide active' : 'slide'}
                 key={index}>
                 {index === current && (
+
+                  //THIS IS GOING TO HAVE TO RENDER CONDITIONALLY BASED ON MOUSE ENTER MOUSE LEAVE AFAIK
                   <MainImage key={index} src={picture} alt='style image' onClick={() => {setCurrentPicture(picture), setClicked(true)}} />
                 )}
               </ImageWrapper>
