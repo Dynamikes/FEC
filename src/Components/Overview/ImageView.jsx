@@ -14,7 +14,7 @@ import {
   ImagePopUp,
   AddWrapper,
   ImageOverlay,
-  circleRow, ExpandButton
+  CircleRow, ExpandButton
 } from '../StyledComponents.jsx';
 import {MAIN_API_KEY} from '../../config.js'
 import {styleIDContext} from './Overview'
@@ -259,7 +259,7 @@ function ImageView(props) {
       )}
 
     </div>
-    <circleRow>
+    <CircleRow>
         {loaded
           ? CarouselData.slice(vertCurrent[0], vertCurrent[1]).map((thumbnail, index) => {
 
@@ -274,7 +274,7 @@ function ImageView(props) {
             }
             })
           : ''}
-      </ circleRow>
+      </ CircleRow>
       </ImageOverlay> }
 
         {/* DEFAULT VIEW HERE */}

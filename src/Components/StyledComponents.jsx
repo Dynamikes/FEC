@@ -397,7 +397,7 @@ export const CharAdd = styled.div`
 `;
 
 export const SelectorAddWrapper = styled.div`
-  
+
 `;
 
 //ReviewBreakdown.jsx ----------------------
@@ -619,7 +619,7 @@ export const ImagePopUp = styled.img`
   max-height: 80vh;
   max-width: 80vw;
 `;
-export const circleRow = styled.div`
+export const CircleRow = styled.div`
 display: flex;
 justify-content: center;
 
