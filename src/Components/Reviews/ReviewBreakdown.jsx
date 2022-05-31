@@ -19,7 +19,7 @@ import RatingStars from './RatingStars.jsx'
 import ProgressBar from "@ramonak/react-progress-bar";
 
 
-const ReviewBreakdown = ({reviewsMeta, chars, changeStars, reviews, setReviews, constReview}) => {
+const ReviewBreakdown = ({reviewsMeta, chars, changeStars, reviews, setReviews, reviewsHolder}) => {
 
   //Variables to hold values
   //Recommended
@@ -55,16 +55,7 @@ const ReviewBreakdown = ({reviewsMeta, chars, changeStars, reviews, setReviews, 
 
    changeStars(average)
 
-   const fullReview = () => {
-     let constRev = constReview.slice()
-     setReviews(constRev)
-     console.log('FIX?', constRev)
-     console.log('REV2', reviews)
-   };
-
    const handleStarClick = (val) => {
-     fullReview();
-     
      if (val === 5) {
       handleFive();
      } else if (val === 4) {
@@ -76,38 +67,35 @@ const ReviewBreakdown = ({reviewsMeta, chars, changeStars, reviews, setReviews, 
      } else {
       handleOne();
      }
-
     };
 
     const handleFive = () => {
-      let starFive = reviews.slice()
+      let starFive = reviewsHolder.slice()
       setReviews(starFive.filter(review => review.rating === 5))
     };
 
     const handleFour = () => {
-      let starFour = reviews.slice()
+      let starFour = reviewsHolder.slice()
       setReviews(starFour.filter(review => review.rating === 4))
     };
 
     const handleThree = () => {
-      let starThree = reviews.slice()
+      let starThree = reviewsHolder.slice()
       setReviews(starThree.filter(review => review.rating === 3))
     };
 
     const handleTwo = () => {
-      let starTwo = reviews.slice()
+      let starTwo = reviewsHolder.slice()
       setReviews(starTwo.filter(review => review.rating === 2))
     };
 
     const handleOne = () => {
-      let starOne = reviews.slice()
+      let starOne = reviewsHolder.slice()
       setReviews(starOne.filter(review => review.rating === 1))
     };
 
   return (
     <ReviewBreakdownWrapper>
-      {console.log('REV', reviews)}
-      {console.log('SAASDASDASD', constReview)}
       <ReviewAverage>
         {average}
         <RatingStars value={(Number(Math.round(average * 4) / 4).toFixed(2))}/>
