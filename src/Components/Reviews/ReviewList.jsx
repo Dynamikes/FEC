@@ -16,7 +16,8 @@ import {
   StyledSearchIcon,
   QAButtons,
   AnswerPhoto,
-  AnswerPhotos
+  AnswerPhotos,
+  SelectorAddWrapper
 }
 from '../StyledComponents.jsx';
 import ReviewListEntry from './ReviewListEntry';
@@ -25,9 +26,10 @@ import StarRatings from 'react-star-ratings';
 import axios from 'axios';
 import {MAIN_API_KEY, IMG_API_KEY} from '../../config.js'
 import {prodIDContext} from '../../App.jsx'
-
+import {productForAdd} from '../../App.jsx'
 const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prodID}) => {
 
+  const product = useContext(productForAdd)
   // const prodID2 = useContext(prodIDContext)
   //State for various items
   const [reviewCount, setReviewCount] = useState(2);
@@ -94,8 +96,10 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
 
   const changeOption = (e) => {
     if (event.target.value === 'Helpful') {
+      setOption('Helpful')
       helpfulSorter()
     } else if (event.target.value === 'Newest') {
+      setOption('Newest')
       newestSorter()
     }
   };
@@ -105,8 +109,14 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
     newReviews.sort((a, b) => {
       return (a.date < b.date) ? 1 : -1
     })
-    
-  }
+    setReviews(newReviews)
+  };
+
+  const helpfulSorter = () => {
+    let helpfulSort = reviews.slice()
+    helpfulSort.sort((a, b) => (a['helpfulness'] < b['helpfulness']) ? 1 : -1)
+    setReviews(helpfulSort)
+  };
 
   const getBase64 = (file) => {
     return new Promise((resolve, reject) => {
@@ -211,15 +221,15 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
         />
         <input type='submit' value='x'onClick={()=> {setReviews(reviewsHolder)}} />
       </SearchBarWrapper>
-      <ReviewMap>
-        <div>
-          {reviews.length} Reviews
+      <SelectorAddWrapper>
+          {reviews.length} Reviews, Sort on -
           <select value={option} onChange={changeOption}>
-            <option></option>
-            <option></option>
-            <option></option>
-          </select>
-        </div>
+            <option value='Relevance'>Relevance</option>
+            <option value='Newest'>Newest</option>
+            <option value='Helpful'>Helpful</option>
+          </select>-
+      </SelectorAddWrapper>
+      <ReviewMap>
         {reviews.slice(0,reviewCount).map((review, index) =>
         <ReviewListEntry
             getReviews={getReviews}
@@ -238,7 +248,7 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
         <AddReview open={addIsOpen} onClose={() => setAdd(false)}>
           <form onSubmit={submitAdd}>
             <AddTitle>Write Your Review</AddTitle>
-            <h3>About the *Add Product Name*</h3>
+            <h3>About the **NEED PRODUCT NAME**</h3>
             <StarRow>
               <div>
                 <StarRatings

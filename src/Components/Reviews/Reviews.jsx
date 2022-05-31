@@ -82,6 +82,8 @@ const Reviews = ({changeStars}) => {
           reviewsMeta={reviewsMeta}
           chars={chara}
           changeStars={changeStars}
+          reviews={reviews}
+          setReviews={setReview}
         />
         <ReviewList
           reviews={reviews}
