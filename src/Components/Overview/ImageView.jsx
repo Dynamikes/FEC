@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft, FaArrowAltCircleUp, FaArrowAltCircleDown } from 'react-icons/fa';
 import {
   ImageWrapper,
-  ExpandButton,
   MainImage,
   Thumbnails,
   ThumbnailImage,
@@ -21,22 +20,20 @@ import {styleIDContext} from './Overview'
 import {prodIDContext} from '../../App.jsx'
 
 const CarouselWrapper = styled.div`
-  border: 3px red solid;
   display: flex;
   overflow: hidden;
 `;
 const MainImageWrapper = styled.div`
-  height: 500px;
-  width: 500px;
+  height: 300px;
+  width: 300px;
   overflow: hidden;
-  margin: 2rem;
+  margin: 1rem;
 `;
 
 const StyledLeftArrow = styled(FaArrowAltCircleLeft)`
   transform: scale(2);
-  position: absolute;
-  left: 5%;
   z-index: 3;
+  margin: 10px;
 `;
 const DeadLeftArrow = styled(StyledLeftArrow)`
   opacity: 0;
@@ -49,9 +46,8 @@ top: 50%;
 
 const StyledRightArrow = styled(FaArrowAltCircleRight)`
   transform: scale(2);
-  position: absolute;
-  right: 5%;
   z-index: 3;
+  margin: 10px;
 `;
 const DeadRightArrow = styled(StyledRightArrow)`
   opacity: 0;
@@ -66,6 +62,7 @@ transform: scale(1);
 left: 10%;
 top: 5%;
 z-index: 3;
+margin: 10px;
 `
 const DeadUpArrow = styled(StyledUpArrow)`
   opacity: 0;
@@ -76,6 +73,7 @@ transform: scale(1);
 left: 10%;
 bottom: 5%;
 z-index: 3;
+margin: 10px;
 `
 const DeadDownArrow = styled(StyledDownArrow)`
   opacity: 0;
@@ -177,7 +175,7 @@ function ImageView(props) {
   }, [styleID]);
 
   return (
-    <ImageViewWrapper>
+    <ImageViewWrapper className='ImageViewWrapper'>
       {clicked &&
       <ImageOverlay>
         {vertCurrent[0] === 0 ? (
@@ -283,7 +281,7 @@ function ImageView(props) {
       ) : (
         <StyledLeftArrow className='left-arrow' onClick={prevImage} />
       )}
-      <CarouselWrapper>
+      <CarouselWrapper className='CarouselWrapper'>
       {loaded
         ?
         CarouselData.map((picture, index) => {

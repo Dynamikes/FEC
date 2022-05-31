@@ -9,7 +9,6 @@ export const ImageWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: auto;
   z-index: 2;
   height: 100%;
   max-width: 100%;
@@ -23,14 +22,13 @@ export const MainImage = styled.img`
 `;
 
 export const ImageViewWrapper = styled.section`
-  position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
   padding: 5px;
   z-index: 2;
-  width: 80%;
-  height: 80%;
+  flex: 1 1 100%;
+  height: 100%;
   user-select: none;
 `;
 export const ExpandButton = styled.button`
@@ -54,18 +52,17 @@ export const Thumbnails = styled.div`
   user-select: none;
 `;
 export const ThumbnailImage = styled.img`
-  height: 50px;
-  width: 50px;
+  height: 35px;
+  width: 35px;
   margin: 2px;
+  border-radius: 50%;
 `;
 export const Flexbox = styled.div`
   display: flex;
   justify-content: center;
-  max-width: 90%;
+  max-width: 80%;
   margin: auto;
   padding: 10px;
-  min-width: 600px;
-  overflow-x: scroll;
 `;
 
 export const StyledPageTitle = styled.h1`
@@ -73,8 +70,7 @@ export const StyledPageTitle = styled.h1`
   justify-content: center;
 `;
 export const AppWrapper = styled.div`
-  min-width: 600px;
-  overflow-x: scroll;
+  min-width: 480px;
 `;
 
 export const StyledSideBar = styled.div`
@@ -83,8 +79,7 @@ export const StyledSideBar = styled.div`
   z-index: 1;
   display: flex;
   padding: 10px;
-  width: 250px;
-  height: 100%;
+  flex-wrap: wrap;
 `;
 export const HiddenSideBar = styled(StyledSideBar)`
   display: none;
@@ -97,6 +92,7 @@ export const StyledProductInfo = styled.div`
 `;
 export const Wrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;
 `;
 export const StyledProductName = styled.h2`
   display: flex;
@@ -182,9 +178,9 @@ export const AddToCartButton = styled.button`
 
 export const StyleThumbnail = styled.img`
   border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  padding: 5px;
+  padding: 3px;
+  height: 35px;
+  width: 35px;
 `;
 export const HighlightedStyleThumbnail = styled(ThumbnailImage)`
 border: 2px solid #dadada;
@@ -196,7 +192,7 @@ box-shadow: 0 0 10px #9ecaed;
 export const StyleSelectorContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 4px;
+  gap: 2px;
 `;
 
 export const BigQAWrapper = styled.div`
@@ -298,11 +294,13 @@ export const  TotalReviewWrapper = styled.div`
   border-color: rgb(20 , 20, 20);
   border-width: 2px;
   border-style: solid;
+  flex-wrap: wrap;
 `;
 
 export const InnerReviewWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 `;
 
 //ReviewList.jsx ---------------------------
@@ -313,6 +311,7 @@ export const ReviewListWrapper = styled.div`
   padding: 10px;
   margin: 10px;
   flex-grow: 1;
+  flex-wrap: wrap;
 `;
 
 export const ReviewMap = styled.div`
