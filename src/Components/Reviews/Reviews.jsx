@@ -19,6 +19,7 @@ const Reviews = ({changeStars}) => {
   const [chars, setChars] = useState({Size: 1, Width: 1, Comfort: 1, Quality: 1, Length:1, Fit: 1})
   const [loadedChars, setLoadedChars] = useState(false);
   const [loadedRev, setLoadedRev] = useState(false);
+  const [constReview, setConstReview] = useState([])
 
   const prodID = useContext(prodIDContext)
 
@@ -34,6 +35,7 @@ const Reviews = ({changeStars}) => {
     .then((response) => {
       setReview(response.data.results);
       setReviewsHolder(response.data.results);
+      setConstReview(response.data.results);
     })
     .catch((err) => {
       console.log('Breaking in Review GET. Err:', err);
@@ -84,6 +86,7 @@ const Reviews = ({changeStars}) => {
           changeStars={changeStars}
           reviews={reviews}
           setReviews={setReview}
+          constReview={constReview}
         />
         <ReviewList
           reviews={reviews}
