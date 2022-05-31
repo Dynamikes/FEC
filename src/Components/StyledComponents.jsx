@@ -622,5 +622,8 @@ export const ImagePopUp = styled.img`
 export const CircleRow = styled.div`
 display: flex;
 justify-content: center;
-
 `
+export const SalePrice = styled.span`
+  color: red;
+  size: 1.1 em;
+`;
