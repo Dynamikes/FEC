@@ -11,7 +11,8 @@ import {
   AnswerPhoto,
   ImagePopUp,
   AddOverlay,
-  AddWrapper
+  AddWrapper,
+  CheckSpan
 }
 from '../StyledComponents.jsx';
 import Moment from 'react-moment';
@@ -57,14 +58,14 @@ const ReviewListEntry = ({review, getReviews}) => {
             </small>
           </div>
         </StyledQuestion>
-          <div><big>{review.reviewer_name} ✓ </big></div>
+          <div><big>{review.reviewer_name} <CheckSpan> ✓ </CheckSpan> </big></div>
         <small> on <Moment format='MMMM Do YYYY'>{review.date}</Moment></small>
       </div>
       {review.response ? <div>{review.response}</div> : <div></div>}
       <p><b>{review.summary}</b></p>
       <ReviewBodyWrapper>
         <ReviewBody>{review.body}</ReviewBody>
-        {review.recommend ? <p>✓ I recommend this product!</p> : null}
+        {review.recommend ? <p><CheckSpan>✓</CheckSpan> I recommend this product!</p> : null}
         <AnswerPhotos>
         {review['photos'].length === 0 ? null :
           review['photos'].map((photo, index) => (

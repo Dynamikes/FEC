@@ -10,7 +10,7 @@ from '../StyledComponents.jsx';
 import {MAIN_API_KEY} from '../../config.js'
 import {prodIDContext} from '../../App.jsx'
 
-const Reviews = () => {
+const Reviews = ({changeStars}) => {
   //States for user reviews / Meta data
   const [reviews, setReview] = useState([]);
   const [reviewsHolder, setReviewsHolder] = useState([]);
@@ -69,9 +69,10 @@ const Reviews = () => {
   useEffect(() => {
     getMeta();
   }, []);
+
+
   let chara
   if(loadedChars){chara = chars}
-  if(loadedRev){console.log(reviews)}
 
   return(
     <TotalReviewWrapper>
@@ -80,6 +81,9 @@ const Reviews = () => {
         <ReviewBreakdown
           reviewsMeta={reviewsMeta}
           chars={chara}
+          changeStars={changeStars}
+          reviews={reviews}
+          setReviews={setReview}
         />
         <ReviewList
           reviews={reviews}

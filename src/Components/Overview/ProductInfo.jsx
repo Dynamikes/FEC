@@ -14,41 +14,72 @@ import {
 import {MAIN_API_KEY} from '../../config.js'
 import {prodIDContext} from '../../App.jsx';
 import StarRatings from 'react-star-ratings';
+import {starsContext} from '../../App.jsx';
+import {styleIDContext} from './Overview'
 
 function ProductInfo() {
   const [products, setProduct] = useState(null);
   const [error, setError] = useState('');
   const [loaded, setLoaded] = useState(false);
+  const [currentStyle, setCurrentStyle] = useState(null)
+  const [styleLoaded, setStyleLoaded] = useState(false)
 
-  let product_id = useContext(prodIDContext);
+  let prodID = useContext(prodIDContext);
+  const stars = useContext(starsContext)
+  const styleID = useContext(styleIDContext);
+  console.log(styleID)
+
 
   useEffect(() => {
     axios({
-      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/',
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${prodID}`,
       method: 'get',
       headers: {
         Authorization: MAIN_API_KEY,
       },
     })
       .then((response) => {
-        console.log('responsedata,', response)
         setProduct(response.data);
       })
       .then(() => {
-        console.log('productInfo', products)
         setLoaded(true);
       })
       .catch((err) => {
         setError(err);
         console.log('Breaking in getOurData. Err:', err);
       });
-  }, []);
+  }, [prodID]);
+
+  useEffect(() => {
+    axios({
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${prodID}/styles`,
+      method: 'get',
+      headers: {
+        Authorization: MAIN_API_KEY,
+      },
+    })
+    .then((response) => {
+      console.log('responsedataresults', response.data.results)
+      if (styleID !== null) {
+        for (let i = 0; i < response.data.results.length; i++) {
+        if (response.data.results[i].style_id === styleID) {
+          setCurrentStyle(response.data.results[i])
+        }
+      }} else {
+        setCurrentStyle(response.data.results[0])
+      }
+    })
+    .then(() => {
+      setStyleLoaded(true)
+      console.log('this is currentstyle', currentStyle)
+    })
+  }, [styleID]);
   return (
     <ProductInfoWrapper>
       <StyledStars>
         {' '}
         <StarRatings
-        rating={1} //Need to pull rating for product in from Ratings to replace 1...
+        rating={Number(stars)}
         starRatedColor="gold"
         starDimension='25px'
         starSpacing={'2px'}
@@ -60,14 +91,15 @@ function ProductInfo() {
       </StyledStars>
       <StyledCategory>
         {' '}
-        {loaded ? products[0].category : 'CATEGORY'}
+        {loaded ? products.category : 'CATEGORY'}
       </StyledCategory>
-      <Title> {loaded ? products[0].name : 'TITLE'} </Title>
+      <Title> {styleLoaded ? currentStyle.name : 'TITLE'} </Title>
       <StyledPrice>
         {' '}
-        {loaded ? '$' + products[0].default_price : 'PRICE'}{' '}
+        {styleLoaded ? '$' + currentStyle.original_price : 'PRICE'}{' '}
       </StyledPrice>
     </ProductInfoWrapper>
+
   );
 }
 

@@ -313,6 +313,10 @@ export const ReviewListWrapper = styled.div`
   flex-wrap: wrap;
 `;
 
+export const CheckSpan = styled.span`
+  color:green;
+`;
+
 export const ReviewMap = styled.div`
   display: flex;
   flex-direction: column;
@@ -388,8 +392,12 @@ export const RadioAdd = styled.div`
 `;
 
 export const CharAdd = styled.div`
-display: flex;
-flex-direction: column;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const SelectorAddWrapper = styled.div`
+  
 `;
 
 //ReviewBreakdown.jsx ----------------------
@@ -488,6 +496,12 @@ export const SliderInputQuality = styled.input`
     color: white
   }
 }
+`;
+
+export const RatingHover = styled.small`
+  &:hover {
+    color: green;
+  }
 `;
 
 export const SliderInputLength = styled.input`
