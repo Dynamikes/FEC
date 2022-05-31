@@ -14,11 +14,12 @@ import {
   ImagePopUp,
   AddWrapper,
   ImageOverlay,
-  circleRow, ExpandButton
+  CircleRow, ExpandButton
 } from '../StyledComponents.jsx';
 import {MAIN_API_KEY} from '../../config.js'
 import {styleIDContext} from './Overview'
 import {prodIDContext} from '../../App.jsx'
+import { relativeTimeThreshold } from 'moment';
 
 const CarouselWrapper = styled.div`
   display: flex;
@@ -109,8 +110,7 @@ function ImageView(props) {
   const [carLength, setCarLength] = useState(0);
   const [styleLoaded, setStyleLoaded] = useState(false)
   const [currentPicture, setCurrentPicture] = useState('');
-  const [opacity, setOpacity] = useState(0);
-  const [offset, setOffset] = useState({ left: 0, top: 0})
+ 
   var Carousel = [];
   const thumbCarousel = [];
   const styleID = useContext(styleIDContext);
@@ -203,22 +203,80 @@ function ImageView(props) {
         console.log('Breaking in getOurData. Err:', err);
       });
   }, [styleID]);
+//>>>>>>>>>>>>>ZOOM HANDLING>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+// const [opacity, setOpacity] = useState(0);
+// const [offset, setOffset] = useState({ left: 0, top: 0})
 
-  const handleMouseEnter = () => {
-    setOpacity(1);
+// const sourceRef = useRef(null);
+// const targetRef = useRef(null);
+// const containerRef = useRef(null);
 
-  }
 
-  const handleMouseLeave = () => {
-    setOpacity(0);
+// const handleMouseEnter = () => {
+//     setOpacity(1);
+
+//   }
+
+//   const handleMouseLeave = () => {
+//     setOpacity(0);
     
-  }
+//   }
 
-  const handleMouseMove = () => {
+//   const handleMouseMove = () => {
+//     const targetRect = targetRef.current.getBoundingClientRect();
+//     const sourceRect = sourceRef.current.getBoundingClientRect();
+//     const containerRect = containerRef.current.getBoundingClientRect();
 
+//     const xRatio = (targetRect.width) / sourceRect.width;
+//     const yRatio = (targetRect.height) / sourceRect.height;
+
+//     const left = Math.max(Math.min(e.pageX - sourceRect.left, sourceRect.width), 0);
+//     const top = Math.max(Math.mid(e.pageY - sourceRect.top, sourceRect.height), 0);
+//     setOffset({
+//       left: left * -xRatio,
+//       top: top * -yRatio
+//     })
     
-  }
+//   }
+// //>>>>>>>>>>>>>>>>>>>>>>>>>>>Example Styled Images>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//   const Target = styled(Image)`
+//   postition: absolute;
+//   left: ${(props) => props.offset.left}px;
+//   top: ${(props) => props.offset.top}px;
+//   opacity: ${(props) => props.opacity};
+//   `
 
+//   const Image = styled.img.attrs((props) => ({
+//     src: props.source
+//   }))`
+//   `
+//   const Container = styled.div`
+//   position: relative;
+//   overflow: hidden;
+//   display: block;
+//   padding: 50px;
+//   border: 1px solid #00adb7;
+//   border-radius: 15px;
+//   `
+//   //>>>>>>>>>>>>>>>>>> EXAMPLE CONTAINERS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+//   <div className="BiggestContainer">
+//       <Container 
+//         ref={containerRef}
+//         onMouseEnter={handleMouseEnter}
+//         onMouseLeave={handleMouseLeave}
+//         onMouseMove={handleMouseMove}
+//         >
+//           <BaseImage ref={sourceRef} alt="source" source="Exampleimage.png" />
+//           <TargetImage 
+//             ref={targetRef}
+//             alt="target"
+//             opacity={opacity}
+//             offset={offset}
+//             source="BiggerExamplePicture" />
+//         </Container>
+//   </div>
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   return (
     <ImageViewWrapper className='ImageViewWrapper'>
       {clicked &&
@@ -234,7 +292,7 @@ function ImageView(props) {
         <ExpandedLeftArrow className='left-arrow' onClick={prevImage} />
       )}
 
-<ImageOverlayContainer className="ImageOverlayContainer" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onMouseMove={handleMouseMove}>
+<ImageOverlayContainer className="ImageOverlayContainer" >
       {loaded
         ? CarouselData.map((picture, index) => {
 
@@ -259,7 +317,7 @@ function ImageView(props) {
       )}
 
     </div>
-    <circleRow>
+    <CircleRow>
         {loaded
           ? CarouselData.slice(vertCurrent[0], vertCurrent[1]).map((thumbnail, index) => {
 
@@ -274,7 +332,7 @@ function ImageView(props) {
             }
             })
           : ''}
-      </ circleRow>
+      </ CircleRow>
       </ImageOverlay> }
 
         {/* DEFAULT VIEW HERE */}
