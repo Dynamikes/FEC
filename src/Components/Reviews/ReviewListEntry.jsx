@@ -44,6 +44,8 @@ const ReviewListEntry = ({review, getReviews}) => {
       })
   };
 
+  console.log('Leia: ', review)
+
   return (
     <ReviewTile>
       <div>

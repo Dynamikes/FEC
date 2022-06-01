@@ -243,6 +243,7 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
     }
   }
 
+
   return (
     <ReviewListWrapper>
       {console.log('Photos', addPhotoUrls)}
