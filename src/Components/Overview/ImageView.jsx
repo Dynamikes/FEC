@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft, FaArrowAltCircleUp, FaArrowAltCircleDown, FaRegCircle } from 'react-icons/fa';
 import {
   ImageWrapper,
-  MainImage,
   Thumbnails,
   ThumbnailImage,
   ImageViewWrapper,
@@ -97,19 +96,38 @@ outline: none;
 border-color: #9ecaed;
 box-shadow: 0 0 10px #9ecaed;
 `
-const Target = styled(MainImage)`
+const MainImage = styled.img`
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  object-position: 50% 50%;
+  
+`;
+
+const Target = styled.img`
 position: absolute;
 left: ${(props) => props.offset.left}px;
 top: ${(props) => props.offset.top}px;
 opacity: ${(props) => props.opacity};
 transform: scale(2.5);
+border: 3px black solid;
+`
+
+const TargetDiv = styled(ImageWrapper)`
+position: absolute;
+border: 3px red solid;
+width: 100%;
+
+
 `
 
 
 const Container = styled.div`
 position: relative;
 overflow: hidden;
-display: block;
+jusitify-content: center;
+align-items: center;
+display: flex;
 padding: 50px;
 border: 1px solid #00adb7;
 border-radius: 15px;
@@ -157,10 +175,10 @@ function ImageView(props) {
  const changeVertCurrent = (x) => {
    if (vertCurrent[1] < CarouselData.length && x === 'down') {
     setVertCurrent([vertCurrent[0] + 1, vertCurrent[1] + 1])
-    console.log(vertCurrent)
+    //console.log(vertCurrent)
    } else if (vertCurrent[0] > 0 && x === 'up') {
      setVertCurrent([vertCurrent[0] - 1, vertCurrent[1] - 1])
-     console.log(vertCurrent)
+     //console.log(vertCurrent)
    }
  }
  const toggleDefault = () => {
@@ -175,7 +193,9 @@ function ImageView(props) {
       },
     })
       .then((response) => {
-        console.log('image array:', response.data);
+        //console.log('image array:', response.data);
+        let tempID = response.data.results[0].style_id
+        props.changeStyleID(tempID)
         let allPics = response.data.results[0].photos;
         let tempLength = 0;
         for (let i = 0; i < allPics.length; i++) {
@@ -220,8 +240,9 @@ function ImageView(props) {
       });
   }, [styleID]);
 //>>>>>>>>>>>>>ZOOM HANDLING>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-const [opacity, setOpacity] = useState(0);
-const [offset, setOffset] = useState({ left: 0, top: 0})
+const [opacity, setOpacity] = useState(1);
+const [offset, setOffset] = useState({ left: 50, top: 50})
+const [backOpacity, setBackOpacity] = useState(1);
 
 const sourceRef = useRef(null);
 const targetRef = useRef(null);
@@ -230,12 +251,14 @@ const containerRef = useRef(null);
 
 const handleMouseEnter = () => {
     setOpacity(1);
+    setBackOpacity(0)
     console.log('Mouse entered')
 
   }
 
   const handleMouseLeave = () => {
     setOpacity(0);
+    setBackOpacity(1)
     console.log('Mouse left')
 
   }
@@ -317,22 +340,29 @@ const handleMouseEnter = () => {
                   key={index}
                   src={picture}
                   alt='style image'
-                  onClick={() => {setCurrentPicture(picture), setClicked(true)}}
+                  onClick={() => {setCurrentPicture(picture), setClicked(true), setOpacity(1)}}
                   ref={sourceRef}
 
                   />
+                  
                 )}
-              <Target
+                {/* <TargetDiv  className="targetDiv"> */}
+                <Target className="ZoomedImage"
                 ref={targetRef}
                 alt="target"
                 opacity={opacity}
                 offset={offset}
-                src={picture} />
+                src={currentPicture} 
+                />
+              {/* </TargetDiv> */}
               </ImageWrapper>
+         
 
             )
           })
         : ''}
+      
+        
       </Container>
 </ImageOverlayContainer>
       {current === carLength - 1 ? (
