@@ -26,8 +26,8 @@ const CarouselWrapper = styled.div`
   overflow: hidden;
 `;
 const MainImageWrapper = styled.div`
-  height: 450px;
-  width: 450px;
+  height: 500px;
+  width: 500px;
   overflow: hidden;
   margin: 1rem;
 `;
@@ -97,7 +97,7 @@ border-radius: 7px;
 outline: none;
 border-color: #9ecaed;
 box-shadow: 0 0 10px #9ecaed;
-` 
+`
 const Target = styled(MainImage)`
 position: absolute;
 left: ${(props) => props.offset.left}px;
@@ -127,7 +127,7 @@ function ImageView(props) {
   const [carLength, setCarLength] = useState(0);
   const [styleLoaded, setStyleLoaded] = useState(false)
   const [currentPicture, setCurrentPicture] = useState('');
- 
+
   var Carousel = [];
   const thumbCarousel = [];
   const styleID = useContext(styleIDContext);
@@ -238,7 +238,7 @@ const handleMouseEnter = () => {
   const handleMouseLeave = () => {
     setOpacity(0);
     console.log('Mouse left')
-    
+
   }
 
   const handleMouseMove = () => {
@@ -257,7 +257,7 @@ const handleMouseEnter = () => {
       left: left * -xRatio,
       top: top * -yRatio
     })
-    
+
   }
 // //>>>>>>>>>>>>>>>>>>>>>>>>>>>Example Styled Images>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -265,14 +265,14 @@ const handleMouseEnter = () => {
 //   //>>>>>>>>>>>>>>>>>> EXAMPLE CONTAINERS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 //   <div className="BiggestContainer">
-//       <Container 
+//       <Container
 //         ref={containerRef}
 //         onMouseEnter={handleMouseEnter}
 //         onMouseLeave={handleMouseLeave}
 //         onMouseMove={handleMouseMove}
 //         >
 //           <BaseImage ref={sourceRef} alt="source" source="Exampleimage.png" />
-//           <TargetImage 
+//           <TargetImage
 //             ref={targetRef}
 //             alt="target"
 //             opacity={opacity}
@@ -297,7 +297,7 @@ const handleMouseEnter = () => {
       )}
 
 <ImageOverlayContainer className="ImageOverlayContainer" >
-      <Container 
+      <Container
       ref={containerRef}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -307,30 +307,30 @@ const handleMouseEnter = () => {
         ? CarouselData.map((picture, index) => {
 
             return (
-              
+
               <ImageWrapper
                 className={index === current ? 'slide active' : 'slide'}
                 key={index}>
                 {index === current && (
 
-                  
-                  <MainImage 
-                  key={index} 
-                  src={picture} 
-                  alt='style image' 
+
+                  <MainImage
+                  key={index}
+                  src={picture}
+                  alt='style image'
                   onClick={() => {setCurrentPicture(picture), setClicked(true)}}
                   ref={sourceRef}
-                  
+
                   />
                 )}
-              <Target 
+              <Target
                 ref={targetRef}
                 alt="target"
                 opacity={opacity}
                 offset={offset}
                 src={picture} />
               </ImageWrapper>
-              
+
             )
           })
         : ''}
