@@ -76,7 +76,7 @@ function Overview({productAdd}) {
         </a>
       </StyledShare>
           </StyledSideBar>
-        
+
       </Wrapper>
       <StyledProductInfo productAdd={productAdd}>
         <ProductDescription />
