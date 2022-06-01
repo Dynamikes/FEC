@@ -18,6 +18,7 @@ export const MainImage = styled.img`
   width: 100%;
   object-fit: contain;
   object-position: 50% 50%;
+
 `;
 
 export const ImageViewWrapper = styled.section`
@@ -150,22 +151,19 @@ export const StyledSizeSelect = styled.select`
   padding: 5px;
   border-width: 3px;
   text-align-last: center;
-  background: black;
-  color: orange;
+ 
 `;
 export const StyledQuantitySelect = styled.select`
   flex-grow: 2;
   padding: 5px;
   border-width: 3px;
   text-align-last: right;
-  background: black;
-  color: orange;
+ 
 `;
-export const AddToCartButton = styled.button`
+export const AddToCartButton = styled.input`
   padding: 10px;
-  border-width: 5px;
-  background: black;
-  color: orange;
+  border-width: 3px;
+  border-color: grey;
   font-size: 1.1em;
 `;
 
