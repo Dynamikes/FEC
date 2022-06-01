@@ -1,4 +1,4 @@
-//All get requests live here
+
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { hot } from 'react-hot-loader/root';
@@ -10,7 +10,7 @@ export let finishedProducts;
 //-----------------------------------------------------------------------//
 //GET REQUEST TO PRODUCT
 //-----------------------------------------------------------------------//
-const updateProducts = async () => {
+const getAllProducts = async () => {
   axios({
     url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/',
     method: 'get',
@@ -20,14 +20,14 @@ const updateProducts = async () => {
   })
     .then((response) => {
       products.push(response.data);
-      console.log(response.data);
+      console.log('this is all data: ', response.data);
     })
     .catch((err) => {
       console.log('Breaking in getOurData. Err:', err);
     });
   console.log('products:', products);
 };
-updateProducts();
+getAllProducts();
 //-----------------------------------------------------------------------//
 //GET REQUEST TO STYLES
 //-----------------------------------------------------------------------//
