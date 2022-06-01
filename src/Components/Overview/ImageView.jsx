@@ -104,12 +104,21 @@ const MainImage = styled.img`
   
 `;
 
-const Target = styled(MainImage)`
+const Target = styled.img`
 position: absolute;
 left: ${(props) => props.offset.left}px;
 top: ${(props) => props.offset.top}px;
 opacity: ${(props) => props.opacity};
 transform: scale(2.5);
+border: 3px black solid;
+`
+
+const TargetDiv = styled(ImageWrapper)`
+position: absolute;
+border: 3px red solid;
+width: 100%;
+
+
 `
 
 
@@ -231,7 +240,7 @@ function ImageView(props) {
       });
   }, [styleID]);
 //>>>>>>>>>>>>>ZOOM HANDLING>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-const [opacity, setOpacity] = useState(0);
+const [opacity, setOpacity] = useState(1);
 const [offset, setOffset] = useState({ left: 50, top: 50})
 const [backOpacity, setBackOpacity] = useState(1);
 
@@ -331,22 +340,29 @@ const handleMouseEnter = () => {
                   key={index}
                   src={picture}
                   alt='style image'
-                  onClick={() => {setCurrentPicture(picture), setClicked(true)}}
+                  onClick={() => {setCurrentPicture(picture), setClicked(true), setOpacity(1)}}
                   ref={sourceRef}
 
                   />
+                  
                 )}
-              <Target
+                {/* <TargetDiv  className="targetDiv"> */}
+                <Target className="ZoomedImage"
                 ref={targetRef}
                 alt="target"
                 opacity={opacity}
                 offset={offset}
-                src={picture} />
+                src={currentPicture} 
+                />
+              {/* </TargetDiv> */}
               </ImageWrapper>
+         
 
             )
           })
         : ''}
+      
+        
       </Container>
 </ImageOverlayContainer>
       {current === carLength - 1 ? (
