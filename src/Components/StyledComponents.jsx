@@ -151,14 +151,14 @@ export const StyledSizeSelect = styled.select`
   padding: 5px;
   border-width: 3px;
   text-align-last: center;
- 
+
 `;
 export const StyledQuantitySelect = styled.select`
   flex-grow: 2;
   padding: 5px;
   border-width: 3px;
   text-align-last: right;
- 
+
 `;
 export const AddToCartButton = styled.input`
   padding: 10px;
@@ -262,6 +262,10 @@ background: none!important;
   text-decoration: underline;
   padding: 0px 3px;
   cursor: pointer;
+  &:hover {
+    color: green;
+  }
+
 `
 export const AddForms = styled.form`
   display: flex;
