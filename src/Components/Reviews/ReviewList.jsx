@@ -201,6 +201,9 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
       alert('Review successfully submitted!');
       setAdd(false);
     })
+    .then(()=> {
+    getReviews()
+    })
     .catch((err) => {
       console.log(err)
       alert('Incorrect submission! Please ensure all fields are appropriately filled')
@@ -311,6 +314,7 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
               <div>
                 <u>Fit: {addFit}</u>
                 <div>
+                <small>Runs tight</small>
                   <input
                     onClick={() => {setAddFit('Runs tight'), setFitValue(1)}} required type="radio" name="addFit"
                   />
@@ -326,6 +330,7 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
                   <input
                     onClick={() => {setAddFit('Runs long'), setFitValue(5)}} required type="radio" name="addFit"
                   />
+                  <small>Runs long</small>
                 </div>
               </div>
               : null}
@@ -333,6 +338,7 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
               <div>
                 <u>Value: {addValue}</u>
                 <div>
+                <small>Too narrow</small>
                   <input
                     onClick={() => {setAddValue('Too narrow'), setValueValue(1)}} required type="radio" name="addValue"
                   />
@@ -348,12 +354,14 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
                   <input
                     onClick={() => {setAddValue('Too wide'), setValueValue(5)}} required type="radio" name="addValue"
                   />
+                  <small>Too wide</small>
                 </div>
               </div> : null}
                 {comfortAdd ?
              <div>
                 <u>Comfort: {addComfort}</u>
                 <div>
+                  <small>Uncomfortable</small>
                   <input
                     onClick={() => {setAddComfort('Uncomfortable'), setComfortValue(1)}} required type="radio" name="addComfort"
                   />
@@ -369,6 +377,7 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
                   <input
                     onClick={() => {setAddComfort('Perfect'), setComfortValue(5)}} required type="radio" name="addComfort"
                   />
+                  <small>Perfect</small>
                </div>
             </div>
               : null}
@@ -376,6 +385,7 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
               <div>
                 <u>Quality: {addQuality}</u>
                 <div>
+                <small>Uncomfortable</small>
                   <input
                     onClick={() => {setAddQuality('Uncomfortable'), setQualityValue(1)}} required type="radio" name="addQuality"
                   />
@@ -391,6 +401,7 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
                   <input
                     onClick={() => {setAddQuality('Perfect'), setQualityValue(5)}} required type="radio" name="addQuality"
                   />
+                  <small>Perfect</small>
                 </div>
               </div>
               : null}
@@ -398,6 +409,7 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
               <div>
               <u>Length: {addLength}</u>
                 <div>
+                <small>Runs short</small>
                   <input
                     onClick={() => {setAddLength('Runs short'), setLengthValue(1)}} required type="radio" name="addLength"
                   />
@@ -413,12 +425,14 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
                   <input
                     onClick={() => {setAddLength('Runs long'), setLengthValue(5)}} required type="radio" name="addLength"
                   />
+                  <small>Runs long</small>
                 </div>
               </div> : null}
             {sizeAdd ?
               <div>
                 <u>Size: {addSize}</u>
                 <div>
+                <small>Runs tight</small>
                   <input
                     onClick={() => {setAddSize('Runs tight'), setSizeValue(1)}} required type="radio" name="addSize"
                   />
@@ -434,6 +448,7 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
                   <input
                     onClick={() => {setAddSize('Runs long'), setSizeValue(5)}} required type="radio" name="addSize"
                   />
+                  <small>Runs long</small>
                 </div>
               </div> : null}
             </CharAdd>
