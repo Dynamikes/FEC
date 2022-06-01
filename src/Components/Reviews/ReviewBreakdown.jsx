@@ -104,6 +104,7 @@ const ReviewBreakdown = ({reviewsMeta, chars, changeStars, reviews, setReviews, 
       <StarBarWrap>
         <div> <StarRatings rating={5} starRatedColor='gold' starDimension='15px' starSpacing='2px'/> <RatingHover onClick={() => {handleStarClick(5)}}>({five}) Reviews! </RatingHover></div>
             <ProgressBar
+              isLabelVisible={false}
               width='65%'
               completed={`${five}`}
               maxCompleted={`${total}`}
@@ -119,6 +120,7 @@ const ReviewBreakdown = ({reviewsMeta, chars, changeStars, reviews, setReviews, 
         <StarBarWrap>
           <div> <StarRatings rating={4} starRatedColor='gold' starDimension='15px' starSpacing='2px'/> <RatingHover onClick={() => handleStarClick(4)}>({four}) Reviews! </RatingHover></div>
             <ProgressBar
+              isLabelVisible={false}
               width='65%'
               completed={`${four}`}
               maxCompleted={`${total}`}
@@ -134,6 +136,7 @@ const ReviewBreakdown = ({reviewsMeta, chars, changeStars, reviews, setReviews, 
         <StarBarWrap>
         <div> <StarRatings rating={3} starRatedColor='gold' starDimension='15px' starSpacing='2px'/> <RatingHover onClick={() => handleStarClick(3)}>({three}) Reviews! </RatingHover></div>
             <ProgressBar
+              isLabelVisible={false}
               width='65%'
               completed={`${three}`}
               maxCompleted={`${total}`}
@@ -149,6 +152,7 @@ const ReviewBreakdown = ({reviewsMeta, chars, changeStars, reviews, setReviews, 
         <StarBarWrap>
         <div> <StarRatings rating={2} starRatedColor='gold' starDimension='15px' starSpacing='2px'/> <RatingHover onClick={() => handleStarClick(2)}>({two}) Reviews! </RatingHover></div>
             <ProgressBar
+              isLabelVisible={false}
               width='65%'
               completed={`${two}`}
               maxCompleted={`${total}`}
@@ -164,6 +168,7 @@ const ReviewBreakdown = ({reviewsMeta, chars, changeStars, reviews, setReviews, 
         <StarBarWrap>
           <div><StarRatings rating={1} starRatedColor='gold' starDimension='15px' starSpacing='2px'/> <RatingHover onClick={() => handleStarClick(1)}>({one}) Reviews! </RatingHover></div>
             <ProgressBar
+              isLabelVisible={false}
               width='65%'
               completed={`${one}`}
               maxCompleted={`${total}`}

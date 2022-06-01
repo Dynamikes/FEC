@@ -561,7 +561,7 @@ export const AddWrapper = styled.div`
 `;
 
 export const ShowMore = styled.a`
-  color: yellow;
+  color orange;
   flex-direction: column;
   align-items: flex-end;
   &:hover {
