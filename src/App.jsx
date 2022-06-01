@@ -18,7 +18,7 @@ const App = (props) => {
   const [prodID, setProdID] = useState(40351)
   const [stars, setStars] = useState(null);
   const [productName, setProductName] = useState(null);
-  
+
   const changeStars = (count) => {
     setStars(count);
   }

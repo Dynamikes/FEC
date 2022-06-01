@@ -319,7 +319,7 @@ export const CheckSpan = styled.span`
 `;
 
 export const ResponseDiv = styled.div`
-  color: silver;
+  color: gold;
 `;
 
 export const ReviewMap = styled.div`
@@ -384,13 +384,16 @@ export const AddTitle = styled.h2`
 export const StarRatingList = styled.div`
   display: flex;
   flex-direction: column;
+  position: absolute;
+  right: 245px;
+  top: 130px;
   border-color: rgb(20 , 20, 20);
-  border-width: 1px;
+  border-width: 5px;
   border-style: solid;
   margin: 5px;
   padding 3px;
   justify-content: center;
-  font-size: 12px;
+  font-size: 22px;
 `;
 
 export const StarRow = styled.div`
