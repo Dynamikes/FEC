@@ -42,17 +42,17 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
   const [addRecommend, setRecommend] = useState(null);
   const [addStar, setStar] = useState(0);
   const [addFit, setAddFit] = useState('none selected');
-  const [fitValue, setFitValue] = useState(0);
+  const [fitValue, setFitValue] = useState(null);
   const [addValue, setAddValue] = useState('none selected');
-  const [valueValue, setValueValue] = useState(0);
+  const [valueValue, setValueValue] = useState(null);
   const [addComfort, setAddComfort] = useState('none selected');
-  const [comfortValue, setComfortValue] = useState(0);
+  const [comfortValue, setComfortValue] = useState(null);
   const [addQuality, setAddQuality] = useState('none selected');
-  const [qualityValue, setQualityValue] = useState(0);
+  const [qualityValue, setQualityValue] = useState(null);
   const [addLength, setAddLength] = useState('none selected');
-  const [lengthValue, setLengthValue] = useState(0);
+  const [lengthValue, setLengthValue] = useState(null);
   const [addSize, setAddSize] = useState('none selected');
-  const [sizeValue, setSizeValue] = useState(0);
+  const [sizeValue, setSizeValue] = useState(null);
   const [addImages, setImages] = useState([]);
   const [addPhotoUrls, setAddPhotoUrls] = useState([]);
   const [option, setOption] = useState('Sort on')
@@ -61,27 +61,40 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
   //Characteristics
   //Helpful
   let fitAdd
+  let fitId
   let valueAdd
+  let valueId
   let comfortAdd
+  let comfortId
   let lengthAdd
+  let lengthId
   let qualityAdd
+  let qualityId
   let sizeAdd
+  let sizeId
   let charas = chara;
 
   let productId = useContext(prodIDContext);
 
   for(var key in charas) {
-    if(key === 'Fit') {fitAdd = charas['Fit'].value
+    if(key === 'Fit') {
+      fitAdd = charas['Fit'].value;
+      fitId = charas['Fit'].id;
   }else if (key === 'Comfort') {
-    comfortAdd = charas['Comfort'].value
+    comfortAdd = charas['Comfort'].value;
+    comfortId = charas['Comfort'].id;
   }else if (key === 'Length') {
-    lengthAdd = charas['Length'].value
+    lengthAdd = charas['Length'].value;
+    lengthId = charas['Length'].id;
   }else if (key === 'Quality') {
-    qualityAdd = charas['Quality'].value
+    qualityAdd = charas['Quality'].value;
+    qualityId = charas['Quality'].id;
   }else if (key === 'Size') {
-    sizeAdd = charas['Size'].value
+    sizeAdd = charas['Size'].value;
+    sizeId = charas['Size'].id;
   }else if (key === 'Value') {
-    valueAdd = charas['Value'].value
+    valueAdd = charas['Value'].value;
+    valueId = charas['Value'].id;
   }}
 
 
@@ -95,10 +108,10 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
   };
 
   const changeOption = (e) => {
-    if (event.target.value === 'Helpful') {
+    if (e.target.value === 'Helpful') {
       setOption('Helpful')
       helpfulSorter()
-    } else if (event.target.value === 'Newest') {
+    } else if (e.target.value === 'Newest') {
       setOption('Newest')
       newestSorter()
     }
@@ -167,7 +180,14 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
       "name": addUsername,
       "email": addEmail,
       "Photos": addPhotoUrls,
-      "characteristics": {}
+      "characteristics": {
+        //  fitId: fitValue,
+        //  comfortId: comfortValue,
+        //  valueId: valueValue,
+        //  sizeId: sizeValue,
+        //  lengthId: lengthValue,
+        //  qualityId: qualityValue
+      }
     };
     axios({
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?product_id=${prodID}`,
