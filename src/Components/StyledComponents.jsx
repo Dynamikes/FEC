@@ -9,7 +9,6 @@ export const ImageWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2;
   height: 100%;
   max-width: 100%;
   user-select: none;
@@ -27,9 +26,6 @@ export const ImageViewWrapper = styled.section`
   align-items: center;
   justify-content: center;
   padding: 5px;
-  z-index: 2;
-  flex: 1 1 100%;
-  height: 100%;
   user-select: none;
 `;
 export const ExpandButton = styled.button`
@@ -43,13 +39,10 @@ export const ExpandButton = styled.button`
   padding: 5px;
 `;
 export const Thumbnails = styled.div`
-  width: 10%;
-  left: 4%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  z-index: 3;
   user-select: none;
 `;
 export const ThumbnailImage = styled.img`
@@ -64,6 +57,7 @@ export const Flexbox = styled.div`
   max-width: 80%;
   margin: auto;
   padding: 10px;
+  overflow: scroll;
 `;
 
 export const StyledPageTitle = styled.h1`
@@ -93,8 +87,6 @@ export const StyledProductInfo = styled.div`
 export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
-  width: 100vw;
-  flex-wrap: wrap;
 `;
 export const StyledProductName = styled.h2`
   display: flex;
@@ -103,20 +95,19 @@ export const StyledProductName = styled.h2`
 `;
 export const OverviewWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  overflow: scroll;
 `;
 export const StyledImageView = styled.div`
   display: flex;
-  z-index: 2;
 `;
 export const ProductInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  max-width: 250px;
 `;
 export const StyledParagraph = styled.p`
   font-size: 1em;
   margin: 4px;
-  max-width: 600px;
 `;
 export const Title = styled.h2`
   align-self: center;

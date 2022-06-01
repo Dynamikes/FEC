@@ -23,12 +23,11 @@ import { relativeTimeThreshold } from 'moment';
 
 const CarouselWrapper = styled.div`
   display: flex;
-  overflow: hidden;
+  overflow: auto;
 `;
 const MainImageWrapper = styled.div`
   height: 500px;
-  width: 500px;
-  overflow: hidden;
+  width: 450px;
   margin: 1rem;
 `;
 const ImageOverlayContainer=styled.div`

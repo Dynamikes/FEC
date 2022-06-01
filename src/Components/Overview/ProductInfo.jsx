@@ -10,7 +10,8 @@ import {
   StyledCategory,
   StyledPrice,
   StyledShare,
-  SalePrice
+  SalePrice,
+  StyledParagraph
 } from '../StyledComponents.jsx';
 import {MAIN_API_KEY} from '../../config.js'
 import {prodIDContext} from '../../App.jsx';
@@ -50,7 +51,7 @@ function ProductInfo({productAdd}) {
       .then(() => {
         setLoaded(true);
         productAdd(tempProd)
-
+        console.log('description here:', products)
       })
       .catch((err) => {
         setError(err);
@@ -106,6 +107,9 @@ function ProductInfo({productAdd}) {
         {' '}
         { styleLoaded ? (currentStyle.sale_price ? <span>Price: <s> {'$' + currentStyle.original_price }</s> <SalePrice>{'  $' + currentStyle.sale_price } </SalePrice> </span> : <span> Price: {'$' + currentStyle.original_price }{' '} </span>) : null }
       </StyledPrice>
+          <StyledParagraph>
+            {loaded ? products.description : null}
+          </StyledParagraph>
     </ProductInfoWrapper>
 
   );
