@@ -33,7 +33,7 @@ const App = (props) => {
 
   const getAllProducts = async () => {
     axios({
-      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/',
+      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products?count=100',
       method: 'get',
       headers: {
         Authorization: MAIN_API_KEY,

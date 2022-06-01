@@ -125,6 +125,7 @@ const AddToCart = () => {
   if (skus !== null && currentSize !== null) {
     let tempSkus = skus.slice();
   for (let i = 0; i < tempSkus.length; i++) {
+    //console.log('yeehaw', currentSize, tempSkus[i])
         if (tempSkus[i][1].size === currentSize) {
 
           setCurrentQuant(tempSkus[i][1].quantity)
@@ -155,7 +156,7 @@ const AddToCart = () => {
         </div>
         <div>
         <label> Quantity: </label>
-        <StyledQuantitySelect name='Quantity' id='Quantity' onChange={(e) => {setSelectedQuant(e.target.value)} }>
+         <StyledQuantitySelect name='Quantity' id='Quantity' onChange={(e) => {setSelectedQuant(e.target.value)} }>
         {skusLoaded && currentQuant !== 0
           ?
             (range(1, currentQuant)).slice(0, 15).map((sku, index) => {

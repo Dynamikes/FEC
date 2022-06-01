@@ -46,18 +46,14 @@ export const Thumbnails = styled.div`
   align-items: center;
   user-select: none;
 `;
-export const ThumbnailImage = styled.img`
-  height: 35px;
-  width: 35px;
-  margin: 2px;
-  border-radius: 50%;
-`;
+
 export const Flexbox = styled.div`
   display: flex;
   justify-content: center;
-  max-width: 90%;
+  max-width: 80%;
   margin: auto;
   padding: 10px;
+  max-height: 600px;
 `;
 
 export const StyledPageTitle = styled.h1`
@@ -95,7 +91,6 @@ export const StyledProductName = styled.h2`
 `;
 export const OverviewWrapper = styled.div`
   display: flex;
-  overflow: scroll;
 `;
 export const StyledImageView = styled.div`
   display: flex;
@@ -172,6 +167,20 @@ export const StyleThumbnail = styled.img`
   height: 35px;
   width: 35px;
 `;
+export const HighlightStyleThumbnail = styled(StyleThumbnail)`
+border: 2px solid #dadada;
+border-radius: 7px;
+outline: none;
+border-color: #9ecaed;
+box-shadow: 0 0 10px #9ecaed;
+`
+export const ThumbnailImage = styled.img`
+  height: 35px;
+  width: 35px;
+  margin: 2px;
+  border-radius: 50%;
+`;
+
 export const HighlightedStyleThumbnail = styled(ThumbnailImage)`
 border: 2px solid #dadada;
 border-radius: 7px;
@@ -261,6 +270,10 @@ background: none!important;
   text-decoration: underline;
   padding: 0px 3px;
   cursor: pointer;
+  &:hover {
+    color: green;
+  }
+
 `
 export const AddForms = styled.form`
   display: flex;

@@ -188,7 +188,7 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
       "recommend": addRecommend,
       "name": addUsername,
       "email": addEmail,
-      "Photos": addPhotoUrls,
+      "photos": addPhotoUrls,
       "characteristics": {
         //  fitId: fitValue,
         //  comfortId: comfortValue,
@@ -246,6 +246,7 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
 
   return (
     <ReviewListWrapper>
+      {console.log('Photos', addPhotoUrls)}
       <SearchBarWrapper onSubmit={(e)=>{searched(e)}}>
       <StyledSearchIcon />
         <ReviewsSearch type='text' name='search'
