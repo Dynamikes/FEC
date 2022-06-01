@@ -318,6 +318,10 @@ export const CheckSpan = styled.span`
   color:green;
 `;
 
+export const ResponseDiv = styled.div`
+  color: silver;
+`;
+
 export const ReviewMap = styled.div`
   display: flex;
   flex-direction: column;
@@ -349,6 +353,11 @@ export const ReviewBody = styled.div`
   padding: 3px;
   margin: 3px;
   word-wrap: break-word;
+`;
+
+export const ReviewBodyShowMore = styled.div`
+display: flex;
+flex-direction: column;
 `;
 
 export const ReviewImageWrapper = styled.div`
@@ -554,6 +563,15 @@ export const AddWrapper = styled.div`
   padding: 50px;
   z-index: 5;
 `;
+
+export const ShowMore = styled.a`
+  color: yellow;
+  flex-direction: column;
+  align-items: flex-end;
+  &:hover {
+    color: green;
+  }
+`
 
 export const AddReviewWrapper = styled.div`
   background-color: rgba(7,7,7);
