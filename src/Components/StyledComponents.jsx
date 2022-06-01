@@ -55,10 +55,9 @@ export const ThumbnailImage = styled.img`
 export const Flexbox = styled.div`
   display: flex;
   justify-content: center;
-  max-width: 80%;
+  max-width: 90%;
   margin: auto;
   padding: 10px;
-  overflow: scroll;
 `;
 
 export const StyledPageTitle = styled.h1`
@@ -151,14 +150,14 @@ export const StyledSizeSelect = styled.select`
   padding: 5px;
   border-width: 3px;
   text-align-last: center;
- 
+
 `;
 export const StyledQuantitySelect = styled.select`
   flex-grow: 2;
   padding: 5px;
   border-width: 3px;
   text-align-last: right;
- 
+
 `;
 export const AddToCartButton = styled.input`
   padding: 10px;

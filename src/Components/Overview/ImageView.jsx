@@ -25,8 +25,8 @@ const CarouselWrapper = styled.div`
   overflow: auto;
 `;
 const MainImageWrapper = styled.div`
-  height: 500px;
-  width: 450px;
+  height: 50vh;
+  width: 40vw;
   margin: 1rem;
 `;
 const ImageOverlayContainer=styled.div`
@@ -101,7 +101,7 @@ const MainImage = styled.img`
   width: 100%;
   object-fit: contain;
   object-position: 50% 50%;
-  
+
 `;
 
 const Target = styled.img`
@@ -344,7 +344,7 @@ const handleMouseEnter = () => {
                   ref={sourceRef}
 
                   />
-                  
+
                 )}
                 {/* <TargetDiv  className="targetDiv"> */}
                 <Target className="ZoomedImage"
@@ -352,17 +352,17 @@ const handleMouseEnter = () => {
                 alt="target"
                 opacity={opacity}
                 offset={offset}
-                src={currentPicture} 
+                src={currentPicture}
                 />
               {/* </TargetDiv> */}
               </ImageWrapper>
-         
+
 
             )
           })
         : ''}
-      
-        
+
+
       </Container>
 </ImageOverlayContainer>
       {current === carLength - 1 ? (

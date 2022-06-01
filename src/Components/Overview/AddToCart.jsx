@@ -20,10 +20,12 @@ const SizeOption = styled.option`
 const QuantOption = styled.option`
 `
 const CartForm = styled.form`
+display: flex;
+flex-direction: column;
 `
 
 const AddToCart = () => {
-  
+
   const [cart, setCart] = useState([]);
   const [sizes, setSizes] = useState(null)
   const [inStock, setInStock] = useState(false)
@@ -36,7 +38,7 @@ const AddToCart = () => {
   const styleID = useContext(styleIDContext)
   const prodID = useContext(prodIDContext)
   var currentStyle = null;
-  
+
   const range= (start, end) => {
     return Array(end - start + 1).fill().map((_, idx) => start + idx)
   }
@@ -55,7 +57,7 @@ const AddToCart = () => {
       // console.log('response.data.results', response.data.results)
       for (let i = 0; i < response.data.results.length; i++) {
         if (response.data.results[i].style_id === styleID) {
-          currentStyle = response.data.results[i].skus 
+          currentStyle = response.data.results[i].skus
           //console.log('Stylematch', currentStyle)
         }
       }
@@ -65,12 +67,12 @@ const AddToCart = () => {
       setLoadedCount(temp + 1)
       setCart(currentStyle)
     })
-    
+
     .catch((err) => {
       console.log('Breaking in StyleSelector get. Err:', err)
     })
   }, [styleID]);
-  
+
   useEffect(() => {
     const tempSkus = [];
     //console.log('this is cart' , cart)
@@ -81,10 +83,10 @@ const AddToCart = () => {
     setSkus(tempSkus);
     //setSkusLoaded(true)
 
-  
+
   }, [cart])
 
- 
+
     useEffect(() => {
     const getData = async () => {
       const tempCurrentSize = await skus[0][1].size;
@@ -97,8 +99,8 @@ const AddToCart = () => {
     .catch(console.error)
 
   }, [skus])
-  
-  
+
+
   const isThis = (event) => {
     event.preventDefault()
     console.log(currentSize)
@@ -116,15 +118,13 @@ const AddToCart = () => {
   //       console.log('QuantUpdated')
   //     }
   //   }
-  //  } 
+  //  }
 
   //  updateQuant()
   //  .catch(console.error)
   if (skus !== null && currentSize !== null) {
     let tempSkus = skus.slice();
-    console.log('howdy')
   for (let i = 0; i < tempSkus.length; i++) {
-    console.log('yeehaw', currentSize, tempSkus[i])
         if (tempSkus[i][1].size === currentSize) {
 
           setCurrentQuant(tempSkus[i][1].quantity)
@@ -132,26 +132,29 @@ const AddToCart = () => {
         }
       }
   }
-  
 
-    
   }, [currentSize])
     return (
     <CartDiv>
       <CartForm onSubmit={isThis}>
       <StyledSizeQuantity>
+        <div>
+        <label>Size:</label>
         <StyledSizeSelect name='SizeSelect' id='SizeSelect' onChange={(e) => {setCurrentSize(e.target.value)} }>
-          {skusLoaded 
+          {skusLoaded
           ?
             skus.map((sku, index) => {
               return (
                 <SizeOption key={index} value={sku[1].size} > {sku[1].size} </SizeOption>
               )
-            }) 
-          : 
+            })
+          :
           <option> hello </option>
           }
         </StyledSizeSelect>
+        </div>
+        <div>
+        <label> Quantity: </label>
         <StyledQuantitySelect name='Quantity' id='Quantity' onChange={(e) => {setSelectedQuant(e.target.value)} }>
         {skusLoaded && currentQuant !== 0
           ?
@@ -159,12 +162,12 @@ const AddToCart = () => {
               return (
                 <QuantOption key={index} > {sku} </QuantOption>
               )
-            }) 
-          : 
+            })
+          :
           ''
           }
-          
         </StyledQuantitySelect>
+        </div>
       </StyledSizeQuantity>
       <AddToCartButton type="submit" value="Add to Cart" />
       </CartForm>
@@ -175,4 +178,4 @@ const AddToCart = () => {
 export default hot(AddToCart);
 
 
-// range of 1 -> 
+// range of 1 ->
