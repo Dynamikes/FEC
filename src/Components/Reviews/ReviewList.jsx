@@ -114,6 +114,9 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
     } else if (e.target.value === 'Newest') {
       setOption('Newest')
       newestSorter()
+    } else if (e.target.value === "Relevant") {
+      setOption('Relevant')
+      relevantSorter()
     }
   };
 
@@ -127,8 +130,14 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
 
   const helpfulSorter = () => {
     let helpfulSort = reviews.slice()
-    helpfulSort.sort((a, b) => (a['helpfulness'] < b['helpfulness']) ? 1 : -1)
+    helpfulSort.sort((a, b) => (a['helpfulness'] < b['relevant']) ? 1 : -1)
     setReviews(helpfulSort)
+  };
+
+  const relevantSorter = () => {
+    let relevantSort = reviews.slice()
+    relevantSort.sort((a, b) => (a['relevant'] < b['relevant']) ? 1 : -1)
+    setReviews(relevantSort)
   };
 
   const getBase64 = (file) => {
@@ -247,7 +256,7 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
       <SelectorAddWrapper>
           {reviews.length} Reviews, Sort on -
           <select value={option} onChange={changeOption}>
-            <option value='Relevance'>Relevance</option>
+            <option value='Relevant'>Relevant</option>
             <option value='Newest'>Newest</option>
             <option value='Helpful'>Helpful</option>
           </select>-
