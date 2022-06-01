@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { hot } from 'react-hot-loader/root';
 import ReviewBreakdown from './ReviewBreakdown.jsx';
 import axios from 'axios';
@@ -18,7 +19,6 @@ const Reviews = ({changeStars}) => {
     {recommended: {true: null, false: null}, ratings: {'1': '1', '2': '2', '3': '3', '4': '4', '5': '5'}});
   const [chars, setChars] = useState({Size: 1, Width: 1, Comfort: 1, Quality: 1, Length:1, Fit: 1})
   const [loadedChars, setLoadedChars] = useState(false);
-  const [loadedRev, setLoadedRev] = useState(false);
 
   const prodID = useContext(prodIDContext)
 
@@ -82,6 +82,9 @@ const Reviews = ({changeStars}) => {
           reviewsMeta={reviewsMeta}
           chars={chara}
           changeStars={changeStars}
+          reviews={reviews}
+          setReviews={setReview}
+          reviewsHolder={reviewsHolder}
         />
         <ReviewList
           reviews={reviews}

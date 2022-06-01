@@ -16,7 +16,8 @@ import {
   StyledSearchIcon,
   QAButtons,
   AnswerPhoto,
-  AnswerPhotos
+  AnswerPhotos,
+  SelectorAddWrapper
 }
 from '../StyledComponents.jsx';
 import ReviewListEntry from './ReviewListEntry';
@@ -25,9 +26,10 @@ import StarRatings from 'react-star-ratings';
 import axios from 'axios';
 import {MAIN_API_KEY, IMG_API_KEY} from '../../config.js'
 import {prodIDContext} from '../../App.jsx'
-
+import {productForAdd} from '../../App.jsx'
 const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prodID}) => {
 
+  const product = useContext(productForAdd)
   // const prodID2 = useContext(prodIDContext)
   //State for various items
   const [reviewCount, setReviewCount] = useState(2);
@@ -40,17 +42,17 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
   const [addRecommend, setRecommend] = useState(null);
   const [addStar, setStar] = useState(0);
   const [addFit, setAddFit] = useState('none selected');
-  const [fitValue, setFitValue] = useState(0);
+  const [fitValue, setFitValue] = useState(null);
   const [addValue, setAddValue] = useState('none selected');
-  const [valueValue, setValueValue] = useState(0);
+  const [valueValue, setValueValue] = useState(null);
   const [addComfort, setAddComfort] = useState('none selected');
-  const [comfortValue, setComfortValue] = useState(0);
+  const [comfortValue, setComfortValue] = useState(null);
   const [addQuality, setAddQuality] = useState('none selected');
-  const [qualityValue, setQualityValue] = useState(0);
+  const [qualityValue, setQualityValue] = useState(null);
   const [addLength, setAddLength] = useState('none selected');
-  const [lengthValue, setLengthValue] = useState(0);
+  const [lengthValue, setLengthValue] = useState(null);
   const [addSize, setAddSize] = useState('none selected');
-  const [sizeValue, setSizeValue] = useState(0);
+  const [sizeValue, setSizeValue] = useState(null);
   const [addImages, setImages] = useState([]);
   const [addPhotoUrls, setAddPhotoUrls] = useState([]);
   const [option, setOption] = useState('Sort on')
@@ -59,27 +61,40 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
   //Characteristics
   //Helpful
   let fitAdd
+  let fitId
   let valueAdd
+  let valueId
   let comfortAdd
+  let comfortId
   let lengthAdd
+  let lengthId
   let qualityAdd
+  let qualityId
   let sizeAdd
+  let sizeId
   let charas = chara;
 
   let productId = useContext(prodIDContext);
 
   for(var key in charas) {
-    if(key === 'Fit') {fitAdd = charas['Fit'].value
+    if(key === 'Fit') {
+      fitAdd = charas['Fit'].value;
+      fitId = charas['Fit'].id;
   }else if (key === 'Comfort') {
-    comfortAdd = charas['Comfort'].value
+    comfortAdd = charas['Comfort'].value;
+    comfortId = charas['Comfort'].id;
   }else if (key === 'Length') {
-    lengthAdd = charas['Length'].value
+    lengthAdd = charas['Length'].value;
+    lengthId = charas['Length'].id;
   }else if (key === 'Quality') {
-    qualityAdd = charas['Quality'].value
+    qualityAdd = charas['Quality'].value;
+    qualityId = charas['Quality'].id;
   }else if (key === 'Size') {
-    sizeAdd = charas['Size'].value
+    sizeAdd = charas['Size'].value;
+    sizeId = charas['Size'].id;
   }else if (key === 'Value') {
-    valueAdd = charas['Value'].value
+    valueAdd = charas['Value'].value;
+    valueId = charas['Value'].id;
   }}
 
 
@@ -93,9 +108,11 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
   };
 
   const changeOption = (e) => {
-    if (event.target.value === 'Helpful') {
+    if (e.target.value === 'Helpful') {
+      setOption('Helpful')
       helpfulSorter()
-    } else if (event.target.value === 'Newest') {
+    } else if (e.target.value === 'Newest') {
+      setOption('Newest')
       newestSorter()
     }
   };
@@ -105,8 +122,14 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
     newReviews.sort((a, b) => {
       return (a.date < b.date) ? 1 : -1
     })
-    
-  }
+    setReviews(newReviews)
+  };
+
+  const helpfulSorter = () => {
+    let helpfulSort = reviews.slice()
+    helpfulSort.sort((a, b) => (a['helpfulness'] < b['helpfulness']) ? 1 : -1)
+    setReviews(helpfulSort)
+  };
 
   const getBase64 = (file) => {
     return new Promise((resolve, reject) => {
@@ -157,7 +180,14 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
       "name": addUsername,
       "email": addEmail,
       "Photos": addPhotoUrls,
-      "characteristics": {}
+      "characteristics": {
+        //  fitId: fitValue,
+        //  comfortId: comfortValue,
+        //  valueId: valueValue,
+        //  sizeId: sizeValue,
+        //  lengthId: lengthValue,
+        //  qualityId: qualityValue
+      }
     };
     axios({
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?product_id=${prodID}`,
@@ -170,6 +200,9 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
     .then(()=> {
       alert('Review successfully submitted!');
       setAdd(false);
+    })
+    .then(()=> {
+    getReviews()
     })
     .catch((err) => {
       console.log(err)
@@ -211,15 +244,15 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
         />
         <input type='submit' value='x'onClick={()=> {setReviews(reviewsHolder)}} />
       </SearchBarWrapper>
-      <ReviewMap>
-        <div>
-          {reviews.length} Reviews
+      <SelectorAddWrapper>
+          {reviews.length} Reviews, Sort on -
           <select value={option} onChange={changeOption}>
-            <option></option>
-            <option></option>
-            <option></option>
-          </select>
-        </div>
+            <option value='Relevance'>Relevance</option>
+            <option value='Newest'>Newest</option>
+            <option value='Helpful'>Helpful</option>
+          </select>-
+      </SelectorAddWrapper>
+      <ReviewMap>
         {reviews.slice(0,reviewCount).map((review, index) =>
         <ReviewListEntry
             getReviews={getReviews}
@@ -238,7 +271,7 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
         <AddReview open={addIsOpen} onClose={() => setAdd(false)}>
           <form onSubmit={submitAdd}>
             <AddTitle>Write Your Review</AddTitle>
-            <h3>About the *Add Product Name*</h3>
+            <h3>About the {product}</h3>
             <StarRow>
               <div>
                 <StarRatings
@@ -281,6 +314,7 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
               <div>
                 <u>Fit: {addFit}</u>
                 <div>
+                <small>Runs tight</small>
                   <input
                     onClick={() => {setAddFit('Runs tight'), setFitValue(1)}} required type="radio" name="addFit"
                   />
@@ -296,6 +330,7 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
                   <input
                     onClick={() => {setAddFit('Runs long'), setFitValue(5)}} required type="radio" name="addFit"
                   />
+                  <small>Runs long</small>
                 </div>
               </div>
               : null}
@@ -303,6 +338,7 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
               <div>
                 <u>Value: {addValue}</u>
                 <div>
+                <small>Too narrow</small>
                   <input
                     onClick={() => {setAddValue('Too narrow'), setValueValue(1)}} required type="radio" name="addValue"
                   />
@@ -318,12 +354,14 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
                   <input
                     onClick={() => {setAddValue('Too wide'), setValueValue(5)}} required type="radio" name="addValue"
                   />
+                  <small>Too wide</small>
                 </div>
               </div> : null}
                 {comfortAdd ?
              <div>
                 <u>Comfort: {addComfort}</u>
                 <div>
+                  <small>Uncomfortable</small>
                   <input
                     onClick={() => {setAddComfort('Uncomfortable'), setComfortValue(1)}} required type="radio" name="addComfort"
                   />
@@ -339,6 +377,7 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
                   <input
                     onClick={() => {setAddComfort('Perfect'), setComfortValue(5)}} required type="radio" name="addComfort"
                   />
+                  <small>Perfect</small>
                </div>
             </div>
               : null}
@@ -346,6 +385,7 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
               <div>
                 <u>Quality: {addQuality}</u>
                 <div>
+                <small>Uncomfortable</small>
                   <input
                     onClick={() => {setAddQuality('Uncomfortable'), setQualityValue(1)}} required type="radio" name="addQuality"
                   />
@@ -361,6 +401,7 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
                   <input
                     onClick={() => {setAddQuality('Perfect'), setQualityValue(5)}} required type="radio" name="addQuality"
                   />
+                  <small>Perfect</small>
                 </div>
               </div>
               : null}
@@ -368,6 +409,7 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
               <div>
               <u>Length: {addLength}</u>
                 <div>
+                <small>Runs short</small>
                   <input
                     onClick={() => {setAddLength('Runs short'), setLengthValue(1)}} required type="radio" name="addLength"
                   />
@@ -383,12 +425,14 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
                   <input
                     onClick={() => {setAddLength('Runs long'), setLengthValue(5)}} required type="radio" name="addLength"
                   />
+                  <small>Runs long</small>
                 </div>
               </div> : null}
             {sizeAdd ?
               <div>
                 <u>Size: {addSize}</u>
                 <div>
+                <small>Runs tight</small>
                   <input
                     onClick={() => {setAddSize('Runs tight'), setSizeValue(1)}} required type="radio" name="addSize"
                   />
@@ -404,6 +448,7 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
                   <input
                     onClick={() => {setAddSize('Runs long'), setSizeValue(5)}} required type="radio" name="addSize"
                   />
+                  <small>Runs long</small>
                 </div>
               </div> : null}
             </CharAdd>

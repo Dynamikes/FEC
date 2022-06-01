@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import {useEffect, React, useState } from 'react';
+import {React, useState } from 'react';
 import { hot } from 'react-hot-loader/root';
 import {
   ReviewTile,
@@ -12,7 +12,10 @@ import {
   ImagePopUp,
   AddOverlay,
   AddWrapper,
-  CheckSpan
+  CheckSpan,
+  ShowMore,
+  ReviewBodyShowMore,
+  ResponseDiv
 }
 from '../StyledComponents.jsx';
 import Moment from 'react-moment';
@@ -23,6 +26,7 @@ import {MAIN_API_KEY} from '../../config.js'
 const ReviewListEntry = ({review, getReviews}) => {
   const [clickedYes, setClickedYes] = useState(false);
   const [popUpPicture, setPopUpPicture] = useState('');
+  const [showMore, setShowMore] = useState(false)
   //not working
   const incrementHelpful = (id) => {
       axios({
@@ -61,11 +65,22 @@ const ReviewListEntry = ({review, getReviews}) => {
           <div><big>{review.reviewer_name} <CheckSpan> ✓ </CheckSpan> </big></div>
         <small> on <Moment format='MMMM Do YYYY'>{review.date}</Moment></small>
       </div>
-      {review.response ? <div>{review.response}</div> : <div></div>}
+      {review.response ?
+      <ResponseDiv>
+        Response from seller: {review.response}
+      </ResponseDiv> : <div></div>}
       <p><b>{review.summary}</b></p>
       <ReviewBodyWrapper>
-        <ReviewBody>{review.body}</ReviewBody>
-        {review.recommend ? <p>✓ I recommend this product!</p> : null}
+        {review.body.length >= 250 && !showMore
+      ? <ReviewBody>{review.body.slice(0,250)}
+          <ReviewBodyShowMore>
+            <ShowMore onClick={() => setShowMore(!showMore)}>{'(...Show more)'}</ShowMore>
+          </ReviewBodyShowMore>
+        </ReviewBody>
+          : review.body.length >= 250 && showMore
+        ? <ReviewBody>{review.body}</ReviewBody>
+        : <ReviewBody>{review.body}</ReviewBody>}
+        {review.recommend ? <p><CheckSpan>✓</CheckSpan> I recommend this product!</p> : null}
         <AnswerPhotos>
         {review['photos'].length === 0 ? null :
           review['photos'].map((photo, index) => (

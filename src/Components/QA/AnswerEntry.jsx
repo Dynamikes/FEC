@@ -61,7 +61,7 @@ function AnswerEntry(props) {
       }
       <div>
         <small> by
-          {props.answer['username'] === 'seller' ? <span><b> Seller </b></span> : <span> {props.answer['answerer_name']} </span>}
+          {props.answer['answerer_name'].toLowerCase() === 'seller' ? <span><b> Seller </b></span> : <span> {props.answer['answerer_name']} </span>}
           on {date} |
           Helpful?
           <UpdateButtons disabled={helpfulStatus} onClick={()=>{aHelpfulUpdate()}}> Yes ({props.answer.helpfulness})</UpdateButtons>  |

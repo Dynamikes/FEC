@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react'
+import {React, useState} from 'react'
 import { hot } from 'react-hot-loader/root';
 import {
   ReviewBreakdownWrapper,
@@ -11,6 +11,7 @@ import {
   SliderInputLength,
   StarBarWrap,
   RecommendWrap,
+  RatingHover,
 }
 from '../StyledComponents.jsx';
 import StarRatings from 'react-star-ratings';
@@ -18,10 +19,10 @@ import RatingStars from './RatingStars.jsx'
 import ProgressBar from "@ramonak/react-progress-bar";
 
 
-const ReviewBreakdown = ({reviewsMeta, chars, changeStars}) => {
+const ReviewBreakdown = ({reviewsMeta, chars, changeStars, reviews, setReviews, reviewsHolder}) => {
+
   //Variables to hold values
   //Recommended
-  // eslint-disable-next-line react/prop-types
   const recommended = Number(reviewsMeta.recommended.true);
   const notRecommended = Number(reviewsMeta.recommended.false);
   //Rating stars
@@ -53,6 +54,46 @@ const ReviewBreakdown = ({reviewsMeta, chars, changeStars}) => {
   const average = parseFloat(((one * 1) +( two * 2) + (three * 3) + (four * 4) + (five * 5)) / (total)).toFixed(1)
 
    changeStars(average)
+
+   const handleStarClick = (val) => {
+     if (val === 5) {
+      handleFive();
+     } else if (val === 4) {
+      handleFour();
+     } else if (val === 3) {
+      handleThree();
+     } else if (val === 2) {
+      handleTwo();
+     } else {
+      handleOne();
+     }
+    };
+
+    const handleFive = () => {
+      let starFive = reviewsHolder.slice()
+      setReviews(starFive.filter(review => review.rating === 5))
+    };
+
+    const handleFour = () => {
+      let starFour = reviewsHolder.slice()
+      setReviews(starFour.filter(review => review.rating === 4))
+    };
+
+    const handleThree = () => {
+      let starThree = reviewsHolder.slice()
+      setReviews(starThree.filter(review => review.rating === 3))
+    };
+
+    const handleTwo = () => {
+      let starTwo = reviewsHolder.slice()
+      setReviews(starTwo.filter(review => review.rating === 2))
+    };
+
+    const handleOne = () => {
+      let starOne = reviewsHolder.slice()
+      setReviews(starOne.filter(review => review.rating === 1))
+    };
+
   return (
     <ReviewBreakdownWrapper>
       <ReviewAverage>
@@ -61,7 +102,7 @@ const ReviewBreakdown = ({reviewsMeta, chars, changeStars}) => {
       </ReviewAverage>
       <ProgressBarWrap>
       <StarBarWrap>
-        <div> <StarRatings rating={5} starRatedColor='gold' starDimension='15px' starSpacing='2px'/> <small>({five}) Reviews! </small></div>
+        <div> <StarRatings rating={5} starRatedColor='gold' starDimension='15px' starSpacing='2px'/> <RatingHover onClick={() => {handleStarClick(5)}}>({five}) Reviews! </RatingHover></div>
             <ProgressBar
               width='65%'
               completed={`${five}`}
@@ -76,7 +117,7 @@ const ReviewBreakdown = ({reviewsMeta, chars, changeStars}) => {
             />
         </StarBarWrap>
         <StarBarWrap>
-          <div> <StarRatings rating={4} starRatedColor='gold' starDimension='15px' starSpacing='2px'/> <small>({four}) Reviews! </small></div>
+          <div> <StarRatings rating={4} starRatedColor='gold' starDimension='15px' starSpacing='2px'/> <RatingHover onClick={() => handleStarClick(4)}>({four}) Reviews! </RatingHover></div>
             <ProgressBar
               width='65%'
               completed={`${four}`}
@@ -91,7 +132,7 @@ const ReviewBreakdown = ({reviewsMeta, chars, changeStars}) => {
             />
         </StarBarWrap>
         <StarBarWrap>
-        <div> <StarRatings rating={3} starRatedColor='gold' starDimension='15px' starSpacing='2px'/> <small>({three}) Reviews! </small></div>
+        <div> <StarRatings rating={3} starRatedColor='gold' starDimension='15px' starSpacing='2px'/> <RatingHover onClick={() => handleStarClick(3)}>({three}) Reviews! </RatingHover></div>
             <ProgressBar
               width='65%'
               completed={`${three}`}
@@ -106,7 +147,7 @@ const ReviewBreakdown = ({reviewsMeta, chars, changeStars}) => {
             />
         </StarBarWrap>
         <StarBarWrap>
-        <div> <StarRatings rating={2} starRatedColor='gold' starDimension='15px' starSpacing='2px'/> <small>({two}) Reviews! </small></div>
+        <div> <StarRatings rating={2} starRatedColor='gold' starDimension='15px' starSpacing='2px'/> <RatingHover onClick={() => handleStarClick(2)}>({two}) Reviews! </RatingHover></div>
             <ProgressBar
               width='65%'
               completed={`${two}`}
@@ -121,7 +162,7 @@ const ReviewBreakdown = ({reviewsMeta, chars, changeStars}) => {
             />
         </StarBarWrap>
         <StarBarWrap>
-          <div><StarRatings rating={1} starRatedColor='gold' starDimension='15px' starSpacing='2px'/> <small>({one}) Reviews! </small></div>
+          <div><StarRatings rating={1} starRatedColor='gold' starDimension='15px' starSpacing='2px'/> <RatingHover onClick={() => handleStarClick(1)}>({one}) Reviews! </RatingHover></div>
             <ProgressBar
               width='65%'
               completed={`${one}`}

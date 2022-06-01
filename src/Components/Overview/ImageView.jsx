@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft, FaArrowAltCircleUp, FaArrowAltCircleDown, FaRegCircle } from 'react-icons/fa';
 import {
   ImageWrapper,
-  MainImage,
   Thumbnails,
   ThumbnailImage,
   ImageViewWrapper,
@@ -23,12 +22,11 @@ import { relativeTimeThreshold } from 'moment';
 
 const CarouselWrapper = styled.div`
   display: flex;
-  overflow: hidden;
+  overflow: auto;
 `;
 const MainImageWrapper = styled.div`
-  height: 450px;
+  height: 500px;
   width: 450px;
-  overflow: hidden;
   margin: 1rem;
 `;
 const ImageOverlayContainer=styled.div`
@@ -97,7 +95,15 @@ border-radius: 7px;
 outline: none;
 border-color: #9ecaed;
 box-shadow: 0 0 10px #9ecaed;
-` 
+`
+const MainImage = styled.img`
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  object-position: 50% 50%;
+  
+`;
+
 const Target = styled(MainImage)`
 position: absolute;
 left: ${(props) => props.offset.left}px;
@@ -110,7 +116,9 @@ transform: scale(2.5);
 const Container = styled.div`
 position: relative;
 overflow: hidden;
-display: block;
+jusitify-content: center;
+align-items: center;
+display: flex;
 padding: 50px;
 border: 1px solid #00adb7;
 border-radius: 15px;
@@ -127,7 +135,7 @@ function ImageView(props) {
   const [carLength, setCarLength] = useState(0);
   const [styleLoaded, setStyleLoaded] = useState(false)
   const [currentPicture, setCurrentPicture] = useState('');
- 
+
   var Carousel = [];
   const thumbCarousel = [];
   const styleID = useContext(styleIDContext);
@@ -200,8 +208,8 @@ function ImageView(props) {
                 thumbCarousel.push(response.data.results[i].photos[y].thumbnail_url)
                 name = response.data.results[i].name;
               }
-              //console.log('This is carousel:', Carousel)
-              
+              console.log('This is carousel:', Carousel)
+
             }
           }
 
@@ -224,7 +232,8 @@ function ImageView(props) {
   }, [styleID]);
 //>>>>>>>>>>>>>ZOOM HANDLING>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 const [opacity, setOpacity] = useState(0);
-const [offset, setOffset] = useState({ left: 0, top: 0})
+const [offset, setOffset] = useState({ left: 50, top: 50})
+const [backOpacity, setBackOpacity] = useState(1);
 
 const sourceRef = useRef(null);
 const targetRef = useRef(null);
@@ -233,14 +242,16 @@ const containerRef = useRef(null);
 
 const handleMouseEnter = () => {
     setOpacity(1);
+    setBackOpacity(0)
     console.log('Mouse entered')
 
   }
 
   const handleMouseLeave = () => {
     setOpacity(0);
+    setBackOpacity(1)
     console.log('Mouse left')
-    
+
   }
 
   const handleMouseMove = () => {
@@ -259,7 +270,7 @@ const handleMouseEnter = () => {
       left: left * -xRatio,
       top: top * -yRatio
     })
-    
+
   }
 // //>>>>>>>>>>>>>>>>>>>>>>>>>>>Example Styled Images>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -267,14 +278,14 @@ const handleMouseEnter = () => {
 //   //>>>>>>>>>>>>>>>>>> EXAMPLE CONTAINERS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 //   <div className="BiggestContainer">
-//       <Container 
+//       <Container
 //         ref={containerRef}
 //         onMouseEnter={handleMouseEnter}
 //         onMouseLeave={handleMouseLeave}
 //         onMouseMove={handleMouseMove}
 //         >
 //           <BaseImage ref={sourceRef} alt="source" source="Exampleimage.png" />
-//           <TargetImage 
+//           <TargetImage
 //             ref={targetRef}
 //             alt="target"
 //             opacity={opacity}
@@ -299,7 +310,7 @@ const handleMouseEnter = () => {
       )}
 
 <ImageOverlayContainer className="ImageOverlayContainer" >
-      <Container 
+      <Container
       ref={containerRef}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -309,30 +320,30 @@ const handleMouseEnter = () => {
         ? CarouselData.map((picture, index) => {
 
             return (
-              
+
               <ImageWrapper
                 className={index === current ? 'slide active' : 'slide'}
                 key={index}>
                 {index === current && (
 
-                  
-                  <MainImage 
-                  key={index} 
-                  src={picture} 
-                  alt='style image' 
+
+                  <MainImage
+                  key={index}
+                  src={picture}
+                  alt='style image'
                   onClick={() => {setCurrentPicture(picture), setClicked(true)}}
                   ref={sourceRef}
-                  
+
                   />
                 )}
-              <Target 
+              <Target
                 ref={targetRef}
                 alt="target"
                 opacity={opacity}
                 offset={offset}
                 src={picture} />
               </ImageWrapper>
-              
+
             )
           })
         : ''}

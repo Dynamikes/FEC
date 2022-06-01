@@ -9,7 +9,6 @@ export const ImageWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2;
   height: 100%;
   max-width: 100%;
   user-select: none;
@@ -19,6 +18,7 @@ export const MainImage = styled.img`
   width: 100%;
   object-fit: contain;
   object-position: 50% 50%;
+
 `;
 
 export const ImageViewWrapper = styled.section`
@@ -27,9 +27,6 @@ export const ImageViewWrapper = styled.section`
   align-items: center;
   justify-content: center;
   padding: 5px;
-  z-index: 2;
-  flex: 1 1 100%;
-  height: 100%;
   user-select: none;
 `;
 export const ExpandButton = styled.button`
@@ -43,13 +40,10 @@ export const ExpandButton = styled.button`
   padding: 5px;
 `;
 export const Thumbnails = styled.div`
-  width: 10%;
-  left: 4%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  z-index: 3;
   user-select: none;
 `;
 export const ThumbnailImage = styled.img`
@@ -64,6 +58,7 @@ export const Flexbox = styled.div`
   max-width: 80%;
   margin: auto;
   padding: 10px;
+  overflow: scroll;
 `;
 
 export const StyledPageTitle = styled.h1`
@@ -80,7 +75,6 @@ export const StyledSideBar = styled.div`
   z-index: 1;
   display: flex;
   padding: 10px;
-  flex-wrap: wrap;
 `;
 export const HiddenSideBar = styled(StyledSideBar)`
   display: none;
@@ -93,7 +87,7 @@ export const StyledProductInfo = styled.div`
 `;
 export const Wrapper = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  justify-content: center;
 `;
 export const StyledProductName = styled.h2`
   display: flex;
@@ -102,20 +96,19 @@ export const StyledProductName = styled.h2`
 `;
 export const OverviewWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  overflow: scroll;
 `;
 export const StyledImageView = styled.div`
   display: flex;
-  z-index: 2;
 `;
 export const ProductInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  max-width: 250px;
 `;
 export const StyledParagraph = styled.p`
   font-size: 1em;
   margin: 4px;
-  max-width: 600px;
 `;
 export const Title = styled.h2`
   align-self: center;
@@ -158,22 +151,19 @@ export const StyledSizeSelect = styled.select`
   padding: 5px;
   border-width: 3px;
   text-align-last: center;
-  background: black;
-  color: orange;
+ 
 `;
 export const StyledQuantitySelect = styled.select`
   flex-grow: 2;
   padding: 5px;
   border-width: 3px;
   text-align-last: right;
-  background: black;
-  color: orange;
+ 
 `;
-export const AddToCartButton = styled.button`
+export const AddToCartButton = styled.input`
   padding: 10px;
-  border-width: 5px;
-  background: black;
-  color: orange;
+  border-width: 3px;
+  border-color: grey;
   font-size: 1.1em;
 `;
 
@@ -305,16 +295,20 @@ export const InnerReviewWrapper = styled.div`
 //ReviewList.jsx ---------------------------
 export const ReviewListWrapper = styled.div`
   display: flex;
-  min-width: 200px;
   flex-direction: column;
   padding: 10px;
   margin: 10px;
+  width: 10%;
   flex-grow: 1;
   flex-wrap: wrap;
-`;
+  `;
 
 export const CheckSpan = styled.span`
   color:green;
+`;
+
+export const ResponseDiv = styled.div`
+  color: gold;
 `;
 
 export const ReviewMap = styled.div`
@@ -322,6 +316,7 @@ export const ReviewMap = styled.div`
   flex-direction: column;
   overflow: auto;
   height:590px;
+  width: 100%;
 `;
 
 export const ReviewTile = styled.div`
@@ -332,6 +327,7 @@ export const ReviewTile = styled.div`
   border-style: solid;
   padding: 10px;
   margin: 10px 1px;
+  word-wrap: break-word;
 `;
 
 export const ReviewBodyWrapper = styled.div`
@@ -339,13 +335,18 @@ export const ReviewBodyWrapper = styled.div`
   flex-direction: column;
   padding: 3px;
   margin: 3px;
-  min-width: 300px;
+  word-wrap: break-word;
 `;
 
 export const ReviewBody = styled.div`
   padding: 3px;
   margin: 3px;
-  flex-wrap: wrap;
+  word-wrap: break-word;
+`;
+
+export const ReviewBodyShowMore = styled.div`
+display: flex;
+flex-direction: column;
 `;
 
 export const ReviewImageWrapper = styled.div`
@@ -372,13 +373,16 @@ export const AddTitle = styled.h2`
 export const StarRatingList = styled.div`
   display: flex;
   flex-direction: column;
+  position: absolute;
+  right: 245px;
+  top: 130px;
   border-color: rgb(20 , 20, 20);
-  border-width: 1px;
+  border-width: 5px;
   border-style: solid;
   margin: 5px;
   padding 3px;
   justify-content: center;
-  font-size: 12px;
+  font-size: 22px;
 `;
 
 export const StarRow = styled.div`
@@ -392,8 +396,12 @@ export const RadioAdd = styled.div`
 `;
 
 export const CharAdd = styled.div`
-display: flex;
-flex-direction: column;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const SelectorAddWrapper = styled.div`
+
 `;
 
 //ReviewBreakdown.jsx ----------------------
@@ -494,6 +502,12 @@ export const SliderInputQuality = styled.input`
 }
 `;
 
+export const RatingHover = styled.small`
+  &:hover {
+    color: green;
+  }
+`;
+
 export const SliderInputLength = styled.input`
   -webkit-appearance: none;
   height: 6px;
@@ -541,6 +555,15 @@ export const AddWrapper = styled.div`
   padding: 50px;
   z-index: 5;
 `;
+
+export const ShowMore = styled.a`
+  color: yellow;
+  flex-direction: column;
+  align-items: flex-end;
+  &:hover {
+    color: green;
+  }
+`
 
 export const AddReviewWrapper = styled.div`
   background-color: rgba(7,7,7);
@@ -612,5 +635,8 @@ export const ImagePopUp = styled.img`
 export const CircleRow = styled.div`
 display: flex;
 justify-content: center;
-
 `
+export const SalePrice = styled.span`
+  color: red;
+  size: 1.1 em;
+`;
