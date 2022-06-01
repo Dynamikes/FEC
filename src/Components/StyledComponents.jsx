@@ -80,7 +80,6 @@ export const StyledSideBar = styled.div`
   z-index: 1;
   display: flex;
   padding: 10px;
-  flex-wrap: wrap;
 `;
 export const HiddenSideBar = styled(StyledSideBar)`
   display: none;
@@ -93,6 +92,8 @@ export const StyledProductInfo = styled.div`
 `;
 export const Wrapper = styled.div`
   display: flex;
+  justify-content: center;
+  width: 100vw;
   flex-wrap: wrap;
 `;
 export const StyledProductName = styled.h2`
@@ -305,13 +306,13 @@ export const InnerReviewWrapper = styled.div`
 //ReviewList.jsx ---------------------------
 export const ReviewListWrapper = styled.div`
   display: flex;
-  min-width: 200px;
   flex-direction: column;
   padding: 10px;
   margin: 10px;
+  width: 10%;
   flex-grow: 1;
   flex-wrap: wrap;
-`;
+  `;
 
 export const CheckSpan = styled.span`
   color:green;
@@ -326,6 +327,7 @@ export const ReviewMap = styled.div`
   flex-direction: column;
   overflow: auto;
   height:590px;
+  width: 100%;
 `;
 
 export const ReviewTile = styled.div`
@@ -336,6 +338,7 @@ export const ReviewTile = styled.div`
   border-style: solid;
   padding: 10px;
   margin: 10px 1px;
+  word-wrap: break-word;
 `;
 
 export const ReviewBodyWrapper = styled.div`
@@ -343,13 +346,13 @@ export const ReviewBodyWrapper = styled.div`
   flex-direction: column;
   padding: 3px;
   margin: 3px;
-  min-width: 300px;
+  word-wrap: break-word;
 `;
 
 export const ReviewBody = styled.div`
   padding: 3px;
   margin: 3px;
-  flex-wrap: wrap;
+  word-wrap: break-word;
 `;
 
 export const ReviewBodyShowMore = styled.div`
@@ -640,5 +643,8 @@ export const ImagePopUp = styled.img`
 export const CircleRow = styled.div`
 display: flex;
 justify-content: center;
-
 `
+export const SalePrice = styled.span`
+  color: red;
+  size: 1.1 em;
+`;

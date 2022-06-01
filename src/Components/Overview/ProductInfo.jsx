@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { hot } from 'react-hot-loader/root';
 import axios from 'axios';
-//import styled from 'styled-components';
+import styled from 'styled-components';
 //import axios from 'axios';
 import {
   ProductInfoWrapper,
@@ -10,6 +10,7 @@ import {
   StyledCategory,
   StyledPrice,
   StyledShare,
+  SalePrice
 } from '../StyledComponents.jsx';
 import {MAIN_API_KEY} from '../../config.js'
 import {prodIDContext} from '../../App.jsx';
@@ -17,6 +18,8 @@ import StarRatings from 'react-star-ratings';
 import {starsContext} from '../../App.jsx';
 import {styleIDContext} from './Overview'
 import {productForAdd} from '../../App.jsx';
+
+
 
 function ProductInfo({productAdd}) {
   const [products, setProduct] = useState(null);
@@ -46,12 +49,8 @@ function ProductInfo({productAdd}) {
       })
       .then(() => {
         setLoaded(true);
-        console.log('this is products', tempProd)
         productAdd(tempProd)
-        
-      })
-      .then(() => {
-        console.log('post productadd prodname' , prodName)
+
       })
       .catch((err) => {
         setError(err);
@@ -85,12 +84,13 @@ function ProductInfo({productAdd}) {
   }, [styleID]);
   return (
     <ProductInfoWrapper>
+      {styleLoaded ? <div><Title> {products.name} </Title> <span> {currentStyle.name}</span> </div>: null }
       <StyledStars>
         {' '}
         <StarRatings
         rating={Number(stars)}
         starRatedColor="gold"
-        starDimension='25px'
+        starDimension='15px'
         starSpacing={'2px'}
       />{' '}
         <a href='#ratings_and_reviews'>
@@ -100,12 +100,11 @@ function ProductInfo({productAdd}) {
       </StyledStars>
       <StyledCategory>
         {' '}
-        {loaded ? products.category : 'CATEGORY'}
+        {loaded ? 'Category: ' + products.category : null}
       </StyledCategory>
-      <Title> {styleLoaded ? products.name : 'TITLE'} </Title>
       <StyledPrice>
         {' '}
-        {styleLoaded ? '$' + currentStyle.original_price : 'PRICE'}{' '}
+        { styleLoaded ? (currentStyle.sale_price ? <span>Price: <s> {'$' + currentStyle.original_price }</s> <SalePrice>{'  $' + currentStyle.sale_price } </SalePrice> </span> : <span> Price: {'$' + currentStyle.original_price }{' '} </span>) : null }
       </StyledPrice>
     </ProductInfoWrapper>
 
