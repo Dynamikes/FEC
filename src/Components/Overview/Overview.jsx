@@ -35,7 +35,7 @@ function Overview({productAdd}) {
     <OverviewWrapper className='OverviewWrapper'>
       <Wrapper className='Wrapper'>
         <StyledImageView className='StyledImageView'>
-          <ImageView click={toggleFunc} productAdd={productAdd} />
+          <ImageView click={toggleFunc} productAdd={productAdd} changeStyleID={changeStyleID} />
         </StyledImageView>
           <StyledSideBar>
             {' '}
