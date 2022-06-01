@@ -92,7 +92,7 @@ const Reviews = ({changeStars}) => {
           getReviews={getReviews}
           chara={chara}
           setReviews={setReview}
-          prodId={prodID}
+          prodID={prodID}
         />
       </InnerReviewWrapper>
     </TotalReviewWrapper>
