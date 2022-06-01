@@ -32,8 +32,8 @@ function Overview({productAdd}) {
 
   return (
     <styleIDContext.Provider value={styleID}>
-    <OverviewWrapper>
-      <Wrapper>
+    <OverviewWrapper className='OverviewWrapper'>
+      <Wrapper className='Wrapper'>
         <StyledImageView className='StyledImageView'>
           <ImageView click={toggleFunc} productAdd={productAdd} />
         </StyledImageView>
@@ -76,7 +76,7 @@ function Overview({productAdd}) {
         </a>
       </StyledShare>
           </StyledSideBar>
-        
+
       </Wrapper>
       <StyledProductInfo productAdd={productAdd}>
         <ProductDescription />
