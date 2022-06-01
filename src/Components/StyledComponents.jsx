@@ -46,12 +46,7 @@ export const Thumbnails = styled.div`
   align-items: center;
   user-select: none;
 `;
-export const ThumbnailImage = styled.img`
-  height: 35px;
-  width: 35px;
-  margin: 2px;
-  border-radius: 50%;
-`;
+
 export const Flexbox = styled.div`
   display: flex;
   justify-content: center;
@@ -173,6 +168,20 @@ export const StyleThumbnail = styled.img`
   height: 35px;
   width: 35px;
 `;
+export const HighlightStyleThumbnail = styled(StyleThumbnail)`
+border: 2px solid #dadada;
+border-radius: 7px;
+outline: none;
+border-color: #9ecaed;
+box-shadow: 0 0 10px #9ecaed;
+`
+export const ThumbnailImage = styled.img`
+  height: 35px;
+  width: 35px;
+  margin: 2px;
+  border-radius: 50%;
+`;
+
 export const HighlightedStyleThumbnail = styled(ThumbnailImage)`
 border: 2px solid #dadada;
 border-radius: 7px;

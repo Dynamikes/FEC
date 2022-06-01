@@ -3,7 +3,7 @@ import { hot } from 'react-hot-loader/root';
 import axios from 'axios';
 // import styled from 'styled-components';
 // import axios from 'axios';
-import { SelectorWrapper, Title, StyleThumbnail, StyleSelectorContainer } from '../StyledComponents.jsx';
+import { SelectorWrapper, Title, StyleThumbnail, StyleSelectorContainer, HighlightStyleThumbnail } from '../StyledComponents.jsx';
 import {styleIDContext} from './Overview'
 import {prodIDContext} from '../../App.jsx'
 import {MAIN_API_KEY} from '../../config.js'
@@ -22,19 +22,20 @@ useEffect(() => {
     },
   })
   .then((response) => {
-    if (styleID === null) {
+    // if (styleID === null) {
       for (let i = 0; i < response.data.results.length; i++) {
-        tempStyleThumbs.push([response.data.results[i].photos[0].thumbnail_url, response.data.results[i].style_id])
+        tempStyleThumbs.push([response.data.results[i].photos[0].url, response.data.results[i].style_id])
       }
 
-    } else {
-      tempStyleThumbs = [];
-      for (let i = 0; i < response.data.results.length; i++) {
-        if (response.data.results[i].style_id !== styleID) {
-          tempStyleThumbs.push([response.data.results[i].photos[0].thumbnail_url, response.data.results[i].style_id])
-        }
-      }
-    }
+    // } 
+    // else {
+    //   tempStyleThumbs = [];
+    //   for (let i = 0; i < response.data.results.length; i++) {
+    //     if (response.data.results[i].style_id !== styleID) {
+    //       tempStyleThumbs.push([response.data.results[i].photos[0].thumbnail_url, response.data.results[i].style_id])
+    //     }
+    //   }
+    // }
     setStyleThumbs(tempStyleThumbs)
   })
   .then(() => {
@@ -49,8 +50,14 @@ useEffect(() => {
     <SelectorWrapper>
       <Title>Styles</Title>
       <StyleSelectorContainer>
-        {loaded ? styleThumbs.map((thumb) => {
-          return <StyleThumbnail key={thumb[1]} src={thumb[0]} onClick={() => {props.click(thumb[1])}}/>
+        {loaded ? styleThumbs.map((thumb, index) => {
+
+          if (thumb[1] === styleID) {
+            return <HighlightStyleThumbnail key={thumb[1]} src={thumb[0]} onClick={() => {props.click(thumb[1])}, console.log('styleID inside thumbnail', thumb)}/>
+          } else {
+            return <StyleThumbnail key={thumb[1]} src={thumb[0]} onClick={() => {props.click(thumb[1]), console.log('styleID inside thumbnail', thumb)}}/>
+          }
+          
         }) : ''}
 
 

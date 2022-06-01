@@ -124,7 +124,7 @@ const AddToCart = () => {
     let tempSkus = skus.slice();
     console.log('howdy')
   for (let i = 0; i < tempSkus.length; i++) {
-    console.log('yeehaw', currentSize, tempSkus[i])
+    //console.log('yeehaw', currentSize, tempSkus[i])
         if (tempSkus[i][1].size === currentSize) {
 
           setCurrentQuant(tempSkus[i][1].quantity)
