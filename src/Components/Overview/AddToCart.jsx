@@ -32,6 +32,7 @@ const AddToCart = () => {
   const [skusLoaded, setSkusLoaded] = useState(false)
   const [currentSize, setCurrentSize] = useState(null)
   const [currentQuant, setCurrentQuant] = useState(null)
+  const [selectedQuant, setSelectedQuant] = useState(null)
   const styleID = useContext(styleIDContext)
   const prodID = useContext(prodIDContext)
   var currentStyle = null;
@@ -101,6 +102,7 @@ const AddToCart = () => {
   const isThis = (event) => {
     event.preventDefault()
     console.log(currentSize)
+    console.log(selectedQuant)
 
   }
 
@@ -138,7 +140,7 @@ const AddToCart = () => {
     <CartDiv>
       <CartForm onSubmit={isThis}>
       <StyledSizeQuantity>
-        <StyledSizeSelect name='SizeSelect' id='SizeSelect' onChange={(e) => {setCurrentSize(e.target.value), console.log(currentSize)} }>
+        <StyledSizeSelect name='SizeSelect' id='SizeSelect' onChange={(e) => {setCurrentSize(e.target.value)} }>
           {skusLoaded 
           ?
             skus.map((sku, index) => {
@@ -150,12 +152,12 @@ const AddToCart = () => {
           <option> hello </option>
           }
         </StyledSizeSelect>
-        <StyledQuantitySelect name='Quantity' id='Quantity' >
+        <StyledQuantitySelect name='Quantity' id='Quantity' onChange={(e) => {setSelectedQuant(e.target.value)} }>
         {skusLoaded && currentQuant !== 0
           ?
             (range(1, currentQuant)).slice(0, 15).map((sku, index) => {
               return (
-                <QuantOption key={index}> {sku} </QuantOption>
+                <QuantOption key={index} > {sku} </QuantOption>
               )
             }) 
           : 
