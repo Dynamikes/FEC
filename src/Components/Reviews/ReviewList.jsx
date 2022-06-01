@@ -231,6 +231,7 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
     }
   }
 
+
   return (
     <ReviewListWrapper>
       <SearchBarWrapper onSubmit={(e)=>{searched(e)}}>
