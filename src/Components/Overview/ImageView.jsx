@@ -195,7 +195,7 @@ function ImageView(props) {
       .then((response) => {
         //console.log('image array:', response.data);
         let tempID = response.data.results[0].style_id
-        props.changeStyleID(tempID)
+        //props.changeStyleID(tempID)
         let allPics = response.data.results[0].photos;
         let tempLength = 0;
         for (let i = 0; i < allPics.length; i++) {
@@ -217,7 +217,7 @@ function ImageView(props) {
                 thumbCarousel.push(response.data.results[i].photos[y].thumbnail_url)
                 name = response.data.results[i].name;
               }
-              console.log('This is carousel:', Carousel)
+             // console.log('This is carousel:', Carousel)
 
             }
           }
