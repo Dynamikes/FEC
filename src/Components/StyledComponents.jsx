@@ -589,7 +589,7 @@ export const ShowMore = styled.a`
 
 export const AddReviewWrapper = styled.div`
   background-color: rgba(7,7,7);
-  border-color: rgb(20 , 20, 20);
+  border-color: silver;
   border-width: 1px;
   border-style: solid;
   position: fixed;
