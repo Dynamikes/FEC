@@ -1,21 +1,16 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { hot } from 'react-hot-loader/root';
 import Overview from './Components/Overview/Overview.jsx';
 import Reviews from './Components/Reviews/Reviews.jsx';
 import RelatedProducts from './Components/RelatedProducts/RelatedProducts.jsx';
 import QA from './Components/QA/QA.jsx';
 import PropTypes from 'prop-types';
+import {allProductsContext} from './App.jsx'
 import {
-  Flexbox,
   StyledPageTitle,
-  AppWrapper,
   ThumbnailImage,
-  Title,
 
 } from './Components/StyledComponents.jsx';
-export const prodIDContext = React.createContext();
-export const starsContext = React.createContext();
-export const productForAdd = React.createContext();
 import { MAIN_API_KEY } from './config.js';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -51,7 +46,7 @@ const CardImage = styled(ThumbnailImage)`
 const HomePage = (props) => {
   const [allProducts, setAllProducts] = useState([]);
   const [loaded, setLoaded] = useState([null])
-
+  const loadedProducts = useContext(allProductsContext);
   const getAllProducts = async () => {
     try {
       let response = await axios({
@@ -87,12 +82,21 @@ const HomePage = (props) => {
         }
       }
       await setAllProducts(sub);
+      await props.updateAllProducts(sub)
+      console.log('ALL DONE')
     } catch (e) {console.log(e)}
   };
-  useEffect(() => {
-    getAllProducts();
-    setLoaded(true)
-  }, [])
+    useEffect(() => {
+      console.log('rendering')
+      if (loadedProducts.length === 0) {
+        console.log('loaded check')
+      getAllProducts();
+      setLoaded(true);
+      } else {
+        setAllProducts(loadedProducts)
+        setLoaded(true)
+      }
+    }, [])
 
   return loaded ? (
     <div >
