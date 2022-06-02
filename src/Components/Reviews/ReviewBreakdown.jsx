@@ -174,7 +174,7 @@ const ReviewBreakdown = ({reviewsMeta, chars, changeStars, setReviews,reviewsHol
               margin='5px'
             />
             {Object.keys(starReviewObj).length !== 0 ? <small><u>Current Filters </u>:</small> : null}
-            <small>{Object.keys(starReviewObj).map((key)=> {return `${key} ★, `})}</small>
+            <small>{Object.keys(starReviewObj).map((key)=> {return `${key} ★| `})}</small>
             {Object.keys(starReviewObj).length !== 0 ? <small> <RemoveFilter onClick={() => handleFilter()} >Remove all filters</RemoveFilter> </small> : null}
         </StarBarWrap>
       </ProgressBarWrap>
