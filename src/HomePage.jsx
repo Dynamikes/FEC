@@ -95,7 +95,7 @@ const HomePage = (props) => {
 
   return loaded ? (
     <div >
-      <StyledPageTitle> Welcome to Chili's! </StyledPageTitle>
+      <StyledPageTitle> Welcome to Chili's! 🌶️  </StyledPageTitle>
       <HomePageFlex>
         {allProducts.map((card, index)=>(
           <HomePageCard key={index} onClick={()=>{props.updateID(card.id)}}>
