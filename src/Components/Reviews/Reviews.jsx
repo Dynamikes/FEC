@@ -25,7 +25,7 @@ const Reviews = ({changeStars}) => {
   //helper functions
   const getReviews = () => {
     axios({
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?product_id=${prodID}&&count=100`,
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/?product_id=${prodID}&&count=1000`,
       method: 'get',
       headers: {
         Authorization: MAIN_API_KEY,
