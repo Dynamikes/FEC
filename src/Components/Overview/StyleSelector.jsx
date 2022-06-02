@@ -27,7 +27,7 @@ useEffect(() => {
         tempStyleThumbs.push([response.data.results[i].photos[0].url, response.data.results[i].style_id])
       }
 
-    // } 
+    // }
     // else {
     //   tempStyleThumbs = [];
     //   for (let i = 0; i < response.data.results.length; i++) {
@@ -48,7 +48,6 @@ useEffect(() => {
 
   return (
     <SelectorWrapper>
-      <Title>Styles</Title>
       <StyleSelectorContainer>
         {loaded ? styleThumbs.map((thumb, index) => {
 
@@ -57,7 +56,7 @@ useEffect(() => {
           } else {
             return <StyleThumbnail key={thumb[1]} src={thumb[0]} onClick={() => {props.click(thumb[1]), console.log('styleID inside thumbnail', thumb)}}/>
           }
-          
+
         }) : ''}
 
 
