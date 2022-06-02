@@ -246,7 +246,6 @@ const ReviewList = ({reviews, getReviews, reviewsHolder, setReviews, chara, prod
 
   return (
     <ReviewListWrapper>
-      {console.log('Photos', addPhotoUrls)}
       <SearchBarWrapper onSubmit={(e)=>{searched(e)}}>
       <StyledSearchIcon />
         <ReviewsSearch type='text' name='search'

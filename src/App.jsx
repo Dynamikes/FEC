@@ -10,6 +10,8 @@ import {
   Flexbox,
   StyledPageTitle,
   AppWrapper,
+  HomeButton,
+  HomeButtonDiv
 } from './Components/StyledComponents.jsx';
 export const prodIDContext = React.createContext();
 export const starsContext = React.createContext();
@@ -30,7 +32,6 @@ const App = (props) => {
 
   const productAdd = (prod) => {
     setProductName(prod);
-    console.log('Is productadd being invoked', )
   }
 
 
@@ -47,8 +48,8 @@ const App = (props) => {
     <starsContext.Provider value={stars} >
     <productForAdd.Provider value={productName}>
     <AppWrapper>
+        <HomeButton onClick={()=>{updateID(null)}}> Home! </HomeButton>
       <StyledPageTitle>Hello {name}</StyledPageTitle>
-      <button onClick={()=>{updateID(null)}}> Home! </button>
       <Flexbox className='Overview' >
         <Overview  productAdd={productAdd} />
       </Flexbox>

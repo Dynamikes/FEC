@@ -57,7 +57,6 @@ const AddToCart = () => {
       for (let i = 0; i < response.data.results.length; i++) {
         if (response.data.results[i].style_id === styleID) {
           currentStyle = response.data.results[i].skus;
-          console.log('styleMatched', currentStyle)
           return currentStyle;
 
         }
@@ -65,7 +64,6 @@ const AddToCart = () => {
     })
     .then((currentStyle) => {
       let temp = loadedCount
-      console.log('currentStyle: ', currentStyle)
       setLoadedCount(temp + 1)
       setCart(currentStyle)
     })
@@ -93,7 +91,6 @@ const AddToCart = () => {
           setCurrentSize(tempCurrentSize);
         }
       setSkusLoaded(true);
-      console.log('Async Triggering')
     }
   }
 
@@ -106,8 +103,6 @@ const AddToCart = () => {
 
   const isThis = (event) => {
     event.preventDefault()
-    console.log(currentSize)
-    console.log(selectedQuant)
     let tempSku = 0;
     for (let x = 0; x < skus.length; x++) {
       if (skus[x][1].size === currentSize) {
@@ -115,7 +110,7 @@ const AddToCart = () => {
       }
     }
     for (let i = 0; i < selectedQuant; i++) {
-      axios.post({
+      axios({
         url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/cart`,
         method: 'post',
         headers: {
@@ -125,6 +120,7 @@ const AddToCart = () => {
           sku_id: tempSku
         }
       })
+      .then(()=>{alert('Order has been placed!')})
       .catch((err) => {
         console.log('Breaking in the silly post request. Err:', err)
       })
@@ -138,9 +134,7 @@ const AddToCart = () => {
   for (let i = 0; i < tempSkus.length; i++) {
 
         if (tempSkus[i][1].size === currentSize) {
-    console.log('yeehaw', currentSize, tempSkus[i])
           setCurrentQuant(tempSkus[i][1].quantity)
-          console.log('QuantUpdated')
         }
       }
   }
