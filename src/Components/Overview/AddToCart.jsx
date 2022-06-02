@@ -79,15 +79,15 @@ const AddToCart = () => {
     for (const key in cart) {
       tempSkus.push([key, cart[key]])
     }
-    setSkus(tempSkus);
-    const setTheData  = async () => {
-      const actualSkus = await skus
-      console.log('This is actualSkus triggering', actualSkus)
-      //setSkusLoaded(true)
-    }
+   setSkus(tempSkus);
+    // const setTheData  =  () => {
+    //   const actualSkus =  skus
+    //   console.log('This is actualSkus triggering', actualSkus)
+    //   //setSkusLoaded(true)
+    // }
 
-    setTheData()
-    .catch(console.error)
+    // setTheData()
+    // .catch(console.error)
 
   }, [cart])
 
@@ -158,7 +158,7 @@ const AddToCart = () => {
         <div>
         <label>Size:</label>
         <StyledSizeSelect name='SizeSelect' id='SizeSelect' onChange={(e) => {setCurrentSize(e.target.value)} }>
-          {skusLoaded
+          {skusLoaded && skus !== null
           ?
             skus.map((sku, index) => {
               return (
