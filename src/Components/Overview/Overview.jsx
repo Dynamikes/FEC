@@ -27,7 +27,6 @@ function Overview({productAdd}) {
   };
   const changeStyleID = (id) => {
     setStyleID(id)
-    console.log("change style triggered", id)
   }
 
   return (

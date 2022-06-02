@@ -42,7 +42,6 @@ const CardImage = styled(ThumbnailImage)`
   object-position: 50% 50%;
 `;
 
-
 const HomePage = (props) => {
   const [allProducts, setAllProducts] = useState([]);
   const [loaded, setLoaded] = useState([null])
@@ -69,7 +68,6 @@ const HomePage = (props) => {
           })
           let photoUrl;
           if (imageHolder.data.results.length > 0) {
-            // console.log('imageHolder', imageHolder.data.results[0].photos[0].url)
             photoUrl = imageHolder.data.results[0].photos[0].url;
           }
           let temp = {
@@ -83,13 +81,10 @@ const HomePage = (props) => {
       }
       await setAllProducts(sub);
       await props.updateAllProducts(sub)
-      console.log('ALL DONE')
     } catch (e) {console.log(e)}
   };
     useEffect(() => {
-      console.log('rendering')
       if (loadedProducts.length === 0) {
-        console.log('loaded check')
       getAllProducts();
       setLoaded(true);
       } else {
