@@ -89,7 +89,6 @@ const ReviewBreakdown = ({reviewsMeta, chars, changeStars, setReviews,reviewsHol
 
   return (
     <ReviewBreakdownWrapper>
-      {console.log('WTF', '')}
       <ReviewAverage>
         {average}
         <RatingStars value={(Number(Math.round(average * 4) / 4).toFixed(2))}/>

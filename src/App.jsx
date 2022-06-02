@@ -30,7 +30,6 @@ const App = (props) => {
 
   const productAdd = (prod) => {
     setProductName(prod);
-    console.log('Is productadd being invoked', )
   }
 
 
