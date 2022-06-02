@@ -35,7 +35,7 @@ const AddToCart = () => {
   const [selectedQuant, setSelectedQuant] = useState(null)
   const styleID = useContext(styleIDContext)
   const prodID = useContext(prodIDContext)
-  var currentStyle = null;
+  
   
   const range= (start, end) => {
     return Array(end - start + 1).fill().map((_, idx) => start + idx)
@@ -51,16 +51,17 @@ const AddToCart = () => {
       },
     })
     .then((response) => {
-      // console.log('this is style id', styleID)
-      // console.log('response.data.results', response.data.results)
+      var currentStyle = null;
       for (let i = 0; i < response.data.results.length; i++) {
         if (response.data.results[i].style_id === styleID) {
-          currentStyle = response.data.results[i].skus 
-          //console.log('Stylematch', currentStyle)
+          currentStyle = response.data.results[i].skus;
+          console.log('styleMatched', currentStyle)
+          return currentStyle;
+          
         }
       }
     })
-    .then(() => {
+    .then((currentStyle) => {
       let temp = loadedCount
       setLoadedCount(temp + 1)
       setCart(currentStyle)
@@ -73,25 +74,33 @@ const AddToCart = () => {
   
   useEffect(() => {
     const tempSkus = [];
-    //console.log('this is cart' , cart)
     for (const key in cart) {
       tempSkus.push([key, cart[key]])
-      //console.log('this is the log of attempted tempSkus', `${key}: ${cart[key]}`, tempSkus)
     }
     setSkus(tempSkus);
-    //setSkusLoaded(true)
-
-  
+    const setTheData  = async () => {
+      const actualSkus = await skus
+      console.log('This is actualSkus triggering', actualSkus)
+      //setSkusLoaded(true)
+    }
+    
+    setTheData()
+    .catch(console.error)
+    
   }, [cart])
 
  
     useEffect(() => {
     const getData = async () => {
-      const tempCurrentSize = await skus[0][1].size;
-      const tempCurrentQuant = await skus[0][1].quantity;
+      const tempCurrentSize =  skus[0][1].size;
+      const tempCurrentQuant =  skus[0][1].quantity;
       setCurrentQuant(tempCurrentQuant);
-      setCurrentSize(tempCurrentSize);
+      if(currentSize === null) {
+        setCurrentSize(tempCurrentSize);
+      }
       setSkusLoaded(true);
+      
+      console.log('Async Triggering')
     }
     getData()
     .catch(console.error)
@@ -103,39 +112,44 @@ const AddToCart = () => {
     event.preventDefault()
     console.log(currentSize)
     console.log(selectedQuant)
+    let tempSku = 0;
+    for (let x = 0; x < skus.length; x++) {
+      if (skus[x][1].size === currentSize) {
+        tempSku = skus[x][0]
+      }
+    }
+    for (let i = 0; i < selectedQuant; i++) {
+      axios.post({
+        url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/cart`,
+        method: 'post',
+        headers: {
+          Authorization: MAIN_API_KEY,
+        },
+        data: {
+          sku_id: tempSku
+        }
+      })
+      .catch((err) => {
+        console.log('Breaking in the silly post request. Err:', err)
+      })
+    }
 
   }
 
   useEffect(() => {
-  //  const updateQuant = async () => {
-  //    const tempSize = await currentSize
-  //    console.log('tempSkus', tempSkus)
-  //   for (let i = 0; i < tempSkus.length; i++) {
-  //     if (tempSkus.size === tempSize) {
-  //       setCurrentQuant(tempSkus[i][1])
-  //       console.log('QuantUpdated')
-  //     }
-  //   }
-  //  } 
-
-  //  updateQuant()
-  //  .catch(console.error)
   if (skus !== null && currentSize !== null) {
     let tempSkus = skus.slice();
     console.log('howdy')
   for (let i = 0; i < tempSkus.length; i++) {
-    //console.log('yeehaw', currentSize, tempSkus[i])
+    
         if (tempSkus[i][1].size === currentSize) {
-
+    console.log('yeehaw', currentSize, tempSkus[i])
           setCurrentQuant(tempSkus[i][1].quantity)
           console.log('QuantUpdated')
         }
       }
   }
-  
-
-    
-  }, [currentSize])
+  }, [currentSize, styleID])
     return (
     <CartDiv>
       <CartForm onSubmit={isThis}>
