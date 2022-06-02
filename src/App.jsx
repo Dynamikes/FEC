@@ -19,7 +19,7 @@ import { MAIN_API_KEY } from './config.js';
 import axios from 'axios';
 
 const App = (props) => {
-  const [prodID, setProdID] = useState(null)
+  const [prodID, setProdID] = useState(40344)
   const [stars, setStars] = useState(null);
   const [productName, setProductName] = useState(null);
   const [allProducts, setAllProducts] = useState([]);
