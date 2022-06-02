@@ -53,7 +53,6 @@ export const Flexbox = styled.div`
   max-width: 80%;
   margin: auto;
   padding: 10px;
-  max-height: 600px;
 `;
 
 export const StyledPageTitle = styled.h1`
@@ -105,7 +104,7 @@ export const StyledParagraph = styled.p`
   margin: 4px;
 `;
 export const Title = styled.h2`
-  align-self: center;
+  align: center;
   margin: 5px;
 `;
 export const CartDiv = styled.div`
@@ -190,7 +189,7 @@ box-shadow: 0 0 10px #9ecaed;
 `
 export const StyleSelectorContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 2px;
 `;
 

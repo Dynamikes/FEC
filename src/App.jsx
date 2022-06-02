@@ -5,6 +5,7 @@ import Reviews from './Components/Reviews/Reviews.jsx';
 import RelatedProducts from './Components/RelatedProducts/RelatedProducts.jsx';
 import QA from './Components/QA/QA.jsx';
 import PropTypes from 'prop-types';
+import HomePage from './HomePage.jsx'
 import {
   Flexbox,
   StyledPageTitle,
@@ -17,7 +18,7 @@ import { MAIN_API_KEY } from './config.js';
 import axios from 'axios';
 
 const App = (props) => {
-  const [prodID, setProdID] = useState(40351)
+  const [prodID, setProdID] = useState(null)
   const [stars, setStars] = useState(null);
   const [productName, setProductName] = useState(null);
   let products = [];
@@ -31,7 +32,7 @@ const App = (props) => {
     console.log('Is productadd being invoked', )
   }
 
-  const getAllProducts = async () => {
+  const getAllProducts =  () => {
     axios({
       url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products?count=100',
       method: 'get',
@@ -51,14 +52,19 @@ const App = (props) => {
   getAllProducts();
 
   const name = props.name;
+
+  const updateID = (id) => {
+    setProdID(id);
+  }
   return prodID ? (
     <prodIDContext.Provider value={prodID} >
     <starsContext.Provider value={stars} >
     <productForAdd.Provider value={productName}>
     <AppWrapper>
       <StyledPageTitle>Hello {name}</StyledPageTitle>
-      <Flexbox>
-        <Overview productAdd={productAdd} />
+      <button onClick={()=>{updateID(null)}}> Home! </button>
+      <Flexbox className='Overview' >
+        <Overview  productAdd={productAdd} />
       </Flexbox>
       <Flexbox>
         <RelatedProducts />
@@ -73,7 +79,7 @@ const App = (props) => {
     </productForAdd.Provider>
     </starsContext.Provider>
     </prodIDContext.Provider>
-  ) : null ;
+  ) : <HomePage updateID={updateID}/> ;
 };
 App.propTypes = {
   name: PropTypes.node,

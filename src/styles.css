@@ -19,6 +19,10 @@ a {
   color: orange;
 }
 
+.Overview {
+  max-height: 600px;
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 5px;
