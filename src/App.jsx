@@ -14,14 +14,15 @@ import {
 export const prodIDContext = React.createContext();
 export const starsContext = React.createContext();
 export const productForAdd = React.createContext();
+export const allProductsContext = React.createContext();
 import { MAIN_API_KEY } from './config.js';
 import axios from 'axios';
 
 const App = (props) => {
-  const [prodID, setProdID] = useState(null)
+  const [prodID, setProdID] = useState(40344)
   const [stars, setStars] = useState(null);
   const [productName, setProductName] = useState(null);
-  let products = [];
+  const [allProducts, setAllProducts] = useState([]);
 
   const changeStars = (count) => {
     setStars(count);
@@ -32,29 +33,14 @@ const App = (props) => {
     console.log('Is productadd being invoked', )
   }
 
-  const getAllProducts =  () => {
-    axios({
-      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products?count=100',
-      method: 'get',
-      headers: {
-        Authorization: MAIN_API_KEY,
-      },
-    })
-      .then((response) => {
-        products.push(response.data);
-        console.log('this is all data: ', response.data);
-      })
-      .catch((err) => {
-        console.log('Breaking in getOurData. Err:', err);
-      });
-    console.log('products:', products);
-  };
-  getAllProducts();
 
   const name = props.name;
 
   const updateID = (id) => {
     setProdID(id);
+  }
+  const updateAllProducts = (array) => {
+    setAllProducts(array);
   }
   return prodID ? (
     <prodIDContext.Provider value={prodID} >
@@ -79,7 +65,10 @@ const App = (props) => {
     </productForAdd.Provider>
     </starsContext.Provider>
     </prodIDContext.Provider>
-  ) : <HomePage updateID={updateID}/> ;
+  ) :
+  <allProductsContext.Provider value={allProducts}>
+    <HomePage updateID={updateID} updateAllProducts={updateAllProducts}/>
+  </allProductsContext.Provider>
 };
 App.propTypes = {
   name: PropTypes.node,
