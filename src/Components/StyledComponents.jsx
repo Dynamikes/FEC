@@ -425,6 +425,17 @@ export const ReviewBreakdownWrapper = styled.div`
   min-width: 190px;
 `;
 
+export const RemoveFilter = styled.button`
+background: none!important;
+  border: none;
+  font-family: arial, sans-serif;
+  cursor: pointer;
+  &:hover {
+    color: green;
+  }
+  color: orange;
+`;
+
 export const ReviewAverage = styled.h2`
   display: flex;
   flex-direction: row;
@@ -568,7 +579,7 @@ export const AddWrapper = styled.div`
 `;
 
 export const ShowMore = styled.a`
-  color: yellow;
+  color orange;
   flex-direction: column;
   align-items: flex-end;
   &:hover {
@@ -578,7 +589,7 @@ export const ShowMore = styled.a`
 
 export const AddReviewWrapper = styled.div`
   background-color: rgba(7,7,7);
-  border-color: rgb(20 , 20, 20);
+  border-color: silver;
   border-width: 1px;
   border-style: solid;
   position: fixed;
