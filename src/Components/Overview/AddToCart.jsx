@@ -120,7 +120,6 @@ const AddToCart = () => {
           sku_id: tempSku
         }
       })
-      .then(()=>{alert('Order has been placed!')})
       .catch((err) => {
         console.log('Breaking in the silly post request. Err:', err)
       })
