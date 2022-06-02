@@ -30,7 +30,7 @@ const AddToCart = () => {
   const [sizes, setSizes] = useState(null)
   const [inStock, setInStock] = useState(false)
   const [loadedCount, setLoadedCount] = useState(0);
-  const [skus, setSkus] = useState(null);
+  const [skus, setSkus] = useState([]);
   const [skusLoaded, setSkusLoaded] = useState(false)
   const [currentSize, setCurrentSize] = useState(null)
   const [currentQuant, setCurrentQuant] = useState(null)
@@ -65,6 +65,7 @@ const AddToCart = () => {
     })
     .then((currentStyle) => {
       let temp = loadedCount
+      console.log('currentStyle: ', currentStyle)
       setLoadedCount(temp + 1)
       setCart(currentStyle)
     })
@@ -74,39 +75,32 @@ const AddToCart = () => {
     })
   }, [styleID]);
 
-  useEffect(() => {
+  useEffect( () => {
     const tempSkus = [];
     for (const key in cart) {
       tempSkus.push([key, cart[key]])
     }
-    setSkus(tempSkus);
-    const setTheData  = async () => {
-      const actualSkus = await skus
-      console.log('This is actualSkus triggering', actualSkus)
-      //setSkusLoaded(true)
-    }
-
-    setTheData()
-    .catch(console.error)
+  setSkus(tempSkus);
 
   }, [cart])
 
-
-    useEffect(() => {
-    const getData = async () => {
+  const getData = async () => {
+    if (skus.length) {
       const tempCurrentSize =  skus[0][1].size;
       const tempCurrentQuant =  skus[0][1].quantity;
       setCurrentQuant(tempCurrentQuant);
-      if(currentSize === null) {
-        setCurrentSize(tempCurrentSize);
-      }
+        if(currentSize === null) {
+          setCurrentSize(tempCurrentSize);
+        }
       setSkusLoaded(true);
-
       console.log('Async Triggering')
     }
-    getData()
-    .catch(console.error)
+  }
 
+  useEffect(() => {
+    if (!skus.length) {
+      getData();
+    }
   }, [skus])
 
 
@@ -157,12 +151,13 @@ const AddToCart = () => {
       <StyledSizeQuantity>
         <div>
         <label>Size:</label>
-        <StyledSizeSelect name='SizeSelect' id='SizeSelect' onChange={(e) => {setCurrentSize(e.target.value)} }>
-          {skusLoaded
+        <StyledSizeSelect  name='SizeSelect' id='SizeSelect' onChange={(e) => {setCurrentSize(e.target.value)} }>
+          <SizeOption selected disabled hidden> </SizeOption>
+          {skus !== null
           ?
             skus.map((sku, index) => {
               return (
-                <SizeOption key={index} value={sku[1].size} > {sku[1].size} </SizeOption>
+                <SizeOption key={index} > {sku[1].size} </SizeOption>
               )
             })
           :
@@ -172,8 +167,8 @@ const AddToCart = () => {
         </div>
         <div>
         <label> Quantity: </label>
-         <StyledQuantitySelect name='Quantity' id='Quantity' onChange={(e) => {setSelectedQuant(e.target.value)} }>
-        {skusLoaded && currentQuant !== 0
+         <StyledQuantitySelect selected='' name='Quantity' id='Quantity' onChange={(e) => {setSelectedQuant(e.target.value)} }>
+        { currentQuant !== 0
           ?
             (range(1, currentQuant)).slice(0, 15).map((sku, index) => {
               return (
