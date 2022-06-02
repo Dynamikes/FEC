@@ -427,6 +427,17 @@ export const ReviewBreakdownWrapper = styled.div`
   min-width: 190px;
 `;
 
+export const RemoveFilter = styled.button`
+background: none!important;
+  border: none;
+  font-family: arial, sans-serif;
+  cursor: pointer;
+  &:hover {
+    color: orange;
+  }
+  color: green;
+`;
+
 export const ReviewAverage = styled.h2`
   display: flex;
   flex-direction: row;
