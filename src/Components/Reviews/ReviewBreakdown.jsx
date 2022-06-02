@@ -23,11 +23,6 @@ import ProgressBar from "@ramonak/react-progress-bar";
 const ReviewBreakdown = ({reviewsMeta, chars, changeStars, setReviews,reviewsHolder}) => {
 
   const [starReviewObj, setStarReviewObj] = useState({});
-  const [oneClick, setOne] = useState(false);
-  const [twoClick, setTwo] = useState(false);
-  const [threeClick, setThree] = useState(false);
-  const [fourClick, setFour] = useState(false);
-  const [fiveClick, setFive] = useState(false);
 
   //Variables to hold values
   //Recommended
@@ -59,9 +54,9 @@ const ReviewBreakdown = ({reviewsMeta, chars, changeStars, setReviews,reviewsHol
   }}
 
 
-  const average = parseFloat(((one * 1) +( two * 2) + (three * 3) + (four * 4) + (five * 5)) / (total)).toFixed(1)
+  const average = parseFloat(((one * 1) +( two * 2) + (three * 3) + (four * 4) + (five * 5)) / (total)).toFixed(1);
 
-   changeStars(average)
+   changeStars(average);
 
    useEffect(() => {
      let objLength = Object.keys(starReviewObj).length;
@@ -88,8 +83,8 @@ const ReviewBreakdown = ({reviewsMeta, chars, changeStars, setReviews,reviewsHol
     }
 
     const handleFilter = () => {
-      setReviews(reviewsHolder)
-
+      setReviews(reviewsHolder);
+      setStarReviewObj({});
     }
 
   return (
@@ -179,8 +174,9 @@ const ReviewBreakdown = ({reviewsMeta, chars, changeStars, setReviews,reviewsHol
               bgColor='green'
               margin='5px'
             />
-            {<small>Filters:{' Five stars'}</small>}
-            <small> <RemoveFilter onClick={() => handleFilter()} >Remove all filters</RemoveFilter> </small>
+            {Object.keys(starReviewObj).length !== 0 ? <small><u>Current Filters </u>:</small> : null}
+            <small>{Object.keys(starReviewObj).map((key)=> {return `${key} ★, `})}</small>
+            {Object.keys(starReviewObj).length !== 0 ? <small> <RemoveFilter onClick={() => handleFilter()} >Remove all filters</RemoveFilter> </small> : null}
         </StarBarWrap>
       </ProgressBarWrap>
       <RecommendWrap>

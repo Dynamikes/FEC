@@ -431,9 +431,9 @@ background: none!important;
   font-family: arial, sans-serif;
   cursor: pointer;
   &:hover {
-    color: orange;
+    color: green;
   }
-  color: green;
+  color: orange;
 `;
 
 export const ReviewAverage = styled.h2`
