@@ -673,3 +673,29 @@ box-shadow: 1px 1px black;
 export const HomeButtonDiv = styled.div`
 width: 60%;
 `;
+export const HomePageFlex = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  justify-content: flex-start;
+  align-content: space-between;
+  max-width: 80%;
+`;
+export const HomePageCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px grey solid;
+  padding: 5px;
+  margin: 10px;
+  height: 20vh;
+  width: 20vh;
+  box-shadow: 3px 3px black;
+`;
+export const CardImage = styled(ThumbnailImage)`
+  height: 100px;
+  width: 100px;
+  object-fit: contain;
+  object-position: 50% 50%;
+`;
