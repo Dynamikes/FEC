@@ -85,6 +85,7 @@ const Reviews = ({changeStars}) => {
           reviews={reviews}
           setReviews={setReview}
           reviewsHolder={reviewsHolder}
+          setReviewsHolder={setReviewsHolder}
         />
         <ReviewList
           reviews={reviews}
