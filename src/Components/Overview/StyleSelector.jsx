@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, {useState, useEffect, useContext} from 'react';
 import { hot } from 'react-hot-loader/root';
 import axios from 'axios';
@@ -49,12 +50,12 @@ useEffect(() => {
   return (
     <SelectorWrapper>
       <StyleSelectorContainer>
-        {loaded ? styleThumbs.map((thumb, index) => {
+        {loaded ? styleThumbs.map((thumb) => {
 
           if (thumb[1] === styleID) {
-            return <HighlightStyleThumbnail key={thumb[1]} src={thumb[0]} onClick={() => {props.click(thumb[1])}, console.log('styleID inside thumbnail', thumb)}/>
+            return <HighlightStyleThumbnail key={thumb[1]} src={thumb[0]} onClick={() => {props.click(thumb[1])}}/>
           } else {
-            return <StyleThumbnail key={thumb[1]} src={thumb[0]} onClick={() => {props.click(thumb[1]), console.log('styleID inside thumbnail', thumb)}}/>
+            return <StyleThumbnail key={thumb[1]} src={thumb[0]} onClick={() => {props.click(thumb[1])}}/>
           }
 
         }) : ''}

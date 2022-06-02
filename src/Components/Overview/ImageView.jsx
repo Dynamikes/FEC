@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect, useContext, useRef} from 'react';
 import { hot } from 'react-hot-loader/root';
 import axios from 'axios';
@@ -159,14 +160,11 @@ function ImageView(props) {
       setVertCurrent([vertCurrent[0] - 1, vertCurrent[1] - 1])
     }
   }, [current])
-  // console.log(API_KEY)
   const nextImage = () => {
     setCurrent(current === carLength - 1 ? 0 : current + 1);
-    // console.log(current);
   };
   const prevImage = () => {
     setCurrent(current === 0 ? carLength - 1 : current - 1);
-    // console.log(current);
   };
  const changeCurrent = (num) => {
    setCurrent(num)
@@ -174,10 +172,8 @@ function ImageView(props) {
  const changeVertCurrent = (x) => {
    if (vertCurrent[1] < CarouselData.length && x === 'down') {
     setVertCurrent([vertCurrent[0] + 1, vertCurrent[1] + 1])
-    //console.log(vertCurrent)
    } else if (vertCurrent[0] > 0 && x === 'up') {
      setVertCurrent([vertCurrent[0] - 1, vertCurrent[1] - 1])
-     //console.log(vertCurrent)
    }
  }
  const toggleDefault = () => {
@@ -192,9 +188,6 @@ function ImageView(props) {
       },
     })
       .then((response) => {
-        //console.log('image array:', response.data);
-        // let tempID = response.data.results[0].style_id
-        // props.changeStyleID(tempID)
         let allPics = response.data.results[0].photos;
         let tempLength = 0;
         for (let i = 0; i < allPics.length; i++) {
@@ -250,24 +243,17 @@ const containerRef = useRef(null);
 const handleMouseEnter = () => {
     setOpacity(1);
     setBackOpacity(0)
-    console.log('Mouse entered')
-
   }
 
   const handleMouseLeave = () => {
     setOpacity(0);
     setBackOpacity(1)
-    console.log('Mouse left')
-
   }
 
   const handleMouseMove = () => {
     const targetRect = targetRef.current.getBoundingClientRect();
     const sourceRect = sourceRef.current.getBoundingClientRect();
     const containerRect = containerRef.current.getBoundingClientRect();
-    console.log('source rect', sourceRect);
-    console.log('target rect', targetRect)
-    console.log('event', event)
     const xRatio = (targetRect.width - containerRect.width) / sourceRect.width ;
     const yRatio = (targetRect.height - containerRect.height) / sourceRect.height ;
 
@@ -313,7 +299,7 @@ const handleMouseEnter = () => {
   //   const handleImageClick = () => {
   //     setZoom((prevState) => !prevState);
   //   };
-  
+
   // const [zoom, setZoom] = useState(false);
   //   const [mouseX, setMouseX] = useState(null);
   //   const [mouseY, setMouseY] = useState(null);

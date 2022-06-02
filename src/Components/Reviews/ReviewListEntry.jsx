@@ -44,7 +44,6 @@ const ReviewListEntry = ({review, getReviews}) => {
       })
   };
 
-
   return (
     <ReviewTile>
       <div>

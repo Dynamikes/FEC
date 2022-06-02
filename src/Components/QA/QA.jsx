@@ -21,7 +21,6 @@ function QA() {
   const [email, setEmail] = useState('');
   const prodName = useContext(productForAdd)
   let product_id = useContext(prodIDContext);
-  console.log(product_id)
   const getQuestions= () => {
     axios({
       url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=' + product_id,

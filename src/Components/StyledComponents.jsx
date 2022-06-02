@@ -663,3 +663,13 @@ export const SalePrice = styled.span`
   color: red;
   size: 1.1 em;
 `;
+
+export const HomeButton = styled.button`
+margin: 5px;
+padding: 5px;
+box-shadow: 1px 1px black;
+`;
+
+export const HomeButtonDiv = styled.div`
+width: 60%;
+`;

@@ -32,7 +32,6 @@ function ProductInfo({productAdd}) {
   const stars = useContext(starsContext);
   const styleID = useContext(styleIDContext);
   const prodName = useContext(productForAdd);
-  //console.log('prodname', prodName)
   var tempProd = '';
 
   useEffect(() => {
@@ -45,21 +44,14 @@ function ProductInfo({productAdd}) {
     })
       .then((response) => {
         setProduct(response.data);
-        ///console.log('just product pull', response.data)
         tempProd = response.data.name
       })
       .then(() => {
         setLoaded(true);
-        ///console.log('this is products', tempProd)
         productAdd(tempProd)
-
-      })
-      .then(() => {
-       /// console.log('post productadd prodname' , prodName)
       })
       .catch((err) => {
         setError(err);
-        ///console.log('Breaking in getOurData. Err:', err);
       });
   }, [prodID]);
 
@@ -72,7 +64,6 @@ function ProductInfo({productAdd}) {
       },
     })
     .then((response) => {
-      ///console.log('responsedataresults', response.data.results)
       if (styleID !== null) {
         for (let i = 0; i < response.data.results.length; i++) {
         if (response.data.results[i].style_id === styleID) {
@@ -84,7 +75,6 @@ function ProductInfo({productAdd}) {
     })
     .then(() => {
       setStyleLoaded(true)
-      //console.log('this is currentstyle', currentStyle)
     })
   }, [styleID]);
   return (
