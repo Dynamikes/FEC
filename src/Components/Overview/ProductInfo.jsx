@@ -52,7 +52,7 @@ function ProductInfo({productAdd}) {
         setLoaded(true);
         ///console.log('this is products', tempProd)
         productAdd(tempProd)
-        
+
       })
       .then(() => {
        /// console.log('post productadd prodname' , prodName)
@@ -100,7 +100,7 @@ function ProductInfo({productAdd}) {
       />{' '}
         <a href='#ratings_and_reviews'>
           {' '}
-          <small>Reviews</small>{' '}
+          <small>Read all Reviews</small>{' '}
         </a>
       </StyledStars>
       <StyledCategory>
