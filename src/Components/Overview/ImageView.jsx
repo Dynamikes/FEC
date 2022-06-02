@@ -193,8 +193,8 @@ function ImageView(props) {
     })
       .then((response) => {
         //console.log('image array:', response.data);
-        let tempID = response.data.results[0].style_id
-        //props.changeStyleID(tempID)
+        // let tempID = response.data.results[0].style_id
+        // props.changeStyleID(tempID)
         let allPics = response.data.results[0].photos;
         let tempLength = 0;
         for (let i = 0; i < allPics.length; i++) {
@@ -206,7 +206,8 @@ function ImageView(props) {
             thumbCarousel.push(response.data.results[0].photos[x].thumbnail_url);
           }
           name = response.data.results[0].name;
-          //console.log('This is thumb carousel', thumbCarousel)
+          let tempID = response.data.results[0].style_id
+          props.changeStyleID(tempID)
         } else {
           for (let i = 0; i < response.data.results.length; i++) {
             if (response.data.results[i].style_id === styleID) {
@@ -216,8 +217,6 @@ function ImageView(props) {
                 thumbCarousel.push(response.data.results[i].photos[y].thumbnail_url)
                 name = response.data.results[i].name;
               }
-             // console.log('This is carousel:', Carousel)
-
             }
           }
 
@@ -239,7 +238,7 @@ function ImageView(props) {
       });
   }, [styleID]);
 //>>>>>>>>>>>>>ZOOM HANDLING>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-const [opacity, setOpacity] = useState(1);
+const [opacity, setOpacity] = useState(0);
 const [offset, setOffset] = useState({ left: 50, top: 50})
 const [backOpacity, setBackOpacity] = useState(1);
 
@@ -280,28 +279,47 @@ const handleMouseEnter = () => {
     })
 
   }
-// //>>>>>>>>>>>>>>>>>>>>>>>>>>>Example Styled Images>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  // const handleMouseMove = (e) => {
+  //   const DOMRect = carouselContent.current.getBoundingClientRect();
+  //   const {
+  //     height, width, left: offsetLeft, top: offsetTop,
+  //   } = DOMRect;
+  //   const x = ((e.pageX - offsetLeft) / width) * 100;
+  //   const y = ((e.pageY - offsetTop) / height) * 100;
+  //   setMouseX(x);
+  //   setMouseY(y);
+  // };
 
+  // const transformOrigin = {
+  //   transformOrigin: `${mouseX}% ${mouseY}%`,
+  // };
+  // const imageDivStyle = {
+  //   backgroundRepeat: 'no-repeat',
+  //   backgroundPosition: 'center',
+  //   transition: 'transform .2s ease-out',
+  //   backgroundImage: `url(${galleryImages[currentGalleryIndex]})`,
+  // };
 
-//   //>>>>>>>>>>>>>>>>>> EXAMPLE CONTAINERS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-//   <div className="BiggestContainer">
-//       <Container
-//         ref={containerRef}
-//         onMouseEnter={handleMouseEnter}
-//         onMouseLeave={handleMouseLeave}
-//         onMouseMove={handleMouseMove}
-//         >
-//           <BaseImage ref={sourceRef} alt="source" source="Exampleimage.png" />
-//           <TargetImage
-//             ref={targetRef}
-//             alt="target"
-//             opacity={opacity}
-//             offset={offset}
-//             source="BiggerExamplePicture" />
-//         </Container>
-//   </div>
-//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  //   <div
+  //     style={{
+  //       ...imageDivStyle,
+  //       transform: zoom ? `scale()` : 'scale(1)',
+  //       cursor: zoom ? 'zoom-out' : 'zoom-in',
+  //       ...transformOrigin,
+  //     }}
+  //     className="gallery-image"
+  //   />
+  //   const handleImageClick = () => {
+  //     setZoom((prevState) => !prevState);
+  //   };
+  
+  // const [zoom, setZoom] = useState(false);
+  //   const [mouseX, setMouseX] = useState(null);
+  //   const [mouseY, setMouseY] = useState(null);
+  //   const zoomScale = 1.75;
+  //   const carouselContent = useRef(null);
+  //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   return (
     <ImageViewWrapper className='ImageViewWrapper'>
       {clicked &&
