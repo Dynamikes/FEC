@@ -19,7 +19,14 @@ import RatingStars from './RatingStars.jsx'
 import ProgressBar from "@ramonak/react-progress-bar";
 
 
-const ReviewBreakdown = ({reviewsMeta, chars, changeStars, reviews, setReviews, reviewsHolder}) => {
+const ReviewBreakdown = ({reviewsMeta, chars, changeStars, reviews, setReviews, reviewsHolder, setReviewsHolder}) => {
+
+
+  const [fiveClicked, setFive] = useState(false);
+  const [fourClicked, setFour] = useState(false);
+  const [threeClicked, setThree] = useState(false);
+  const [twoClicked, setTwo] = useState(false);
+  const [oneClicked, setOne] = useState(false);
 
   //Variables to hold values
   //Recommended
@@ -70,8 +77,13 @@ const ReviewBreakdown = ({reviewsMeta, chars, changeStars, reviews, setReviews, 
     };
 
     const handleFive = () => {
+      if (!fiveClicked) {
       let starFive = reviewsHolder.slice()
       setReviews(starFive.filter(review => review.rating === 5))
+      setFive(true);
+      } else {
+      setFive(false)
+      }
     };
 
     const handleFour = () => {
@@ -180,6 +192,8 @@ const ReviewBreakdown = ({reviewsMeta, chars, changeStars, reviews, setReviews, 
               bgColor='green'
               margin='5px'
             />
+            {fiveClicked || fourClicked || threeClicked|| twoClicked|| oneClicked
+             ? <small>Filters:{fiveClicked ? ' Five stars': null}</small> : null}
         </StarBarWrap>
       </ProgressBarWrap>
       <RecommendWrap>
