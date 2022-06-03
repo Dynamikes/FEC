@@ -30,11 +30,11 @@ const ReviewBreakdown = ({reviewsMeta, chars, changeStars, setReviews,reviewsHol
   const notRecommended = Number(reviewsMeta.recommended.false);
   //Rating stars
 
-  let one = Number(reviewsMeta.ratings[1])
-  let two = Number(reviewsMeta.ratings[2])
-  let three = Number(reviewsMeta.ratings[3])
-  let four = Number(reviewsMeta.ratings[4])
-  let five = Number(reviewsMeta.ratings[5])
+  let one = Number(reviewsMeta.ratings[1]) || 0
+  let two = Number(reviewsMeta.ratings[2]) || 0
+  let three = Number(reviewsMeta.ratings[3]) || 0
+  let four = Number(reviewsMeta.ratings[4]) || 0
+  let five = Number(reviewsMeta.ratings[5]) || 0
   let total = one + two + three + four + five
 
   let fit, value, comfort, length, quality, size;

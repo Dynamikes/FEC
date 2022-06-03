@@ -39,6 +39,7 @@ const App = (props) => {
 
   const updateID = (id) => {
     setProdID(id);
+    console.log(id)
   }
   const updateAllProducts = (array) => {
     setAllProducts(array);
