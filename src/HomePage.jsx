@@ -6,7 +6,8 @@ import {
   ThumbnailImage,
   HomePageFlex,
   HomePageCard,
-  CardImage
+  CardImage,
+  AddSummaryWrapper
 } from './Components/StyledComponents.jsx';
 import { MAIN_API_KEY } from './config.js';
 import axios from 'axios';
@@ -80,7 +81,6 @@ const HomePage = (props) => {
   return loaded ? (
     <div >
       <StyledPageTitle> Welcome to Chili's! 🌶️  </StyledPageTitle>
-      <button onClick={() => {props.incrementPage()}}> Load More Products! </button>
       <HomePageFlex>
         {allProducts.map((card, index)=>(
           <HomePageCard key={index} onClick={()=>{props.updateID(card.id)}}>
@@ -92,9 +92,16 @@ const HomePage = (props) => {
         </HomePageCard>
         ))}
       </HomePageFlex>
+      <AddSummaryWrapper className='ScuffedButtonWrapper'>
+        <LoadMoreProducts onClick={() => {props.incrementPage()}}> Load More Products! </LoadMoreProducts>
+      </AddSummaryWrapper>
     </div>
   ) : null
 
 }
+const LoadMoreProducts = styled.button`
+  margin: 10px auto;
+  padding: 5px 10px;
+`;
 
 export default hot(HomePage);

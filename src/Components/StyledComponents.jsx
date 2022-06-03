@@ -674,10 +674,12 @@ export const HomeButtonDiv = styled.div`
 width: 60%;
 `;
 export const HomePageFlex = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+  gap: 10px;
   margin: auto;
-  justify-content: flex-start;
+  margin-bottom: 10px;
+  justify-content: start;
   align-content: space-between;
   max-width: 80%;
 `;
@@ -688,9 +690,9 @@ export const HomePageCard = styled.div`
   align-items: center;
   border: 2px grey solid;
   padding: 5px;
-  margin: 10px;
-  height: 20vh;
-  width: 20vh;
+  margin: 10
+  height: auto;px;
+  min-height: 150px;
   box-shadow: 3px 3px black;
 `;
 export const CardImage = styled(ThumbnailImage)`

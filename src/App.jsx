@@ -21,8 +21,8 @@ export const pageContext = React.createContext();
 import { MAIN_API_KEY } from './config.js';
 import axios from 'axios';
 
-const App = (props) => {
-  const [prodID, setProdID] = useState(null);
+const App = ({ name }) => {
+  const [prodID, setProdID] = useState(40344);
   const [stars, setStars] = useState(null);
   const [productName, setProductName] = useState(null);
   const [allProducts, setAllProducts] = useState([]);
@@ -37,7 +37,7 @@ const App = (props) => {
   }
 
 
-  const name = props.name;
+  //const name = props.name;
 
   const updateID = (id) => {
     setProdID(id);
@@ -78,7 +78,5 @@ const App = (props) => {
     </pageContext.Provider>
   </allProductsContext.Provider>
 };
-App.propTypes = {
-  name: PropTypes.node,
-};
+
 export default hot(App);
