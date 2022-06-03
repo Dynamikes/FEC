@@ -28,6 +28,7 @@ import axios from "axios";
 import { MAIN_API_KEY, IMG_API_KEY } from "../../config.js";
 import { prodIDContext } from "../../App.jsx";
 import { productForAdd } from "../../App.jsx";
+
 const ReviewList = ({
   reviews,
   getReviews,
@@ -36,12 +37,12 @@ const ReviewList = ({
   chara,
   prodID,
 }) => {
+
   const product = useContext(productForAdd);
-  // const prodID2 = useContext(prodIDContext)
+
   //State for various items
   const [reviewCount, setReviewCount] = useState(2);
   const [addIsOpen, setAdd] = useState(false);
-
   const [addUsername, setUser] = useState("");
   const [addSummary, setSummary] = useState("");
   const [addBody, setBody] = useState("");
