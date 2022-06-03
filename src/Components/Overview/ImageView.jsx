@@ -1,9 +1,15 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect, useContext, useRef} from 'react';
-import { hot } from 'react-hot-loader/root';
-import axios from 'axios';
-import styled from 'styled-components';
-import { FaArrowAltCircleRight, FaArrowAltCircleLeft, FaArrowAltCircleUp, FaArrowAltCircleDown, FaRegCircle } from 'react-icons/fa';
+import React, { useState, useEffect, useContext, useRef } from "react";
+import { hot } from "react-hot-loader/root";
+import axios from "axios";
+import styled from "styled-components";
+import {
+  FaArrowAltCircleRight,
+  FaArrowAltCircleLeft,
+  FaArrowAltCircleUp,
+  FaArrowAltCircleDown,
+  FaRegCircle,
+} from "react-icons/fa";
 import {
   ImageWrapper,
   Thumbnails,
@@ -14,12 +20,13 @@ import {
   ImagePopUp,
   AddWrapper,
   ImageOverlay,
-  CircleRow, ExpandButton
-} from '../StyledComponents.jsx';
-import {MAIN_API_KEY} from '../../config.js'
-import {styleIDContext} from './Overview'
-import {prodIDContext} from '../../App.jsx'
-import { relativeTimeThreshold } from 'moment';
+  CircleRow,
+  ExpandButton,
+} from "../StyledComponents.jsx";
+import { MAIN_API_KEY } from "../../config.js";
+import { styleIDContext } from "./Overview";
+import { prodIDContext } from "../../App.jsx";
+import { relativeTimeThreshold } from "moment";
 
 const CarouselWrapper = styled.div`
   display: flex;
@@ -30,7 +37,7 @@ const MainImageWrapper = styled.div`
   width: 40vw;
   margin: 1rem;
 `;
-const ImageOverlayContainer=styled.div`
+const ImageOverlayContainer = styled.div`
   max-height: 1000px;
   max-width: 1000px;
   display: flex;
@@ -56,47 +63,45 @@ const DeadRightArrow = styled(StyledRightArrow)`
   user-select: none;
 `;
 const ExpandedRightArrow = styled(StyledRightArrow)`
-top: 50%;
-position: absolute;
-right: 5%;
-`
+  top: 50%;
+  position: absolute;
+  right: 5%;
+`;
 const ExpandedLeftArrow = styled(StyledLeftArrow)`
-position: absolute;
-left: 5%;
-top: 50%;
-`
+  position: absolute;
+  left: 5%;
+  top: 50%;
+`;
 const StyledUpArrow = styled(FaArrowAltCircleUp)`
-transform: scale(1);
-left: 10%;
-top: 5%;
-z-index: 3;
-margin: 10px;
-`
+  transform: scale(1);
+  left: 10%;
+  top: 5%;
+  z-index: 3;
+  margin: 10px;
+`;
 const DeadUpArrow = styled(StyledUpArrow)`
   opacity: 0;
   user-select: none;
 `;
 const StyledDownArrow = styled(FaArrowAltCircleDown)`
-transform: scale(1);
-left: 10%;
-bottom: 5%;
-z-index: 3;
-margin: 10px;
-`
+  transform: scale(1);
+  left: 10%;
+  bottom: 5%;
+  z-index: 3;
+  margin: 10px;
+`;
 const DeadDownArrow = styled(StyledDownArrow)`
   opacity: 0;
   user-select: none;
 `;
-const ThumbCircle = styled(FaRegCircle)`
-
-`
+const ThumbCircle = styled(FaRegCircle)``;
 const HighlightCircle = styled(FaRegCircle)`
-border: 2px solid #dadada;
-border-radius: 7px;
-outline: none;
-border-color: #9ecaed;
-box-shadow: 0 0 10px #9ecaed;
-`
+  border: 2px solid #dadada;
+  border-radius: 7px;
+  outline: none;
+  border-color: #9ecaed;
+  box-shadow: 0 0 10px #9ecaed;
+`;
 const MainImage = styled.img`
   height: 100%;
   width: 100%;
@@ -105,33 +110,30 @@ const MainImage = styled.img`
 `;
 
 const Target = styled.img`
-position: absolute;
-left: ${(props) => props.offset.left}px;
-top: ${(props) => props.offset.top}px;
-opacity: ${(props) => props.opacity};
-transform: scale(2.5);
-border: 3px black solid;
-`
+  position: absolute;
+  left: ${(props) => props.offset.left}px;
+  top: ${(props) => props.offset.top}px;
+  opacity: ${(props) => props.opacity};
+  transform: scale(2.5);
+  border: 3px black solid;
+`;
 
 const TargetDiv = styled(ImageWrapper)`
-position: absolute;
-border: 3px red solid;
-width: 100%;
-
-
-`
-
+  position: absolute;
+  border: 3px red solid;
+  width: 100%;
+`;
 
 const Container = styled.div`
-position: relative;
-overflow: hidden;
-jusitify-content: center;
-align-items: center;
-display: flex;
-padding: 50px;
-border: 1px solid #00adb7;
-border-radius: 15px;
-`
+  position: relative;
+  overflow: hidden;
+  jusitify-content: center;
+  align-items: center;
+  display: flex;
+  padding: 50px;
+  border: 1px solid #00adb7;
+  border-radius: 15px;
+`;
 function ImageView(props) {
   const imageToggle = () => {
     props.click();
@@ -140,53 +142,52 @@ function ImageView(props) {
   const [vertCurrent, setVertCurrent] = useState([0, 7]);
   const [loaded, setLoaded] = useState(false);
   const [CarouselData, setCarouselData] = useState(null);
-  const [thumbCarouselData, setThumbCarouselData] = useState(null)
+  const [thumbCarouselData, setThumbCarouselData] = useState(null);
   const [carLength, setCarLength] = useState(0);
-  const [styleLoaded, setStyleLoaded] = useState(false)
-  const [currentPicture, setCurrentPicture] = useState('');
+  const [styleLoaded, setStyleLoaded] = useState(false);
+  const [currentPicture, setCurrentPicture] = useState("");
 
   var Carousel = [];
   const thumbCarousel = [];
   const styleID = useContext(styleIDContext);
   const prodID = useContext(prodIDContext);
-  const [clicked, setClicked] = useState(false)
-  var name = '';
+  const [clicked, setClicked] = useState(false);
+  var name = "";
 
-  useEffect(()=> {
+  useEffect(() => {
     if (current === vertCurrent[1]) {
-      setVertCurrent([vertCurrent[0] + 1, vertCurrent[1] + 1])
+      setVertCurrent([vertCurrent[0] + 1, vertCurrent[1] + 1]);
+    } else if (current === vertCurrent[0] && current !== 0) {
+      setVertCurrent([vertCurrent[0] - 1, vertCurrent[1] - 1]);
     }
-     else if (current === vertCurrent[0] && current !== 0) {
-      setVertCurrent([vertCurrent[0] - 1, vertCurrent[1] - 1])
-    }
-  }, [current])
+  }, [current]);
   const nextImage = () => {
     setCurrent(current === carLength - 1 ? 0 : current + 1);
   };
   const prevImage = () => {
     setCurrent(current === 0 ? carLength - 1 : current - 1);
   };
- const changeCurrent = (num) => {
-   setCurrent(num)
- }
- const changeVertCurrent = (x) => {
-   if (vertCurrent[1] < CarouselData.length && x === 'down') {
-    setVertCurrent([vertCurrent[0] + 1, vertCurrent[1] + 1])
-    console.log('vertCurrent', vertCurrent[1])
-    console.log('carlength', carLength)
-   } else if (vertCurrent[0] > 0 && x === 'up') {
-     setVertCurrent([vertCurrent[0] - 1, vertCurrent[1] - 1])
-     console.log('vertCurrent', vertCurrent[1])
-     console.log('carlength', carLength)
-   }
- }
- const toggleDefault = () => {
-   setClicked(!clicked)
- }
+  const changeCurrent = (num) => {
+    setCurrent(num);
+  };
+  const changeVertCurrent = (x) => {
+    if (vertCurrent[1] < CarouselData.length && x === "down") {
+      setVertCurrent([vertCurrent[0] + 1, vertCurrent[1] + 1]);
+      console.log("vertCurrent", vertCurrent[1]);
+      console.log("carlength", carLength);
+    } else if (vertCurrent[0] > 0 && x === "up") {
+      setVertCurrent([vertCurrent[0] - 1, vertCurrent[1] - 1]);
+      console.log("vertCurrent", vertCurrent[1]);
+      console.log("carlength", carLength);
+    }
+  };
+  const toggleDefault = () => {
+    setClicked(!clicked);
+  };
   useEffect(() => {
     axios({
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products/${prodID}/styles`,
-      method: 'get',
+      method: "get",
       headers: {
         Authorization: MAIN_API_KEY,
       },
@@ -200,76 +201,81 @@ function ImageView(props) {
         }
         if (styleID === null) {
           for (let x = 0; x < response.data.results[0].photos.length; x++) {
-            thumbCarousel.push(response.data.results[0].photos[x].thumbnail_url);
+            thumbCarousel.push(
+              response.data.results[0].photos[x].thumbnail_url
+            );
           }
           name = response.data.results[0].name;
-          let tempID = response.data.results[0].style_id
-          props.changeStyleID(tempID)
+          let tempID = response.data.results[0].style_id;
+          props.changeStyleID(tempID);
         } else {
           for (let i = 0; i < response.data.results.length; i++) {
             if (response.data.results[i].style_id === styleID) {
               Carousel = [];
               for (let y = 0; y < response.data.results[i].photos.length; y++) {
-                Carousel.push(response.data.results[i].photos[y].url)
-                thumbCarousel.push(response.data.results[i].photos[y].thumbnail_url)
+                Carousel.push(response.data.results[i].photos[y].url);
+                thumbCarousel.push(
+                  response.data.results[i].photos[y].thumbnail_url
+                );
                 name = response.data.results[i].name;
               }
             }
           }
-
-
         }
         setCarouselData(Carousel);
         setCarLength(tempLength);
-        setThumbCarouselData(thumbCarousel)
+        setThumbCarouselData(thumbCarousel);
       })
-      .then(() => {
-
-      })
+      .then(() => {})
       .then(() => {
         setLoaded(true);
-        setStyleLoaded(true)
+        setStyleLoaded(true);
       })
       .catch((err) => {
-        console.log('Breaking in getOurData. Err:', err);
+        console.log("Breaking in getOurData. Err:", err);
       });
   }, [styleID]);
-//>>>>>>>>>>>>>ZOOM HANDLING>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-const [opacity, setOpacity] = useState(0);
-const [offset, setOffset] = useState({ left: 50, top: 50})
-const [backOpacity, setBackOpacity] = useState(1);
+  //>>>>>>>>>>>>>ZOOM HANDLING>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  const [opacity, setOpacity] = useState(0);
+  const [offset, setOffset] = useState({ left: 50, top: 50 });
+  const [backOpacity, setBackOpacity] = useState(1);
 
-const sourceRef = useRef(null);
-const targetRef = useRef(null);
-const containerRef = useRef(null);
+  const sourceRef = useRef(null);
+  const targetRef = useRef(null);
+  const containerRef = useRef(null);
 
-
-const handleMouseEnter = () => {
+  const handleMouseEnter = () => {
     setOpacity(1);
-    setBackOpacity(0)
-  }
+    setBackOpacity(0);
+  };
 
   const handleMouseLeave = () => {
     setOpacity(0);
-    setBackOpacity(1)
-  }
+    setBackOpacity(1);
+  };
 
   const handleMouseMove = () => {
     const targetRect = targetRef.current.getBoundingClientRect();
     const sourceRect = sourceRef.current.getBoundingClientRect();
     const containerRect = containerRef.current.getBoundingClientRect();
-    const xRatio = (targetRect.width - containerRect.width) / sourceRect.width ;
-    const yRatio = (targetRect.height - containerRect.height) / sourceRect.height ;
+    const xRatio = (targetRect.width - containerRect.width) / sourceRect.width;
+    const yRatio =
+      (targetRect.height - containerRect.height) / sourceRect.height;
 
-    const left = Math.max(Math.min(event.pageX - sourceRect.left, sourceRect.width), 0);
-    const top = Math.max(Math.min(event.pageY - sourceRect.top, sourceRect.height), 0);
+    const left = Math.max(
+      Math.min(event.pageX - sourceRect.left, sourceRect.width),
+      0
+    );
+    const top = Math.max(
+      Math.min(event.pageY - sourceRect.top, sourceRect.height),
+      0
+    );
     setOffset({
       left: left * -xRatio,
-      top: top * -yRatio
-    })
-
-  }
-//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+      top: top * -yRatio,
+    });
+  };
+  //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   // const handleMouseMove = (e) => {
   //   const DOMRect = carouselContent.current.getBoundingClientRect();
   //   const {
@@ -311,162 +317,170 @@ const handleMouseEnter = () => {
   //   const carouselContent = useRef(null);
   //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   return (
-    <ImageViewWrapper className='ImageViewWrapper'>
-      {clicked &&
-      <ImageOverlay>
+    <ImageViewWrapper className="ImageViewWrapper">
+      {clicked && (
+        <ImageOverlay>
+          <div className="modalWrapper">
+            <ExpandButton onClick={toggleDefault}> Back </ExpandButton>
 
-        <div className="modalWrapper">
+            {current === 0 ? (
+              <DeadLeftArrow />
+            ) : (
+              <ExpandedLeftArrow className="left-arrow" onClick={prevImage} />
+            )}
 
-       <ExpandButton onClick={toggleDefault}> Back </ExpandButton>
-
-      {current === 0 ? (
-        <DeadLeftArrow />
-      ) : (
-        <ExpandedLeftArrow className='left-arrow' onClick={prevImage} />
+            <ImageOverlayContainer className="ImageOverlayContainer">
+              <Container
+                ref={containerRef}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                onMouseMove={handleMouseMove}
+              >
+                {loaded
+                  ? CarouselData.map((picture, index) => {
+                      return (
+                        <ImageWrapper
+                          className={
+                            index === current ? "slide active" : "slide"
+                          }
+                          key={index}
+                        >
+                          {index === current && (
+                            <MainImage
+                              key={index}
+                              src={picture}
+                              alt="style image"
+                              onClick={() => {
+                                setCurrentPicture(picture),
+                                  setClicked(true),
+                                  setOpacity(1);
+                              }}
+                              ref={sourceRef}
+                            />
+                          )}
+                          {/* <TargetDiv  className="targetDiv"> */}
+                          <Target
+                            className="ZoomedImage"
+                            ref={targetRef}
+                            alt="target"
+                            opacity={opacity}
+                            offset={offset}
+                            src={currentPicture}
+                          />
+                          {/* </TargetDiv> */}
+                        </ImageWrapper>
+                      );
+                    })
+                  : ""}
+              </Container>
+            </ImageOverlayContainer>
+            {current === carLength - 1 ? (
+              ""
+            ) : (
+              <ExpandedRightArrow className="right-arrow" onClick={nextImage} />
+            )}
+          </div>
+          <CircleRow>
+            {loaded
+              ? CarouselData.slice(vertCurrent[0], vertCurrent[1]).map(
+                  (thumbnail, index) => {
+                    if (thumbnail === CarouselData[current]) {
+                      return <HighlightCircle key={index} />;
+                    } else {
+                      return <ThumbCircle key={index} />;
+                    }
+                  }
+                )
+              : ""}
+          </CircleRow>
+        </ImageOverlay>
       )}
 
-<ImageOverlayContainer className="ImageOverlayContainer" >
-      <Container
-      ref={containerRef}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onMouseMove={handleMouseMove}
-      >
-      {loaded
-        ? CarouselData.map((picture, index) => {
-
-            return (
-
-              <ImageWrapper
-                className={index === current ? 'slide active' : 'slide'}
-                key={index}>
-                {index === current && (
-
-
-                  <MainImage
-                  key={index}
-                  src={picture}
-                  alt='style image'
-                  onClick={() => {setCurrentPicture(picture), setClicked(true), setOpacity(1)}}
-                  ref={sourceRef}
-
-                  />
-
-                )}
-                {/* <TargetDiv  className="targetDiv"> */}
-                <Target className="ZoomedImage"
-                ref={targetRef}
-                alt="target"
-                opacity={opacity}
-                offset={offset}
-                src={currentPicture}
-                />
-              {/* </TargetDiv> */}
-              </ImageWrapper>
-
-
-            )
-          })
-        : ''}
-
-
-      </Container>
-</ImageOverlayContainer>
-      {current === carLength - 1 ? (
-        ''
-      ) : (
-        <ExpandedRightArrow className='right-arrow' onClick={nextImage} />
-      )}
-
-    </div>
-    <CircleRow>
-        {loaded
-          ? CarouselData.slice(vertCurrent[0], vertCurrent[1]).map((thumbnail, index) => {
-
-            if (thumbnail === CarouselData[current]) {
-              return (
-                <HighlightCircle key={index}
-                />
-              )
-            } else {
-              return (<ThumbCircle key={index}
-                />)
-            }
-            })
-          : ''}
-      </ CircleRow>
-      </ImageOverlay> }
-
-        {/* DEFAULT VIEW HERE */}
+      {/* DEFAULT VIEW HERE */}
       <Thumbnails>
-      {vertCurrent[0] === 0 ? (
-        <DeadUpArrow/>
-      ) : (
-        <StyledUpArrow className='left-arrow'  onClick={() => changeVertCurrent('up')} />
-      )}
+        {vertCurrent[0] === 0 ? (
+          <DeadUpArrow />
+        ) : (
+          <StyledUpArrow
+            className="left-arrow"
+            onClick={() => changeVertCurrent("up")}
+          />
+        )}
         {loaded
-          ? CarouselData.slice(vertCurrent[0], vertCurrent[1]).map((thumbnail, index) => {
-
-            if (thumbnail === CarouselData[current]) {
-              return (
-                <HighlightedStyleThumbnail
-                  key={index}
-                  src={thumbnail}
-                  alt={'style thumbnail'}
-
-                />
-              )
-            } else {
-              return (<ThumbnailImage
-                  key={index}
-                  src={thumbnail}
-                  alt={'style thumbnail'}
-                  onClick={() => changeCurrent(index)}
-                />)
-            }
-            })
-          : ''}
-          {vertCurrent[1] > carLength || vertCurrent[1] === carLength ? (
-        <DeadDownArrow className="deadarrow"/>
-      ) : (
-        <StyledDownArrow className='right-arrow'  onClick={() => changeVertCurrent('down')} />
-      )}
+          ? CarouselData.slice(vertCurrent[0], vertCurrent[1]).map(
+              (thumbnail, index) => {
+                if (thumbnail === CarouselData[current]) {
+                  return (
+                    <HighlightedStyleThumbnail
+                      key={index}
+                      src={thumbnail}
+                      alt={"style thumbnail"}
+                    />
+                  );
+                } else {
+                  return (
+                    <ThumbnailImage
+                      key={index}
+                      src={thumbnail}
+                      alt={"style thumbnail"}
+                      onClick={() => changeCurrent(index)}
+                    />
+                  );
+                }
+              }
+            )
+          : ""}
+        {vertCurrent[1] > carLength || vertCurrent[1] === carLength ? (
+          <DeadDownArrow className="deadarrow" />
+        ) : (
+          <StyledDownArrow
+            className="right-arrow"
+            onClick={() => changeVertCurrent("down")}
+          />
+        )}
       </Thumbnails>
       {/* ARROWS START HERE */}
       {current === 0 ? (
-        // <DeadLeftArrow />
-        ''
+        <DeadLeftArrow />
       ) : (
-        <StyledLeftArrow className='left-arrow' onClick={prevImage} />
+        <StyledLeftArrow className="left-arrow" onClick={prevImage} />
       )}
-      <CarouselWrapper className='CarouselWrapper'>
-      {loaded
-        ?
-        CarouselData.map((picture, index) => {
-            return (
-              <ImageWrapper
-                className={index === current ? 'slide active' : 'slide'}
-                key={index}>
-                {index === current && (
-                  <MainImageWrapper>
-                    <MainImage key={index} src={picture} alt='style image' onClick={() => {setCurrentPicture(picture), setClicked(true)}} />
-                  </MainImageWrapper>
-                )}
-              </ImageWrapper>
-            )
-          })
-        : null}
-        </CarouselWrapper>
+      <CarouselWrapper className="CarouselWrapper">
+        {loaded
+          ? CarouselData.map((picture, index) => {
+              return (
+                <ImageWrapper
+                  className={index === current ? "slide active" : "slide"}
+                  key={index}
+                >
+                  {index === current && (
+                    <MainImageWrapper>
+                      <MainImage
+                        key={index}
+                        src={picture}
+                        alt="style image"
+                        onClick={() => {
+                          setCurrentPicture(picture), setClicked(true);
+                        }}
+                      />
+                    </MainImageWrapper>
+                  )}
+                </ImageWrapper>
+              );
+            })
+          : null}
+      </CarouselWrapper>
       {current === carLength - 1 ? (
-        <DeadRightArrow/>
+        <DeadRightArrow />
       ) : (
-        <StyledRightArrow className='right-arrow' onClick={nextImage} />
+        <StyledRightArrow className="right-arrow" onClick={nextImage} />
       )}
     </ImageViewWrapper>
   );
 }
 export default hot(ImageView);
-{/* {clicked === 'expanded' ?
+{
+  /* {clicked === 'expanded' ?
       <AddOverlay onClick={() => setCurrentPicture('')}>
           <AddWrapper>
             {current === 0 ? (
@@ -485,4 +499,5 @@ export default hot(ImageView);
         :
         null
 
-      } */}
+      } */
+}

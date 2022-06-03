@@ -1,61 +1,37 @@
 import React, {useState, useEffect, useContext} from 'react';
 import { hot } from 'react-hot-loader/root';
-import Overview from './Components/Overview/Overview.jsx';
-import Reviews from './Components/Reviews/Reviews.jsx';
-import RelatedProducts from './Components/RelatedProducts/RelatedProducts.jsx';
-import QA from './Components/QA/QA.jsx';
-import PropTypes from 'prop-types';
-import {allProductsContext} from './App.jsx'
+import {allProductsContext, pageContext } from './App.jsx'
 import {
   StyledPageTitle,
   ThumbnailImage,
-
+  HomePageFlex,
+  HomePageCard,
+  CardImage,
+  AddSummaryWrapper
 } from './Components/StyledComponents.jsx';
 import { MAIN_API_KEY } from './config.js';
 import axios from 'axios';
 import styled from 'styled-components';
 
-const HomePageFlex = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin: auto;
-  justify-content: flex-start;
-  align-content: space-between;
-  max-width: 80%;
-`;
-const HomePageCard = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border: 2px grey solid;
-  padding: 5px;
-  margin: 10px;
-  height: 20vh;
-  width: 20vh;
-  box-shadow: 3px 3px black;
-`;
-const CardImage = styled(ThumbnailImage)`
-  height: 100px;
-  width: 100px;
-  object-fit: contain;
-  object-position: 50% 50%;
-`;
 
 const HomePage = (props) => {
-  const [allProducts, setAllProducts] = useState([]);
-  const [loaded, setLoaded] = useState([null])
   const loadedProducts = useContext(allProductsContext);
+  const page = useContext(pageContext);
+  const [allProducts, setAllProducts] = useState([... loadedProducts]);
+  const [loaded, setLoaded] = useState([null])
+  const [currentPage, setCurrentPage] = useState(page);
+
+
   const getAllProducts = async () => {
     try {
       let response = await axios({
-        url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products?count=20',
+        url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/products?page=${page + 1}`,
         method: 'get',
         headers: {
           Authorization: MAIN_API_KEY,
         },
       })
-      let sub = [];
+      let sub = [... allProducts];
       if (response.data.length) {
         for (let i = 0; i < response.data.length; i++) {
           let id = response.data[i].id;
@@ -84,14 +60,23 @@ const HomePage = (props) => {
     } catch (e) {console.log(e)}
   };
     useEffect(() => {
-      if (loadedProducts.length === 0) {
-      getAllProducts();
-      setLoaded(true);
-      } else {
-        setAllProducts(loadedProducts)
+      if (loadedProducts.length === 0 ) {
+        getAllProducts();
+        setLoaded(true);
+       }
+       else {
+        setAllProducts(loadedProducts);
         setLoaded(true)
       }
     }, [])
+    useEffect(() => {
+      console.log('page updated:', page);
+      if (page === currentPage + 1) {
+        getAllProducts();
+        setLoaded(true);
+        setCurrentPage(currentPage + 1)
+      }
+    }, [page])
 
   return loaded ? (
     <div >
@@ -107,9 +92,16 @@ const HomePage = (props) => {
         </HomePageCard>
         ))}
       </HomePageFlex>
+      <AddSummaryWrapper className='ScuffedButtonWrapper'>
+        <LoadMoreProducts onClick={() => {props.incrementPage()}}> Load More Products! </LoadMoreProducts>
+      </AddSummaryWrapper>
     </div>
   ) : null
 
 }
+const LoadMoreProducts = styled.button`
+  margin: 10px auto;
+  padding: 5px 10px;
+`;
 
 export default hot(HomePage);

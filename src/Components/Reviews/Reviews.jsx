@@ -77,7 +77,7 @@ const Reviews = ({changeStars}) => {
   return(
     <TotalReviewWrapper>
       <Title> Ratings and Reviews </Title>
-      <InnerReviewWrapper>
+      {loadedChars ? (<InnerReviewWrapper>
         <ReviewBreakdown
           reviewsMeta={reviewsMeta}
           chars={chara}
@@ -95,7 +95,7 @@ const Reviews = ({changeStars}) => {
           setReviews={setReview}
           prodID={prodID}
         />
-      </InnerReviewWrapper>
+      </InnerReviewWrapper>) : null }
     </TotalReviewWrapper>
   );
 };

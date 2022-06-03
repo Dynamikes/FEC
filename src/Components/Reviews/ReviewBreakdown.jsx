@@ -54,12 +54,13 @@ const ReviewBreakdown = ({reviewsMeta, chars, changeStars, setReviews,reviewsHol
   }}
 
 
-  const average = parseFloat(((one * 1) +( two * 2) + (three * 3) + (four * 4) + (five * 5)) / (total)).toFixed(1);
+  let average = parseFloat(((one * 1) +( two * 2) + (three * 3) + (four * 4) + (five * 5)) / (total)).toFixed(1);
 
    changeStars(average);
 
    useEffect(() => {
-     let objLength = Object.keys(starReviewObj).length;
+     if (reviewsHolder.length > 0){
+       let objLength = Object.keys(starReviewObj).length;
      let reviewCopy = reviewsHolder.slice()
 
      if (objLength > 0) {
@@ -69,7 +70,7 @@ const ReviewBreakdown = ({reviewsMeta, chars, changeStars, setReviews,reviewsHol
       setReviews(rate)
      } else {
       setReviews(reviewsHolder)
-     }
+     }}
    }, [starReviewObj])
 
     const StarAdder = (e) => {
