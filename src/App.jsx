@@ -19,7 +19,7 @@ export const allProductsContext = React.createContext();
 export const pageContext = React.createContext();
 
 const App = ({ name }) => {
-  const [prodID, setProdID] = useState(null);
+  const [prodID, setProdID] = useState(40352);
   const [stars, setStars] = useState(null);
   const [productName, setProductName] = useState(null);
   const [allProducts, setAllProducts] = useState([]);
@@ -52,14 +52,7 @@ const App = ({ name }) => {
       <starsContext.Provider value={stars}>
         <productForAdd.Provider value={productName}>
           <AppWrapper>
-            <HomeButton
-              onClick={() => {
-                updateID(null);
-              }}
-            >
-              {" "}
-              Home!{" "}
-            </HomeButton>
+            
             <StyledPageTitle
               onClick={() => {
                 updateID(null);

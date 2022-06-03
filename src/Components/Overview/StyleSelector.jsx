@@ -45,7 +45,7 @@ useEffect(() => {
   .catch((err) => {
     console.log('Breaking in StyleSelector get. Err:', err)
   })
-}, [styleID]);
+}, [styleID, prodID]);
 
   return (
     <SelectorWrapper>

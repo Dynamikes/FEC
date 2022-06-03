@@ -25,21 +25,6 @@ const AddToCart = () => {
   const [sizes, setSizes] = useState(null);
   const [inStock, setInStock] = useState(false);
   const [loadedCount, setLoadedCount] = useState(0);
-<<<<<<< HEAD
-  const [skus, setSkus] = useState(null);
-  const [skusLoaded, setSkusLoaded] = useState(false)
-  const [currentSize, setCurrentSize] = useState(null)
-  const [currentQuant, setCurrentQuant] = useState(null)
-  const [selectedQuant, setSelectedQuant] = useState(null)
-  const styleID = useContext(styleIDContext)
-  const prodID = useContext(prodIDContext)
-
-
-  const range= (start, end) => {
-    return Array(end - start + 1).fill().map((_, idx) => start + idx)
-  }
-
-=======
   const [skus, setSkus] = useState([]);
   const [skusLoaded, setSkusLoaded] = useState(false);
   const [currentSize, setCurrentSize] = useState(null);
@@ -53,7 +38,6 @@ const AddToCart = () => {
       .fill()
       .map((_, idx) => start + idx);
   };
->>>>>>> 6128be01f648dc7509ed65da4002c73b4ae91672
 
   useEffect(() => {
     axios({
@@ -63,26 +47,6 @@ const AddToCart = () => {
         Authorization: MAIN_API_KEY,
       },
     })
-<<<<<<< HEAD
-    .then((response) => {
-      var currentStyle = null;
-      for (let i = 0; i < response.data.results.length; i++) {
-        if (response.data.results[i].style_id === styleID) {
-          currentStyle = response.data.results[i].skus;
-          console.log('styleMatched', currentStyle)
-          return currentStyle;
-        }
-      }
-    })
-    .then((currentStyle) => {
-      let temp = loadedCount
-      setLoadedCount(temp + 1)
-      setCart(currentStyle)
-    })
-    .catch((err) => {
-      console.log('Breaking in StyleSelector get. Err:', err)
-    })
-=======
       .then((response) => {
         var currentStyle = null;
         for (let i = 0; i < response.data.results.length; i++) {
@@ -101,7 +65,6 @@ const AddToCart = () => {
       .catch((err) => {
         console.log("Breaking in StyleSelector get. Err:", err);
       });
->>>>>>> 6128be01f648dc7509ed65da4002c73b4ae91672
   }, [styleID]);
 
   useEffect(() => {
@@ -110,29 +73,6 @@ const AddToCart = () => {
       tempSkus.push([key, cart[key]]);
     }
     setSkus(tempSkus);
-<<<<<<< HEAD
-    const setTheData  = async () => {
-      const actualSkus = await skus
-      console.log('This is actualSkus triggering', actualSkus)
-      //setSkusLoaded(true)
-    }
-
-    setTheData()
-    .catch(console.error)
-
-  }, [cart])
-
-
-    useEffect(() => {
-    const getData = async () => {
-      const tempCurrentSize =  skus[0][1].size;
-      const tempCurrentQuant =  skus[0][1].quantity;
-      setCurrentQuant(tempCurrentQuant);
-      if(currentSize === null) {
-        setCurrentSize(tempCurrentSize);
-      }
-      setSkusLoaded(true);
-=======
   }, [cart]);
 
   const getData = async () => {
@@ -146,27 +86,17 @@ const AddToCart = () => {
       setSkusLoaded(true);
     }
   };
->>>>>>> 6128be01f648dc7509ed65da4002c73b4ae91672
 
-      console.log('Async Triggering')
-    }
-<<<<<<< HEAD
-    getData()
-    .catch(console.error)
+    useEffect(() => {
+      if (!skus.length)
+       {
+         getData();
+       }
+    }, [skus]);
 
-  }, [skus])
-
-
-  const isThis = (event) => {
-    event.preventDefault()
-    console.log(currentSize)
-    console.log(selectedQuant)
-=======
-  }, [skus]);
 
   const isThis = (event) => {
     event.preventDefault();
->>>>>>> 6128be01f648dc7509ed65da4002c73b4ae91672
     let tempSku = 0;
     for (let x = 0; x < skus.length; x++) {
       if (skus[x][1].size === currentSize) {
@@ -194,13 +124,7 @@ const AddToCart = () => {
       let tempSkus = skus.slice();
       for (let i = 0; i < tempSkus.length; i++) {
         if (tempSkus[i][1].size === currentSize) {
-<<<<<<< HEAD
-    console.log('yeehaw', currentSize, tempSkus[i])
-          setCurrentQuant(tempSkus[i][1].quantity)
-          console.log('QuantUpdated')
-=======
           setCurrentQuant(tempSkus[i][1].quantity);
->>>>>>> 6128be01f648dc7509ed65da4002c73b4ae91672
         }
       }
     }
@@ -208,41 +132,6 @@ const AddToCart = () => {
   return (
     <CartDiv>
       <CartForm onSubmit={isThis}>
-<<<<<<< HEAD
-      <StyledSizeQuantity>
-        <div>
-        <label>Size:</label>
-        <StyledSizeSelect name='SizeSelect' id='SizeSelect' onChange={(e) => {setCurrentSize(e.target.value)} }>
-          {skusLoaded
-          ?
-            skus.map((sku, index) => {
-              return (
-                <SizeOption key={index} value={sku[1].size} > {sku[1].size} </SizeOption>
-              )
-            })
-          :
-          <option> hello </option>
-          }
-        </StyledSizeSelect>
-        </div>
-        <div>
-        <label> Quantity: </label>
-         <StyledQuantitySelect name='Quantity' id='Quantity' onChange={(e) => {setSelectedQuant(e.target.value)} }>
-        {skusLoaded && currentQuant !== 0
-          ?
-            (range(1, currentQuant)).slice(0, 15).map((sku, index) => {
-              return (
-                <QuantOption key={index} > {sku} </QuantOption>
-              )
-            })
-          :
-          ''
-          }
-        </StyledQuantitySelect>
-        </div>
-      </StyledSizeQuantity>
-      <AddToCartButton type="submit" value="Add to Cart" />
-=======
         <StyledSizeQuantity>
           <div>
             <label>Size:</label>
@@ -287,7 +176,6 @@ const AddToCart = () => {
           </div>
         </StyledSizeQuantity>
         <AddToCartButton type="submit" value="Add to Cart 🛒" />
->>>>>>> 6128be01f648dc7509ed65da4002c73b4ae91672
       </CartForm>
     </CartDiv>
   );

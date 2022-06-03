@@ -22,118 +22,30 @@ import {
   ImageOverlay,
   CircleRow,
   ExpandButton,
+  CarouselWrapper,
+  MainImageWrapper,
+  ImageOverlayContainer,
+  StyledLeftArrow,
+  DeadLeftArrow,
+  StyledRightArrow,
+  DeadRightArrow,
+  ExpandedRightArrow,
+  ExpandedLeftArrow,
+  StyledUpArrow,
+  DeadUpArrow,
+  StyledDownArrow,
+  DeadDownArrow,
+  ThumbCircle,
+  HighlightCircle,
+  MainImage,
+  Target,
+  Container,
 } from "../StyledComponents.jsx";
 import { MAIN_API_KEY } from "../../config.js";
 import { styleIDContext } from "./Overview";
 import { prodIDContext } from "../../App.jsx";
 import { relativeTimeThreshold } from "moment";
 
-const CarouselWrapper = styled.div`
-  display: flex;
-  overflow: auto;
-`;
-const MainImageWrapper = styled.div`
-  height: 50vh;
-  width: 40vw;
-  margin: 1rem;
-`;
-const ImageOverlayContainer = styled.div`
-  max-height: 1000px;
-  max-width: 1000px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-const StyledLeftArrow = styled(FaArrowAltCircleLeft)`
-  transform: scale(2);
-  z-index: 3;
-  margin: 10px;
-`;
-const DeadLeftArrow = styled(StyledLeftArrow)`
-  opacity: 0;
-  user-select: none;
-`;
-const StyledRightArrow = styled(FaArrowAltCircleRight)`
-  transform: scale(2);
-  z-index: 3;
-  margin: 10px;
-`;
-const DeadRightArrow = styled(StyledRightArrow)`
-  opacity: 0;
-  user-select: none;
-`;
-const ExpandedRightArrow = styled(StyledRightArrow)`
-  top: 50%;
-  position: absolute;
-  right: 5%;
-`;
-const ExpandedLeftArrow = styled(StyledLeftArrow)`
-  position: absolute;
-  left: 5%;
-  top: 50%;
-`;
-const StyledUpArrow = styled(FaArrowAltCircleUp)`
-  transform: scale(1);
-  left: 10%;
-  top: 5%;
-  z-index: 3;
-  margin: 10px;
-`;
-const DeadUpArrow = styled(StyledUpArrow)`
-  opacity: 0;
-  user-select: none;
-`;
-const StyledDownArrow = styled(FaArrowAltCircleDown)`
-  transform: scale(1);
-  left: 10%;
-  bottom: 5%;
-  z-index: 3;
-  margin: 10px;
-`;
-const DeadDownArrow = styled(StyledDownArrow)`
-  opacity: 0;
-  user-select: none;
-`;
-const ThumbCircle = styled(FaRegCircle)``;
-const HighlightCircle = styled(FaRegCircle)`
-  border: 2px solid #dadada;
-  border-radius: 7px;
-  outline: none;
-  border-color: #9ecaed;
-  box-shadow: 0 0 10px #9ecaed;
-`;
-const MainImage = styled.img`
-  height: 100%;
-  width: 100%;
-  object-fit: contain;
-  object-position: 50% 50%;
-`;
-
-const Target = styled.img`
-  position: absolute;
-  left: ${(props) => props.offset.left}px;
-  top: ${(props) => props.offset.top}px;
-  opacity: ${(props) => props.opacity};
-  transform: scale(2.5);
-  border: 3px black solid;
-`;
-
-const TargetDiv = styled(ImageWrapper)`
-  position: absolute;
-  border: 3px red solid;
-  width: 100%;
-`;
-
-const Container = styled.div`
-  position: relative;
-  overflow: hidden;
-  jusitify-content: center;
-  align-items: center;
-  display: flex;
-  padding: 50px;
-  border: 1px solid #00adb7;
-  border-radius: 15px;
-`;
 function ImageView(props) {
   const imageToggle = () => {
     props.click();

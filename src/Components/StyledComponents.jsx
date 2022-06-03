@@ -1,7 +1,12 @@
 //import React from 'react';
 import styled from "styled-components";
 // import { hot } from 'react-hot-loader/root';
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, 
+  FaArrowAltCircleRight,
+  FaArrowAltCircleLeft,
+  FaArrowAltCircleUp,
+  FaArrowAltCircleDown,
+  FaRegCircle, } from "react-icons/fa";
 import { AiFillCloseCircle } from "react-icons/ai";
 
 export const ImageWrapper = styled.div`
@@ -684,12 +689,17 @@ export const HomePageCard = styled.div`
   justify-content: center;
   align-items: center;
   border: 2px grey solid;
-  padding: 5px;
-  margin: 10
-  height: auto;px;
+  padding: 10px;
+  margin: 10px;
+  height: auto;
   min-height: 150px;
   box-shadow: 3px 3px black;
 `;
+// export const RelatedProdCard = styled(HomePageCard) `
+//   margin
+// `;
+
+
 export const CardImage = styled(ThumbnailImage)`
   height: 100px;
   width: 100px;
@@ -720,4 +730,107 @@ export const SubmitButton = styled.button`
 
 export const RelatedProductsWheel = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const CarouselWrapper = styled.div`
+  display: flex;
+  overflow: auto;
+`;
+export const MainImageWrapper = styled.div`
+  height: 50vh;
+  width: 40vw;
+  margin: 1rem;
+`;
+export const ImageOverlayContainer = styled.div`
+  max-height: 1000px;
+  max-width: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+export const StyledLeftArrow = styled(FaArrowAltCircleLeft)`
+  transform: scale(2);
+  z-index: 3;
+  margin: 10px;
+`;
+export const DeadLeftArrow = styled(StyledLeftArrow)`
+  opacity: 0;
+  user-select: none;
+`;
+export const StyledRightArrow = styled(FaArrowAltCircleRight)`
+  transform: scale(2);
+  z-index: 3;
+  margin: 10px;
+`;
+export const DeadRightArrow = styled(StyledRightArrow)`
+  opacity: 0;
+  user-select: none;
+`;
+export const ExpandedRightArrow = styled(StyledRightArrow)`
+  top: 50%;
+  position: absolute;
+  right: 5%;
+`;
+export const ExpandedLeftArrow = styled(StyledLeftArrow)`
+  position: absolute;
+  left: 5%;
+  top: 50%;
+`;
+export const StyledUpArrow = styled(FaArrowAltCircleUp)`
+  transform: scale(1);
+  left: 10%;
+  top: 5%;
+  z-index: 3;
+  margin: 10px;
+`;
+export const DeadUpArrow = styled(StyledUpArrow)`
+  opacity: 0;
+  user-select: none;
+`;
+export const StyledDownArrow = styled(FaArrowAltCircleDown)`
+  transform: scale(1);
+  left: 10%;
+  bottom: 5%;
+  z-index: 3;
+  margin: 10px;
+`;
+export const DeadDownArrow = styled(StyledDownArrow)`
+  opacity: 0;
+  user-select: none;
+`;
+export const ThumbCircle = styled(FaRegCircle)``;
+export const HighlightCircle = styled(FaRegCircle)`
+  border: 2px solid #dadada;
+  border-radius: 7px;
+  outline: none;
+  border-color: #9ecaed;
+  box-shadow: 0 0 10px #9ecaed;
+`;
+
+export const Target = styled.img`
+  position: absolute;
+  left: ${(props) => props.offset.left}px;
+  top: ${(props) => props.offset.top}px;
+  opacity: ${(props) => props.opacity};
+  transform: scale(2.5);
+  border: 3px black solid;
+`;
+
+export const TargetDiv = styled(ImageWrapper)`
+  position: absolute;
+  border: 3px red solid;
+  width: 100%;
+`;
+
+export const Container = styled.div`
+  position: relative;
+  overflow: hidden;
+  jusitify-content: center;
+  align-items: center;
+  display: flex;
+  padding: 50px;
+  border: 1px solid #00adb7;
+  border-radius: 15px;
 `;
