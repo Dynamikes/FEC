@@ -6,6 +6,7 @@ import StarRatings from 'react-star-ratings';
  const Rating = ({value}) => {
 
   return (
+
     <div>
       <StarRatings
         rating={Number(value)}
