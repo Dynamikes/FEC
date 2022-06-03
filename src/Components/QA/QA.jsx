@@ -36,12 +36,12 @@ function QA() {
   const [questionBody, setQuestionBody] = useState("");
   const [email, setEmail] = useState("");
   const prodName = useContext(productForAdd);
-  let product_id = useContext(prodIDContext);
+  let prodID = useContext(prodIDContext);
   const getQuestions = () => {
     axios({
       url:
         "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions?product_id=" +
-        product_id,
+        prodID,
       method: "get",
       headers: {
         Authorization: MAIN_API_KEY,
@@ -65,7 +65,7 @@ function QA() {
 
   useEffect(() => {
     getQuestions();
-  }, []);
+  }, [prodID]);
 
   const submitQuestion = (e) => {
     e.preventDefault();
@@ -73,7 +73,7 @@ function QA() {
       name: username,
       body: questionBody,
       email: email,
-      product_id: product_id,
+      product_id: prodID,
     };
     axios({
       url: "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/qa/questions",

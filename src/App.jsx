@@ -60,7 +60,13 @@ const App = ({ name }) => {
               {" "}
               Home!{" "}
             </HomeButton>
-            <StyledPageTitle>Hello {name}</StyledPageTitle>
+            <StyledPageTitle
+              onClick={() => {
+                updateID(null);
+              }}
+            >
+              Iron Man-a-zon
+            </StyledPageTitle>
             <Flexbox className="Overview">
               <Overview productAdd={productAdd} />
             </Flexbox>

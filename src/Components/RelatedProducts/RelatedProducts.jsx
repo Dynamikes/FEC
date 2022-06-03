@@ -3,6 +3,12 @@ import { hot } from "react-hot-loader/root";
 import axios from "axios";
 import { MAIN_API_KEY } from "../../config.js";
 import { prodIDContext } from "../../App.jsx";
+// import {
+//   StyledLeftArrow,
+//   DeadLeftArrow,
+//   StyledRightArrow,
+//   DeadRightArrow,
+// } from "../Overview/ImageView.jsx";
 import {
   Title,
   HomePageCard,
@@ -58,7 +64,6 @@ const RelatedProducts = ({ updateID }) => {
       console.log(sub);
       await setRelatedProducts(sub);
       await setLoaded(true);
-      // await props.updateAllProducts(sub)
     } catch (e) {
       console.log(e);
     }
@@ -66,10 +71,11 @@ const RelatedProducts = ({ updateID }) => {
 
   useEffect(() => {
     getRelatedProducts();
-  }, []);
+  }, [prodID]);
   return loaded ? (
     <div>
       <Title> Related Products! </Title>
+      <StyledLeftArrow />
       <RelatedProductsWheel>
         {relatedProducts.map((card, index) => (
           <HomePageCard
@@ -86,6 +92,7 @@ const RelatedProducts = ({ updateID }) => {
           </HomePageCard>
         ))}
       </RelatedProductsWheel>
+      <StyledRightArrow />
     </div>
   ) : null;
 };
