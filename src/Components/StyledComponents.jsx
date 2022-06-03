@@ -717,3 +717,7 @@ export const SubmitButton = styled.button`
   margin: 3px;
   padding: 10px;
 `;
+
+export const RelatedProductsWheel = styled.div`
+  display: flex;
+`;

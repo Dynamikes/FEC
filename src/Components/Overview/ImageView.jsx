@@ -150,7 +150,7 @@ function ImageView(props) {
   var Carousel = [];
   const thumbCarousel = [];
   const styleID = useContext(styleIDContext);
-  const prodID = useContext(prodIDContext);
+  let prodID = useContext(prodIDContext);
   const [clicked, setClicked] = useState(false);
   var name = "";
 
@@ -234,7 +234,7 @@ function ImageView(props) {
       .catch((err) => {
         console.log("Breaking in getOurData. Err:", err);
       });
-  }, [styleID]);
+  }, [styleID, prodID]);
   //>>>>>>>>>>>>>ZOOM HANDLING>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   const [opacity, setOpacity] = useState(0);
   const [offset, setOffset] = useState({ left: 50, top: 50 });
