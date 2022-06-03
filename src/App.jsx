@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { hot } from "react-hot-loader/root";
 import Overview from "./Components/Overview/Overview.jsx";
 import Reviews from "./Components/Reviews/Reviews.jsx";
@@ -11,15 +11,12 @@ import {
   StyledPageTitle,
   AppWrapper,
   HomeButton,
-  HomeButtonDiv,
 } from "./Components/StyledComponents.jsx";
 export const prodIDContext = React.createContext();
 export const starsContext = React.createContext();
 export const productForAdd = React.createContext();
 export const allProductsContext = React.createContext();
 export const pageContext = React.createContext();
-import { MAIN_API_KEY } from "./config.js";
-import axios from "axios";
 
 const App = ({ name }) => {
   const [prodID, setProdID] = useState(null);
@@ -36,8 +33,6 @@ const App = ({ name }) => {
     setProductName(prod);
   };
 
-  //const name = props.name;
-
   const updateID = (id) => {
     setProdID(id);
     console.log(id);
@@ -48,6 +43,10 @@ const App = ({ name }) => {
   const incrementPage = () => {
     setPage(page + 1);
   };
+  // useEffect(() => {
+  //   console.log("Rerender triggered! : ", prodID);
+  // }, [prodID]);
+
   return prodID ? (
     <prodIDContext.Provider value={prodID}>
       <starsContext.Provider value={stars}>
@@ -66,7 +65,7 @@ const App = ({ name }) => {
               <Overview productAdd={productAdd} />
             </Flexbox>
             <Flexbox>
-              <RelatedProducts />
+              <RelatedProducts updateID={updateID} />
             </Flexbox>
             <Flexbox id="ratings_and_reviews">
               <Reviews changeStars={changeStars} />
