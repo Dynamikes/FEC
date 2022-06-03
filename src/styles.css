@@ -23,6 +23,10 @@ a {
   max-height: 600px;
 }
 
+.FormSubmit {
+  margin: 5px;
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 5px;

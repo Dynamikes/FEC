@@ -30,11 +30,11 @@ const ReviewBreakdown = ({reviewsMeta, chars, changeStars, setReviews,reviewsHol
   const notRecommended = Number(reviewsMeta.recommended.false);
   //Rating stars
 
-  let one = Number(reviewsMeta.ratings[1])
-  let two = Number(reviewsMeta.ratings[2])
-  let three = Number(reviewsMeta.ratings[3])
-  let four = Number(reviewsMeta.ratings[4])
-  let five = Number(reviewsMeta.ratings[5])
+  let one = Number(reviewsMeta.ratings[1]) || 0
+  let two = Number(reviewsMeta.ratings[2]) || 0
+  let three = Number(reviewsMeta.ratings[3]) || 0
+  let four = Number(reviewsMeta.ratings[4]) || 0
+  let five = Number(reviewsMeta.ratings[5]) || 0
   let total = one + two + three + four + five
 
   let fit, value, comfort, length, quality, size;
@@ -54,12 +54,13 @@ const ReviewBreakdown = ({reviewsMeta, chars, changeStars, setReviews,reviewsHol
   }}
 
 
-  const average = parseFloat(((one * 1) +( two * 2) + (three * 3) + (four * 4) + (five * 5)) / (total)).toFixed(1);
+  let average = parseFloat(((one * 1) +( two * 2) + (three * 3) + (four * 4) + (five * 5)) / (total)).toFixed(1);
 
    changeStars(average);
 
    useEffect(() => {
-     let objLength = Object.keys(starReviewObj).length;
+     if (reviewsHolder.length > 0){
+       let objLength = Object.keys(starReviewObj).length;
      let reviewCopy = reviewsHolder.slice()
 
      if (objLength > 0) {
@@ -69,7 +70,7 @@ const ReviewBreakdown = ({reviewsMeta, chars, changeStars, setReviews,reviewsHol
       setReviews(rate)
      } else {
       setReviews(reviewsHolder)
-     }
+     }}
    }, [starReviewObj])
 
     const StarAdder = (e) => {
