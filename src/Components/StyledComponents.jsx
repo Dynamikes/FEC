@@ -107,10 +107,8 @@ export const Title = styled.h2`
   margin: 5px;
 `;
 export const CartDiv = styled.div`
+  margin: 5px;
   display: flex;
-  flex-basis: none;
-  flex-direction: column;
-  justify-content: center;
 `;
 export const CartH3 = styled.h2``;
 export const SelectorWrapper = styled.div`
@@ -152,9 +150,11 @@ export const StyledQuantitySelect = styled.select`
 `;
 export const AddToCartButton = styled.input`
   padding: 10px;
+  margin: 10px;
   border-width: 3px;
   border-color: grey;
   font-size: 1.1em;
+  background-color: color: rgba(255, 255, 255, 0.801);
 `;
 
 export const StyleThumbnail = styled.img`

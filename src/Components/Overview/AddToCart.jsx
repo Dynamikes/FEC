@@ -173,7 +173,7 @@ const AddToCart = () => {
             </StyledQuantitySelect>
           </div>
         </StyledSizeQuantity>
-        <AddToCartButton type="submit" value="Add to Cart" />
+        <AddToCartButton type="submit" value="Add to Cart 🛒" />
       </CartForm>
     </CartDiv>
   );
