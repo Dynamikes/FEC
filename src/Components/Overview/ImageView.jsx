@@ -277,7 +277,7 @@ function ImageView(props) {
                             alt="target"
                             opacity={opacity}
                             offset={offset}
-                            src={currentPicture}
+                            src={CarouselData[current]}
                           />
                           {/* </TargetDiv> */}
                         </ImageWrapper>
