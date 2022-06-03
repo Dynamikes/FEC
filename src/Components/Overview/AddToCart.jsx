@@ -30,7 +30,7 @@ const AddToCart = () => {
   const [sizes, setSizes] = useState(null)
   const [inStock, setInStock] = useState(false)
   const [loadedCount, setLoadedCount] = useState(0);
-  const [skus, setSkus] = useState([]);
+  const [skus, setSkus] = useState(null);
   const [skusLoaded, setSkusLoaded] = useState(false)
   const [currentSize, setCurrentSize] = useState(null)
   const [currentQuant, setCurrentQuant] = useState(null)
@@ -57,8 +57,8 @@ const AddToCart = () => {
       for (let i = 0; i < response.data.results.length; i++) {
         if (response.data.results[i].style_id === styleID) {
           currentStyle = response.data.results[i].skus;
+          console.log('styleMatched', currentStyle)
           return currentStyle;
-
         }
       }
     })
@@ -67,42 +67,51 @@ const AddToCart = () => {
       setLoadedCount(temp + 1)
       setCart(currentStyle)
     })
-
     .catch((err) => {
       console.log('Breaking in StyleSelector get. Err:', err)
     })
   }, [styleID]);
 
-  useEffect( () => {
+  useEffect(() => {
     const tempSkus = [];
     for (const key in cart) {
       tempSkus.push([key, cart[key]])
     }
-  setSkus(tempSkus);
+    setSkus(tempSkus);
+    const setTheData  = async () => {
+      const actualSkus = await skus
+      console.log('This is actualSkus triggering', actualSkus)
+      //setSkusLoaded(true)
+    }
+
+    setTheData()
+    .catch(console.error)
 
   }, [cart])
 
-  const getData = async () => {
-    if (skus.length) {
+
+    useEffect(() => {
+    const getData = async () => {
       const tempCurrentSize =  skus[0][1].size;
       const tempCurrentQuant =  skus[0][1].quantity;
       setCurrentQuant(tempCurrentQuant);
-        if(currentSize === null) {
-          setCurrentSize(tempCurrentSize);
-        }
+      if(currentSize === null) {
+        setCurrentSize(tempCurrentSize);
+      }
       setSkusLoaded(true);
-    }
-  }
 
-  useEffect(() => {
-    if (!skus.length) {
-      getData();
+      console.log('Async Triggering')
     }
+    getData()
+    .catch(console.error)
+
   }, [skus])
 
 
   const isThis = (event) => {
     event.preventDefault()
+    console.log(currentSize)
+    console.log(selectedQuant)
     let tempSku = 0;
     for (let x = 0; x < skus.length; x++) {
       if (skus[x][1].size === currentSize) {
@@ -110,7 +119,7 @@ const AddToCart = () => {
       }
     }
     for (let i = 0; i < selectedQuant; i++) {
-      axios({
+      axios.post({
         url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/cart`,
         method: 'post',
         headers: {
@@ -133,7 +142,9 @@ const AddToCart = () => {
   for (let i = 0; i < tempSkus.length; i++) {
 
         if (tempSkus[i][1].size === currentSize) {
+    console.log('yeehaw', currentSize, tempSkus[i])
           setCurrentQuant(tempSkus[i][1].quantity)
+          console.log('QuantUpdated')
         }
       }
   }
@@ -144,13 +155,12 @@ const AddToCart = () => {
       <StyledSizeQuantity>
         <div>
         <label>Size:</label>
-        <StyledSizeSelect  name='SizeSelect' id='SizeSelect' onChange={(e) => {setCurrentSize(e.target.value)} }>
-          <SizeOption selected disabled hidden> </SizeOption>
-          {skus !== null
+        <StyledSizeSelect name='SizeSelect' id='SizeSelect' onChange={(e) => {setCurrentSize(e.target.value)} }>
+          {skusLoaded
           ?
             skus.map((sku, index) => {
               return (
-                <SizeOption key={index} > {sku[1].size} </SizeOption>
+                <SizeOption key={index} value={sku[1].size} > {sku[1].size} </SizeOption>
               )
             })
           :
@@ -160,8 +170,8 @@ const AddToCart = () => {
         </div>
         <div>
         <label> Quantity: </label>
-         <StyledQuantitySelect selected='' name='Quantity' id='Quantity' onChange={(e) => {setSelectedQuant(e.target.value)} }>
-        { currentQuant !== 0
+         <StyledQuantitySelect name='Quantity' id='Quantity' onChange={(e) => {setSelectedQuant(e.target.value)} }>
+        {skusLoaded && currentQuant !== 0
           ?
             (range(1, currentQuant)).slice(0, 15).map((sku, index) => {
               return (
