@@ -87,11 +87,13 @@ const AddToCart = () => {
     }
   };
 
-  useEffect(() => {
-    if (!skus.length) {
-      getData();
-    }
-  }, [skus]);
+    useEffect(() => {
+      if (!skus.length)
+       {
+         getData();
+       }
+    }, [skus]);
+
 
   const isThis = (event) => {
     event.preventDefault();
@@ -102,7 +104,7 @@ const AddToCart = () => {
       }
     }
     for (let i = 0; i < selectedQuant; i++) {
-      axios({
+      axios.post({
         url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/cart`,
         method: "post",
         headers: {
