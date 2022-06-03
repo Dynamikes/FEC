@@ -172,8 +172,12 @@ function ImageView(props) {
  const changeVertCurrent = (x) => {
    if (vertCurrent[1] < CarouselData.length && x === 'down') {
     setVertCurrent([vertCurrent[0] + 1, vertCurrent[1] + 1])
+    console.log('vertCurrent', vertCurrent[1])
+    console.log('carlength', carLength)
    } else if (vertCurrent[0] > 0 && x === 'up') {
      setVertCurrent([vertCurrent[0] - 1, vertCurrent[1] - 1])
+     console.log('vertCurrent', vertCurrent[1])
+     console.log('carlength', carLength)
    }
  }
  const toggleDefault = () => {
@@ -422,15 +426,16 @@ const handleMouseEnter = () => {
             }
             })
           : ''}
-          {vertCurrent[1] === carLength - 1 ? (
-        <DeadDownArrow/>
+          {vertCurrent[1] > carLength || vertCurrent[1] === carLength ? (
+        <DeadDownArrow className="deadarrow"/>
       ) : (
         <StyledDownArrow className='right-arrow'  onClick={() => changeVertCurrent('down')} />
       )}
       </Thumbnails>
       {/* ARROWS START HERE */}
       {current === 0 ? (
-        <DeadLeftArrow />
+        // <DeadLeftArrow />
+        ''
       ) : (
         <StyledLeftArrow className='left-arrow' onClick={prevImage} />
       )}
