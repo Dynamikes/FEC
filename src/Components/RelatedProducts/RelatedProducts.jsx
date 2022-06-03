@@ -18,7 +18,8 @@ import {
   DeadLeftArrow,
   StyledRightArrow,
   DeadRightArrow,
-  TotalReviewWrapper
+  TotalReviewWrapper,
+  RelatedProdWrapper
 } from "../StyledComponents.jsx";
 
 const RelatedProducts = ({ updateID }) => {
@@ -106,7 +107,6 @@ const RelatedProducts = ({ updateID }) => {
       />)): <DeadLeftArrow />}
       
       
-        
         {relatedProducts.slice(relatedCarData[0], relatedCarData[1]).map((card, index) => (
           <HomePageCard
             key={index}
@@ -121,6 +121,7 @@ const RelatedProducts = ({ updateID }) => {
             <p>{"$" + card.price}</p>
           </HomePageCard>
         ))}
+       
       {relatedProducts.length > 5 ? (
       relatedCarData[1] === relatedProducts.length ? (
         <DeadRightArrow />

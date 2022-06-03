@@ -834,3 +834,7 @@ export const Container = styled.div`
   border: 1px solid #00adb7;
   border-radius: 15px;
 `;
+export const RelatedProdWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`
