@@ -44,6 +44,19 @@ const ReviewListEntry = ({review, getReviews}) => {
       })
   };
 
+  const reportReview = (id) => {
+    axios({
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfp/reviews/${id}/report`,
+      method: 'put',
+      headers: {
+        Authorization: MAIN_API_KEY,
+      },
+    })
+    .then(()=>{
+      getReviews();
+    })
+  }
+
   return (
     <ReviewTile>
       <div>
@@ -58,7 +71,16 @@ const ReviewListEntry = ({review, getReviews}) => {
           />
         </div>
           <div>
-            <small> Helpful? <UpdateButtons disabled={clickedYes} onClick={()=>{incrementHelpful(review['review_id'])}}> Yes ({review.helpfulness}) </UpdateButtons>
+            <small> Helpful?
+              <UpdateButtons
+                disabled={clickedYes}
+                onClick={()=>{incrementHelpful(review['review_id'])}}>
+                 Yes ({review.helpfulness})
+              </UpdateButtons>
+              |
+              <UpdateButtons
+                onClick={()=>{reportReview(review['review_id'])}}>{' '}Report
+              </UpdateButtons>
             </small>
           </div>
         </StyledQuestion>
